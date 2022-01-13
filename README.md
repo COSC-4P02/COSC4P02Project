@@ -5,6 +5,7 @@ Group project for Professor Naser Ezzati-Jivan's COSC 4P02 class at Brock Univer
 
 Team Members:  
 Dazhi Gao (5914320) > [Leader]  
+> l
 Wenjie Li (5748389)  
 Tianyu Zhou (6423966)  
 Zijian Feng (6104723)  
