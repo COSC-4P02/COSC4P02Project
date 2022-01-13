@@ -4,8 +4,7 @@ Group project for Professor Naser Ezzati-Jivan's COSC 4P02 class at Brock Univer
 ## Canada Games & Brock University Chatbot Project
 
 Team Members:  
-Dazhi Gao (5914320) > [Leader]  
-> l
+Dazhi Gao (5914320) [Leader]  
 Wenjie Li (5748389)  
 Tianyu Zhou (6423966)  
 Zijian Feng (6104723)  
