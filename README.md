@@ -1,7 +1,7 @@
 # COSC4P02Project
 Group project for Professor Naser Ezzati-Jivan's COSC 4P02 class at Brock Universtiy. Winter 2022 term.
 
-##Canada Games & Brock University Chatbot Project
+## Canada Games & Brock University Chatbot Project
 
 Team Members:  
 Dazhi Gao (5914320) [Leader]  
