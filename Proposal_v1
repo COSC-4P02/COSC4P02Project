@@ -1,0 +1,68 @@
+COSC4P02 Software Engineering 2
+Chatbot for Canada Summer Game and Brock University
+Dazhi Gao [leader]
+5914320
+dg15rv@brocku.ca
+Wenjie Li
+5748389
+wl14ht@brocku.ca
+Tianyu Zhou
+aaaaaaa
+tz17va@brocku.ca
+Zijian Feng
+aaaaaaa
+zf16eq@brocku.ca
+Jiayang Lai
+aaaaaaa
+jl17za@brocku.ca
+Icarus Zhu
+5925045
+pz15gx@brocku.ca
+Junhui Chen
+aaaaaa
+jc19si@brocku.ca
+January 12, 2022
+1 Introduction
+The information and relationship between the Brock university and Niagara 2022 Canada summer
+game.
+provide some info about our chatbot for that.
+2 Objectives
+2.1 Goal
+what does the chatbot provide. (good UI, excellent user experience...some of our function such as
+provide a way to connect with real representative....and so on)
+2.2 Importance
+why is chatbot important? (problem and we can solve that) For example... time zone, some tourists
+from different country want to travel Niagara region and interested in Summers Game, but they can
+not contact the real representative in regular working hour because of the different time zone. Chatbot
+can help them to get info immediately. etc...
+2.3 Overall description
+what is the chatbot about?... A description of what a chatbot is has been provided from Wikipedia
+[2]:
+“Chatbots are used in dialog systems for various purposes including customer service, request
+routing, or information gathering. While some chatbot applications use extensive word-classification
+processes, natural language processors, and sophisticated AI, others simply scan for general keywords
+and generate responses using common phrases obtained from an associated library or database.”
+2.4 software engineering process
+detail about: Software specification - defining what the system should do;
+Software design and implementation - defining the organization of the system and implementing
+the system;
+Software validation - checking that it does what the customer wants;
+Software evolution - changing the system in response to changing customer needs.
+using the Scrum model...(detail)
+1
+3 Version Release
+about the github.......
+4 Timeline
+Table 1: Important Duedate
+Stage Title Due date
+Stage 1 Proposal Jan 17,2022
+Stage 2 Product Backlog and Sprint Backlog Jan 24,2022
+Stage 3 Progress Reports 1 Feb 28,2022
+Stage 4 Progress Reports 2 Mar 28,2022
+Stage 5 presentation –
+Stage 6 final demonstration april 18-30
+Design and implementation with start from January 24 until March 21, partial testing will be held
+during this period.
+5 Team meeting
+discussing in the first meeting......
+2
