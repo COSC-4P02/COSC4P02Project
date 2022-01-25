@@ -1,9 +1,9 @@
 # Chatbot Frontend
 
 ```
-krunk@K-M1Max ~ % cd Frontend
-krunk@K-M1Max Frontend % yarn
-krunk@K-M1Max Frontend % yarn serve
+cd Frontend
+yarn
+yarn serve
 ```
 
 ## Resource
