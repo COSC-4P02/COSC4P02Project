@@ -44,6 +44,7 @@ export default {
     // Connect to websocket
     connectWS () {
       ws = new WebSocket('wss://ws.chatbot-ai.ga:8001')
+      // ws = new WebSocket('wss://localhost:8001')
       ws.addEventListener('open', this.handleWsOpen.bind(this), false)
       ws.addEventListener('close', this.handleWsClose.bind(this), false)
       ws.addEventListener('error', this.handleWsError.bind(this), false)
@@ -58,8 +59,10 @@ export default {
         this.botTyping = false
         this.messageData.push({
           agent: 'bot',
-          type: 'text',
-          text: 'Hello There, what can I do for you?'
+          type: 'button',
+          text: 'Hello There, what can I do for you?',
+          options: [ { text: 'Who are you', value: 'who', action: 'postback' },
+            { text: 'What is Canada Games', value: 'cg', action: 'postback' } ]
         })
       }, 500)
     },
