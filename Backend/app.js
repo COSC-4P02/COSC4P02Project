@@ -76,7 +76,7 @@ var server = ws.createServer(options, conn=> {
       print(e)
     }
     do_action(`received`,conn,obj);
-    do_action(`received_${obj.type}`,conn,obj);
+    do_action(`received_${obj.type}_${obj.version}`,conn,obj);
   })
 
   conn.on("close", function (code, reason) {
@@ -92,8 +92,8 @@ var server = ws.createServer(options, conn=> {
 }).listen(wsport)
 
 // Receive message
-// Reply with nlp answer
-var receivedText = (conn,obj)=>{
+// Brock
+var receivedTextBrock = (conn,obj)=>{
   print(obj);
   (async () => {
     // Pocess NLP
@@ -122,7 +122,23 @@ var receivedText = (conn,obj)=>{
 
   })();
 };
-add_action('received_text',receivedText);
+add_action('received_text_brock',receivedTextBrock);
+
+// Receive message
+// Canada Game
+var receivedTextGame = (conn,obj)=>{
+  print(obj);
+  (async () => {
+    // Reply to Client
+    send = {
+      'type': 'text',
+      'text': 'Still under development...',
+      'disableInput': false
+    }
+    conn.sendText(JSON.stringify(send));
+  })();
+};
+add_action('received_text_game',receivedTextGame);
 
 print('WebSocket Chat Server Listening on Port ' + wsport);
 

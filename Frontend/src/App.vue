@@ -28,7 +28,12 @@ export default {
       messageData: [],
       botTyping: false,
       inputDisable: false,
+      version: 'brock', // Define Chatbot Version: brock / game
       botOptions: {
+        botTitle: 'Brock University Chatbot', // Bot Title Color
+        colorScheme: '#cc0000', // Bot Color
+        msgBubbleBgUser: '#cc0000', // User Bubble Color
+
         botAvatarImg: BotIcon,
         boardContentBg: '#f4f4f4',
         msgBubbleBgBot: '#fff',
@@ -119,6 +124,7 @@ export default {
       // Send to server
       ws.send(JSON.stringify({
         time: new Date().getTime(),
+        version: this.version,
         agent: 'user',
         type: 'text',
         msg: value.text

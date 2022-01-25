@@ -92,8 +92,8 @@ export default {
     return {
       botActive: false,
       defaultOptions: {
-        botTitle: 'Chatbot',
-        colorScheme: '#1b53d0',
+        botTitle: 'Chatbot', // Bot Title Color
+        colorScheme: '#cc0000', // Bot Color
         textColor: '#fff',
         bubbleBtnSize: 56,
         animation: true,
@@ -102,7 +102,7 @@ export default {
         botAvatarImg: 'http://placehold.it/200x200',
         msgBubbleBgBot: '#f0f0f0',
         msgBubbleColorBot: '#000',
-        msgBubbleBgUser: '#4356e0',
+        msgBubbleBgUser: '#cc0000', // User Bubble Color
         msgBubbleColorUser: '#fff',
         inputPlaceholder: 'Message',
         inputDisableBg: '#fff',
