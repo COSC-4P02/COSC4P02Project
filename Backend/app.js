@@ -30,7 +30,10 @@ const webport = 3000
 
 // CORS Allow Origins
 var allowedOrigins = ['http://localhost:3000',
-                      'https://chatbot-ai.ga'];
+                      'https://chatbot-ai.ga',
+                      'https://web.chatbot-ai.ga',
+                      'https://web-test.chatbot-ai.ga',
+                      'https://ws.chatbot-ai.ga'];
 app.use(cors({
   origin: function(origin, callback){
     if(!origin) return callback(null, true);
