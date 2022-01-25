@@ -86,14 +86,14 @@ var server = ws.createServer(options, conn=> {
   })
   
   conn.on("error",function(err){
-    print('handler error',err)
+    print('handler error'+err,err)
   })
 
 }).listen(wsport)
 
 // Receive message
 // Reply with nlp answer
-var receivedMessage = (conn,obj)=>{
+var receivedText = (conn,obj)=>{
   print(obj);
   (async () => {
     // Pocess NLP
@@ -102,6 +102,14 @@ var receivedMessage = (conn,obj)=>{
     const answer = result.score > threshold && result.answer
       ? result.answer
       : "Sorry, I don't understand";
+
+    // Reply to Client
+    send = {
+      'type': 'text',
+      'text': answer,
+      'disableInput': false
+    }
+    conn.sendText(JSON.stringify(send));
 
     // Sentiment
     let sentiment = '';
@@ -112,12 +120,9 @@ var receivedMessage = (conn,obj)=>{
     }
     print(`bot> ${answer} ${sentiment}`);
 
-    // Reply to Client
-    conn.sendText('{"type": "text","text": "'+answer+'","disableInput": false}');
-
   })();
 };
-add_action('received_message',receivedMessage);
+add_action('received_text',receivedText);
 
 print('WebSocket Chat Server Listening on Port ' + wsport);
 

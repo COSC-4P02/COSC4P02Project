@@ -43,8 +43,8 @@ export default {
 
     // Connect to websocket
     connectWS () {
-      ws = new WebSocket('wss://ws.chatbot-ai.ga:8001')
-      // ws = new WebSocket('wss://localhost:8001')
+      // ws = new WebSocket('wss://ws.chatbot-ai.ga:8001')
+      ws = new WebSocket('wss://localhost:8001')
       ws.addEventListener('open', this.handleWsOpen.bind(this), false)
       ws.addEventListener('close', this.handleWsClose.bind(this), false)
       ws.addEventListener('error', this.handleWsError.bind(this), false)
@@ -113,21 +113,24 @@ export default {
         text: value.text
       })
 
+      // Loading
+      this.botTyping = true
+
       // Send to server
       ws.send(JSON.stringify({
-        data: new Date().getTime(),
+        time: new Date().getTime(),
         agent: 'user',
-        type: 'message',
+        type: 'text',
         msg: value.text
       }))
 
-      this.getResponse()
+      // this.getResponse()
     },
 
     // Submit the message from user to bot API, then get the response from Bot
     getResponse () {
       // Loading
-      this.botTyping = true
+      // this.botTyping = true
 
       // Post the message from user here
       // Then get the response as below
