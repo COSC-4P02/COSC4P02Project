@@ -13,7 +13,9 @@
 <script>
 import BotIcon from './assets/icons/bot.png'
 import { ChatbotUI } from './chatbot'
-import { messageService } from './helpers/message'
+// import { messageService } from './helpers/message'
+
+var ws = null
 
 export default {
   components: {
@@ -30,7 +32,7 @@ export default {
         botAvatarImg: BotIcon,
         boardContentBg: '#f4f4f4',
         msgBubbleBgBot: '#fff',
-        inputPlaceholder: 'Type hereeee...',
+        inputPlaceholder: 'Type here...',
         inputDisableBg: '#fff',
         inputDisablePlaceholder: 'Hit the buttons above to respond'
       }
@@ -38,22 +40,68 @@ export default {
   },
 
   methods: {
-    botStart () {
-      // Get token if you want to build a private bot
-      // Request first message here
 
-      // Fake typing for the first message
+    // Connect to websocket
+    connectWS () {
+      ws = new WebSocket('wss://ws.chatbot-ai.ga:8001')
+      ws.addEventListener('open', this.handleWsOpen.bind(this), false)
+      ws.addEventListener('close', this.handleWsClose.bind(this), false)
+      ws.addEventListener('error', this.handleWsError.bind(this), false)
+      ws.addEventListener('message', this.handleWsMessage.bind(this), false)
+    },
+
+    // Connection open
+    handleWsOpen (e) {
+      // First message after socket open
       this.botTyping = true
       setTimeout(() => {
         this.botTyping = false
         this.messageData.push({
           agent: 'bot',
           type: 'text',
-          text: 'Hello'
+          text: 'Hello There, what can I do for you?'
+        })
+      }, 500)
+    },
+
+    // Connection closed
+    handleWsClose (e) {
+      this.botTyping = true
+      setTimeout(() => {
+        this.botTyping = false
+        this.messageData.push({
+          agent: 'bot',
+          type: 'text',
+          text: 'Something went wrong, close the pop-up and open it again'
         })
       }, 1000)
     },
+    handleWsError (e) {
 
+    },
+
+    // Receive message from ws server
+    handleWsMessage (e) {
+      const msg = JSON.parse(e.data)
+
+      const replyMessage = {
+        agent: 'bot',
+        ...msg
+      }
+      this.inputDisable = msg.disableInput
+      this.messageData.push(replyMessage)
+      this.botTyping = false
+    },
+
+    // Run when pop-up open
+    botStart () {
+      // Connect WebSocket
+      if (ws === null || ws.readyState === WebSocket.CLOSED) {
+        this.connectWS()
+      }
+    },
+
+    // Get user input and send to server
     msgSend (value) {
       // Push the user's message to board
       this.messageData.push({
@@ -61,6 +109,14 @@ export default {
         type: 'text',
         text: value.text
       })
+
+      // Send to server
+      ws.send(JSON.stringify({
+        data: new Date().getTime(),
+        agent: 'user',
+        type: 'message',
+        msg: value.text
+      }))
 
       this.getResponse()
     },
@@ -74,19 +130,19 @@ export default {
       // Then get the response as below
 
       // Create new message from fake data
-      messageService.createMessage()
-        .then((response) => {
-          const replyMessage = {
-            agent: 'bot',
-            ...response
-          }
+      // messageService.createMessage()
+      //   .then((response) => {
+      //     const replyMessage = {
+      //       agent: 'bot',
+      //       ...response
+      //     }
 
-          this.inputDisable = response.disableInput
-          this.messageData.push(replyMessage)
+      //     this.inputDisable = response.disableInput
+      //     this.messageData.push(replyMessage)
 
-          // finish
-          this.botTyping = false
-        })
+      //     // finish
+      //     this.botTyping = false
+      //   })
     }
   }
 }

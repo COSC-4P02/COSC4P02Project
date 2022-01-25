@@ -11426,6 +11426,11 @@ ws@^7.0.0:
   resolved "https://registry.npmjs.org/ws/-/ws-7.2.3.tgz"
   integrity sha512-HTDl9G9hbkNDk98naoR/cHDws7+EyYMOdL1BmjsZXRUjf7d+MficC4B7HLUPlSiho0vg+CWKrGIt/VJBd1xunQ==
 
+ws@^8.4.2:
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.4.2.tgz#18e749868d8439f2268368829042894b6907aa0b"
+  integrity sha512-Kbk4Nxyq7/ZWqr/tarI9yIt/+iNNFOjBXEWgTb4ydaNHBNGgvf2QHbS9fdfsndfjFlFwEd4Al+mw83YkaD10ZA==
+
 xml-name-validator@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/xml-name-validator/-/xml-name-validator-3.0.0.tgz"

@@ -44,5 +44,8 @@
     "vue-svg-loader": "^0.15.0",
     "vue-template-compiler": "^2.6.10"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.4.2"
+  }
 }
