@@ -1,3 +1,34 @@
+// Logger
+const winston = require('winston');
+
+// Create Logger
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss'
+    }),
+    winston.format.errors({ stack: true }),
+    winston.format.splat(),
+    winston.format.json()
+  ),
+  defaultMeta: { service: 'Chatbot' },
+  transports: [
+    new winston.transports.File({ filename: 'chatbot-error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'chatbot-info.log' })
+  ]
+});
+
+// Log to console
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.colorize(),
+      winston.format.simple()
+    )
+  }));
+}
+
 // File
 var fs = require('fs');
 
@@ -48,7 +79,18 @@ app.use(cors({
 
 // Console Log
 function print(message) {
-  console.log(message);
+  //console.log(message);
+  logger.log({
+    level: 'info', // Level of the logging message
+    message: message 
+  });
+}
+
+function errorlog(message) {
+  logger.log({
+    level: 'error',
+    message: message 
+  });
 }
 
 // Train NLP if not trained
@@ -87,6 +129,7 @@ var server = ws.createServer(options, conn=> {
   
   conn.on("error",function(err){
     print('handler error'+err,err)
+    errorlog("WebSocket Error Occour - " + err);
   })
 
 }).listen(wsport)

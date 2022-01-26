@@ -11,6 +11,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.2",
-    "node-nlp": "^3.10.2"
+    "node-nlp": "^3.10.2",
+    "winston": "^3.4.0"
   }
 }

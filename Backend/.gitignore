@@ -3,6 +3,10 @@ node_modules
 
 # cert/*.pem
 
+# logs
+chatbot-info.log
+chatbot-error.log
+
 # public
 dist/*.gz
 dist/*.gz
