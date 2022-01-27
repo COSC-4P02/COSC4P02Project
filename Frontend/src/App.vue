@@ -66,8 +66,8 @@ export default {
           agent: 'bot',
           type: 'button',
           text: 'Hello There, what can I do for you?',
-          options: [ { text: 'Who are you', value: 'who', action: 'postback' },
-            { text: 'What is Canada Games', value: 'cg', action: 'postback' } ]
+          options: [ { text: 'Get Started', action: 'postback' },
+            { text: 'About Brock University', action: 'postback' } ]
         })
       }, 500)
     },

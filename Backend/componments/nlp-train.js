@@ -9,6 +9,22 @@ module.exports = async function trainnlp(manager, say) {
   
   GereralQnA(manager);
 
+  // Start
+  manager.addDocument('en', 'Get Started', 'agent.start');
+  manager.addAnswer('en', 'agent.start', '!start-');
+
+
+  // Brock About
+  manager.addNamedEntityText('brocku', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
+  manager.addDocument('en', 'What is %brocku%', 'brock.about.des');
+  manager.addDocument('en', '%brocku%', 'brock.about.des');
+  manager.addDocument('en', 'Where is %brocku%', 'brock.about.location');
+  manager.addDocument('en', 'How is %brocku%', 'brock.about.des');
+
+  manager.addAnswer('en', 'brock.about.des', '!brockAbout-');
+  manager.addAnswer('en', 'brock.about.location', 'You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada'); //Location
+  
+
   // Course
   manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
   manager.addDocument('en', '%brockCourse%', 'brock.course.des');
