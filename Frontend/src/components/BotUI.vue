@@ -139,6 +139,7 @@ export default {
   },
 
   mounted () {
+    this.botOpen() // Autoload Bot when launch
     document.addEventListener(Config.EVENT_OPEN, function () {
       this.botOpen()
     })

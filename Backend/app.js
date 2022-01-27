@@ -22,8 +22,8 @@ const logger = winston.createLogger({
   ),
   defaultMeta: { service: 'Chatbot' },
   transports: [
-    new winston.transports.File({ filename: 'chatbot-error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'chatbot-info.log' })
+    new winston.transports.File({ filename: 'logs/chatbot-error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/chatbot-info.log' })
   ]
 });
 
@@ -54,7 +54,7 @@ function errorlog(message) {
 
 function chatlog(message) {
   logger.log({
-    level: 'info', // Level of the logging message
+    level: 'info',
     message: message 
   });
 }
@@ -76,7 +76,7 @@ const {add_filter, remove_filter, add_action,
 // NLP
 const readline = require('readline');
 const { NlpManager } = require('./plugins/NlpManager');
-const trainnlp = require('./nlp-train');
+const trainnlp = require('./componments/nlp-train');
 const threshold = 0.5;
 const nlpManager = new NlpManager({ languages: ['en'] });
 

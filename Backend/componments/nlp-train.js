@@ -1,42 +1,15 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-function trainAndSave(manager,say){
-  say('Data is Training, please wait..');
-  const hrstart = process.hrtime();
-  manager.train();
-  const hrend = process.hrtime(hrstart);
-  console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
-  say('Data Trained!');
-  manager.save('./nlp-model/model.nlp', true);
-}
-
 module.exports = async function trainnlp(manager, say) {
-  if (fs.existsSync('./nlp-model/model.nlp')) {
-    manager.load('./nlp-model/model.nlp');
+  if (fs.existsSync(__dirname + '/../nlp-model/model.nlp')) {
+    manager.load(__dirname + '/../nlp-model/model.nlp');
     return;
   }
+  
+  GereralQnA(manager);
 
   // Course
-  //manager.addNamedEntityText('brockCourse', 'COSC-4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01','COSC401','COSC 401']);
-  fs.createReadStream('train-data/brock/course/data.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    var course = row[Object.keys(row)].split("\t");
-    const courseName1 = course[0].toUpperCase();
-    const courseName2 = course[0].toLowerCase();
-    const courseName3 = course[0].replace('-', ' ');
-    const courseName4 = course[0].toUpperCase().replace('P', '').replace('F', '');
-    const courseName5 = course[0].toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
-    const courseName6 = course[0].toUpperCase().replace('-', '').replace('P', '').replace('F', '');
-    manager.addNamedEntityText('brockCourse', courseName1, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
-    //console.log(course);
-  })
-  .on('end', () => {
-    console.log('CSV file successfully processed');
-    trainAndSave(manager,say);
-  });
-  
   manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
   manager.addDocument('en', '%brockCourse%', 'brock.course.des');
   manager.addDocument('en', 'When is %brockCourse%', 'brock.course.time');
@@ -64,6 +37,38 @@ module.exports = async function trainnlp(manager, say) {
 
   manager.addAnswer('en', 'agent.cginfo', "The Canada Summer Games are coming to the Niagara Region August 6-21, 2022! These Games will feature approximately 5,000 athletes and coaches in 18 sports from all 13 Provinces and Territories. 4,000 volunteers will be needed to deliver these Games and the expected economic impact will exceed $450 million.");
 
+  // Course CSV
+  //manager.addNamedEntityText('brockCourse', 'COSC-4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01','COSC401','COSC 401']);
+  fs.createReadStream(__dirname + '/../train-data/brock/course/data.csv')
+  .pipe(csv())
+  .on('data', (row) => {
+    var course = row[Object.keys(row)].split("\t");
+    const courseName1 = course[0].toUpperCase();
+    const courseName2 = course[0].toLowerCase();
+    const courseName3 = course[0].replace('-', ' ');
+    const courseName4 = course[0].toUpperCase().replace('P', '').replace('F', '');
+    const courseName5 = course[0].toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
+    const courseName6 = course[0].toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+    manager.addNamedEntityText('brockCourse', courseName1, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
+    //console.log(course);
+  })
+  .on('end', () => {
+    console.log('CSV file successfully processed');
+    trainAndSave(manager,say);
+  });
+}
+
+function trainAndSave(manager,say){
+  say('Data is Training, please wait..');
+  const hrstart = process.hrtime();
+  manager.train();
+  const hrend = process.hrtime(hrstart);
+  console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
+  say('Data Trained!');
+  manager.save('./nlp-model/model.nlp', true);
+}
+
+function GereralQnA(manager){
   // Gereral
   manager.addDocument('en', 'say about you', 'agent.acquaintance');
   manager.addDocument('en', 'why are you here', 'agent.acquaintance');
@@ -818,6 +823,4 @@ module.exports = async function trainnlp(manager, say) {
     'user.needsadvice',
     "I'm not sure I'll have the best answer, but I'll try"
   );
-
-  trainAndSave(manager,say);
-};
+}
