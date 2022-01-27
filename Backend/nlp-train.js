@@ -1,4 +1,15 @@
 const fs = require('fs');
+const csv = require('csv-parser');
+
+function trainAndSave(manager,say){
+  say('Data is Training, please wait..');
+  const hrstart = process.hrtime();
+  manager.train();
+  const hrend = process.hrtime(hrstart);
+  console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
+  say('Data Trained!');
+  manager.save('./nlp-model/model.nlp', true);
+}
 
 module.exports = async function trainnlp(manager, say) {
   if (fs.existsSync('./nlp-model/model.nlp')) {
@@ -7,9 +18,25 @@ module.exports = async function trainnlp(manager, say) {
   }
 
   // Course
-  manager.addNamedEntityText('brockCourse', 'COSC 4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01','COSC401','COSC 401']);
-  manager.addNamedEntityText('brockCourse', 'COSC 4P02', ['en'], ['COSC 4P02','COSC-4P02','COSC4P02','COSC402','COSC 402']);
-
+  //manager.addNamedEntityText('brockCourse', 'COSC-4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01','COSC401','COSC 401']);
+  fs.createReadStream('train-data/brock/course/data.csv')
+  .pipe(csv())
+  .on('data', (row) => {
+    var course = row[Object.keys(row)].split("\t");
+    const courseName1 = course[0].toUpperCase();
+    const courseName2 = course[0].toLowerCase();
+    const courseName3 = course[0].replace('-', ' ');
+    const courseName4 = course[0].toUpperCase().replace('P', '').replace('F', '');
+    const courseName5 = course[0].toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
+    const courseName6 = course[0].toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+    manager.addNamedEntityText('brockCourse', courseName1, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
+    //console.log(course);
+  })
+  .on('end', () => {
+    console.log('CSV file successfully processed');
+    trainAndSave(manager,say);
+  });
+  
   manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
   manager.addDocument('en', '%brockCourse%', 'brock.course.des');
   manager.addDocument('en', 'When is %brockCourse%', 'brock.course.time');
@@ -394,12 +421,6 @@ module.exports = async function trainnlp(manager, say) {
   manager.addDocument('en', 'I need some advice', 'user.needsadvice');
   manager.addDocument('en', 'can you give me some advice', 'user.needsadvice');
   manager.addDocument('en', 'what should I do', 'user.needsadvice');
-  say('Training, please wait..');
-  const hrstart = process.hrtime();
-  await manager.train();
-  const hrend = process.hrtime(hrstart);
-  console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
-  say('Trained!');
 
   manager.addAnswer('en', 'agent.acquaintance', "I'm a virtual agent");
   manager.addAnswer(
@@ -797,5 +818,6 @@ module.exports = async function trainnlp(manager, say) {
     'user.needsadvice',
     "I'm not sure I'll have the best answer, but I'll try"
   );
-  manager.save('./nlp-model/model.nlp', true);
+
+  trainAndSave(manager,say);
 };

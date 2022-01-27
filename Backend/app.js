@@ -67,13 +67,8 @@ var fs = require('fs');
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Hooks-Server
-const {
-  add_filter,
-  remove_filter,
-  add_action,
-  remove_action,
-  do_action,
-  apply_filters
+const {add_filter, remove_filter, add_action, 
+  remove_action, do_action, apply_filters 
 } = require("./plugins/hooks-server/hooks-server.js");
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
@@ -106,7 +101,6 @@ const webport = 3000
 var allowedOrigins = ['http://localhost:3000',
                       'https://chatbot-ai.ga',
                       'https://web.chatbot-ai.ga',
-                      'https://web-test.chatbot-ai.ga',
                       'https://ws.chatbot-ai.ga'];
 app.use(cors({
   origin: function(origin, callback){

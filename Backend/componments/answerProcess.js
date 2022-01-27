@@ -2,6 +2,43 @@
 // Return with answer or send by "conn"
 
 const https = require('https');
+const fs = require('fs');
+const csv = require('csv-parser');
+
+function sendCourseDetails(conn,result_array,number){
+  if (result_array[number]!=""&&result_array[number].toLowerCase()!="none"&&result_array[number].toLowerCase()!="null"){
+    send = {
+      'type': 'text',
+      'text': result_array[number],
+      'disableInput': false
+    }
+    conn.sendText(JSON.stringify(send));
+  }
+}
+
+// Read courses from csv
+function readCourseFromCsv(conn,param,number){
+  var result = "Can't find info of "+param;
+  var result_array = null;
+  fs.createReadStream('train-data/brock/course/data.csv')
+  .pipe(csv())
+  .on('data', (row) => {
+    var course = row[Object.keys(row)].split("\t");
+    if (param.toUpperCase() == course[0].toUpperCase()){
+      result_array = course;
+    }
+  })
+  .on('end', () => {
+    if (number==1)
+      sendCourseDetails(conn,result_array,4) // Title
+    sendCourseDetails(conn,result_array,number) // Des
+    if (number==1){
+      sendCourseDetails(conn,result_array,5) // Type
+      sendCourseDetails(conn,result_array,6) // Restriction
+      sendCourseDetails(conn,result_array,7) // Note
+    }
+  });
+}
 
 module.exports = function ({answer,conn}) { 
     if (answer.charAt(0)=='!'){
@@ -79,17 +116,20 @@ module.exports = function ({answer,conn}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseDes": // Course Description
-        return "Course Description is here "+param;
+        readCourseFromCsv(conn,param,1);
+        return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseTime": // Course Time
-        return "Course Time is here "+param;
+        readCourseFromCsv(conn,param,3);
+        return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseLocation": // Course Location
-        return "Course Location is here "+param;
+        readCourseFromCsv(conn,param,2);
+        return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
