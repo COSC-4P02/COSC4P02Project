@@ -6,6 +6,21 @@ module.exports = async function trainnlp(manager, say) {
     return;
   }
 
+  // Course
+  manager.addNamedEntityText('brockCourse', 'COSC 4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01']);
+  manager.addNamedEntityText('brockCourse', 'COSC 4P02', ['en'], ['COSC 4P02','COSC-4P02','COSC4P02']);
+
+  manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
+  manager.addDocument('en', '%brockCourse%', 'brock.course.des');
+  manager.addDocument('en', 'When is %brockCourse%', 'brock.course.time');
+  manager.addDocument('en', 'Where is %brockCourse%', 'brock.course.location');
+  manager.addDocument('en', 'How is %brockCourse%', 'brock.course.des');
+
+  manager.addAnswer('en', 'brock.course.des', '!courseDes {{brockCourse}}');
+  manager.addAnswer('en', 'brock.course.time', '!courseTime {{brockCourse}}');
+  manager.addAnswer('en', 'brock.course.location', '!courseLocation {{brockCourse}}');
+
+  // Canad Game
   manager.addDocument('en', 'canada game', 'agent.cginfo');
   manager.addDocument('en', 'i want to know about canada game', 'agent.cginfo');
   manager.addDocument('en', 'what is canada game', 'agent.cginfo');
@@ -13,9 +28,7 @@ module.exports = async function trainnlp(manager, say) {
 
   manager.addAnswer('en', 'agent.cginfo', "The Canada Summer Games are coming to the Niagara Region August 6-21, 2022! These Games will feature approximately 5,000 athletes and coaches in 18 sports from all 13 Provinces and Territories. 4,000 volunteers will be needed to deliver these Games and the expected economic impact will exceed $450 million.");
 
-
-
-
+  // Gereral
   manager.addDocument('en', 'say about you', 'agent.acquaintance');
   manager.addDocument('en', 'why are you here', 'agent.acquaintance');
   manager.addDocument('en', 'what is your personality', 'agent.acquaintance');
