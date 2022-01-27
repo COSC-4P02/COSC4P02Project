@@ -1,3 +1,11 @@
+/*!
+ * Chatbot-ai Backend
+ * Copyright 2021 chatbot-ai.ga
+ * 
+ * Available under the terms of the MIT
+ * See LICENSE file for more informations.
+ */
+
 // Logger
 const winston = require('winston');
 
@@ -29,8 +37,34 @@ if (process.env.NODE_ENV !== 'production') {
   }));
 }
 
+// Console Log
+function print(message) {
+  logger.log({
+    level: 'info', // Level of the logging message
+    message: message 
+  });
+}
+
+function errorlog(message) {
+  logger.log({
+    level: 'error',
+    message: message 
+  });
+}
+
+function chatlog(message) {
+  logger.log({
+    level: 'info', // Level of the logging message
+    message: message 
+  });
+}
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
 // File
 var fs = require('fs');
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Hooks-Server
 const {
@@ -42,12 +76,21 @@ const {
   apply_filters
 } = require("./plugins/hooks-server/hooks-server.js");
 
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
 // NLP
 const readline = require('readline');
 const { NlpManager } = require('./plugins/NlpManager');
 const trainnlp = require('./nlp-train');
 const threshold = 0.5;
 const nlpManager = new NlpManager({ languages: ['en'] });
+
+// Train NLP if not trained
+(async () => {
+  await trainnlp(nlpManager, print);
+})();
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // WebSocket
 const ws = require("./plugins/ws/index.js");
@@ -77,26 +120,7 @@ app.use(cors({
   }
 }));
 
-// Console Log
-function print(message) {
-  //console.log(message);
-  logger.log({
-    level: 'info', // Level of the logging message
-    message: message 
-  });
-}
-
-function errorlog(message) {
-  logger.log({
-    level: 'error',
-    message: message 
-  });
-}
-
-// Train NLP if not trained
-(async () => {
-  await trainnlp(nlpManager, print);
-})();
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Define WSS
 var options = {
@@ -107,11 +131,10 @@ var options = {
 
 // Define WebSocket
 var server = ws.createServer(options, conn=> {
-  print("New connection")
+  print("New Connection")
   
   conn.on("text", function (data) {
     print("Message Received")
-    print(data);
     var obj = {};
     try {
       obj = JSON.parse(data);
@@ -134,6 +157,9 @@ var server = ws.createServer(options, conn=> {
   })
 
 }).listen(wsport)
+print('WebSocket Chat Server Listening on Port ' + wsport);
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Receive message
 // Brock
@@ -146,6 +172,9 @@ var receivedTextBrock = (conn,obj)=>{
       ? result.answer
       : "Sorry, I don't understand";
 
+    chatlog("User: " + obj.msg + " | Bot: " + answer);
+
+    // Process Answer if needed
     answer = apply_filters("answer_process", {answer,conn});
 
     // Reply to Client
@@ -167,20 +196,23 @@ var receivedTextBrock = (conn,obj)=>{
         result.sentiment.score
       })`;
     }
-    print(`bot> ${answer} ${sentiment}`);
+    console.log(`bot> ${answer} ${sentiment}`);
 
   })();
 };
 add_action('received_text_brock',receivedTextBrock);
 
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
 // Process answer if needs an action "!"
 var answerProcess = require('./componments/answerProcess.js');
 add_filter('answer_process',answerProcess);
 
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
 // Receive message
 // Canada Game
 var receivedTextGame = (conn,obj)=>{
-  print(obj);
   (async () => {
     // Reply to Client
     send = {
@@ -193,7 +225,7 @@ var receivedTextGame = (conn,obj)=>{
 };
 add_action('received_text_game',receivedTextGame);
 
-print('WebSocket Chat Server Listening on Port ' + wsport);
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Api Services
 app.get('/', (req, res) => {

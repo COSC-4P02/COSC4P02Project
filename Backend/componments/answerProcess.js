@@ -12,31 +12,34 @@ module.exports = function ({answer,conn}) {
     const param = temp.substr(temp.indexOf('-')+1,temp.length-1);
 
     switch(control) {
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
       case "!covidNiagara": // COVID Infomation
 
         // COVID Links
         urlsend = {
-              'type': 'button',
-              'text': "Here are some links about COVID-19",
-              'disableInput': false,
-              'options': [
-                {
-                  'text': 'Niagara Region COVID',
-                  'value': 'https://niagararegion.ca/health/covid-19/statistics.aspx',
-                  'action': 'url'
-                },
-                {
-                  'text': 'Canada COVID',
-                  'value': 'https://health-infobase.canada.ca/covid-19/epidemiological-summary-covid-19-cases.html#newCases',
-                  'action': 'url'
-                },
-                {
-                  'text': 'Ontario COVID',
-                  'value': 'https://covid-19.ontario.ca/data/case-numbers-and-spread',
-                  'action': 'url'
-                }
-              ]
+          'type': 'button',
+          'text': "Here are some links about COVID-19",
+          'disableInput': false,
+          'options': [
+            {
+              'text': 'Niagara Region COVID',
+              'value': 'https://niagararegion.ca/health/covid-19/statistics.aspx',
+              'action': 'url'
+            },
+            {
+              'text': 'Canada COVID',
+              'value': 'https://health-infobase.canada.ca/covid-19/epidemiological-summary-covid-19-cases.html#newCases',
+              'action': 'url'
+            },
+            {
+              'text': 'Ontario COVID',
+              'value': 'https://covid-19.ontario.ca/data/case-numbers-and-spread',
+              'action': 'url'
             }
+          ]
+        }
         conn.sendText(JSON.stringify(urlsend));
 
         const options = {
@@ -73,21 +76,25 @@ module.exports = function ({answer,conn}) {
         req.end()
         return "!ignore";
 
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseDes": // Course Description
         return "Course Description is here "+param;
 
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseTime": // Course Time
         return "Course Time is here "+param;
 
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseLocation": // Course Location
         return "Course Location is here "+param;
 
-        
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
       default:
-        errorlog("Error from answerProcess: "+answer);
+        console.error("Error from answerProcess: "+answer);
         return "Oops, Something went wrong, try again later";
     }
   }else{

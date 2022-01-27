@@ -7,8 +7,8 @@ module.exports = async function trainnlp(manager, say) {
   }
 
   // Course
-  manager.addNamedEntityText('brockCourse', 'COSC 4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01']);
-  manager.addNamedEntityText('brockCourse', 'COSC 4P02', ['en'], ['COSC 4P02','COSC-4P02','COSC4P02']);
+  manager.addNamedEntityText('brockCourse', 'COSC 4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01','COSC401','COSC 401']);
+  manager.addNamedEntityText('brockCourse', 'COSC 4P02', ['en'], ['COSC 4P02','COSC-4P02','COSC4P02','COSC402','COSC 402']);
 
   manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
   manager.addDocument('en', '%brockCourse%', 'brock.course.des');
