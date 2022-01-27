@@ -11,8 +11,7 @@ module.exports = async function trainnlp(manager, say) {
 
   // Start
   manager.addDocument('en', 'Get Started', 'agent.start');
-  manager.addAnswer('en', 'agent.start', '!start-');
-
+  manager.addAnswer('en', 'agent.start', '!json-{\"type\":\"button\",\"text\":\"Welcome! Here are some questions you may ask!\",\"disableInput\":false,\"options\":[{\"text\":\"Tell me about Brock\",\"action\":\"postback\"},{\"text\":\"Where is Brock\",\"action\":\"postback\"},{\"text\":\"What is COSC 4P01\",\"action\":\"postback\"},{\"text\":\"COVID in Niagara\",\"action\":\"postback\"}]}');
 
   // Brock About
   manager.addNamedEntityText('brocku', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
@@ -21,20 +20,29 @@ module.exports = async function trainnlp(manager, say) {
   manager.addDocument('en', 'Where is %brocku%', 'brock.about.location');
   manager.addDocument('en', 'How is %brocku%', 'brock.about.des');
 
-  manager.addAnswer('en', 'brock.about.des', '!brockAbout-');
-  manager.addAnswer('en', 'brock.about.location', 'You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada'); //Location
+  manager.addAnswer('en', 'brock.about.des', '!json-{"type":"button","text":"Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.","disableInput":false,"options":[{"text":"About","value":"https://brocku.ca/about/","action":"url"},{"text":"Homepage","value":"https://brocku.ca/","action":"url"},{"text":"News","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}');
+  manager.addAnswer('en', 'brock.about.location', '!json-{"type":"button","text":"You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}'); //Location
   
-
-  // Course
+  // Courses Details
   manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
+  manager.addDocument('en', 'Tell me about %brockCourse%', 'brock.course.des');
+  manager.addDocument('en', 'I want to know about %brockCourse%', 'brock.course.des');
   manager.addDocument('en', '%brockCourse%', 'brock.course.des');
+
   manager.addDocument('en', 'When is %brockCourse%', 'brock.course.time');
+  manager.addDocument('en', '%brockCourse% time', 'brock.course.time');
+
   manager.addDocument('en', 'Where is %brockCourse%', 'brock.course.location');
-  manager.addDocument('en', 'How is %brockCourse%', 'brock.course.des');
+  manager.addDocument('en', '%brockCourse% Location', 'brock.course.location');
+  
+  manager.addDocument('en', 'How is the %brockCourse% delivered', 'brock.course.deliver');
+  manager.addDocument('en', '%brockCourse% deliver method', 'brock.course.deliver');
+  manager.addDocument('en', '%brockCourse% lecture', 'brock.course.deliver');
 
   manager.addAnswer('en', 'brock.course.des', '!courseDes-{{brockCourse}}'); //Des
   manager.addAnswer('en', 'brock.course.time', '!courseTime-{{brockCourse}}'); //Time
   manager.addAnswer('en', 'brock.course.location', '!courseLocation-{{brockCourse}}'); //Location
+  manager.addAnswer('en', 'brock.course.deliver', '!courseDeliver-{{brockCourse}}'); //Location
   
   // COVID
   manager.addDocument('en', 'covid-19', 'agent.covid');

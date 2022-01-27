@@ -146,68 +146,15 @@ module.exports = function ({answer,conn}) {
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
-
-      case "!brockAbout": // Brock About
-        urlsend = {
-          'type': 'button',
-          'text': "Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.",
-          'disableInput': false,
-          'options': [
-            {
-              'text': 'About',
-              'value': 'https://brocku.ca/about/',
-              'action': 'url'
-            },
-            {
-              'text': 'Homepage',
-              'value': 'https://brocku.ca/',
-              'action': 'url'
-            },
-            {
-              'text': 'News',
-              'value': 'https://brocku.ca/brock-news/',
-              'action': 'url'
-            },
-            {
-              'text': 'Maps',
-              'value': 'https://goo.gl/maps/LhZQxd2xQ86LZUAP7',
-              'action': 'url'
-            }
-          ]
-        }
-        conn.sendText(JSON.stringify(urlsend));
+      
+      case "!courseDeliver": // Course Location
+        readCourseFromCsv(conn,param,5);
         return "!ignore";
-
-    // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
-
-      case "!start": // Course Location
-        urlsend = {
-          'type': 'button',
-          'text': "Welcome! Here are some question you may ask!",
-          'disableInput': false,
-          'options': [
-            {
-              'text': 'Tell me about Brock',
-              'action': 'postback'
-            },
-            {
-              'text': 'Where is Brock',
-              'action': 'postback'
-            },
-            {
-              'text': 'What is COSC 4P01',
-              'action': 'postback'
-            },
-            {
-              'text': 'COVID in Niagara',
-              'action': 'postback'
-            }
-          ]
-        }
-        conn.sendText(JSON.stringify(urlsend));
-        return "!ignore";
-
+        
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!json":
+        return "!json"
 
       default:
         console.error("Error from answerProcess: "+answer);

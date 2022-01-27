@@ -98,7 +98,7 @@ const app = express()
 const webport = 3000
 
 // CORS Allow Origins
-var allowedOrigins = ['http://localhost:3000',
+var allowedOrigins = ['http://localhost:1901',
                       'https://chatbot-ai.ga',
                       'https://web.chatbot-ai.ga',
                       'https://ws.chatbot-ai.ga'];
@@ -164,33 +164,34 @@ var receivedTextBrock = (conn,obj)=>{
     // Get Answer
     var answer = result.score > threshold && result.answer
       ? result.answer
-      : "Sorry, I don't understand";
+      : '!json-{"type":"button","text":"Sorry, I don\'t understand, but maybe you can find answer here.","disableInput":false,"options":[{"text":"Find it out","value":"http://www.google.com/search?q='+encodeURIComponent(obj.msg)+'","action":"url"}]}';
+    var answer2 = (' ' + answer).slice(1);
 
     chatlog("User: " + obj.msg + " | Bot: " + answer);
 
     // Process Answer if needed
     answer = apply_filters("answer_process", {answer,conn});
 
-    // Reply to Client
-    send = {
-      'type': 'text',
-      'text': answer,
-      'disableInput': false
-    }
+    // Reply to Client by text
+    send = { 'type': 'text', 'text': answer, 'disableInput': false }
 
-    if (answer == "!ignore"){
+    if (answer == "!ignore"){ // Ignore this send
+      return;
+    }else if (answer == "!json"){ // Send this json directly
+      const param = answer2.substr(answer2.indexOf('-')+1,answer2.length-1);
+      conn.sendText(param);
       return;
     }
-    conn.sendText(JSON.stringify(send));
+    conn.sendText(JSON.stringify(send)); // Send to Client
 
     // Sentiment
-    let sentiment = '';
-    if (result.sentiment.score !== 0) {
-        sentiment = `  ${result.sentiment.score > 0 ? ':)' : ':('}   (${
-        result.sentiment.score
-      })`;
-    }
-    console.log(`bot> ${answer} ${sentiment}`);
+    // let sentiment = '';
+    // if (result.sentiment.score !== 0) {
+    //     sentiment = `  ${result.sentiment.score > 0 ? ':)' : ':('}   (${
+    //     result.sentiment.score
+    //   })`;
+    // }
+    // print(`bot> ${answer} : ${sentiment}`);
 
   })();
 };
