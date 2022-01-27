@@ -18,7 +18,6 @@ function sendCourseDetails(conn,result_array,number){
 
 // Read courses from csv
 function readCourseFromCsv(conn,param,number){
-  var result = "Can't find info of "+param;
   var result_array = null;
   fs.createReadStream('train-data/brock/course/data.csv')
   .pipe(csv())
@@ -29,13 +28,23 @@ function readCourseFromCsv(conn,param,number){
     }
   })
   .on('end', () => {
-    if (number==1)
-      sendCourseDetails(conn,result_array,4) // Title
-    sendCourseDetails(conn,result_array,number) // Des
-    if (number==1){
-      sendCourseDetails(conn,result_array,5) // Type
-      sendCourseDetails(conn,result_array,6) // Restriction
-      sendCourseDetails(conn,result_array,7) // Note
+    if (result_array==null){
+      send = {
+        'type': 'text',
+        'text': "Can not find info about it",
+        'disableInput': false
+      }
+      conn.sendText(JSON.stringify(send));
+      console.error("Can not find info - "+param);
+    }else{
+      if (number==1)
+        sendCourseDetails(conn,result_array,4) // Title
+      sendCourseDetails(conn,result_array,number) // Des
+      if (number==1){
+        sendCourseDetails(conn,result_array,5) // Type
+        sendCourseDetails(conn,result_array,6) // Restriction
+        sendCourseDetails(conn,result_array,7) // Note
+      }
     }
   });
 }
