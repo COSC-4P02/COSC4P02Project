@@ -7,6 +7,9 @@ node_modules
 chatbot-info.log
 chatbot-error.log
 
+# train data
+model.nlp
+
 # public
 dist/*.gz
 dist/*.gz

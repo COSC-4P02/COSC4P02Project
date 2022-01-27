@@ -111,6 +111,7 @@ var server = ws.createServer(options, conn=> {
   
   conn.on("text", function (data) {
     print("Message Received")
+    print(data);
     var obj = {};
     try {
       obj = JSON.parse(data);
@@ -137,20 +138,25 @@ var server = ws.createServer(options, conn=> {
 // Receive message
 // Brock
 var receivedTextBrock = (conn,obj)=>{
-  print(obj);
   (async () => {
     // Pocess NLP
     const result = await nlpManager.process(obj.msg);
     // Get Answer
-    const answer = result.score > threshold && result.answer
+    var answer = result.score > threshold && result.answer
       ? result.answer
       : "Sorry, I don't understand";
+
+    answer = apply_filters("answer_process", {answer,conn});
 
     // Reply to Client
     send = {
       'type': 'text',
       'text': answer,
       'disableInput': false
+    }
+
+    if (answer == "!ignore"){
+      return;
     }
     conn.sendText(JSON.stringify(send));
 
@@ -166,6 +172,10 @@ var receivedTextBrock = (conn,obj)=>{
   })();
 };
 add_action('received_text_brock',receivedTextBrock);
+
+// Process answer if needs an action "!"
+var answerProcess = require('./componments/answerProcess.js');
+add_filter('answer_process',answerProcess);
 
 // Receive message
 // Canada Game

@@ -16,11 +16,20 @@ module.exports = async function trainnlp(manager, say) {
   manager.addDocument('en', 'Where is %brockCourse%', 'brock.course.location');
   manager.addDocument('en', 'How is %brockCourse%', 'brock.course.des');
 
-  manager.addAnswer('en', 'brock.course.des', '!courseDes {{brockCourse}}');
-  manager.addAnswer('en', 'brock.course.time', '!courseTime {{brockCourse}}');
-  manager.addAnswer('en', 'brock.course.location', '!courseLocation {{brockCourse}}');
+  manager.addAnswer('en', 'brock.course.des', '!courseDes-{{brockCourse}}'); //Des
+  manager.addAnswer('en', 'brock.course.time', '!courseTime-{{brockCourse}}'); //Time
+  manager.addAnswer('en', 'brock.course.location', '!courseLocation-{{brockCourse}}'); //Location
+  
+  // COVID
+  manager.addDocument('en', 'covid-19', 'agent.covid');
+  manager.addDocument('en', 'i want to know about covid infomation', 'agent.covid');
+  manager.addDocument('en', 'how is the covid in niagara', 'agent.covid');
+  manager.addDocument('en', 'covid', 'agent.covid');
+  manager.addDocument('en', 'What is the covid status', 'agent.covid');
 
-  // Canad Game
+  manager.addAnswer('en', 'agent.covid', "!covidNiagara-");
+
+  // Canada Game
   manager.addDocument('en', 'canada game', 'agent.cginfo');
   manager.addDocument('en', 'i want to know about canada game', 'agent.cginfo');
   manager.addDocument('en', 'what is canada game', 'agent.cginfo');
