@@ -14,6 +14,7 @@
 import EventBus from './helpers/event-bus'
 import BotIcon from './assets/icons/Sir-Isaac-Brock.jpg'
 import { ChatbotUI } from './chatbot'
+import axios from 'axios'
 // import { messageService } from './helpers/message'
 
 var ws = null
@@ -26,6 +27,14 @@ export default {
 
   data () {
     return {
+      // Production Server
+      // wsApi: 'wss://ws.chatbot-ai.ga:8001',
+      // whApi: 'https://api.chatbot-ai.ga',
+
+      // Development Server
+      wsApi: 'wss://localhost:8001',
+      whApi: 'http://localhost:3000',
+
       messageData: [],
       botTyping: false,
       inputDisable: false,
@@ -63,8 +72,32 @@ export default {
           }, 200)
           break
         case 'ExportLog': // Export Chat Log
-          alert('TODO: Chat Log Export')
-          console.log(this.messageData)
+          const chatlog = { chatlog: JSON.stringify(this.messageData) }
+          axios.post(this.whApi + '/chat/pdf/', chatlog)
+            .then(
+              response => {
+                let filename = 'logs.txt'
+                let element = document.createElement('a')
+                element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(response.data.msg))
+                element.setAttribute('download', filename)
+                element.style.display = 'none'
+                document.body.appendChild(element)
+                element.click()
+                document.body.removeChild(element)
+                this.messageData.push({
+                  agent: 'bot',
+                  type: 'text',
+                  text: 'Chat Log Generate complete'
+                })
+              })
+            .catch(error => {
+              this.errorMessage = error.message
+              this.messageData.push({
+                agent: 'bot',
+                type: 'text',
+                text: 'Generate Failed, try again later.'
+              })
+            })
           break
         case 'Help':
           this.messageData.push({
@@ -84,8 +117,7 @@ export default {
 
     // Connect to websocket
     connectWS () {
-      // ws = new WebSocket('wss://ws.chatbot-ai.ga:8001')
-      ws = new WebSocket('wss://localhost:8001')
+      ws = new WebSocket(this.wsApi)
       ws.addEventListener('open', this.handleWsOpen.bind(this), false)
       ws.addEventListener('close', this.handleWsClose.bind(this), false)
       ws.addEventListener('error', this.handleWsError.bind(this), false)

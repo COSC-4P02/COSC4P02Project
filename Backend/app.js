@@ -114,6 +114,9 @@ app.use(cors({
   }
 }));
 
+app.use(express.json());
+app.use(express.urlencoded());
+
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Define WSS
@@ -231,6 +234,30 @@ app.get('/', (req, res) => {
 app.get('/log/enter/', (req, res) => {
   print('A user is coming');
   res.send('{"type": "confirm","msg":"success"}');
+})
+
+// Chatlog PDF
+app.post('/chat/pdf/', (req, res) => {
+  const chatlog = JSON.parse(req.body.chatlog)
+  //console.log(chatlog);
+  var result = "";
+  for (var i = 0; i < chatlog.length; i++) {
+    //console.log(chatlog[i]);
+    result = result + chatlog[i]['agent'] + ': \t' + chatlog[i]['text'] + '\n'
+    if (chatlog[i]['type'] == 'button'){
+      for (var j = 0; j < chatlog[i]['options'].length; j++) {
+        var value = ""
+        if (chatlog[i]['options'][j]['value'] != undefined){
+          value = chatlog[i]['options'][j]['value']
+        }
+        result = result + '\t> ' + chatlog[i]['options'][j]['text'] + '\t' + value + '\n'
+      }
+    }
+  }
+  send = {'type': 'pdf',
+          'msg': result}
+  print(send)
+  res.send(JSON.stringify(send));
 })
 
 app.listen(webport, () => {

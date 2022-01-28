@@ -46,6 +46,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.25.0",
     "vue-clickaway": "^2.2.2",
     "ws": "^8.4.2"
   }
