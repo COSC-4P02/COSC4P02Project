@@ -11,7 +11,8 @@
   )
 </template>
 <script>
-import BotIcon from './assets/icons/bot.png'
+import EventBus from './helpers/event-bus'
+import BotIcon from './assets/icons/Sir-Isaac-Brock.jpg'
 import { ChatbotUI } from './chatbot'
 // import { messageService } from './helpers/message'
 
@@ -44,6 +45,41 @@ export default {
     }
   },
 
+  mounted () {
+    // SettingButtons
+    EventBus.$on('SettingButtons', (msg) => {
+      switch (msg) {
+        case 'ClearMsg': // Clear Chat Log
+          this.botTyping = true
+          this.messageData = []
+          setTimeout(() => {
+            this.messageData.push({
+              agent: 'bot',
+              type: 'button',
+              text: 'Chat Log Cleared',
+              options: [ { text: 'Get Started', action: 'postback' } ]
+            })
+            this.botTyping = false
+          }, 200)
+          break
+        case 'ExportLog': // Export Chat Log
+          alert('TODO: Chat Log Export')
+          console.log(this.messageData)
+          break
+        case 'Help':
+          this.messageData.push({
+            agent: 'bot',
+            type: 'button',
+            text: 'Looks like you needs some help',
+            options: [ { text: 'Get Started', action: 'postback' },
+              { text: 'Read ChatBot Document', value: 'http://doc.krunk.cn/docs/post-2/page-9', action: 'url' },
+              { text: 'Open Source Code', value: 'https://github.com/COSC-4P02/COSC4P02Project', action: 'url' } ]
+          })
+          break
+      }
+    })
+  },
+
   methods: {
 
     // Connect to websocket
@@ -69,7 +105,7 @@ export default {
           options: [ { text: 'Get Started', action: 'postback' },
             { text: 'About Brock University', action: 'postback' } ]
         })
-      }, 500)
+      }, 200)
     },
 
     // Connection closed
