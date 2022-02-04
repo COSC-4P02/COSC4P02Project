@@ -1,19 +1,23 @@
 <template lang="pug">
-#app
-  ChatbotUI(
-    :options="botOptions",
-    :messages="messageData",
-    :bot-typing="botTyping",
-    :input-disable="inputDisable",
-    :is-open="false",
-    @init="botStart",
-    @msg-send="msgSend",
-  )
+  #app
+    Nav
+    Background
+    ChatbotUI(
+      :options="botOptions",
+      :messages="messageData",
+      :bot-typing="botTyping",
+      :input-disable="inputDisable",
+      :is-open="false",
+      @init="botStart",
+      @msg-send="msgSend",
+    )
 </template>
 <script>
 import EventBus from './helpers/event-bus'
 import BotIcon from './assets/icons/Sir-Isaac-Brock.jpg'
 import { ChatbotUI } from './chatbot'
+import Background from './components/Background'
+import Nav from './components/Nav'
 import axios from 'axios'
 // import { messageService } from './helpers/message'
 
@@ -22,7 +26,9 @@ var ws = null
 export default {
   components: {
     BotIcon,
-    ChatbotUI
+    ChatbotUI,
+    Background,
+    Nav
   },
 
   data () {
