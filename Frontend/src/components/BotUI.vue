@@ -45,6 +45,7 @@ import BoardAction from './Board/Action'
 import AppStyle from './AppStyle'
 import BubbleIcon from '../assets/icons/bubble.svg'
 import CloseIcon from '../assets/icons/close.svg'
+import BotIcon from '../assets/icons/Sir-Isaac-Brock.jpg'
 
 export default {
   name: 'ChatbotUI',
@@ -59,9 +60,9 @@ export default {
   },
 
   props: {
-    options: {
-      type: Object,
-      default: () => { return {} }
+    version: {
+      type: String,
+      default: 'brock'
     },
 
     messages: {
@@ -91,6 +92,30 @@ export default {
   data () {
     return {
       botActive: false,
+      BrockBot: {
+        botTitle: 'Brock University Chatbot', // Bot Title Color
+        colorScheme: '#cc0000', // Bot Color
+        msgBubbleBgUser: '#cc0000', // User Bubble Color
+        botAvatarImg: BotIcon,
+        boardContentBg: '#f4f4f4',
+        msgBubbleBgBot: '#fff',
+        inputPlaceholder: 'Type here...',
+        inputDisableBg: '#fff',
+        inputDisablePlaceholder: 'Hit the buttons above to respond'
+      },
+      SummerGamesBot: {
+        botTitle: 'Niagara 2022 Canada Summer Games Chatbot', // Bot Title Color
+        colorScheme: '#004f71', // Bot Color
+        msgBubbleBgUser: '#004f71', // User Bubble Color
+        botAvatarImg: BotIcon,
+        boardContentBg: '#f4f4f4',
+        msgBubbleBgBot: '#fff',
+        inputPlaceholder: 'Type here...',
+        inputDisableBg: '#fff',
+        inputDisablePlaceholder: 'Hit the buttons above to respond'
+      },
+      options: {
+      },
       defaultOptions: {
         botTitle: 'Chatbot', // Bot Title Color
         colorScheme: '#cc0000', // Bot Color
@@ -113,7 +138,13 @@ export default {
 
   computed: {
     optionsMain () {
-      return { ...this.defaultOptions, ...this.options }
+      if (this.version === 'game') {
+        return { ...this.defaultOptions, ...this.SummerGamesBot }
+      } else if (this.version === 'brock') {
+        return { ...this.defaultOptions, ...this.BrockBot }
+      } else {
+        return { ...this.defaultOptions }
+      }
     },
 
     // Add class to bot ui wrapper

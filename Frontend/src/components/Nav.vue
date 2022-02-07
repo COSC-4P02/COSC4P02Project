@@ -5,31 +5,44 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img src="../assets/icons/brocku-logo-rgb.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        Brock University</a>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <img :src="botInfo.botIcon" alt="" width="55" height="35" class="d-inline-block align-text-top">
+        {{botInfo.botTitle}}</a>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Nav</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">{{botInfo.navTitle}}</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" :href="botInfo.OfficialWeb">Official Web</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Another Bot
+                Switch Bot
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                <li><a class="dropdown-item" href="#">Brock university</a></li>
-                <li><a class="dropdown-item" href="#">Niagara 2020 Summer Game</a></li>
+                <li><button class="dropdown-item" @click="switchVersion('brock')">Brock university</button></li>
+                <li><a class="dropdown-item"  @click="switchVersion('game')">Niagara 2020 Summer Game</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarSize" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Font size
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                <li><a class="dropdown-item" href="#">size 1</a></li>
+                <li><a class="dropdown-item" href="#">size 2</a></li>
+                <li><a class="dropdown-item" href="#">size 3</a></li>
+              </ul>
+            </li>
           </ul>
           <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="Type what you want" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
@@ -40,8 +53,48 @@
 
 <script>
 export default {
-  name: 'Nav'
+  name: 'Nav',
+  props: {
+    version: {
+      type: String,
+      default: 'brock'
+    },
+    switchVersion: {
+      type: Function,
+      default: () => {}
+    }
 
+  },
+  data () {
+    return {
+      botInfo: {
+        botTitle: '',
+        botIcon: '../assets/icons/bubble.svg',
+        navTitle: '',
+        OfficialWeb: ''
+      }
+    }
+  },
+  methods: {
+  },
+  watch: {
+    version: {
+      immediate: true,
+      handler (newValue) {
+        if (newValue === 'game') {
+          this.botInfo.botTitle = 'Niagara 2022 Canada Summer Games'
+          this.botInfo.botIcon = require('../assets/icons/n22-logo.svg')
+          this.botInfo.navTitle = 'Niagara2022games Bot'
+          this.botInfo.OfficialWeb = 'https://niagara2022games.ca/'
+        } else if (newValue === 'brock') {
+          this.botInfo.botTitle = 'Brock University'
+          this.botInfo.botIcon = require('../assets/icons/brocku-logo-rgb.png')
+          this.botInfo.navTitle = 'Brock Bot'
+          this.botInfo.OfficialWeb = 'https://brocku.ca/'
+        }
+      }
+    }
+  }
 }
 </script>
 
