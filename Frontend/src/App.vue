@@ -1,8 +1,15 @@
-<template lang="pug">
+<template v-bind:style="{ fontSize: fontSize + 'rem' }" lang="pug">
   #app
-    Nav
-    Background
+    Nav(
+      :version="version"
+      :switchVersion="versionSwitch"
+      :fontChange ="fontChange"
+    )
+    Background(
+      :version="version"
+    )
     ChatbotUI(
+      :version="version",
       :options="botOptions",
       :messages="messageData",
       :bot-typing="botTyping",
@@ -14,7 +21,6 @@
 </template>
 <script>
 import EventBus from './helpers/event-bus'
-import BotIcon from './assets/icons/Sir-Isaac-Brock.jpg'
 import { ChatbotUI } from './chatbot'
 import Background from './components/Background'
 import Nav from './components/Nav'
@@ -25,7 +31,6 @@ var ws = null
 
 export default {
   components: {
-    BotIcon,
     ChatbotUI,
     Background,
     Nav
@@ -40,23 +45,11 @@ export default {
       // Development Server
       wsApi: 'wss://localhost:8001',
       whApi: 'http://localhost:3000',
-
       messageData: [],
       botTyping: false,
       inputDisable: false,
       version: 'brock', // Define Chatbot Version: brock / game
-      botOptions: {
-        botTitle: 'Brock University Chatbot', // Bot Title Color
-        colorScheme: '#cc0000', // Bot Color
-        msgBubbleBgUser: '#cc0000', // User Bubble Color
-
-        botAvatarImg: BotIcon,
-        boardContentBg: '#f4f4f4',
-        msgBubbleBgBot: '#fff',
-        inputPlaceholder: 'Type here...',
-        inputDisableBg: '#fff',
-        inputDisablePlaceholder: 'Hit the buttons above to respond'
-      }
+      fontSize: 10
     }
   },
 
@@ -130,6 +123,23 @@ export default {
       ws.addEventListener('message', this.handleWsMessage.bind(this), false)
     },
 
+    versionSwitch (event) {
+      if (this.version === 'brock' && event === 'game') {
+        this.version = 'game'
+      } else if (this.version === 'game' && event === 'brock') {
+        this.version = 'brock'
+      }
+    },
+    fontChange (event) {
+      if (event === '0') {
+        this.fontSize = 10
+      } else if (event === '1') {
+        this.fontSize = 15
+      } else {
+        this.fontSize = 20
+      }
+    },
+
     // Connection open
     handleWsOpen (e) {
       // First message after socket open
@@ -182,7 +192,6 @@ export default {
         this.connectWS()
       }
     },
-
     // Get user input and send to server
     msgSend (value) {
       // Push the user's message to board
