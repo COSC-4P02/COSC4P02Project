@@ -35,9 +35,9 @@
                 Font size
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                <li><a class="dropdown-item" @click="switchVersion('game')">size 1</a></li>
-                <li><a class="dropdown-item" @click="switchVersion('game')">size 2</a></li>
-                <li><a class="dropdown-item" @click="switchVersion('game')">size 3</a></li>
+                <li><a class="dropdown-item" @click="fontChange('0')">size 1</a></li>
+                <li><a class="dropdown-item" @click="fontChange('1')">size 2</a></li>
+                <li><a class="dropdown-item" @click="fontChange('2')">size 3</a></li>
               </ul>
             </li>
           </ul>
@@ -60,6 +60,10 @@ export default {
       default: 'brock'
     },
     switchVersion: {
+      type: Function,
+      default: () => {}
+    },
+    fontChange: {
       type: Function,
       default: () => {}
     }

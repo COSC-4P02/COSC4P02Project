@@ -1,8 +1,9 @@
-<template lang="pug">
+<template v-bind:style="{ fontSize: fontSize + 'rem' }" lang="pug">
   #app
     Nav(
       :version="version"
       :switchVersion="versionSwitch"
+      :fontChange ="fontChange"
     )
     Background(
       :version="version"
@@ -47,7 +48,8 @@ export default {
       messageData: [],
       botTyping: false,
       inputDisable: false,
-      version: 'brock' // Define Chatbot Version: brock / game
+      version: 'brock', // Define Chatbot Version: brock / game
+      fontSize: 10
     }
   },
 
@@ -128,7 +130,14 @@ export default {
         this.version = 'brock'
       }
     },
-    fontChange () {
+    fontChange (event) {
+      if (event === '0') {
+        this.fontSize = 10
+      } else if (event === '1') {
+        this.fontSize = 15
+      } else {
+        this.fontSize = 20
+      }
     },
 
     // Connection open
