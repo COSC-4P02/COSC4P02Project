@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img :src="botInfo.botIcon" alt="" width="55" height="35" class="d-inline-block align-text-top">
+        <img :src="botInfo.botIcon" :alt="botInfo.botIcon" width="55" height="35" class="d-inline-block align-text-top">
         {{botInfo.botTitle}}</a>
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
@@ -35,9 +35,9 @@
                 Font size
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                <li><a class="dropdown-item" href="#">size 1</a></li>
-                <li><a class="dropdown-item" href="#">size 2</a></li>
-                <li><a class="dropdown-item" href="#">size 3</a></li>
+                <li><a class="dropdown-item" @click="switchVersion('game')">size 1</a></li>
+                <li><a class="dropdown-item" @click="switchVersion('game')">size 2</a></li>
+                <li><a class="dropdown-item" @click="switchVersion('game')">size 3</a></li>
               </ul>
             </li>
           </ul>
@@ -70,6 +70,7 @@ export default {
       botInfo: {
         botTitle: '',
         botIcon: '../assets/icons/bubble.svg',
+        IconAlt: '',
         navTitle: '',
         OfficialWeb: ''
       }
@@ -83,12 +84,14 @@ export default {
       handler (newValue) {
         if (newValue === 'game') {
           this.botInfo.botTitle = 'Niagara 2022 Canada Summer Games'
-          this.botInfo.botIcon = require('../assets/icons/n22-logo.svg')
+          this.botInfo.botIcon = 'https://niagara2022games.ca/assets/img/n22-logo.svg'
+          this.botInfo.IconAlt = 'Niagara 2022 Canada Gameslogo'
           this.botInfo.navTitle = 'Niagara2022games Bot'
           this.botInfo.OfficialWeb = 'https://niagara2022games.ca/'
         } else if (newValue === 'brock') {
           this.botInfo.botTitle = 'Brock University'
-          this.botInfo.botIcon = require('../assets/icons/brocku-logo-rgb.png')
+          this.botInfo.botIcon = require('../assets/brock/brocku-logo-rgb.png')
+          this.botInfo.IconAlt = 'Brock University logo'
           this.botInfo.navTitle = 'Brock Bot'
           this.botInfo.OfficialWeb = 'https://brocku.ca/'
         }

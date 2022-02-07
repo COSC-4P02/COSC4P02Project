@@ -4,7 +4,9 @@
       :version="version"
       :switchVersion="versionSwitch"
     )
-    Background
+    Background(
+      :version="version"
+    )
     ChatbotUI(
       :version="version",
       :options="botOptions",
@@ -18,7 +20,6 @@
 </template>
 <script>
 import EventBus from './helpers/event-bus'
-import BotIcon from './assets/icons/Sir-Isaac-Brock.jpg'
 import { ChatbotUI } from './chatbot'
 import Background from './components/Background'
 import Nav from './components/Nav'
@@ -29,7 +30,6 @@ var ws = null
 
 export default {
   components: {
-    BotIcon,
     ChatbotUI,
     Background,
     Nav
@@ -44,7 +44,6 @@ export default {
       // Development Server
       wsApi: 'wss://localhost:8001',
       whApi: 'http://localhost:3000',
-
       messageData: [],
       botTyping: false,
       inputDisable: false,
@@ -128,6 +127,8 @@ export default {
       } else if (this.version === 'game' && event === 'brock') {
         this.version = 'brock'
       }
+    },
+    fontChange () {
     },
 
     // Connection open

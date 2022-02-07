@@ -45,7 +45,7 @@ import BoardAction from './Board/Action'
 import AppStyle from './AppStyle'
 import BubbleIcon from '../assets/icons/bubble.svg'
 import CloseIcon from '../assets/icons/close.svg'
-import BotIcon from '../assets/icons/Sir-Isaac-Brock.jpg'
+import BotIcon from '../assets/brock/Sir-Isaac-Brock.jpg'
 
 export default {
   name: 'ChatbotUI',
@@ -113,8 +113,6 @@ export default {
         inputPlaceholder: 'Type here...',
         inputDisableBg: '#fff',
         inputDisablePlaceholder: 'Hit the buttons above to respond'
-      },
-      options: {
       },
       defaultOptions: {
         botTitle: 'Chatbot', // Bot Title Color

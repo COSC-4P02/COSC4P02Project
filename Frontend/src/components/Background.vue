@@ -7,13 +7,13 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="../assets/icons/Brock.jpg" class="d-block w-100" alt="...">
+        <img src="../assets/brock/Brock.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="../assets/icons/Sir-Isaac-Brock.jpg" class="d-block w-100" alt="...">
+        <img src="../assets/brock/Brocku2.jpeg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="../assets/icons/Sir-Isaac-Brock.jpg" class="d-block w-100" alt="...">
+        <img src="../assets/canada_game/canada-games2.jpeg" class="d-block w-100" alt="...">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
