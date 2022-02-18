@@ -19,7 +19,7 @@ function sendCourseDetails(conn,result_array,number){
 // Read courses from csv
 function readCourseFromCsv(conn,param,number){
   var result_array = null;
-  fs.createReadStream('train-data/brock/course/data.csv')
+  fs.createReadStream('data/train-data/brock/course/data.csv')
   .pipe(csv())
   .on('data', (row) => {
     var course = row[Object.keys(row)].split("\t");
@@ -101,7 +101,6 @@ module.exports = function ({answer,conn}) {
         }
 
         const req = https.request(options, res => {
-          //console.log(`状态码: ${res.statusCode}`)
           if (res.statusCode!=200){
             console.error("Niagara COVID Fetch Api Error: "+res.statusCode)
             return;
@@ -150,6 +149,41 @@ module.exports = function ({answer,conn}) {
       case "!courseDeliver": // Course Location
         readCourseFromCsv(conn,param,5);
         return "!ignore";
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+      
+      case "!courseProf": // Course Prof
+        //readCourseFromCsv(conn,param,10);
+        return "TODO";
+        return "!ignore";
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+      
+      case "!coursePrerequisites": // Course Prerequisites
+        readCourseFromCsv(conn,param,6);
+        return "!ignore";
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+      
+      case "!courseLab": // Course Lab
+        readCourseFromCsv(conn,param,2);
+        return "!ignore";
+        
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!programDes": // 
+        if (param == "{{brockProgram}}"){
+          return "This program does not appear to exist, sorry.";
+        }
+        return param + " program details will be here";
+        
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!programReq": // Course Location
+        if (param == "{{brockProgram}}"){
+          return "This program does not appear to exist, sorry.";
+        }
+        return param + " program requirements will be here";
         
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 

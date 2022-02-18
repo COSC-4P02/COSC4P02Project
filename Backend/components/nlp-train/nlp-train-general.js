@@ -1,49 +1,5 @@
-const fs = require('fs');
-const csv = require('csv-parser');
+module.exports = function (manager, say) { 
 
-module.exports = async function trainnlp(manager, say) {
-  if (fs.existsSync(__dirname + '/../nlp-model/model.nlp')) {
-    manager.load(__dirname + '/../nlp-model/model.nlp');
-    return;
-  }
-  
-  GereralQnA(manager);
-
-  // Start
-  manager.addDocument('en', 'Get Started', 'agent.start');
-  manager.addAnswer('en', 'agent.start', '!json-{\"type\":\"button\",\"text\":\"Welcome! Here are some questions you may ask!\",\"disableInput\":false,\"options\":[{\"text\":\"Tell me about Brock\",\"action\":\"postback\"},{\"text\":\"Where is Brock\",\"action\":\"postback\"},{\"text\":\"What is COSC 4P01\",\"action\":\"postback\"},{\"text\":\"COVID in Niagara\",\"action\":\"postback\"}]}');
-
-  // Brock About
-  manager.addNamedEntityText('brocku', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
-  manager.addDocument('en', 'What is %brocku%', 'brock.about.des');
-  manager.addDocument('en', '%brocku%', 'brock.about.des');
-  manager.addDocument('en', 'Where is %brocku%', 'brock.about.location');
-  manager.addDocument('en', 'How is %brocku%', 'brock.about.des');
-
-  manager.addAnswer('en', 'brock.about.des', '!json-{"type":"button","text":"Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.","disableInput":false,"options":[{"text":"About","value":"https://brocku.ca/about/","action":"url"},{"text":"Homepage","value":"https://brocku.ca/","action":"url"},{"text":"News","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}');
-  manager.addAnswer('en', 'brock.about.location', '!json-{"type":"button","text":"You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}'); //Location
-  
-  // Courses Details
-  manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
-  manager.addDocument('en', 'Tell me about %brockCourse%', 'brock.course.des');
-  manager.addDocument('en', 'I want to know about %brockCourse%', 'brock.course.des');
-  manager.addDocument('en', '%brockCourse%', 'brock.course.des');
-
-  manager.addDocument('en', 'When is %brockCourse%', 'brock.course.time');
-  manager.addDocument('en', '%brockCourse% time', 'brock.course.time');
-
-  manager.addDocument('en', 'Where is %brockCourse%', 'brock.course.location');
-  manager.addDocument('en', '%brockCourse% Location', 'brock.course.location');
-  
-  manager.addDocument('en', 'How is the %brockCourse% delivered', 'brock.course.deliver');
-  manager.addDocument('en', '%brockCourse% deliver method', 'brock.course.deliver');
-  manager.addDocument('en', '%brockCourse% lecture', 'brock.course.deliver');
-
-  manager.addAnswer('en', 'brock.course.des', '!courseDes-{{brockCourse}}'); //Des
-  manager.addAnswer('en', 'brock.course.time', '!courseTime-{{brockCourse}}'); //Time
-  manager.addAnswer('en', 'brock.course.location', '!courseLocation-{{brockCourse}}'); //Location
-  manager.addAnswer('en', 'brock.course.deliver', '!courseDeliver-{{brockCourse}}'); //Location
-  
   // COVID
   manager.addDocument('en', 'covid-19', 'agent.covid');
   manager.addDocument('en', 'i want to know about covid infomation', 'agent.covid');
@@ -53,46 +9,7 @@ module.exports = async function trainnlp(manager, say) {
 
   manager.addAnswer('en', 'agent.covid', "!covidNiagara-");
 
-  // Canada Game
-  manager.addDocument('en', 'canada game', 'agent.cginfo');
-  manager.addDocument('en', 'i want to know about canada game', 'agent.cginfo');
-  manager.addDocument('en', 'what is canada game', 'agent.cginfo');
-  manager.addDocument('en', 'when is canada game', 'agent.cginfo');
 
-  manager.addAnswer('en', 'agent.cginfo', "The Canada Summer Games are coming to the Niagara Region August 6-21, 2022! These Games will feature approximately 5,000 athletes and coaches in 18 sports from all 13 Provinces and Territories. 4,000 volunteers will be needed to deliver these Games and the expected economic impact will exceed $450 million.");
-
-  // Course CSV
-  //manager.addNamedEntityText('brockCourse', 'COSC-4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01','COSC401','COSC 401']);
-  fs.createReadStream(__dirname + '/../train-data/brock/course/data.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    var course = row[Object.keys(row)].split("\t");
-    const courseName1 = course[0].toUpperCase();
-    const courseName2 = course[0].toLowerCase();
-    const courseName3 = course[0].replace('-', ' ');
-    const courseName4 = course[0].toUpperCase().replace('P', '').replace('F', '');
-    const courseName5 = course[0].toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
-    const courseName6 = course[0].toUpperCase().replace('-', '').replace('P', '').replace('F', '');
-    manager.addNamedEntityText('brockCourse', courseName1, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
-    //console.log(course);
-  })
-  .on('end', () => {
-    console.log('CSV file successfully processed');
-    trainAndSave(manager,say);
-  });
-}
-
-function trainAndSave(manager,say){
-  say('Data is Training, please wait..');
-  const hrstart = process.hrtime();
-  manager.train();
-  const hrend = process.hrtime(hrstart);
-  console.info('Trained (hr): %ds %dms', hrend[0], hrend[1] / 1000000);
-  say('Data Trained!');
-  manager.save('./nlp-model/model.nlp', true);
-}
-
-function GereralQnA(manager){
   // Gereral
   manager.addDocument('en', 'say about you', 'agent.acquaintance');
   manager.addDocument('en', 'why are you here', 'agent.acquaintance');
@@ -368,6 +285,7 @@ function GereralQnA(manager){
   manager.addDocument('en', 'bye for now', 'greetings.bye');
   manager.addDocument('en', 'i must go', 'greetings.bye');
   manager.addDocument('en', 'hello', 'greetings.hello');
+  manager.addDocument('en', 'nihao', 'greetings.hello');
   manager.addDocument('en', 'hi', 'greetings.hello');
   manager.addDocument('en', 'howdy', 'greetings.hello');
   manager.addDocument('en', 'how is your day', 'greetings.howareyou');
@@ -847,4 +765,4 @@ function GereralQnA(manager){
     'user.needsadvice',
     "I'm not sure I'll have the best answer, but I'll try"
   );
-}
+};
