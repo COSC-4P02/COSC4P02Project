@@ -9,9 +9,9 @@
 var config = require('./config');
 
 // Hooks-Server
-const {add_filter, remove_filter, add_action, 
-  remove_action, do_action, apply_filters 
-} = require("./plugins/hooks-server/hooks-server.js");
+// const {add_filter, remove_filter, add_action, 
+//   remove_action, do_action, apply_filters 
+// } = require("./plugins/hooks-server/hooks-server.js");
 
 //Logger
 const { print, errorlog, chatlog } = require('./components/logService');
@@ -19,7 +19,6 @@ const { print, errorlog, chatlog } = require('./components/logService');
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // NLP init
-const readline = require('readline');
 const { NlpManager } = require('./plugins/NlpManager');
 const trainnlp = require('./components/nlp-train/nlp-train');
 const threshold = config.nlpThreshold;

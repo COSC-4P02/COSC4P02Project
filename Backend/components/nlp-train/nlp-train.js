@@ -9,7 +9,7 @@ module.exports = async function trainnlp(manager, say, version) {
     return;
   }
   
-  trainGeneral(manager,say);
+  trainGeneral(manager);
 
   if (version == "brock")
     trainBrock(manager,say,function () {

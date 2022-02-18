@@ -1,6 +1,7 @@
 var config = require('../config');
 const express = require('express')
 var cors = require('cors');
+var fs = require('fs');
 
 module.exports = function (print, errorlog) { 
   // Express
@@ -27,6 +28,11 @@ module.exports = function (print, errorlog) {
   // Api Services
   app.get('/', (req, res) => {
     res.send('404 Not Found');
+    errorlog('/ visit');
+  })
+
+  app.get('/test', (req, res) => {
+    res.send(fs.readFileSync('test/question-test.html').toString());
   })
 
   // User enter logs
@@ -53,7 +59,7 @@ module.exports = function (print, errorlog) {
         }
       }
     }
-    send = {'type': 'pdf',
+    var send = {'type': 'pdf',
             'msg': result}
     print(send)
     res.send(JSON.stringify(send));

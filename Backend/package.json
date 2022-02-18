@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Chatbot-Ai-Backend",
   "scripts": {
-    "serve": "node app.js"
+    "serve": "node app.js",
+    "test": "npm run serve & open http://localhost:3000/test",
+    "lint": "./node_modules/.bin/eslint ./components"
   },
   "keywords": [
     "chatbot"
@@ -14,5 +16,8 @@
     "express": "^4.17.2",
     "node-nlp": "^3.10.2",
     "winston": "^3.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0"
   }
 }

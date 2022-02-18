@@ -1,4 +1,4 @@
-module.exports = function (manager, say) { 
+module.exports = function (manager) { 
 
   // COVID
   manager.addDocument('en', 'covid-19', 'agent.covid');

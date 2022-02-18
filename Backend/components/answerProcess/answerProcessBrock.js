@@ -7,7 +7,7 @@ const csv = require('csv-parser');
 
 function sendCourseDetails(conn,result_array,number){
   if (result_array[number]!=""&&result_array[number].toLowerCase()!="none"&&result_array[number].toLowerCase()!="null"){
-    send = {
+    var send = {
       'type': 'text',
       'text': result_array[number],
       'disableInput': false
@@ -29,7 +29,7 @@ function readCourseFromCsv(conn,param,number){
   })
   .on('end', () => {
     if (result_array==null){
-      send = {
+      var send = {
         'type': 'text',
         'text': "Can not find info about it",
         'disableInput': false
@@ -54,7 +54,7 @@ module.exports = function ({answer,conn}) {
     var temp = (' ' + answer).slice(1);
     const control = temp.substr(0,temp.indexOf('-'));
 
-    var temp = (' ' + answer).slice(1);
+    temp = (' ' + answer).slice(1);
     const param = temp.substr(temp.indexOf('-')+1,temp.length-1);
 
     switch(control) {
@@ -64,7 +64,7 @@ module.exports = function ({answer,conn}) {
       case "!covidNiagara": // COVID Infomation
 
         // COVID Links
-        urlsend = {
+        var urlsend = {
           'type': 'button',
           'text': "Here are some links about COVID-19",
           'disableInput': false,
@@ -93,14 +93,14 @@ module.exports = function ({answer,conn}) {
         }
         conn.sendText(JSON.stringify(urlsend));
 
-        const options = {
+        var options = {
           hostname: 'niagara.krunk.cn',
           port: 443,
           path: '/today-api.php',
           method: 'GET'
         }
 
-        const req = https.request(options, res => {
+        var req = https.request(options, res => {
           if (res.statusCode!=200){
             console.error("Niagara COVID Fetch Api Error: "+res.statusCode)
             return;
@@ -110,7 +110,7 @@ module.exports = function ({answer,conn}) {
             const result = "As of "+data['date']+" in Niagara Region, Total Cases: "+data['strCaseNumbers']+
               ", Total Resolved Cases: "+data['spnResolvedCases']+", Total Death Cases: "+data['death'];
 
-            send = {
+            var send = {
               'type': 'text',
               'text': result,
               'disableInput': false
@@ -155,7 +155,7 @@ module.exports = function ({answer,conn}) {
       case "!courseProf": // Course Prof
         //readCourseFromCsv(conn,param,10);
         return "TODO";
-        return "!ignore";
+        //return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       

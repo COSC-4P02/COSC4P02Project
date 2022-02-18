@@ -1,9 +1,11 @@
 var config = require('../config');
 
 // Hooks-Server
+/* eslint-disable */
 const {add_filter, remove_filter, add_action, 
   remove_action, do_action, apply_filters 
 } = require("../plugins/hooks-server/hooks-server.js");
+/* eslint-enable */
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
@@ -20,12 +22,13 @@ var options = {
 }
 
 module.exports = function (print, errorlog, chatlog, nlp_info) {
-  threshold = nlp_info[0];
-  nlpManagerBrock = nlp_info[1];
-  nlpManagerGame = nlp_info[2];
+  var threshold = nlp_info[0];
+  var nlpManagerBrock = nlp_info[1];
+  var nlpManagerGame = nlp_info[2];
 
   // Define WebSocket
-  var server = ws.createServer(options, conn=> {
+  //var server = 
+  ws.createServer(options, conn=> {
     print("New Connection")
     
     conn.on("text", function (data) {
@@ -74,7 +77,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       answer = apply_filters("answer_process_brock", {answer,conn});
 
       // Reply to Client by text
-      send = { 'type': 'text', 'text': answer, 'disableInput': false }
+      var send = { 'type': 'text', 'text': answer, 'disableInput': false }
 
       if (answer == "!ignore"){ // Ignore this send
         return;
@@ -124,7 +127,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       answer = apply_filters("answer_process_game", {answer,conn});
 
       // Reply to Client by text
-      send = { 'type': 'text', 'text': answer, 'disableInput': false }
+      var send = { 'type': 'text', 'text': answer, 'disableInput': false }
 
       if (answer == "!ignore"){ // Ignore this send
         return;
