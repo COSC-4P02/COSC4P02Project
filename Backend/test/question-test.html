@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chatbot Question Test</title>
+<script>
+var conn = new WebSocket("wss://127.0.0.1:8001")
+var lock = false;
+
+conn.onopen = async function () {
+	console.log("Connection Opened")
+
+	// Brock Question
+	send('console','Brock Question')
+
+	send('brock','Tell me about the COSC 4P02 exam')
+	send('brock','What time is the COSC 4P02 exam')
+	send('brock','Where is the COSC 4P02 exam')
+	send('brock','Tell me about COSC 4P02')
+	send('brock','What term is COSC 4P02')
+	send('brock','Who teaches COSC 4P02')
+	send('brock','What are the lab options for COSC 4P02')
+	send('brock','What are the Prerequisites for COSC 1P02')
+	send('brock','What are the Prerequisites for COSC 1P03')
+	send('brock','Tell me about the Dance Program')
+	send('brock','Tell me about the Accounting Program')
+	send('brock','Tell me about the Accounting Program requirements')
+	send('brock','Tell me about the Business Accounting Program requirements')
+	send('brock','What is the Brock University Website')
+	send('brock','What’s new at Brock University')
+	send('brock','Tell me about Brock University')
+	send('brock','Tell me about Brock University Important Dates')
+	
+	send('brock','Where can I park my car?');
+
+	// Canada Game Question
+	send('console','Canada Game Question')
+
+	send('game','What is the Canada Games Website')
+	send('game','How Long until the Canada Games Starts')
+	send('game','Whats new with the Canada Games')
+	send('game','Where is the Canada Games')
+	send('game','Tell me about Sidney Crosby')
+	send('game','Tell me about Sidney Corrigan')
+	send('game','What sport did Sidney Corrigan play')
+	send('game','How many medals does Ontario have?')
+	send('game','How many medals does Buffalo have?')
+	send('game','How many silver medals does New Brunswick have?')
+	send('game','When is the next Badminton Game?')
+	send('game','When is the next Archery Game?')
+	send('game','When is the next Archery Game that Ontario plays in?')
+	send('game','Where can I buy tickets?')
+	
+	// Transportation  Question
+	send('console','Transportation Question')
+
+	send('brock','What transportation options are available?')
+	send('brock','Is there an app for the buses?')
+	send('brock','What can you do in the Niagara region?')
+	send('brock','Where can you stay in the Niagara region?')
+
+	// Other Question
+	send('console','Other Question')
+
+	send('brock','Hello');
+	send('brock','Get Started');
+
+	// Covid  Question
+	send('console','Covid Question')
+
+	send('brock','Covid news at Brock University')
+	send('game','What are the COVID-19 restrictions like in Niagara?')
+	
+}
+
+conn.onmessage = async function (evt) {
+	const msg = JSON.parse(evt.data).text;
+	if (msg.includes("Sorry")
+		|| msg.includes("sorry")
+		|| msg.includes("won't")
+		|| msg.includes("Still under development...")
+		|| msg.includes("not sure")
+		){
+		console.log("%cNot Implemented: "+msg,'background: #c00; color: #fff')
+	}else{
+		console.info("A: "+msg)
+	}
+	lock = false
+}
+
+conn.onerror = function () {
+	console.error("Error")
+}
+
+conn.onclose = function () {
+	console.log("Connection Closed")
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function send(version,msg) {
+    while(lock) {
+        await sleep(50);
+    }
+    if (version == "console"){
+    	console.log('%c\n'+msg,'background: #222; color: #bada55');
+    	return;
+    }
+    sent = ('{"type":"text","version":"'+version+'","agent":"user","msg":"'+msg+'"}');
+    lock = true;
+    conn.send(sent);
+    console.log("%cQ: "+msg,'background: #222; color: #73deff');
+}
+
+</script>
+</head>
+
+<body>
+	<h1>Chatbot-ai Question Test</h1>
+	<h2>How to use:</h2>
+	<ol>
+		<li>Open Web Console</li>
+		<li>npm run serve</li>
+		<li>Access "<a href="https://127.0.0.1:8001" target="_blank">https://127.0.0.1:8001</a>" in another tab. The browser should alert you about security, since the certificate is self-signed</li>
+		<li>Accept security exception</li>
+		<li>Reload this page</li>
+	</ol>
+</body>
+</html>
