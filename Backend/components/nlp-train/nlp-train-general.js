@@ -9,6 +9,42 @@ module.exports = function (manager) {
 
   manager.addAnswer('en', 'agent.covid', "!covidNiagara-");
 
+  // Navigation
+  manager.addNamedEntityText('navLocation', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
+  manager.addNamedEntityText('navLocation', 'Canada Games', ['en'], ['Canada Games','CanadaGames','CG','Canada Game','CanadaGame']);
+  manager.addNamedEntityText('navLocation', 'Pen Center', ['en'], ['Pen Centre','Pen','PC']);
+
+  manager.addDocument('en', 'Go to %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'How can I go to %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'What bus should I take to %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'Where is %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'I want go to %navLocation%', 'agent.navigation');
+
+  manager.addAnswer('en', 'agent.navigation', '!navgation-{{navLocation}}');
+
+  // Transit
+  manager.addDocument('en', 'What transportation options are available?', 'agent.transit.info');
+  manager.addDocument('en', 'transportation options', 'agent.transit.info');
+  manager.addDocument('en', 'transportation infomation', 'agent.transit.info');
+  manager.addDocument('en', 'Is there an app for the buses?', 'agent.transit.app');
+  manager.addDocument('en', 'Bus App', 'agent.transit.app');
+  manager.addDocument('en', 'Transit App', 'agent.transit.app');
+  manager.addDocument('en', 'Niagara Transit', 'agent.transit.app');
+
+  manager.addAnswer('en', 'agent.transit.info', '!json-{"type":"button","text":"Niagara Region Transit information is available here","disableInput":false,"options":[{"text":"Niagara Region Transit","value":"https://www.niagararegion.ca/transit/","action":"url"}]}');
+  manager.addAnswer('en', 'agent.transit.app', '!json-{"type":"button","text":"You can download Transit app from AppStore or Play Store here","disableInput":false,"options":[{"text":"Transit IOS","value":"https://apps.apple.com/ca/app/transit-bus-train-times/id498151501","action":"url"},{"text":"Transit Android","value":"https://play.google.com/store/apps/details?id=com.thetransitapp.droid","action":"url"}]}');
+
+  // Local Area
+  manager.addDocument('en', 'What can you do in the Niagara region?', 'agent.localArea.do');
+  manager.addDocument('en', 'What can I do in the Niagara region?', 'agent.localArea.do');
+  manager.addDocument('en', 'What to play around', 'agent.localArea.do');
+  manager.addDocument('en', 'Where can you stay in the Niagara region?', 'agent.localArea.stay');
+  manager.addDocument('en', 'Where can I stay in the Niagara region?', 'agent.localArea.stay');
+  manager.addDocument('en', 'where to stay', 'agent.localArea.stay');
+
+  manager.addAnswer('en', 'agent.localArea.do', '!json-{"type":"button","text":"The Niagara Falls Tourism website provided here has information about what you can see and do in the region.","disableInput":false,"options":[{"text":"Niagara Falls Tourism","value":"https://www.niagarafallstourism.com/niagara-region/","action":"url"}]}');
+  manager.addAnswer('en', 'agent.localArea.stay', '!json-{"type":"button","text":"The Niagara Falls Tourism website provided here has information about accommodations in the Niagara Region.","disableInput":false,"options":[{"text":"Niagara Falls Tourism","value":"https://www.niagarafallstourism.com/niagara-region/","action":"url"},{"text":"Google Maps","value":"https://www.google.ca/maps/search/niagara+region+hotel/@43.1375653,-79.2561342,12.13z","action":"url"}]}');
+
 
   // Gereral
   manager.addDocument('en', 'say about you', 'agent.acquaintance');

@@ -49,7 +49,9 @@ function readCourseFromCsv(conn,param,number){
   });
 }
 
-module.exports = function ({answer,conn}) { 
+module.exports = function ({obj,answer,conn}) { 
+  var urlsend = "";
+
     if (answer.charAt(0)=='!'){
     var temp = (' ' + answer).slice(1);
     const control = temp.substr(0,temp.indexOf('-'));
@@ -64,7 +66,7 @@ module.exports = function ({answer,conn}) {
       case "!covidNiagara": // COVID Infomation
 
         // COVID Links
-        var urlsend = {
+        urlsend = {
           'type': 'button',
           'text': "Here are some links about COVID-19",
           'disableInput': false,
@@ -184,6 +186,46 @@ module.exports = function ({answer,conn}) {
           return "This program does not appear to exist, sorry.";
         }
         return param + " program requirements will be here";
+
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!navgation": // Navagation - Google Maps
+
+        var location = param;
+        if (param == "{{navLocation}}"){
+          location = obj.msg;
+        }
+
+        urlsend = {
+          'type': 'button',
+          'text': "You can see route here",
+          'disableInput': false,
+          'options': [
+            {
+              'text': 'Drive',
+              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=drive',
+              'action': 'url'
+            },
+            {
+              'text': 'Bus',
+              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=transit',
+              'action': 'url'
+            },
+            {
+              'text': 'Walk',
+              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=walking',
+              'action': 'url'
+            },
+            {
+              'text': 'Ontario COVID',
+              'value': 'https://covid-19.ontario.ca/data/case-numbers-and-spread',
+              'action': 'url'
+            }
+          ]
+        }
+        conn.sendText(JSON.stringify(urlsend));
+        return "!ignore";
         
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 

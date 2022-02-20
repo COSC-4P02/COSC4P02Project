@@ -19,6 +19,13 @@ module.exports = function (manager, say, save) {
   manager.addDocument('en', 'Covid news at %brocku%', 'agent.covid');
   manager.addDocument('en', 'Tell me about %brocku% Important Dates', 'brock.about.dates');
 
+  manager.addDocument('en', 'Go to %brocku%', 'agent.navigation');
+  manager.addDocument('en', 'How can I go to %brocku%', 'agent.navigation');
+  manager.addDocument('en', 'What bus should I take to %brocku%', 'agent.navigation');
+  manager.addDocument('en', 'Where is %brocku%', 'agent.navigation');
+  manager.addDocument('en', 'I want go to %brocku%', 'agent.navigation');
+  manager.addAnswer('en', 'agent.navigation', '!navgation-{{navLocation}}');
+
   manager.addAnswer('en', 'brock.about.des', '!json-{"type":"button","text":"Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.","disableInput":false,"options":[{"text":"About","value":"https://brocku.ca/about/","action":"url"},{"text":"Homepage","value":"https://brocku.ca/","action":"url"},{"text":"News","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}');
   manager.addAnswer('en', 'brock.about.location', '!json-{"type":"button","text":"You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}'); //Location
   manager.addAnswer('en', 'brock.about.website', '!json-{"type":"button","text":"The website is https://brocku.ca","disableInput":false,"options":[{"text":"Open brocku.ca","value":"https://brocku.ca","action":"url"}]}');

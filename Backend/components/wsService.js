@@ -74,7 +74,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
 
       // Process Answer if needed
-      answer = apply_filters("answer_process_brock", {answer,conn});
+      answer = apply_filters("answer_process_brock", {obj,answer,conn});
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -124,7 +124,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       chatlog("Game| User: " + obj.msg + " | Bot: " + answer);
 
       // Process Answer if needed
-      answer = apply_filters("answer_process_game", {answer,conn});
+      answer = apply_filters("answer_process_game", {obj,answer,conn});
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
