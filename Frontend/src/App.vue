@@ -58,6 +58,7 @@ export default {
   },
 
   mounted () {
+    this.getNetworkType()
     // SettingButtons
     EventBus.$on('SettingButtons', (msg) => {
       switch (msg) {
@@ -221,6 +222,10 @@ export default {
       }))
 
       // this.getResponse()
+    },
+
+    getNetworkType () {
+      alert('you are using ' + navigator.connection.effectiveType + ' network')
     },
 
     // Submit the message from user to bot API, then get the response from Bot
