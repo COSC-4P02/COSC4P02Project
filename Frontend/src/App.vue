@@ -1,5 +1,7 @@
-<template v-bind:style="{ fontSize: fontSize + 'rem' }" lang="pug">
-  #app
+<template  lang="pug">
+  #app(
+    v-bind:style="{fontSize: fSize}"
+    )
     Nav(
       :version="version"
       :switchVersion="versionSwitch"
@@ -15,6 +17,7 @@
       :bot-typing="botTyping",
       :input-disable="inputDisable",
       :is-open="false",
+      :fontSize="fontSize",
       @init="botStart",
       @msg-send="msgSend",
     )
@@ -39,17 +42,18 @@ export default {
   data () {
     return {
       // Production Server
-      // wsApi: 'wss://ws.chatbot-ai.ga:8001',
-      // whApi: 'https://api.chatbot-ai.ga',
+      wsApi: 'wss://ws.chatbot-ai.ga:8001',
+      whApi: 'https://api.chatbot-ai.ga',
 
       // Development Server
-      wsApi: 'wss://localhost:8001',
-      whApi: 'http://localhost:3000',
+      // wsApi: 'wss://localhost:8001',
+      // whApi: 'http://localhost:3000',
       messageData: [],
       botTyping: false,
       inputDisable: false,
       version: 'brock', // Define Chatbot Version: brock / game
-      fontSize: 10
+      fSize: '18px',
+      fontSize: '1'
     }
   },
 
@@ -132,11 +136,14 @@ export default {
     },
     fontChange (event) {
       if (event === '0') {
-        this.fontSize = 10
+        this.fontSize = '0'
+        this.fSize = '15px'
       } else if (event === '1') {
-        this.fontSize = 15
-      } else {
-        this.fontSize = 20
+        this.fontSize = '1'
+        this.fSize = '18px'
+      } else if (event === '2') {
+        this.fontSize = '2'
+        this.fSize = '25px'
       }
     },
 

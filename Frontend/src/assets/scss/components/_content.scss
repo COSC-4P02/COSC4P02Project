@@ -56,12 +56,19 @@
 
 .qkb-msg-bubble-component {
   font-size: .875rem;
-
   &:hover {
     & ~ .qkb-msg-bubble__time {
       opacity: .8;
     }
   }
+}
+
+.qkb-msg-bubble-component--sizeL {
+  font-size: .95rem;
+}
+
+.qkb-msg-bubble-component--sizeS {
+  font-size: .755rem;
 }
 
 .qkb-msg-bubble {
@@ -109,7 +116,6 @@
   border: 1px solid transparent;
   border-radius: 13px;
   color: inherit;
-  font-size: 0.875rem;
   font-family: inherit;
   text-decoration: none;
   background-color: transparent;

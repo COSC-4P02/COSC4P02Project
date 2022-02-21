@@ -1,5 +1,5 @@
 <template lang="pug">
-.qkb-msg-bubble-component.qkb-msg-bubble-component--button-options
+.qkb-msg-bubble-component(:class="sizeClass").qkb-msg-bubble-component--button-options
   .qkb-msg-bubble-component__text {{ mainData.text }}
   .qkb-msg-bubble-component__options-wrapper
     .qkb-mb-button-options__item(
@@ -26,6 +26,21 @@ export default {
   props: {
     mainData: {
       type: Object
+    },
+    fontSize: {
+      type: String,
+      default: '1'
+    }
+  },
+  computed: {
+    sizeClass () {
+      if (this.fontSize === '0') {
+        return 'qkb-msg-bubble-component--sizeS'
+      } else if (this.fontSize === '2') {
+        return 'qkb-msg-bubble-component--sizeL'
+      } else {
+        return ''
+      }
     }
   },
 

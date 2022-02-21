@@ -11,6 +11,7 @@
       BoardContent(
         :bot-typing="botTyping",
         :main-data="messages"
+        :fontSize="fontSize"
       )
       BoardAction(
         :input-disable="inputDisable",
@@ -86,6 +87,10 @@ export default {
 
     openDelay: {
       type: Number
+    },
+    fontSize: {
+      type: String,
+      default: '0'
     }
   },
 

@@ -6,6 +6,7 @@
     v-if="componentType",
     :is="componentType",
     :main-data="message"
+    :fontSize="fontSize"
   )
   .qkb-msg-bubble__time(v-if="message.createdAt")
     | {{ message.createdAt }}
@@ -23,6 +24,10 @@ export default {
   props: {
     message: {
       type: Object
+    },
+    fontSize: {
+      type: String,
+      default: '0'
     }
   },
 

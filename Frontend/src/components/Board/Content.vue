@@ -7,6 +7,7 @@
       v-for="(item, index) in mainData",
       :key="index",
       :message="item",
+      :fontSize="fontSize"
     )
     .qkb-board-content__bot-typing(v-if="botTyping")
       slot(name="botTyping")
@@ -32,6 +33,10 @@ export default {
     botTyping: {
       type: Boolean,
       default: false
+    },
+    fontSize: {
+      type: String,
+      default: '2'
     }
   },
 
