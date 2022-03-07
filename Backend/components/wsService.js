@@ -4,14 +4,14 @@ var config = require('../config');
 /* eslint-disable */
 const {add_filter, remove_filter, add_action, 
   remove_action, do_action, apply_filters 
-} = require("../plugins/hooks-server/hooks-server.js");
+} = require("../plugin/hooks-server/hooks-server.js");
 /* eslint-enable */
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // WebSocket
 var fs = require('fs');
-const ws = require("../plugins/ws/index.js");
+const ws = require("../plugin/ws/index.js");
 var wsport = config.WebSocketPort;
 
 // Define WSS
@@ -64,7 +64,14 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
   var receivedTextBrock = (conn,obj)=>{
     (async () => {
       // Pocess NLP
+  //     nlpManagerBrock.addDocument('en', 'My mail is %email%', 'email');
+  // nlpManagerBrock.addDocument('en', 'My email is %email%', 'email');
+  // nlpManagerBrock.addDocument('en', 'Here you have my email: %email%', 'email');
+  // nlpManagerBrock.addAnswer('en', 'email', 'Your email is {{email}}');
       const result = await nlpManagerBrock.process(obj.msg);
+      console.log(result);
+      const result2 = await nlpManagerBrock.extractEntities('en', obj.msg);
+      console.log(result2);
       // Get Answer
       var answer = result.score > threshold && result.answer
         ? result.answer

@@ -103,11 +103,6 @@ module.exports = function ({obj,answer,conn}) {
               'text': 'Walk',
               'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=walking',
               'action': 'url'
-            },
-            {
-              'text': 'Ontario COVID',
-              'value': 'https://covid-19.ontario.ca/data/case-numbers-and-spread',
-              'action': 'url'
             }
           ]
         }
