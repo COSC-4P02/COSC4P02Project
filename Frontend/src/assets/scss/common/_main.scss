@@ -12,6 +12,12 @@
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .qkb-bot-ui {
+    bottom: 0.3rem;
+  }
+}
+
 .qkb-preload-image {
   position: absolute;
   top: 0;

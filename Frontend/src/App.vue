@@ -1,4 +1,4 @@
-<template  lang="pug">
+<template lang="pug">
   #app(
     v-bind:style="{fontSize: fSize}"
     )
