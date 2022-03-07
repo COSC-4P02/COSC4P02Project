@@ -21,6 +21,8 @@ var options = {
   cert: fs.readFileSync(config.wsCert)
 }
 
+var saved_already = false;
+
 module.exports = function (print, errorlog, chatlog, nlp_info) {
   var threshold = nlp_info[0];
   var nlpManagerBrock = nlp_info[1];
@@ -64,14 +66,14 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
   var receivedTextBrock = (conn,obj)=>{
     (async () => {
       // Pocess NLP
-  //     nlpManagerBrock.addDocument('en', 'My mail is %email%', 'email');
-  // nlpManagerBrock.addDocument('en', 'My email is %email%', 'email');
-  // nlpManagerBrock.addDocument('en', 'Here you have my email: %email%', 'email');
-  // nlpManagerBrock.addAnswer('en', 'email', 'Your email is {{email}}');
+      // nlpManagerBrock.addDocument('en', 'My mail is %email%', 'email');
+      // nlpManagerBrock.addDocument('en', 'My email is %email%', 'email');
+      // nlpManagerBrock.addDocument('en', 'Here you have my email: %email%', 'email');
+      // nlpManagerBrock.addAnswer('en', 'email', 'Your email is {{email}}');
       const result = await nlpManagerBrock.process(obj.msg);
-      console.log(result);
+      //console.log(result);
       const result2 = await nlpManagerBrock.extractEntities('en', obj.msg);
-      console.log(result2);
+      //console.log(result2);
       // Get Answer
       var answer = result.score > threshold && result.answer
         ? result.answer
@@ -105,6 +107,11 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       // print(`bot> ${answer} : ${sentiment}`);
 
     })();
+    if (!saved_already){
+      nlpManagerBrock.save('./data/nlp-model/model-' + 'brock' + '.nlp', true);
+      nlpManagerGame.save('./data/nlp-model/model-' + 'game' + '.nlp', true);
+      saved_already = true;
+    }
   };
   add_action('received_text_brock',receivedTextBrock);
 
@@ -146,6 +153,11 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       conn.sendText(JSON.stringify(send)); // Send to Client
 
     })();
+    if (!saved_already){
+      nlpManagerBrock.save('./data/nlp-model/model-' + 'brock' + '.nlp', true);
+      nlpManagerGame.save('./data/nlp-model/model-' + 'game' + '.nlp', true);
+      saved_already = true;
+    }
   };
   add_action('received_text_game',receivedTextGame);
 

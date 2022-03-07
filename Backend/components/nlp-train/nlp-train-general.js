@@ -1,5 +1,10 @@
 module.exports = function (manager) { 
 
+  manager.addDocument('en', 'where can i park', 'agent.parking');
+  manager.addDocument('en', 'want to park', 'agent.parking');
+
+  manager.addAnswer('en', 'agent.parking', '!json-{"type":"button","text":"You can find parking infomation here","disableInput":false,"options":[{"text":"Location","value":"https://brocku.ca/parking-services/wp-content/uploads/sites/16/Paid-Parking-2021.pdf","action":"url"}]}');
+
   // COVID
   manager.addDocument('en', 'covid-19', 'agent.covid');
   manager.addDocument('en', 'i want to know about covid infomation', 'agent.covid');

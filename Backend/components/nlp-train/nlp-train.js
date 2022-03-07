@@ -28,5 +28,5 @@ function trainAndSave(manager,say,version){
   manager.train();
   const hrend = process.hrtime(hrstart);
   say("NlpTrainer: " + version + ' version trained (hr): ' + hrend[0] + " " + hrend[1] / 1000000);
-  manager.save('./data/nlp-model/model-' + version + '.nlp', true);
+  //manager.save('./data/nlp-model/model-' + version + '.nlp', true);
 }
