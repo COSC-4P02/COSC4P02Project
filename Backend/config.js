@@ -16,8 +16,8 @@ config.wsKey = "cert/key.pem";
 config.wsCert = "cert/cert.pem";
 
 // Error Log Location
-config.loggerError = "data/logs/chatbot-error.log";
 config.loggerInfo = "data/logs/chatbot-info.log";
+config.loggerError = "data/logs/chatbot-error.log";
 
 // NLP.JS
 config.nlpThreshold = 0.5;

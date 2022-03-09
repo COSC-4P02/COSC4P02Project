@@ -45,15 +45,22 @@ module.exports = function (dbCache, print, errorlog, result) {
 			return;
 		}
 		res.on('data', d => {
-			const data = JSON.parse(d);
-			const result_data = "As of "+data['date']+" in Niagara Region, Total Cases: "+data['strCaseNumbers']+
-			", Total Resolved Cases: "+data['spnResolvedCases']+", Total Death Cases: "+data['death'];
+			try{
+				const data = JSON.parse(d);
+				const result_data = "As of "+data['date']+" in Niagara Region, Total Cases: "+data['strCaseNumbers']+
+				", Total Resolved Cases: "+data['spnResolvedCases']+", Total Death Cases: "+data['death'];
 
-			dbCache.push(db_loc, result_data);
-			dbCache.push(db_loc_date, new Date());
-			print("Crawler: Niagara Covid Fetch Successfully | Saved to database");
+				dbCache.push(db_loc, result_data);
+				dbCache.push(db_loc_date, new Date());
+				print("Crawler: Niagara Covid Fetch Successfully | Saved to database");
 
-			if (!sent) result(result_data);
+				if (!sent) result(result_data);
+			}catch(e){
+				errorlog("Niagara COVID Fetch Api Error: "+e);
+				if (!sent && data_cache!=null) result(data_cache);
+				return;
+			}
+			
 		})
 	})
 

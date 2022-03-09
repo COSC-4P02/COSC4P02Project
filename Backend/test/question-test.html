@@ -1,8 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Chatbot Question Test</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>document.getElementsByTagName("html")[0].className += " js";</script>
+	<link rel="stylesheet" href="https://api-frame.krunk.cn/main/assets/css/style.min.css">
+	<title>Chatbot Question Test</title>
 <script>
 var conn = new WebSocket("wss://127.0.0.1:8001")
 var lock = false;
@@ -118,14 +121,46 @@ async function send(version,msg) {
 </head>
 
 <body>
-	<h1>Chatbot-ai Question Test</h1>
-	<h2>How to use:</h2>
-	<ol>
-		<li>Open Web Console</li>
-		<li>npm run serve</li>
-		<li>Access "<a href="https://127.0.0.1:8001" target="_blank">https://127.0.0.1:8001</a>" in another tab. The browser should alert you about security, since the certificate is self-signed</li>
-		<li>Accept security exception</li>
-		<li>Reload this page</li>
-	</ol>
+	<div class="container max-width-sm hide-nav padding-y-sm z-index-header pointer-events-none js-hide-nav js-hide-nav--main">
+	    <header class="float-nav-header pointer-events-auto">
+	      <div class="flex-basis-0 flex-grow flex items-center display@md">
+	        <ul class="flex items-center gap-sm padding-left-xs">
+	          <li class="flex items-center"><a class="float-nav-header__link" href="https://chatbot-ai.ga">Chatbot Web</a></li>
+	        </ul>
+	      </div>
+	    
+	      <div class="flex-basis-0 flex-grow flex items-center justify-start padding-left-xs justify-center@md padding-left-0@md">
+	        <a class="float-nav-header__logo" href="#" style="text-decoration: none;">
+	          <h4>Chatbot</h4>
+	        </a>
+	      </div>
+	    
+	      <div class="flex-basis-0 flex-grow flex items-center justify-end">
+	        <ul class="flex items-center gap-sm">
+	          <li class="flex items-center display@md"><a class="float-nav-header__link" href="https://uptime.krunk.cn">Uptime</a></li>
+	        </ul>
+	      </div>
+	    </header>
+	  </div>
+
+	  <div class="container max-width-sm padding-y-lg">
+	    <div class="article text-component">
+	      <h1>Chatbot-ai Question Test</h1>
+	      <br>
+	      <h2>How to use:</h2>
+			<ol class="list list--ol">
+				<li>Open Web Console</li>
+				<li>npm run serve</li>
+				<li>Access "<a href="https://127.0.0.1:8001" target="_blank">https://127.0.0.1:8001</a>" in another tab. The browser should alert you about security, since the certificate is self-signed</li>
+				<li>Accept security exception</li>
+				<li>Reload this page</li>
+			</ol>
+
+	      <h2>Documentation</h2>
+	      <p>For further help, <a href="http://docs.chatbot-ai.ga" target="_blank" rel="noopener nofollow">check the documentation</a>.</p>
+	    </div>
+	  </div>
+	
+	<script src="https://api-frame.krunk.cn/main/assets/js/scripts.min.js"></script>
 </body>
 </html>
