@@ -23,7 +23,7 @@ var options = {
 
 var saved_already = false;
 
-module.exports = function (print, errorlog, chatlog, nlp_info) {
+module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
   var threshold = nlp_info[0];
   var nlpManagerBrock = nlp_info[1];
   var nlpManagerGame = nlp_info[2];
@@ -52,12 +52,11 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
     })
     
     conn.on("error",function(err){
-      print('handler error'+err,err)
       errorlog("WebSocket Error Occour - " + err);
     })
 
   }).listen(wsport)
-  print('WebSocket Server Listening on Port ' + wsport);
+  print('Core: WebSocket Server Listening on Port ' + wsport);
 
   // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
@@ -71,9 +70,9 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       // nlpManagerBrock.addDocument('en', 'Here you have my email: %email%', 'email');
       // nlpManagerBrock.addAnswer('en', 'email', 'Your email is {{email}}');
       const result = await nlpManagerBrock.process(obj.msg);
-      //console.log(result);
-      const result2 = await nlpManagerBrock.extractEntities('en', obj.msg);
-      //console.log(result2);
+      // console.log(result);
+      // const result2 = await nlpManagerBrock.extractEntities('en', obj.msg);
+      // console.log(result2);
       // Get Answer
       var answer = result.score > threshold && result.answer
         ? result.answer
@@ -83,7 +82,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
 
       // Process Answer if needed
-      answer = apply_filters("answer_process_brock", {obj,answer,conn});
+      answer = apply_filters("answer_process_brock", {obj,answer,conn,dbCache,print,errorlog});
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -107,11 +106,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       // print(`bot> ${answer} : ${sentiment}`);
 
     })();
-    if (!saved_already){
-      nlpManagerBrock.save('./data/nlp-model/model-' + 'brock' + '.nlp', true);
-      nlpManagerGame.save('./data/nlp-model/model-' + 'game' + '.nlp', true);
-      saved_already = true;
-    }
+    modelSave();
   };
   add_action('received_text_brock',receivedTextBrock);
 
@@ -138,7 +133,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       chatlog("Game| User: " + obj.msg + " | Bot: " + answer);
 
       // Process Answer if needed
-      answer = apply_filters("answer_process_game", {obj,answer,conn});
+      answer = apply_filters("answer_process_game", {obj,answer,conn,dbCache,print,errorlog});
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -153,11 +148,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       conn.sendText(JSON.stringify(send)); // Send to Client
 
     })();
-    if (!saved_already){
-      nlpManagerBrock.save('./data/nlp-model/model-' + 'brock' + '.nlp', true);
-      nlpManagerGame.save('./data/nlp-model/model-' + 'game' + '.nlp', true);
-      saved_already = true;
-    }
+    modelSave();
   };
   add_action('received_text_game',receivedTextGame);
 
@@ -168,5 +159,14 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
   add_filter('answer_process_game',answerProcessGame);
 
   // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+  function modelSave(){
+    if (!saved_already){
+      nlpManagerBrock.save('./data/nlp-model/model-' + 'brock' + '.nlp', true);
+      nlpManagerGame.save('./data/nlp-model/model-' + 'game' + '.nlp', true);
+      saved_already = true;
+      print("NlpTrainer: Saved to files");
+    }
+  }
 
 };

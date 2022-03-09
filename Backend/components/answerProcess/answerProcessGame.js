@@ -1,9 +1,9 @@
 // Process answer after NLP
 // Return with answer or send by "conn"
 
-const https = require('https');
+const covidNiagara = require('../crawler/covidNiagara');
 
-module.exports = function ({obj,answer,conn}) { 
+module.exports = function ({obj,answer,conn,dbCache,print,errorlog}) { 
     if (answer.charAt(0)=='!'){
     var temp = (' ' + answer).slice(1);
     const control = temp.substr(0,temp.indexOf('-'));
@@ -42,37 +42,15 @@ module.exports = function ({obj,answer,conn}) {
         }
         conn.sendText(JSON.stringify(urlsend));
 
-        var options = {
-          hostname: 'niagara.krunk.cn',
-          port: 443,
-          path: '/today-api.php',
-          method: 'GET'
-        }
-
-        var req = https.request(options, res => {
-          if (res.statusCode!=200){
-            console.error("Niagara COVID Fetch Api Error: "+res.statusCode)
-            return;
+        covidNiagara(dbCache, print,errorlog,function (data) {
+          var send = {
+            'type': 'text',
+            'text': data,
+            'disableInput': false
           }
-          res.on('data', d => {
-            const data = JSON.parse(d);
-            const result = "As of "+data['date']+" in Niagara Region, Total Cases: "+data['strCaseNumbers']+
-              ", Total Resolved Cases: "+data['spnResolvedCases']+", Total Death Cases: "+data['death'];
-
-            var send = {
-              'type': 'text',
-              'text': result,
-              'disableInput': false
-            }
-            conn.sendText(JSON.stringify(send));
-          })
-        })
-
-        req.on('error', error => {
-          console.error("Niagara COVID Fetch Api Error: "+error)
-        })
-
-        req.end()
+          conn.sendText(JSON.stringify(send));
+        });
+        
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～

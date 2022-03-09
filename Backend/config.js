@@ -22,4 +22,10 @@ config.loggerInfo = "data/logs/chatbot-info.log";
 // NLP.JS
 config.nlpThreshold = 0.5;
 
+// Database Main Location
+config.databaseLocMain = "data/database/chatbot-data-main.cdb";
+
+// Database Temp Location
+config.databaseLocCache = "data/database/chatbot-data-cache.cdb";
+
 module.exports = config;

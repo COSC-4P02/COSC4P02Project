@@ -3,7 +3,7 @@ const express = require('express')
 var cors = require('cors');
 var fs = require('fs');
 
-module.exports = function (print, errorlog) { 
+module.exports = function (print, errorlog, dbCache) { 
   // Express
   const app = express()
   const webport = config.apiServicePort
@@ -65,7 +65,15 @@ module.exports = function (print, errorlog) {
     res.send(JSON.stringify(send));
   })
 
+  app.get('/data/brock/news', (req, res) => {
+    const brockNews = require('./crawler/brockNews');
+    brockNews(dbCache, print, errorlog, function (rss) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(rss));
+    });
+  })
+
   app.listen(webport, () => {
-    print(`Api Services listening on port ${webport}`)
+    print(`Core: Api Services listening on port ${webport}`)
   })
 };

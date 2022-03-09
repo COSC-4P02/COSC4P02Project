@@ -13,8 +13,11 @@ var config = require('./config');
 //   remove_action, do_action, apply_filters 
 // } = require("./plugin/hooks-server/hooks-server.js");
 
-//Logger
+// Logger
 const { print, errorlog, chatlog } = require('./components/logService');
+
+// DataBase
+const { dbMain, dbCache } = require('./components/dbService');
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
@@ -38,10 +41,10 @@ var nlp_info = [ threshold, nlpManagerBrock, nlpManagerGame ];
 
 // WebSocket Service
 const wsService = require('./components/wsService');
-wsService(print, errorlog, chatlog, nlp_info);
+wsService(print, errorlog, chatlog, nlp_info, dbCache);
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Api Service
 const apiService = require('./components/apiService');
-apiService(print, errorlog);
+apiService(print, errorlog, dbCache);
