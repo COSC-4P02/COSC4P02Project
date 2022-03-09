@@ -15,14 +15,14 @@ module.exports = function (manager) {
   manager.addAnswer('en', 'agent.covid', "!covidNiagara-");
 
   // Navigation
-  manager.addNamedEntityText('navLocation', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
+  //manager.addNamedEntityText('navLocation', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
   manager.addNamedEntityText('navLocation', 'Canada Games', ['en'], ['Canada Games','CanadaGames','CG','Canada Game','CanadaGame']);
   // manager.addRegexEntity('navLocation', 'en', /go to ([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/i;
   // manager.addRegexEntity('navLocation', 'en', /Where is [([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/i;
 
-  manager.addDocument('en', 'Go %navLocation%', 'agent.navigation');
-  manager.addDocument('en', 'bus take %navLocation%', 'agent.navigation');
-  manager.addDocument('en', 'Where %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'go to %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'bus take to %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'Where is %navLocation%', 'agent.navigation');
 
   manager.addAnswer('en', 'agent.navigation', '!navgation-{{navLocation}}');
 

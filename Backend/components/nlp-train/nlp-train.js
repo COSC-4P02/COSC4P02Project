@@ -3,7 +3,7 @@ const trainGeneral = require('./nlp-train-general');
 const trainBrock = require('./nlp-train-brock');
 const trainGame = require('./nlp-train-game');
 
-module.exports = async function trainnlp(manager, say, version) {
+module.exports = async function trainnlp(manager, say, dbCache, version) {
   if (fs.existsSync(__dirname + '/../../data/nlp-model/model-' + version + '.nlp')) {
     manager.load(__dirname + '/../../data/nlp-model/model-' + version + '.nlp');
     return;
@@ -12,12 +12,12 @@ module.exports = async function trainnlp(manager, say, version) {
   trainGeneral(manager);
 
   if (version == "brock")
-    trainBrock(manager,say,function () {
+    trainBrock(manager,say,dbCache,function () {
       trainAndSave(manager,say,version);
     });
 
   if (version == "game")
-    trainGame(manager,say,function () {
+    trainGame(manager,say,dbCache,function () {
       trainAndSave(manager,say,version);
     });
 

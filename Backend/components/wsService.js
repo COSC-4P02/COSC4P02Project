@@ -21,8 +21,6 @@ var options = {
   cert: fs.readFileSync(config.wsCert)
 }
 
-var saved_already = false;
-
 module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
   var threshold = nlp_info[0];
   var nlpManagerBrock = nlp_info[1];
@@ -106,7 +104,6 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
       // print(`bot> ${answer} : ${sentiment}`);
 
     })();
-    modelSave();
   };
   add_action('received_text_brock',receivedTextBrock);
 
@@ -148,7 +145,6 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
       conn.sendText(JSON.stringify(send)); // Send to Client
 
     })();
-    modelSave();
   };
   add_action('received_text_game',receivedTextGame);
 
@@ -157,16 +153,5 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
   // Process answer if needs an action "!"
   var answerProcessGame = require('../components/answerProcess/answerProcessGame.js');
   add_filter('answer_process_game',answerProcessGame);
-
-  // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
-
-  function modelSave(){
-    if (!saved_already){
-      nlpManagerBrock.save('./data/nlp-model/model-' + 'brock' + '.nlp', true);
-      nlpManagerGame.save('./data/nlp-model/model-' + 'game' + '.nlp', true);
-      saved_already = true;
-      print("NlpTrainer: Saved to files");
-    }
-  }
 
 };

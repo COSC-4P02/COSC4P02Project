@@ -1,4 +1,4 @@
-module.exports = function (manager, say, save) { 
+module.exports = function (manager, say, dbCache, save) { 
 
 	// Canada Game
 	manager.addDocument('en', 'canada game', 'agent.cginfo');

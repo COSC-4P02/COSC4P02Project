@@ -1,7 +1,7 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-module.exports = function (manager, say, save) { 
+module.exports = function (manager, say, dbCache, save) { 
 
   // Start
   manager.addDocument('en', 'Get Started', 'agent.start');
@@ -10,21 +10,16 @@ module.exports = function (manager, say, save) {
   // Brock About
   manager.addNamedEntityText('brocku', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
   manager.addDocument('en', 'What is %brocku%', 'brock.about.des');
+  manager.addDocument('en', 'Tell me about %brocku%', 'brock.about.des');
   manager.addDocument('en', '%brocku%', 'brock.about.des');
   manager.addDocument('en', 'Where is %brocku%', 'brock.about.location');
+  manager.addDocument('en', 'Go to %brocku%', 'brock.about.location');
   manager.addDocument('en', 'How is %brocku%', 'brock.about.des');
   manager.addDocument('en', 'What is the %brocku% Website', 'brock.about.website');
   manager.addDocument('en', 'What’s new at %brocku%', 'brock.about.news');
   manager.addDocument('en', '%brocku% news', 'brock.about.news');
   manager.addDocument('en', 'Covid news at %brocku%', 'agent.covid');
   manager.addDocument('en', 'Tell me about %brocku% Important Dates', 'brock.about.dates');
-
-  manager.addDocument('en', 'Go to %brocku%', 'agent.navigation');
-  manager.addDocument('en', 'How can I go to %brocku%', 'agent.navigation');
-  manager.addDocument('en', 'What bus should I take to %brocku%', 'agent.navigation');
-  manager.addDocument('en', 'Where is %brocku%', 'agent.navigation');
-  manager.addDocument('en', 'I want go to %brocku%', 'agent.navigation');
-  manager.addAnswer('en', 'agent.navigation', '!navgation-{{navLocation}}');
 
   manager.addAnswer('en', 'brock.about.des', '!json-{"type":"button","text":"Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.","disableInput":false,"options":[{"text":"About","value":"https://brocku.ca/about/","action":"url"},{"text":"Homepage","value":"https://brocku.ca/","action":"url"},{"text":"News","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}');
   manager.addAnswer('en', 'brock.about.location', '!json-{"type":"button","text":"You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}'); //Location
@@ -69,6 +64,16 @@ module.exports = function (manager, say, save) {
   manager.addDocument('en', 'What are the lab options for %brockCourse%', 'brock.course.lab');
   manager.addDocument('en', '%brockCourse% lab', 'brock.course.lab');
 
+  manager.addDocument('en', 'Tell me about the %brockCourse% exam', 'brock.course.exam');
+  manager.addDocument('en', '%brockCourse% exam', 'brock.course.exam');
+  manager.addDocument('en', 'What time is the %brockCourse% exam', 'brock.course.exam.time');
+  manager.addDocument('en', '%brockCourse% exam time', 'brock.course.exam.time');
+  manager.addDocument('en', 'Where is the %brockCourse% exam', 'brock.course.exam.loc');
+  manager.addDocument('en', '%brockCourse% exam location', 'brock.course.exam.loc');
+
+  manager.addDocument('en', 'What term is %brockCourse%', 'brock.course.term');
+  manager.addDocument('en', '%brockCourse% term', 'brock.course.term');
+
   manager.addAnswer('en', 'brock.course.des', '!courseDes-{{brockCourse}}'); //Des
   manager.addAnswer('en', 'brock.course.time', '!courseTime-{{brockCourse}}'); //Time
   manager.addAnswer('en', 'brock.course.location', '!courseLocation-{{brockCourse}}'); //Location
@@ -76,25 +81,25 @@ module.exports = function (manager, say, save) {
   manager.addAnswer('en', 'brock.course.prof', '!courseProf-{{brockCourse}}');
   manager.addAnswer('en', 'brock.course.prerequisites', '!coursePrerequisites-{{brockCourse}}');
   manager.addAnswer('en', 'brock.course.lab', '!courseLab-{{brockCourse}}');
+  manager.addAnswer('en', 'brock.course.exam', '!courseExam-{{brockCourse}}');
+  manager.addAnswer('en', 'brock.course.exam.time', '!courseExamTime-{{brockCourse}}');
+  manager.addAnswer('en', 'brock.course.exam.loc', '!courseExamLoc-{{brockCourse}}');
+  manager.addAnswer('en', 'brock.course.term', '!courseTerm-{{brockCourse}}');
 
-  // Course CSV
-  //manager.addNamedEntityText('brockCourse', 'COSC-4P01', ['en'], ['COSC 4P01','COSC-4P01','COSC4P01','COSC401','COSC 401']);
-  fs.createReadStream(__dirname + '/../../data/train-data/brock/course/data.csv')
-    .pipe(csv())
-    .on('data', (row) => {
-      var course = row[Object.keys(row)].split("\t");
-      const courseName1 = course[0].toUpperCase();
-      const courseName2 = course[0].toLowerCase();
-      const courseName3 = course[0].replace('-', ' ');
-      const courseName4 = course[0].toUpperCase().replace('P', '').replace('F', '');
-      const courseName5 = course[0].toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
-      const courseName6 = course[0].toUpperCase().replace('-', '').replace('P', '').replace('F', '');
-      manager.addNamedEntityText('brockCourse', courseName1, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
-      //console.log(course);
-    })
-    .on('end', () => {
-      console.log('CSV file successfully processed');
-      save(); // Train and save
-    });
+
+  const brockData = require('../crawler/brockData');
+  brockData(dbCache, say,say,function (data) {
+    for (var i = data['course'].length - 1; i >= 0; i--) {
+      var course = data['course'][i]['course'];
+      const courseName1 = course.toUpperCase();
+      const courseName2 = course.toLowerCase();
+      const courseName3 = course.replace('-', ' ');
+      const courseName4 = course.toUpperCase().replace('P', '').replace('F', '');
+      const courseName5 = course.toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
+      const courseName6 = course.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+      manager.addNamedEntityText('brockCourse', course, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
+    }
+    save(); // Train and save
+  });
 
 };

@@ -25,13 +25,25 @@ const { dbMain, dbCache } = require('./components/dbService');
 const { NlpManager } = require('node-nlp');
 const trainnlp = require('./components/nlp-train/nlp-train');
 const threshold = config.nlpThreshold;
-const nlpManagerBrock = new NlpManager({ languages: ['en'] });
-const nlpManagerGame = new NlpManager({ languages: ['en'] });
+const nlpManagerBrock = new NlpManager({ 
+  languages: ['en'], 
+  threshold: config.nlpThreshold,
+  modelFileName: './data/nlp-model/model-brock.nlp',
+  autoLoad: false,
+  autoSave: true
+});
+const nlpManagerGame = new NlpManager({ 
+  languages: ['en'],  
+  threshold: config.nlpThreshold,
+  modelFileName: './data/nlp-model/model-game.nlp',
+  autoLoad: false,
+  autoSave: true
+});
 
 // Train NLP if not trained
 (async () => {
-  await trainnlp(nlpManagerBrock, print, "brock");
-  await trainnlp(nlpManagerGame, print, "game");
+  await trainnlp(nlpManagerBrock, print, dbCache, "brock");
+  await trainnlp(nlpManagerGame, print, dbCache, "game");
 })();
 
 // Store nlp data
