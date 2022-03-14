@@ -25,7 +25,7 @@ def getInfo():
     d=0
     outputList = []
 
-    for tag in soup.find_all('p', {'class':['calccode','calcname']}):
+    for tag in soup.find_all('p', {'class':['calccode','calcname','calnormal','calitalic']}):
         # c+=1
         # if c > 29:
         # if tag.string:
