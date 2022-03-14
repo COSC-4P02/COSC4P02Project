@@ -63,13 +63,15 @@ module.exports = function (manager, say, dbCache, save) {
 
   manager.addDocument('en', 'What are the lab options for %brockCourse%', 'brock.course.lab');
   manager.addDocument('en', '%brockCourse% lab', 'brock.course.lab');
+  manager.addDocument('en', 'What are the seminers options for %brockCourse%', 'brock.course.lab');
+  manager.addDocument('en', '%brockCourse% seminer', 'brock.course.lab');
 
   manager.addDocument('en', 'Tell me about the %brockCourse% exam', 'brock.course.exam');
   manager.addDocument('en', '%brockCourse% exam', 'brock.course.exam');
-  manager.addDocument('en', 'What time is the %brockCourse% exam', 'brock.course.exam.time');
-  manager.addDocument('en', '%brockCourse% exam time', 'brock.course.exam.time');
-  manager.addDocument('en', 'Where is the %brockCourse% exam', 'brock.course.exam.loc');
-  manager.addDocument('en', '%brockCourse% exam location', 'brock.course.exam.loc');
+  manager.addDocument('en', 'What time is the %brockCourse% exam', 'brock.course.exam');
+  manager.addDocument('en', '%brockCourse% exam time', 'brock.course.exam');
+  manager.addDocument('en', 'Where is the %brockCourse% exam', 'brock.course.exam');
+  manager.addDocument('en', '%brockCourse% exam location', 'brock.course.exam');
 
   manager.addDocument('en', 'What term is %brockCourse%', 'brock.course.term');
   manager.addDocument('en', '%brockCourse% term', 'brock.course.term');
@@ -82,15 +84,14 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addAnswer('en', 'brock.course.prerequisites', '!coursePrerequisites-{{brockCourse}}');
   manager.addAnswer('en', 'brock.course.lab', '!courseLab-{{brockCourse}}');
   manager.addAnswer('en', 'brock.course.exam', '!courseExam-{{brockCourse}}');
-  manager.addAnswer('en', 'brock.course.exam.time', '!courseExamTime-{{brockCourse}}');
-  manager.addAnswer('en', 'brock.course.exam.loc', '!courseExamLoc-{{brockCourse}}');
   manager.addAnswer('en', 'brock.course.term', '!courseTerm-{{brockCourse}}');
 
 
   const brockData = require('../crawler/brockData');
   brockData(dbCache, say,say,function (data) {
-    for (var i = data['course'].length - 1; i >= 0; i--) {
-      var course = data['course'][i]['course'];
+    for (var key in data) {
+      if (key=="Krunk") continue;
+      var course = key;
       const courseName1 = course.toUpperCase();
       const courseName2 = course.toLowerCase();
       const courseName3 = course.replace('-', ' ');
