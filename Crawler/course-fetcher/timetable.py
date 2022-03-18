@@ -305,18 +305,18 @@ def processing_data(all_courses, all_labs, all_sem):
 		# Lab & Sem ###################
 		precessing_course[key]['lab/tut_count']=0
 		precessing_course[key]['sem_count']=0
-		precessing_course[key]['lab/tut_des']="This course does not appear to have labs/tuts in "+brock_current_session
-		precessing_course[key]['sem_des']="This course does not appear to have seminers in "+brock_current_session
+		precessing_course[key]['lab/tut_des']="This course does not appear to has labs/tuts in "+brock_current_session
+		precessing_course[key]['sem_des']="This course does not appear to hs seminers in "+brock_current_session
 
 		if precessing_course[key]['lab/tut']:
 			total_count = len(precessing_course[key]['lab/tut'])
 			precessing_course[key]['lab/tut_count']=total_count
-			precessing_course[key]['lab/tut_des']="This course have a total of "+str(total_count)+" labs/tuts in "+brock_current_session
+			precessing_course[key]['lab/tut_des']="This course has a total of "+str(total_count)+" labs/tuts in "+brock_current_session
 
 		if precessing_course[key]['sem']:
 			total_count = len(precessing_course[key]['sem'])
 			precessing_course[key]['sem_count']=total_count
-			precessing_course[key]['sem_des']="This course have a total of "+str(total_count)+" seminers in "+brock_current_session
+			precessing_course[key]['sem_des']="This course has a total of "+str(total_count)+" seminers in "+brock_current_session
 
 		del precessing_course[key]['lab/tut']
 		del precessing_course[key]['sem']
