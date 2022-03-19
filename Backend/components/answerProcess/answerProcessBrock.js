@@ -1,13 +1,13 @@
 // Process answer after NLP
 // Return with answer or send by "conn"
 
-const fs = require('fs');
 const covidNiagara = require('../crawler/covidNiagara');
 
 function sendCourseDetails(conn, result_array, number, ignoreifnone){
+  var send = {}
   try {
     if (result_array[number]!=""&&result_array[number].toLowerCase()!="none"&&result_array[number].toLowerCase()!="null"){
-      var send = {
+      send = {
         'type': 'text',
         'text': result_array[number],
         'disableInput': false
@@ -24,7 +24,7 @@ function sendCourseDetails(conn, result_array, number, ignoreifnone){
   }
   if (ignoreifnone)
     return
-  var send = {
+  send = {
     'type': 'text',
     'text': "There are no information about "+number+"",
     'disableInput': false
@@ -42,7 +42,7 @@ function readCourseFromBrockData(conn,param,number,dbCache,print,errorlog, callb
 
   const brockData = require('../crawler/brockData');
   brockData(dbCache, print,errorlog,function (data) {
-    inputCourse = param.toUpperCase().replace(' ','').replace('-','').replace(' ','').replace('/','')
+    var inputCourse = param.toUpperCase().replace(' ','').replace('-','').replace(' ','').replace('/','')
     for (var key in data) {
       var course1 = key.toUpperCase();
       const courseName1 = course1.toUpperCase();
@@ -66,7 +66,7 @@ function readCourseFromBrockData(conn,param,number,dbCache,print,errorlog, callb
 }
 
 module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) { 
-  var urlsend = "";
+    var urlsend = "";
 
     if (answer.charAt(0)=='!'){
     var temp = (' ' + answer).slice(1);
@@ -149,7 +149,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseTime": // Course Time
-        var result_array = readCourseFromBrockData(conn,param,3,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,3,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',
@@ -167,7 +167,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseLocation": // Course Location
-        var result_array = readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',
@@ -185,7 +185,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
       case "!courseDeliver": // Course Deliver
-        var result_array = readCourseFromBrockData(conn,param,5,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,5,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',
@@ -203,7 +203,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
       case "!courseProf": // Course Prof
-        var result_array = readCourseFromBrockData(conn,param,10,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,10,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',
@@ -221,7 +221,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
       case "!coursePrerequisites": // Course Prerequisites
-        var result_array = readCourseFromBrockData(conn,param,6,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,6,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',
@@ -239,7 +239,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
       case "!courseLab": // Course Lab
-        var result_array = readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',
@@ -258,7 +258,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseExam": // Course
-        var result_array = readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',
@@ -276,7 +276,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseTerm": // Course
-        var result_array = readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
           if (result_array==null){
             var send = {
               'type': 'text',

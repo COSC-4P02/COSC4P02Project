@@ -62,6 +62,29 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
   // Brock
   var receivedTextBrock = (conn,obj)=>{
     (async () => {
+      if (obj.extra=="news" && obj.msg != "Exit News Search"){
+        const test = require('./newsEngine/brockNewsEngine');
+        test(print,errorlog, obj.msg,function (data) {
+          if (data=="notfound"){
+            obj.extra="";
+            receivedTextBrock(conn,obj)
+          }else{
+            //console.log(data);
+            answer = data
+            chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
+            var send = { 'type': 'button', 'text': answer, 'disableInput': false, 'options': [
+              {
+                'text': 'Exit News Search',
+                'value': 'Exit News Search',
+                'action': 'postback'
+              }
+            ]}
+            conn.sendText(JSON.stringify(send));
+            return
+          }
+        });
+        return
+      }
       // Pocess NLP
       // nlpManagerBrock.addDocument('en', 'My mail is %email%', 'email');
       // nlpManagerBrock.addDocument('en', 'My email is %email%', 'email');

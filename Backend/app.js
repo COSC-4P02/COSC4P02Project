@@ -60,3 +60,32 @@ wsService(print, errorlog, chatlog, nlp_info, dbCache);
 // Api Service
 const apiService = require('./components/apiService');
 apiService(print, errorlog, dbCache);
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+let {PythonShell} = require('python-shell')
+PythonShell.run('test/shell.py', null, function (err) {
+  if (err){
+    errorlog('Core: Python is not working correctly')
+    throw err;
+  } 
+  print('Core: PythonShell is working correctly')
+});
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+function exitHandler(options, exitCode) {
+    if (options.cleanup) console.log('clean');
+    if (exitCode || exitCode === 0) console.log(exitCode);
+    if (options.exit) process.exit();
+}
+
+process.stdin.resume();
+process.on('exit', exitHandler.bind(null,{cleanup:true}));
+// ctrl+c
+process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+// kill pid
+process.on('SIGUSR1', exitHandler.bind(null, {exit:true}));
+process.on('SIGUSR2', exitHandler.bind(null, {exit:true}));
+// uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
