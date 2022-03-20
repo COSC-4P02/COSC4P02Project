@@ -25,7 +25,7 @@
 <script>
 import EventBus from './helpers/event-bus'
 import { ChatbotUI } from './chatbot'
-import Background from './components/Background'
+import Background from './components/background/Background'
 import Nav from './components/Nav'
 import axios from 'axios'
 // import { messageService } from './helpers/message'
