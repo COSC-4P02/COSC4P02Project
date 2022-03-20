@@ -7,7 +7,7 @@ import csv
 
 
 def getInfo():
-    url = 'https://brocku.ca/webcal/2021/undergrad/bchm.html'
+    url = 'https://brocku.ca/about/'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'}
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -17,7 +17,7 @@ def getInfo():
     # list = soup.find_all('p', {'class':['calccode','calcname','calnormal','calitalic']})
     list = soup.find_all('p', {'class':['calccode','calcname','calnormal','calitalic']})
 
-    f = open("Bioc.csv",mode='w')
+    f = open("about.csv",mode='w')
     fields = ['1','2','3','4','5','6','7']
     writer = csv.writer(f)
 
@@ -25,7 +25,7 @@ def getInfo():
     d=0
     outputList = []
 
-    for tag in soup.find_all('p', {'class':['calccode','calcname']}):
+    for tag in soup.find_all('p', {'class':['calccode','calcname','calnormal','calitalic']}):
         # c+=1
         # if c > 29:
         # if tag.string:
@@ -62,7 +62,7 @@ getInfo()
 
 
 def grabWeb():
-    url = 'https://brocku.ca/webcal/2021/undergrad/cosc.html'
+    url = 'https://brocku.ca/about/'
     resp = urllib.request.urlopen(url)
     page = resp.read()
     page = str(page, 'utf-8')

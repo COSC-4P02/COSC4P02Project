@@ -21,7 +21,7 @@ var options = {
   cert: fs.readFileSync(config.wsCert)
 }
 
-module.exports = function (print, errorlog, chatlog, nlp_info) {
+module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
   var threshold = nlp_info[0];
   var nlpManagerBrock = nlp_info[1];
   var nlpManagerGame = nlp_info[2];
@@ -50,12 +50,11 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
     })
     
     conn.on("error",function(err){
-      print('handler error'+err,err)
       errorlog("WebSocket Error Occour - " + err);
     })
 
   }).listen(wsport)
-  print('WebSocket Server Listening on Port ' + wsport);
+  print('Core: WebSocket Server Listening on Port ' + wsport);
 
   // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
@@ -63,15 +62,38 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
   // Brock
   var receivedTextBrock = (conn,obj)=>{
     (async () => {
+      if (obj.extra=="news" && obj.msg != "Exit News Search"){
+        const test = require('./newsEngine/brockNewsEngine');
+        test(print,errorlog, obj.msg,function (data) {
+          if (data=="notfound"){
+            obj.extra="";
+            receivedTextBrock(conn,obj)
+          }else{
+            //console.log(data);
+            answer = data
+            chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
+            var send = { 'type': 'button', 'text': answer, 'disableInput': false, 'options': [
+              {
+                'text': 'Exit News Search',
+                'value': 'Exit News Search',
+                'action': 'postback'
+              }
+            ]}
+            conn.sendText(JSON.stringify(send));
+            return
+          }
+        });
+        return
+      }
       // Pocess NLP
-  //     nlpManagerBrock.addDocument('en', 'My mail is %email%', 'email');
-  // nlpManagerBrock.addDocument('en', 'My email is %email%', 'email');
-  // nlpManagerBrock.addDocument('en', 'Here you have my email: %email%', 'email');
-  // nlpManagerBrock.addAnswer('en', 'email', 'Your email is {{email}}');
+      // nlpManagerBrock.addDocument('en', 'My mail is %email%', 'email');
+      // nlpManagerBrock.addDocument('en', 'My email is %email%', 'email');
+      // nlpManagerBrock.addDocument('en', 'Here you have my email: %email%', 'email');
+      // nlpManagerBrock.addAnswer('en', 'email', 'Your email is {{email}}');
       const result = await nlpManagerBrock.process(obj.msg);
-      console.log(result);
-      const result2 = await nlpManagerBrock.extractEntities('en', obj.msg);
-      console.log(result2);
+      // console.log(result);
+      // const result2 = await nlpManagerBrock.extractEntities('en', obj.msg);
+      // console.log(result2);
       // Get Answer
       var answer = result.score > threshold && result.answer
         ? result.answer
@@ -81,7 +103,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
 
       // Process Answer if needed
-      answer = apply_filters("answer_process_brock", {obj,answer,conn});
+      answer = apply_filters("answer_process_brock", {obj,answer,conn,dbCache,print,errorlog});
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -131,7 +153,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
       chatlog("Game| User: " + obj.msg + " | Bot: " + answer);
 
       // Process Answer if needed
-      answer = apply_filters("answer_process_game", {obj,answer,conn});
+      answer = apply_filters("answer_process_game", {obj,answer,conn,dbCache,print,errorlog});
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -154,7 +176,5 @@ module.exports = function (print, errorlog, chatlog, nlp_info) {
   // Process answer if needs an action "!"
   var answerProcessGame = require('../components/answerProcess/answerProcessGame.js');
   add_filter('answer_process_game',answerProcessGame);
-
-  // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 };

@@ -8,6 +8,10 @@ chatbot-info.log
 chatbot-error.log
 chatbot-chat.log
 
+# db
+chatbot-data-main.cdb
+chatbot-data-cache.cdb
+
 # public
 dist/*.gz
 dist/*.gz

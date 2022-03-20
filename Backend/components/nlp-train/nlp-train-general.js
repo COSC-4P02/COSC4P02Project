@@ -1,5 +1,10 @@
 module.exports = function (manager) { 
 
+  manager.addDocument('en', 'where can i park', 'agent.parking');
+  manager.addDocument('en', 'want to park', 'agent.parking');
+
+  manager.addAnswer('en', 'agent.parking', '!json-{"type":"button","text":"You can find parking infomation here","disableInput":false,"options":[{"text":"Location","value":"https://brocku.ca/parking-services/wp-content/uploads/sites/16/Paid-Parking-2021.pdf","action":"url"}]}');
+
   // COVID
   manager.addDocument('en', 'covid-19', 'agent.covid');
   manager.addDocument('en', 'i want to know about covid infomation', 'agent.covid');
@@ -10,14 +15,14 @@ module.exports = function (manager) {
   manager.addAnswer('en', 'agent.covid', "!covidNiagara-");
 
   // Navigation
-  manager.addNamedEntityText('navLocation', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
+  //manager.addNamedEntityText('navLocation', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
   manager.addNamedEntityText('navLocation', 'Canada Games', ['en'], ['Canada Games','CanadaGames','CG','Canada Game','CanadaGame']);
   // manager.addRegexEntity('navLocation', 'en', /go to ([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/i;
   // manager.addRegexEntity('navLocation', 'en', /Where is [([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/i;
 
-  manager.addDocument('en', 'Go %navLocation%', 'agent.navigation');
-  manager.addDocument('en', 'bus take %navLocation%', 'agent.navigation');
-  manager.addDocument('en', 'Where %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'go to %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'bus take to %navLocation%', 'agent.navigation');
+  manager.addDocument('en', 'Where is %navLocation%', 'agent.navigation');
 
   manager.addAnswer('en', 'agent.navigation', '!navgation-{{navLocation}}');
 

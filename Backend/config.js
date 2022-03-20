@@ -16,10 +16,16 @@ config.wsKey = "cert/key.pem";
 config.wsCert = "cert/cert.pem";
 
 // Error Log Location
-config.loggerError = "data/logs/chatbot-error.log";
 config.loggerInfo = "data/logs/chatbot-info.log";
+config.loggerError = "data/logs/chatbot-error.log";
 
 // NLP.JS
 config.nlpThreshold = 0.5;
+
+// Database Main Location
+config.databaseLocMain = "data/database/chatbot-data-main.cdb";
+
+// Database Temp Location
+config.databaseLocCache = "data/database/chatbot-data-cache.cdb";
 
 module.exports = config;

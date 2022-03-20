@@ -1,56 +1,72 @@
 // Process answer after NLP
 // Return with answer or send by "conn"
 
-const https = require('https');
-const fs = require('fs');
-const csv = require('csv-parser');
+const covidNiagara = require('../crawler/covidNiagara');
 
-function sendCourseDetails(conn,result_array,number){
-  if (result_array[number]!=""&&result_array[number].toLowerCase()!="none"&&result_array[number].toLowerCase()!="null"){
-    var send = {
-      'type': 'text',
-      'text': result_array[number],
-      'disableInput': false
-    }
-    conn.sendText(JSON.stringify(send));
-  }
-}
-
-// Read courses from csv
-function readCourseFromCsv(conn,param,number){
-  var result_array = null;
-  fs.createReadStream('data/train-data/brock/course/data.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    var course = row[Object.keys(row)].split("\t");
-    if (param.toUpperCase() == course[0].toUpperCase()){
-      result_array = course;
-    }
-  })
-  .on('end', () => {
-    if (result_array==null){
-      var send = {
+function sendCourseDetails(conn, result_array, number, ignoreifnone){
+  var send = {}
+  try {
+    if (result_array[number]!=""&&result_array[number].toLowerCase()!="none"&&result_array[number].toLowerCase()!="null"){
+      send = {
         'type': 'text',
-        'text': "Can not find info about it",
+        'text': result_array[number],
         'disableInput': false
       }
       conn.sendText(JSON.stringify(send));
-      console.error("Can not find info - "+param);
+      return
     }else{
-      if (number==1)
-        sendCourseDetails(conn,result_array,4) // Title
-      sendCourseDetails(conn,result_array,number) // Des
-      if (number==1){
-        sendCourseDetails(conn,result_array,5) // Type
-        sendCourseDetails(conn,result_array,6) // Restriction
-        sendCourseDetails(conn,result_array,7) // Note
+      if (ignoreifnone)
+        return
+    }
+  } catch (error) {
+    console.log(number);
+    console.error(error);
+  }
+  if (ignoreifnone)
+    return
+  send = {
+    'type': 'text',
+    'text': "There are no information about "+number+"",
+    'disableInput': false
+  }
+  conn.sendText(JSON.stringify(send));
+}
+
+// Read courses from csv
+function readCourseFromBrockData(conn,param,number,dbCache,print,errorlog, callback){
+  var result_array = null;
+
+  if (param=="{{brockCourse}}"){
+    callback(result_array);
+  }
+
+  const brockData = require('../crawler/brockData');
+  brockData(dbCache, print,errorlog,function (data) {
+    var inputCourse = param.toUpperCase().replace(' ','').replace('-','').replace(' ','').replace('/','')
+    for (var key in data) {
+      var course1 = key.toUpperCase();
+      const courseName1 = course1.toUpperCase();
+      const courseName2 = course1.toLowerCase();
+      const courseName3 = course1.toUpperCase().replace('-', '');
+      const courseName4 = course1.toUpperCase().replace('P', '').replace('F', '');
+      const courseName5 = course1.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+      const courseName6 = course1.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+      if (inputCourse == courseName1||
+        inputCourse == courseName2||
+        inputCourse == courseName3||
+        inputCourse == courseName4||
+        inputCourse == courseName5||
+        inputCourse == courseName6){
+        result_array = data[key];
+        break;
       }
     }
+    callback(result_array);
   });
 }
 
-module.exports = function ({obj,answer,conn}) { 
-  var urlsend = "";
+module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) { 
+    var urlsend = "";
 
     if (answer.charAt(0)=='!'){
     var temp = (' ' + answer).slice(1);
@@ -95,80 +111,184 @@ module.exports = function ({obj,answer,conn}) {
         }
         conn.sendText(JSON.stringify(urlsend));
 
-        var options = {
-          hostname: 'niagara.krunk.cn',
-          port: 443,
-          path: '/today-api.php',
-          method: 'GET'
-        }
-
-        var req = https.request(options, res => {
-          if (res.statusCode!=200){
-            console.error("Niagara COVID Fetch Api Error: "+res.statusCode)
-            return;
+        covidNiagara(dbCache, print,errorlog,function (data) {
+          var send = {
+            'type': 'text',
+            'text': data,
+            'disableInput': false
           }
-          res.on('data', d => {
-            const data = JSON.parse(d);
-            const result = "As of "+data['date']+" in Niagara Region, Total Cases: "+data['strCaseNumbers']+
-              ", Total Resolved Cases: "+data['spnResolvedCases']+", Total Death Cases: "+data['death'];
+          conn.sendText(JSON.stringify(send));
+        });
 
-            var send = {
-              'type': 'text',
-              'text': result,
-              'disableInput': false
-            }
-            conn.sendText(JSON.stringify(send));
-          })
-        })
-
-        req.on('error', error => {
-          console.error("Niagara COVID Fetch Api Error: "+error)
-        })
-
-        req.end()
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseDes": // Course Description
-        readCourseFromCsv(conn,param,1);
+        readCourseFromBrockData(conn,param,1,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"title",0) // Title
+            sendCourseDetails(conn,result_array,"description",0) // Des
+            sendCourseDetails(conn,result_array,"format",1) // Type
+            sendCourseDetails(conn,result_array,"restrictions",1) // Restriction
+            sendCourseDetails(conn,result_array,"exclusions",1)
+            sendCourseDetails(conn,result_array,"crosslisting",1)
+            sendCourseDetails(conn,result_array,"notes",1) // Note
+          }
+        });
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseTime": // Course Time
-        readCourseFromCsv(conn,param,3);
+        readCourseFromBrockData(conn,param,3,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"time")
+          }
+        });
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseLocation": // Course Location
-        readCourseFromCsv(conn,param,2);
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"location")
+          }
+        });
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
-      case "!courseDeliver": // Course Location
-        readCourseFromCsv(conn,param,5);
+      case "!courseDeliver": // Course Deliver
+        readCourseFromBrockData(conn,param,5,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"format")
+          }
+        });
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
       case "!courseProf": // Course Prof
-        //readCourseFromCsv(conn,param,10);
-        return "TODO";
-        //return "!ignore";
+        readCourseFromBrockData(conn,param,10,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"professor")
+          }
+        });
+        return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
       case "!coursePrerequisites": // Course Prerequisites
-        readCourseFromCsv(conn,param,6);
+        readCourseFromBrockData(conn,param,6,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"prerequisites")
+          }
+        });
         return "!ignore";
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
       
       case "!courseLab": // Course Lab
-        readCourseFromCsv(conn,param,2);
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"lab/tut_des")
+            sendCourseDetails(conn,result_array,"sem_des")
+          }
+        });
+        return "!ignore";
+        
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!courseExam": // Course
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"examinfo")
+          }
+        });
+        return "!ignore";
+        
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!courseTerm": // Course
+        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
+          if (result_array==null){
+            var send = {
+              'type': 'text',
+              'text': "Can not find info about it",
+              'disableInput': false
+            }
+            conn.sendText(JSON.stringify(send));
+            console.error("Can not find info - "+param);
+          }else{
+            sendCourseDetails(conn,result_array,"session")
+          }
+        });
         return "!ignore";
         
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
