@@ -73,6 +73,10 @@ conn.onopen = async function () {
 
 	send('brock','Covid news at Brock University')
 	send('game','What are the COVID-19 restrictions like in Niagara?')
+
+	// News
+	send('console','Covid Question')
+	send_full('brock','Brock','news')
 	
 }
 
@@ -104,6 +108,10 @@ function sleep(ms) {
 }
 
 async function send(version,msg) {
+    send_full(version,msg,'');
+}
+
+async function send_full(version,msg,extra) {
     while(lock) {
         await sleep(50);
     }
@@ -111,7 +119,7 @@ async function send(version,msg) {
     	console.log('%c\n'+msg,'background: #222; color: #bada55');
     	return;
     }
-    sent = ('{"type":"text","version":"'+version+'","agent":"user","msg":"'+msg+'"}');
+    sent = ('{"type":"text","version":"'+version+'","agent":"user","extra":"'+extra+'","msg":"'+msg+'"}');
     lock = true;
     conn.send(sent);
     console.log("%cQ: "+msg,'background: #222; color: #73deff');

@@ -12,7 +12,6 @@
     )
     ChatbotUI(
       :version="version",
-      :options="botOptions",
       :messages="messageData",
       :bot-typing="botTyping",
       :input-disable="inputDisable",
@@ -25,7 +24,7 @@
 <script>
 import EventBus from './helpers/event-bus'
 import { ChatbotUI } from './chatbot'
-import Background from './components/Background'
+import Background from './components/background/Background'
 import Nav from './components/Nav'
 import axios from 'axios'
 // import { messageService } from './helpers/message'
@@ -53,7 +52,8 @@ export default {
       inputDisable: false,
       version: 'brock', // Define Chatbot Version: brock / game
       fSize: '18px',
-      fontSize: '1'
+      fontSize: '1',
+      extra: ''
     }
   },
 
@@ -184,6 +184,10 @@ export default {
     handleWsMessage (e) {
       const msg = JSON.parse(e.data)
 
+      if (msg.extra === 'news') {
+        this.extra = msg.extra
+      }
+
       const replyMessage = {
         agent: 'bot',
         ...msg
@@ -202,10 +206,18 @@ export default {
     },
     // Get user input and send to server
     msgSend (value) {
+      if (this.extra === 'news' && value.text.toLowerCase() === 'exit news search'.toLowerCase()) {
+        this.extra = ''
+        this.messageData.push({ agent: 'user', type: 'text', extra: this.extra, text: value.text })
+        this.messageData.push({ agent: 'bot', type: 'text', text: 'News Search Exited' })
+        return
+      }
+
       // Push the user's message to board
       this.messageData.push({
         agent: 'user',
         type: 'text',
+        extra: this.extra,
         text: value.text
       })
 
@@ -218,6 +230,7 @@ export default {
         version: this.version,
         agent: 'user',
         type: 'text',
+        extra: this.extra,
         msg: value.text
       }))
 
@@ -225,7 +238,7 @@ export default {
     },
 
     getNetworkType () {
-      alert('you are using ' + navigator.connection.effectiveType + ' network')
+      // alert('you are using ' + navigator.connection.effectiveType + ' network')
     },
 
     // Submit the message from user to bot API, then get the response from Bot

@@ -28,7 +28,7 @@ module.exports = function (print, errorlog, dbCache) {
   // Api Services
   app.get('/', (req, res) => {
     res.send('404 Not Found');
-    errorlog('/ visit');
+    //errorlog('/ visit');
   })
 
   app.get('/test', (req, res) => {

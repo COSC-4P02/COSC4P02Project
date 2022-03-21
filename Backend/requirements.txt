@@ -1,0 +1,10 @@
+# CentOS ##########
+# yum install -y python3
+# /bin/pip3 install -r requirements.txt
+
+# Other ##########
+# pip3 install -r requirements.txt
+
+nltk
+requests
+sklearn

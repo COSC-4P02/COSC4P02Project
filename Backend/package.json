@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "node app.js",
     "test": "npm run serve & open http://localhost:3000/test",
-    "lint": "./node_modules/.bin/eslint ./components"
+    "lint": "./node_modules/.bin/eslint ./components",
+    "clean": "node clean.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "kuromoji": "^0.1.2",
     "node-json-db": "^1.4.1",
     "node-nlp": "^4.23.2",
+    "python-shell": "^3.0.1",
     "rss-to-json": "file:plugin/rss-to-json",
     "winston": "^3.4.0",
     "xlsx": "^0.18.2"
