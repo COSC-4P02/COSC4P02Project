@@ -8,11 +8,13 @@
       </button>
     </div>
     <div class="carousel-inner">
-      <div v-for="(items,index) in msg.items" v-bind:key="items" class="carousel-item" :class="{'active':index==0}" style="height: 80vh;">
+      <div v-for="(items,index) in msg.items" v-bind:key="items" class="carousel-item ratio ratio-16x9" :class="{'active':index==0}" >
         <a :href="items.link"><img :src="items.image" class="d-block w-100" style="object-fit: cover" alt='...'></a>
-        <div class="carousel-caption d-none d-md-block" style="background: linear-gradient(0deg, rgba(204,0,0,1) 25%, rgba(204,0,0,0.15) 100%)">
-          <h5>{{items.title}}</h5>
-          <p>{{items.description}}</p >
+        <div>
+          <div class="carousel-caption d-block" style="left: 0;right: 0;bottom: 0; background: linear-gradient(0deg, rgba(204,0,0,1) 40%, rgba(204,0,0,0.005) 100%)">
+            <h5>{{items.title}}</h5>
+            <p>{{items.description}}</p >
+          </div>
         </div>
       </div>
     </div>
