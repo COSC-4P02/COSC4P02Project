@@ -1,30 +1,18 @@
 <template>
   <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button v-for="(items, index) in msg.items" :key="items"
+              type="button" data-bs-target="#carouselExampleIndicators"
+              v-bind:data-bs-slide-to="index" :class="{'active':index==0}"
+              v-bind:aria-current="{'true':index==0}" v-bind:aria-label="'Slide '+(index+1)">
+      </button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://brocku.ca/brock-news/wp-content/uploads/2022/03/WVBCelebrate-1600x901.jpg?x70330" class="d-block w-100 min-vh-60" style="height: 70vh" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>{{msg.items[0].title}}</h5>
-          <p>{{msg.items[0].description}}</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://brocku.ca/brock-news/wp-content/uploads/2019/11/microphone-stock-pic-for-town-halls-etc.jpg?x70330" class="d-block w-100 min-vh-60" style="height: 70vh" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>{{msg.items[1].title}}</h5>
-          <p>{{msg.items[1].description}}</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://brocku.ca/brock-news/wp-content/uploads/2022/02/GettyImages-1308314704-1600x900.jpg?x70330" class="d-block w-100 min-vh-60" style="height: 70vh" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>{{msg.items[2].title}}</h5>
-          <p>{{msg.items[2].description}}</p>
+      <div v-for="(items,index) in msg.items" v-bind:key="items" class="carousel-item" :class="{'active':index==0}" >
+        <a :href="items.link"><img :src="items.image" class="d-block w-100" style="height: 70vh; min-height: 40vh" alt='...'></a>
+        <div class="carousel-caption d-none d-md-block" style="background: linear-gradient(0deg, rgba(204,0,0,1) 25%, rgba(204,0,0,0.15) 100%)">
+          <h5>{{items.title}}</h5>
+          <p>{{items.description}}</p >
         </div>
       </div>
     </div>
@@ -44,6 +32,12 @@ import axios from 'axios'
 
 export default {
   name: 'Background',
+  props: {
+    version: {
+      type: String,
+      default: 'brock'
+    }
+  },
   data () {
     return {
       msg: ' '
@@ -51,8 +45,45 @@ export default {
   },
   methods: {
     getNews () {
-      const path = 'https://api.chatbot-ai.ga/data/brock/news'
-      axios(path).then((res) => { this.msg = res.data }).catch((error) => { console.error(error) })
+      if (this.version === 'brock') {
+        const path = 'https://api.chatbot-ai.ga/data/brock/news'
+        axios(path).then((res) => { this.msg = res.data }).catch((error) => { console.error(error) })
+      } else if (this.version === 'game') {
+        this.msg.items = [{
+          title: 'N22 Pelham road race course takes centre stage during first-ever Canadian Cycling eSports Championships',
+          description: 'Ella Myers got a sneak peek at the road cycling course for the Niagara 2022 Canada Summer Games recently.',
+          image: 'https://niagara2022games.ca/content/images/news/_ansel_image_cache/30b6c5ef7d64964ebab1e5a710bd9139.jpg',
+          link: 'https://niagara2022games.ca/news/article/n22-pelham-road-race-course-takes-centre-stage-during-first-ever-canadian-cycling-esports-championships/'
+        }]
+      }
+    }
+  },
+  watch: {
+    version: {
+      immediate: true,
+      handler (newValue) {
+        if (newValue === 'game') {
+          this.msg.items = [{
+            title: 'N22 Pelham road race course takes centre stage during first-ever Canadian Cycling eSports Championships',
+            description: 'Ella Myers got a sneak peek at the road cycling course for the Niagara 2022 Canada Summer Games recently.',
+            image: 'https://niagara2022games.ca/content/images/news/_ansel_image_cache/30b6c5ef7d64964ebab1e5a710bd9139.jpg',
+            link: 'https://niagara2022games.ca/news/article/n22-pelham-road-race-course-takes-centre-stage-during-first-ever-canadian-cycling-esports-championships/'
+          }, {
+            title: 'Trans Canada Trail officially partners with the Niagara 2022 Canada Summer Games',
+            description: 'Trans Canada Trail and 2022 Canada Games are proud to engage Canadians in a celebration of Canada, athleticism, and healthy, safe and active communities.',
+            image: 'https://niagara2022games.ca/content/images/news/_ansel_image_cache/fc73f034be5368550dcc2e51a9992320.png',
+            link: 'https://niagara2022games.ca/news/article/trans-canada-trail-officially-partners-with-the-niagara-2022-canada-summer-games/'
+          }, {
+            title: '‘Looking for the next Carly’: How Shaw-MacLaren is blazing a path for Canadian soccer officials',
+            description: 'Carly Shaw-MacLaren’s recent vacation was anything but one.',
+            image: 'https://niagara2022games.ca/content/images/news/_ansel_image_cache/5b08e0ab95516bf2e221f27839162964.jpg',
+            link: 'https://niagara2022games.ca/news/article/looking-for-the-next-Carly-how-Shaw-MacLaren-is-blazing-a-path-for-canadian-soccer-officials/'
+          }]
+        } else if (newValue === 'brock') {
+          const path = 'https://api.chatbot-ai.ga/data/brock/news'
+          axios(path).then((res) => { this.msg = res.data }).catch((error) => { console.error(error) })
+        }
+      }
     }
   },
   created () {
