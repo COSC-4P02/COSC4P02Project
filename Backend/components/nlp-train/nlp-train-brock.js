@@ -62,6 +62,8 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addDocument('en', '%brockCourse% lab', 'brock.course.lab');
   manager.addDocument('en', 'What are the seminers options for %brockCourse%', 'brock.course.lab');
   manager.addDocument('en', '%brockCourse% seminer', 'brock.course.lab');
+  manager.addDocument('en', 'What are the sem options for %brockCourse%', 'brock.course.lab');
+  manager.addDocument('en', '%brockCourse% sem', 'brock.course.lab');
 
   manager.addDocument('en', 'Tell me about the %brockCourse% exam', 'brock.course.exam');
   manager.addDocument('en', '%brockCourse% exam', 'brock.course.exam');
