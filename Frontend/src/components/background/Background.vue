@@ -53,7 +53,7 @@ export default {
     getNews () {
       if (this.version === 'brock') {
         const path = 'https://api.chatbot-ai.ga/data/brock/news'
-        axios(path).then((res) => { this.msg = res.data }).catch((error) => { console.error(error) })
+        axios(path).then((res) => { this.msg = res.data })
       } else if (this.version === 'game') {
         this.msg.items = [{
           title: 'N22 Pelham road race course takes centre stage during first-ever Canadian Cycling eSports Championships',
@@ -87,7 +87,7 @@ export default {
           }]
         } else if (newValue === 'brock') {
           const path = 'https://api.chatbot-ai.ga/data/brock/news'
-          axios(path).then((res) => { this.msg = res.data }).catch((error) => { console.error(error) })
+          axios(path).then((res) => { this.msg = res.data })
         }
       }
     }
