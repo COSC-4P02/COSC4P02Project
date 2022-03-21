@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "node app.js",
     "test": "npm run serve & open http://localhost:3000/test",
-    "lint": "./node_modules/.bin/eslint ./components"
+    "lint": "./node_modules/.bin/eslint ./components",
+    "clean": "node clean.js"
   },
   "repository": {
     "type": "git",
