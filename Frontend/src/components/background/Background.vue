@@ -11,7 +11,7 @@
       <div v-for="(items,index) in msg.items" v-bind:key="items" class="carousel-item ratio ratio-16x9" :class="{'active':index==0}" >
         <a :href="items.link"><img :src="items.image" class="d-block w-100" style="object-fit: cover" alt='...'></a>
         <div>
-          <div class="carousel-caption d-block" style="left: 0;right: 0;bottom: 0; background: linear-gradient(0deg, rgba(204,0,0,1) 40%, rgba(204,0,0,0.005) 100%)">
+          <div class="carousel-caption d-block" style="left: 0;right: 0;bottom: 0; background: linear-gradient(0deg, rgba(204,0,0,1) 40%, rgba(204,0,0,0.005) 100%)" >
             <h5>{{items.title}}</h5>
             <p>{{items.description}}</p >
           </div>
@@ -42,7 +42,11 @@ export default {
   },
   data () {
     return {
-      msg: ' '
+      msg: ' ',
+      color: {
+        brock: 'linear-gradient(0deg, rgba(204,0,0,1) 70%, rgba(204,0,0,0.005) 100%)',
+        game: 'linear-gradient(0deg, rgba(0,79,113,1) 70%, rgba(0,79,113,1,0.005) 100%)'
+      }
     }
   },
   methods: {
