@@ -8,8 +8,8 @@
       </button>
     </div>
     <div class="carousel-inner">
-      <div v-for="(items,index) in msg.items" v-bind:key="items" class="carousel-item" :class="{'active':index==0}" >
-        <a :href="items.link"><img :src="items.image" class="d-block w-100" style="height: 70vh; min-height: 40vh" alt='...'></a>
+      <div v-for="(items,index) in msg.items" v-bind:key="items" class="carousel-item" :class="{'active':index==0}" style="height: 80vh;">
+        <a :href="items.link"><img :src="items.image" class="d-block w-100" style="object-fit: cover" alt='...'></a>
         <div class="carousel-caption d-none d-md-block" style="background: linear-gradient(0deg, rgba(204,0,0,1) 25%, rgba(204,0,0,0.15) 100%)">
           <h5>{{items.title}}</h5>
           <p>{{items.description}}</p >
