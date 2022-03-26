@@ -39,6 +39,9 @@ const brockNews = require('../components/crawler/brockNews');
 
 describe('brockNews Test', () => {
   it('should return news list', function(done) {
+    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true'){
+      this.skip();
+    }
     this.timeout(10000);
     brockNews('rss', '', 0, dbTest, print, print, function (rss) {
       data = rss['items'];
