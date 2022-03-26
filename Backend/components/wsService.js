@@ -63,26 +63,40 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbCache) {
   var receivedTextBrock = (conn,obj)=>{
     (async () => {
       if (obj.extra=="news" && obj.msg != "Exit News Search"){
-        const test = require('./newsEngine/brockNewsEngine');
-        test(print,errorlog, obj.msg,function (data) {
-          if (data=="notfound"){
-            obj.extra="";
-            receivedTextBrock(conn,obj)
-          }else{
-            //console.log(data);
-            answer = data
-            chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
-            var send = { 'type': 'button', 'text': answer, 'disableInput': false, 'options': [
+
+        const brockNews = require('./crawler/brockNews');
+        brockNews('search', obj.msg, 0, null, print, errorlog, function (all_news) {
+          var send = { 'type': 'news', 'text': 'Here are some news about '+obj.msg, 'news': all_news, 'disableInput': false, 'options': [
               {
                 'text': 'Exit News Search',
                 'value': 'Exit News Search',
                 'action': 'postback'
               }
             ]}
-            conn.sendText(JSON.stringify(send));
-            return
-          }
+          conn.sendText(JSON.stringify(send));
+          return
         });
+
+        // const test = require('./newsEngine/brockNewsEngine');
+        // test(print,errorlog, obj.msg,function (data) {
+        //   if (data=="notfound"){
+        //     obj.extra="";
+        //     receivedTextBrock(conn,obj)
+        //   }else{
+        //     //console.log(data);
+        //     answer = data
+        //     chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
+        //     var send = { 'type': 'button', 'text': answer, 'disableInput': false, 'options': [
+        //       {
+        //         'text': 'Exit News Search',
+        //         'value': 'Exit News Search',
+        //         'action': 'postback'
+        //       }
+        //     ]}
+        //     conn.sendText(JSON.stringify(send));
+        //     return
+        //   }
+        // });
         return
       }
       // Pocess NLP

@@ -14,11 +14,13 @@
 <script>
 import SingleText from './SingleText'
 import ButtonOptions from './ButtonOptions'
+import NewsOptions from './NewsOptions'
 
 export default {
   components: {
     SingleText,
-    ButtonOptions
+    ButtonOptions,
+    NewsOptions
   },
 
   props: {
@@ -45,6 +47,9 @@ export default {
       switch (this.message.type) {
         case 'button':
           type = 'ButtonOptions'
+          break
+        case 'news':
+          type = 'NewsOptions'
           break
         default:
           type = 'SingleText'

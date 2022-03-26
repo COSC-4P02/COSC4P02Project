@@ -37,19 +37,37 @@ describe('Niagara Covid Infomation Fetch Test', () => {
 
 const brockNews = require('../components/crawler/brockNews');
 
-describe('brockNews Test', () => {
-  it('should return news list', function(done) {
-    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true'){
-      this.skip();
-    }
-    this.timeout(10000);
-    brockNews('rss', '', 0, dbTest, print, print, function (rss) {
-      data = rss['items'];
-      if (data.length <= 0 || data == undefined){
-        done(new Error("Error"));
-        return;
-      }
-      done();
+describe('Brock News Test', () => {
+  describe('RSS Test', () => {
+    it('should return news list', function(done) {
+      // Circle Ci Does not work with brock news api sometimes
+      if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
+        this.skip();
+      this.timeout(10000);
+      brockNews('rss', '', 0, dbTest, print, print, function (rss) {
+        data = rss['items'];
+        if (data.length <= 0 || data == undefined){
+          done(new Error("Error"));
+          return;
+        }
+        done();
+      });
+    });
+  });
+
+  describe('Search Test', () => {
+    it('should return news list', function(done) {
+      if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
+        this.skip();
+      this.timeout(10000);
+      brockNews('search', 'brock', 0, dbTest, print, print, function (all_news) {
+        data = all_news;
+        if (data.length <= 0 || data == undefined){
+          done(new Error("Error"));
+          return;
+        }
+        done();
+      });
     });
   });
 });

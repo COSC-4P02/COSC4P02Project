@@ -83,7 +83,7 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 						try{
 							rss.items[count]['image'] = dom.window.document.querySelector('.main-image').href
 						}catch(e){
-							rss.items[count]['image'] = "";
+							rss.items[count]['image'] = "https://brocku.ca/brock-news/wp-content/uploads/2018/11/Brock-University-Campus-LR-1600x899.jpg?";
 						}
 						count++;
 					}
