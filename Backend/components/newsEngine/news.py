@@ -59,6 +59,32 @@ def get_news(url):
         all_news = all_news + n['title'] + "\n\n" + s.get_data() + "\n" + n['link'] + "\n\n\n\n\n\n"
     return all_news
 
+def get_news_all(url):
+    print("Fetching news: "+url)
+    retry = 0
+    while retry < 10:
+        try:
+            r = requests.get(url=url)
+            if r.status_code != 500:
+                news = json.loads(r.text)
+                break
+            else:
+                retry = retry + 1
+                print("Fetching Error: " + r.status_code)
+                time.sleep(1)
+        except:
+            retry = retry + 1
+            print("Fetching Error: " + url)
+            time.sleep(2)
+    if (retry >= 10):
+        print("ERR:Fetch Error")
+        exit(0)
+    all_news = "";
+    print("Fetched news")
+    for n in news:
+        all_news = all_news + n['title'] + "\n" + n['href'] + "\n"
+    return all_news
+
 def nltk_download(name,find):
     try:
         print(nltk.data.find(find))
@@ -101,6 +127,8 @@ def main():
     nltk_download('wordnet','corpora/wordnet')
     nltk_download('omw-1.4','corpora/omw-1.4')
     raw = get_news('http://localhost:3000/data/brock/news')
+
+    raw = raw
 
     sent_tokens=nltk.sent_tokenize(raw)
     word_tokens=nltk.word_tokenize(raw)

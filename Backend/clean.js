@@ -1,8 +1,6 @@
 const fs = require('fs')
 
 const path = [
-  './data/database/chatbot-data-main.cdb',
-  './data/database/chatbot-data-cache.cdb',
   './data/logs/chatbot-error.log',
   './data/logs/chatbot-info.log',
   './data/nlp-model/model-brock.nlp',

@@ -1,4 +1,23 @@
-module.exports = function (manager) { 
+module.exports = async function (manager) { 
+
+  const csvFilePath='data/train-data/general/parking_info.csv'
+  const csv=require('csvtojson')
+
+  var jsonArray=await csv().fromFile(csvFilePath);
+  jsonArray = (JSON.parse(JSON.stringify(jsonArray,1),1))
+
+  for (var i = 0; i < jsonArray.length; i++) {
+    var item = jsonArray[i];
+    console.log('where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i)
+    manager.addDocument('en', 'where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i);
+    var closest_building = item['closest_building'];
+    // for (const item in JSON.parse(item.closest_building)[0]){
+    //   closest_building=closest_building+item+', '
+    // }
+    console.log('It is near '+closest_building+', Type:'+item.type, 'agent.parking.'+i)
+    manager.addAnswer('en', 'agent.parking.'+i, 'It is near '+closest_building+', Type:'+item.type);
+  
+  }
 
   manager.addDocument('en', 'where can i park', 'agent.parking');
   manager.addDocument('en', 'want to park', 'agent.parking');

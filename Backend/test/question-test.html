@@ -10,6 +10,8 @@
 var conn = new WebSocket("wss://127.0.0.1:8001")
 var lock = false;
 
+//conn.send('{"type":"text","version":"brock","agent":"user","extra":"","msg":"hi"}');
+
 conn.onopen = async function () {
 	console.log("Connection Opened")
 
