@@ -51,6 +51,8 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 
 	if(type === 'rss'){
 		const db_news_loc = "/crawler/data/brock/news";
+		const db_loc_date = "/crawler/data/brock/news/date";
+		const cache_max_time = 0.1; // Max cache time (Hour)
 		try{
 			var rss_cache = dbCache.getData(db_news_loc);
 			if (rss_cache.length > 0 || rss_cache.title != 'failed'){
@@ -64,7 +66,19 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 
 		if (sent&&noFetch) return
 
-
+		if (sent){
+			try{
+				var data_cache_date = dbCache.getData(db_loc_date);
+				const expire_timer = new Date(data_cache_date) - (new Date());
+				const expire_timer_format = "PassTime: "+(expire_timer/1000/60*-1).toFixed(2)+" Min";
+				if (expire_timer >= (-1000 * 60 * 60 * cache_max_time)){
+					print("Crawler: RSS Skip Fetch | "+expire_timer_format);
+					return
+				}
+			}catch(e){
+				print("Crawler: No data from cache database - "+db_loc_date);
+			}
+		}
 		
 		parse('https://brocku.ca/brock-news/feed/').then(rss => {
 
@@ -88,6 +102,7 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 						count++;
 					}
 					dbCache.push(db_news_loc, rss);
+					dbCache.push(db_loc_date, new Date());
 					print("Crawler: Brock News RSS Read Successfully | Saved to database");
 					if (!sent) result(rss);
 				},
