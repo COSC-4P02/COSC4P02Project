@@ -10,7 +10,7 @@ module.exports = async function (manager) {
     var item = jsonArray[i];
     console.log('where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i)
     manager.addDocument('en', 'where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i);
-    closest_building = item['closest_building'];
+    var closest_building = item['closest_building'];
     // for (const item in JSON.parse(item.closest_building)[0]){
     //   closest_building=closest_building+item+', '
     // }

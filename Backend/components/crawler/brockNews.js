@@ -63,27 +63,34 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 		}
 
 		if (sent&&noFetch) return
+
+
 		
 		parse('https://brocku.ca/brock-news/feed/').then(rss => {
+
 			if (rss.title != 'failed'){
 				var endpoints = []
 				for (const item of rss.items) {
-				   const link = item.link;
-				   endpoints.push(link);
+					const link = item.link;
+					endpoints.push(link);
 				}
 
 				axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-				  (data) => {
-				  	var count = 0
-				  	for (const item of data) {
+				(data) => {
+					var count = 0
+					for (const item of data) {
 						const dom = new JSDOM(item.data);
-						rss.items[count]['image'] = dom.window.document.querySelector('.main-image').href
+						try{
+							rss.items[count]['image'] = dom.window.document.querySelector('.main-image').href
+						}catch(e){
+							rss.items[count]['image'] = "";
+						}
 						count++;
 					}
 					dbCache.push(db_news_loc, rss);
 					print("Crawler: Brock News RSS Read Successfully | Saved to database");
 					if (!sent) result(rss);
-				  },
+				},
 				);
 
 				
@@ -112,8 +119,8 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 		if (sent&&noFetch) return
 
 		axios.get('https://brocku.ca/brock-news/category/news/')
-		  .then(function (response) {
-		    const dom = new JSDOM(response.data);
+			.then(function (response) {
+			const dom = new JSDOM(response.data);
 			const total_array = dom.window.document.querySelectorAll('.page-numbers');
 			var largest_page = 0;
 			for (const item of total_array){
@@ -126,17 +133,17 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 			//largest_page = 1
 
 			let newPromise = axios({
-			      method: 'get',
-			      url: 'https://brocku.ca/brock-news/category/news/'
-			    })
+				method: 'get',
+				url: 'https://brocku.ca/brock-news/category/news/'
+			})
 
 			let axiosArray = [newPromise]
-			for (x = 2; x <= largest_page; x++) {
-			  let newPromise = axios({
-			      method: 'get',
-			      url: 'https://brocku.ca/brock-news/category/news/page/'+x+'/'
-			    })
-			  axiosArray.push(newPromise)
+			for (var x = 2; x <= largest_page; x++) {
+				let newPromise = axios({
+					method: 'get',
+					url: 'https://brocku.ca/brock-news/category/news/page/'+x+'/'
+				})
+				axiosArray.push(newPromise)
 			}
 
 			print("Crawler: Fetching news - " + largest_page + " pages");
@@ -144,10 +151,10 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 			var all_news = []
 
 			axios
-			  .all(axiosArray)
-			  .then(axios.spread((...responses) => {
-			    responses.forEach(res => {
-			    	const dom = new JSDOM(res.data);
+				.all(axiosArray)
+				.then(axios.spread((...responses) => {
+				responses.forEach(res => {
+					const dom = new JSDOM(res.data);
 					const total_array = dom.window.document.querySelectorAll('#loop-list li div h2 a');
 					for (const item of total_array){
 						const data = {
@@ -156,11 +163,11 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 						}
 						all_news.push(data)
 					}
-			    })
+				})
 				print('Crawler: All News Fetching Complete - ' + all_news.length + " Total news");
 
-			 //    let axiosArray2 = []
-			 //    for (const item of all_news) {
+				//    let axiosArray2 = []
+				//    for (const item of all_news) {
 				//   let newPromise = axios({
 				//       method: 'get',
 				//       url: item.href
@@ -173,23 +180,23 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 
 				// setTimeout(() => {
 				// 	get_news_content(axiosArray2, all_news, 0, function (all_news) {
-	   //    				print('Crawler: All News Content Fetching Complete - ' + all_news.length + " Total news");
-				// 		dbCache.push(db_news_loc, all_news);
-	   //  			});
+				//    				print('Crawler: All News Content Fetching Complete - ' + all_news.length + " Total news");
+						// 		dbCache.push(db_news_loc, all_news);
+				//  			});
 				// }, 15000);
 				//print('Crawler: All News Content Fetching Complete - ' + all_news.length + " Total news");
 
 				dbCache.push(db_news_loc, all_news);
 				if (!sent) result(all_news);
-			  }))
-			  .catch(error => {console.log(error);})
-		  })
+				}))
+				.catch(error => {console.log(error);})
+			})
 	}else if(type === 'search'){
 		var all_news=[]
 		axios.get('https://brocku.ca/brock-news/?s='+parma.replace(' ','+'))
-		  .then(function (res) {
-		    // console.log(res);
-		    const dom = new JSDOM(res.data);
+			.then(function (res) {
+			// console.log(res);
+			const dom = new JSDOM(res.data);
 			const total_array = dom.window.document.querySelectorAll('#loop-list li div h2 a');
 			for (const item of total_array){
 				const data = {
@@ -199,8 +206,8 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 				all_news.push(data);
 			}
 			result(all_news);
-		  })
-		  .catch(function (error) {console.log(error);})
+		})
+		.catch(function (error) {console.log(error);})
 	}
 	// else if(type === 'details'){
 	// 	try{

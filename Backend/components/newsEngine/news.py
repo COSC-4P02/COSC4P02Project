@@ -127,9 +127,8 @@ def main():
     nltk_download('wordnet','corpora/wordnet')
     nltk_download('omw-1.4','corpora/omw-1.4')
     raw = get_news('http://localhost:3000/data/brock/news')
-    raw2 = get_news_all('http://localhost:3000/data/brock/news/all/cache')
 
-    raw = raw + "\n\n" + raw2
+    raw = raw
 
     sent_tokens=nltk.sent_tokenize(raw)
     word_tokens=nltk.word_tokenize(raw)

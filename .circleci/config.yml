@@ -1,0 +1,38 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+jobs:
+  build_backend:
+    working_directory: ~/Backend
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-npm
+      - node/install-packages:
+          app-dir: ~/Backend
+          cache-path: node_modules
+          override-ci-command: npm i
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test_backend:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Backend Test
+          command: npm test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_backend
+      - test_backend:
+          requires:
+            - build_backend
