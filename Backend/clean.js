@@ -5,6 +5,7 @@ const path = [
   './data/logs/chatbot-info.log',
   './data/nlp-model/model-brock.nlp',
   './data/nlp-model/model-game.nlp',
+  './data/database/chatbot-data-test.cdb',
   ]
 const folder = [
   './data/nltk/corpora/',

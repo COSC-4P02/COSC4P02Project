@@ -1,5 +1,5 @@
 const axios = require('axios').default;
-const { parse } = require('rss-to-json');
+const { parse } = require('../../plugin/rss-to-json/dist/');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 

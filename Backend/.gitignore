@@ -42,6 +42,3 @@ docs/.vuepress/dist
 # Backups
 .BACKUP
 .STORAGE
-
-# npm related
-package-lock.json

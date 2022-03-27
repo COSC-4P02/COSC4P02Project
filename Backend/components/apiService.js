@@ -73,13 +73,13 @@ module.exports = function (print, errorlog, dbCache) {
     });
   })
 
-  app.get('/data/brock/news/all', (req, res) => {
-    const brockNews = require('./crawler/brockNews');
-    brockNews('all', '', 0, dbCache, print, errorlog, function (rss) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(rss));
-    });
-  })
+  // app.get('/data/brock/news/all', (req, res) => {
+  //   const brockNews = require('./crawler/brockNews');
+  //   brockNews('all', '', 0, dbCache, print, errorlog, function (rss) {
+  //     res.setHeader('Content-Type', 'application/json');
+  //     res.send(JSON.stringify(rss));
+  //   });
+  // })
 
   app.get('/data/brock/news/cache', (req, res) => {
     const brockNews = require('./crawler/brockNews');
@@ -89,13 +89,13 @@ module.exports = function (print, errorlog, dbCache) {
     });
   })
 
-  app.get('/data/brock/news/all/cache', (req, res) => {
-    const brockNews = require('./crawler/brockNews');
-    brockNews('all', '', 1, dbCache, print, errorlog, function (rss) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(rss));
-    });
-  })
+  // app.get('/data/brock/news/all/cache', (req, res) => {
+  //   const brockNews = require('./crawler/brockNews');
+  //   brockNews('all', '', 1, dbCache, print, errorlog, function (rss) {
+  //     res.setHeader('Content-Type', 'application/json');
+  //     res.send(JSON.stringify(rss));
+  //   });
+  // })
 
   app.get('/data/brock/news/search', (req, res) => {
     const brockNews = require('./crawler/brockNews');

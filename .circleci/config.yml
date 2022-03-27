@@ -27,6 +27,29 @@ jobs:
           root: .
           paths:
             - .
+  build_frontend:
+    working_directory: ~/circleci/Frontend/
+    executor: node/default
+    steps:
+      - checkout:
+          path: ~/circleci/
+      - run:
+          command: ls
+      - node/install-yarn
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - node/install-packages:
+          app-dir: ~/circleci/Frontend/
+          cache-path: node_modules
+          override-ci-command: yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
   test_backend:
     working_directory: ~/circleci/Backend/
@@ -39,6 +62,28 @@ jobs:
           name: Backend Test
           command: npm test
 
+  lint_backend:
+    working_directory: ~/circleci/Backend/
+    docker:
+      - image: cimg/node:current
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Backend Lint Test
+          command: npm run lint
+
+  lint_frontend:
+    working_directory: ~/circleci/Frontend/
+    docker:
+      - image: cimg/node:current
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Frontend Lint Test
+          command: yarn lint
+
 workflows:
   version: 2
   build_and_test:
@@ -47,3 +92,10 @@ workflows:
       - test_backend:
           requires:
             - build_backend
+      - lint_backend:
+          requires:
+            - build_backend
+      - build_frontend
+      - lint_frontend:
+          requires:
+            - build_frontend

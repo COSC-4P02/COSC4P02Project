@@ -13,26 +13,41 @@ describe('Api Service Test', () => {
   before(function () {
     apiService(print, print, dbTest);
   });
-  it('should return 200', function (done) {
+  it('should return 200 - /', function (done) {
     http.get('http://localhost:3000', function (res) {
       assert.equal(200, res.statusCode);
       done();
     });
   });
-  it('should return 200', function (done) {
+  it('should return 200 - Brock News', function (done) {
+    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
+      this.skip();
+    this.timeout(10000);
     http.get('http://localhost:3000/data/brock/news', function (res) {
       assert.equal(200, res.statusCode);
       done();
     });
   });
-  it('should return 200', function (done) {
+  it('should return 200 - Brock News Cache', function (done) {
+    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
+      this.skip();
+    this.timeout(10000);
     http.get('http://localhost:3000/data/brock/news/cache', function (res) {
       assert.equal(200, res.statusCode);
       done();
     });
   });
-  it('should return 200', function (done) {
+  it('should return 200 - Test Page', function (done) {
     http.get('http://localhost:3000/test', function (res) {
+      assert.equal(200, res.statusCode);
+      done();
+    });
+  });
+  it('should return 200 - News Search', function (done) {
+    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
+      this.skip();
+    this.timeout(10000);
+    http.get('http://localhost:3000/data/brock/news/search?s=brock', function (res) {
       assert.equal(200, res.statusCode);
       done();
     });
@@ -43,9 +58,8 @@ const brockNewsEngine = require('../components/newsEngine/brockNewsEngine');
 
 describe('Brock News Python Test', () => {
   it('should return notfound when msg is not relevant', function (done) {
-    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true'){
+    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
       this.skip();
-    }
     this.timeout(100000);
     msg = "hello";
     brockNewsEngine(print,print, msg,function (data) {
@@ -57,9 +71,8 @@ describe('Brock News Python Test', () => {
     });
   });
   it('should return a text when brock is in the news', function(done) {
-    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true'){
+    if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
       this.skip();
-    }
     this.timeout(100000);
     msg = "brock";
     brockNewsEngine(print,print, msg,function (data) {
