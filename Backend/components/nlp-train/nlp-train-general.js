@@ -8,13 +8,13 @@ module.exports = async function (manager) {
 
   for (var i = 0; i < jsonArray.length; i++) {
     var item = jsonArray[i];
-    console.log('where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i)
+    //console.log('where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i)
     manager.addDocument('en', 'where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i);
     var closest_building = item['closest_building'];
     // for (const item in JSON.parse(item.closest_building)[0]){
     //   closest_building=closest_building+item+', '
     // }
-    console.log('It is near '+closest_building+', Type:'+item.type, 'agent.parking.'+i)
+    //console.log('It is near '+closest_building+', Type:'+item.type, 'agent.parking.'+i)
     manager.addAnswer('en', 'agent.parking.'+i, 'It is near '+closest_building+', Type:'+item.type);
   
   }

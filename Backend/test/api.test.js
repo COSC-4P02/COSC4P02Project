@@ -11,7 +11,7 @@ const apiService = require('../components/apiService');
 
 describe('Api Service Test', () => {
   before(function () {
-    apiService(print, print, dbTest);
+    apiService(print, print, dbTest, dbTest);
   });
   it('should return 200 - /', function (done) {
     http.get('http://localhost:3000', function (res) {

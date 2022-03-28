@@ -2,6 +2,7 @@ const axios = require('axios').default;
 const { parse } = require('../../plugin/rss-to-json/dist/');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
+var { stats_one } = require('../statsService');
 
 // Brock News RSS
 
@@ -46,10 +47,11 @@ const { JSDOM } = jsdom;
 // 		.catch(error => {console.log(error);})
 // }
 
-module.exports = function (type, parma, noFetch, dbCache, print, errorlog, result) { 
+module.exports = function (type, parma, noFetch, dbMain, dbCache, print, errorlog, result) { 
 	var sent = false;
 
 	if(type === 'rss'){
+		stats_one(print, errorlog, dbMain, "api/crawler/brockNews/rss");
 		const db_news_loc = "/crawler/data/brock/news";
 		const db_loc_date = "/crawler/data/brock/news/date";
 		const cache_max_time = 0.1; // Max cache time (Hour)
@@ -117,6 +119,7 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 			}
 		});
 	}else if(type === 'all'){
+		stats_one(print, errorlog, dbMain, "api/crawler/brockNews");
 
 		const db_news_loc = "/crawler/data/brock/news_all";
 
@@ -207,6 +210,7 @@ module.exports = function (type, parma, noFetch, dbCache, print, errorlog, resul
 				.catch(error => {console.log(error);})
 			})
 	}else if(type === 'search'){
+		stats_one(print, errorlog, dbMain, "api/crawler/brockNews/search");
 		var all_news=[]
 		axios.get('https://brocku.ca/brock-news/?s='+parma.replace(' ','+'))
 			.then(function (res) {

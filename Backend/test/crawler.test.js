@@ -44,7 +44,7 @@ describe('Brock News Test', () => {
       if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
         this.skip();
       this.timeout(10000);
-      brockNews('rss', '', 0, dbTest, print, print, function (rss) {
+      brockNews('rss', '', 0, dbTest, dbTest, print, print, function (rss) {
         data = rss['items'];
         if (data.length <= 0 || data == undefined){
           done(new Error("Error"));
@@ -60,7 +60,7 @@ describe('Brock News Test', () => {
       if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
         this.skip();
       this.timeout(10000);
-      brockNews('search', 'brock', 0, dbTest, print, print, function (all_news) {
+      brockNews('search', 'brock', 0, dbTest, dbTest, print, print, function (all_news) {
         data = all_news;
         if (data.length <= 0 || data == undefined){
           done(new Error("Error"));

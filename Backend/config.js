@@ -8,8 +8,10 @@ config.apiServicePort = 3000;
 
 // Api Service CORS
 config.corsAllowedOrigins = ['http://localhost:1901',
+                        'http://localhost:3010',
                         'https://chatbot-ai.ga',
-                        'https://web.chatbot-ai.ga'];
+                        'https://web.chatbot-ai.ga',
+                        'https://dash.chatbot-ai.ga'];
 
 // SSL Cert
 config.wsKey = "cert/key.pem";

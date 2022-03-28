@@ -16,6 +16,9 @@ var config = require('./config');
 // Logger
 const { print, errorlog, chatlog } = require('./components/logService');
 
+// Stats Logger
+var { stats_one, stats_query, stats_array_append } = require('./components/statsService');
+
 // DataBase
 const { dbMain, dbCache } = require('./components/dbService');
 
@@ -53,13 +56,13 @@ var nlp_info = [ threshold, nlpManagerBrock, nlpManagerGame ];
 
 // WebSocket Service
 const wsService = require('./components/wsService');
-wsService(print, errorlog, chatlog, nlp_info, dbCache);
+wsService(print, errorlog, chatlog, nlp_info, dbMain, dbCache);
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
 // Api Service
 const apiService = require('./components/apiService');
-apiService(print, errorlog, dbCache);
+apiService(print, errorlog, dbMain, dbCache);
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
@@ -89,3 +92,5 @@ process.on('SIGUSR1', exitHandler.bind(null, {exit:true}));
 process.on('SIGUSR2', exitHandler.bind(null, {exit:true}));
 // uncaught exceptions
 process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+
+stats_one(print, errorlog, dbMain, "core/server/start");
