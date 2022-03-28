@@ -66,6 +66,14 @@ apiService(print, errorlog, dbMain, dbCache);
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
+// Discord Service
+if (config.enableDiscord) {
+  const discordService = require('./components/discordService');
+  discordService(print, errorlog, chatlog, nlp_info, dbMain, dbCache);
+}
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
 let {PythonShell} = require('python-shell')
 PythonShell.run('test/shell.py', null, function (err) {
   if (err){

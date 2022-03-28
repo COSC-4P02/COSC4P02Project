@@ -12,7 +12,7 @@ function sendCourseDetails(conn, result_array, number, ignoreifnone){
         'text': result_array[number],
         'disableInput': false
       }
-      conn.sendText(JSON.stringify(send));
+      conn(JSON.stringify(send));
       return
     }else{
       if (ignoreifnone)
@@ -29,7 +29,7 @@ function sendCourseDetails(conn, result_array, number, ignoreifnone){
     'text': "There are no information about "+number+"",
     'disableInput': false
   }
-  conn.sendText(JSON.stringify(send));
+  conn(JSON.stringify(send));
 }
 
 // Read courses from csv
@@ -65,7 +65,7 @@ function readCourseFromBrockData(conn,param,number,dbCache,print,errorlog, callb
   });
 }
 
-module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) { 
+module.exports = function (obj, answer, conn, dbCache, print, errorlog) {
     var urlsend = "";
 
     if (answer.charAt(0)=='!'){
@@ -109,7 +109,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
             }
           ]
         }
-        conn.sendText(JSON.stringify(urlsend));
+        conn(JSON.stringify(urlsend));
 
         covidNiagara(dbCache, print,errorlog,function (data) {
           var send = {
@@ -117,7 +117,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
             'text': data,
             'disableInput': false
           }
-          conn.sendText(JSON.stringify(send));
+          conn(JSON.stringify(send));
         });
 
         return "!ignore";
@@ -132,7 +132,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"title",0) // Title
@@ -156,7 +156,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"time")
@@ -174,7 +174,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"location")
@@ -192,7 +192,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"format")
@@ -210,7 +210,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"professor")
@@ -228,7 +228,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"prerequisites")
@@ -246,7 +246,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"lab/tut_des")
@@ -265,7 +265,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"examinfo")
@@ -283,7 +283,7 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
               'text': "Can not find info about it",
               'disableInput': false
             }
-            conn.sendText(JSON.stringify(send));
+            conn(JSON.stringify(send));
             console.error("Can not find info - "+param);
           }else{
             sendCourseDetails(conn,result_array,"session")
@@ -324,22 +324,22 @@ module.exports = function ({obj, answer, conn, dbCache, print, errorlog}) {
           'options': [
             {
               'text': 'Drive',
-              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=drive',
+              'value': encodeURI('https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=drive'),
               'action': 'url'
             },
             {
               'text': 'Bus',
-              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=transit',
+              'value': encodeURI('https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=transit'),
               'action': 'url'
             },
             {
               'text': 'Walk',
-              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=walking',
+              'value': encodeURI('https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=walking'),
               'action': 'url'
             }
           ]
         }
-        conn.sendText(JSON.stringify(urlsend));
+        conn(JSON.stringify(urlsend));
         return "!ignore";
         
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～

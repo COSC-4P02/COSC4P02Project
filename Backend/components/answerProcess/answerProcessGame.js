@@ -3,7 +3,7 @@
 
 const covidNiagara = require('../crawler/covidNiagara');
 
-module.exports = function ({obj,answer,conn,dbCache,print,errorlog}) { 
+module.exports = function (obj,answer,conn,dbCache,print,errorlog) { 
     if (answer.charAt(0)=='!'){
     var temp = (' ' + answer).slice(1);
     const control = temp.substr(0,temp.indexOf('-'));
@@ -40,7 +40,7 @@ module.exports = function ({obj,answer,conn,dbCache,print,errorlog}) {
             }
           ]
         }
-        conn.sendText(JSON.stringify(urlsend));
+        conn(JSON.stringify(urlsend));
 
         covidNiagara(dbCache, print,errorlog,function (data) {
           var send = {
@@ -48,7 +48,7 @@ module.exports = function ({obj,answer,conn,dbCache,print,errorlog}) {
             'text': data,
             'disableInput': false
           }
-          conn.sendText(JSON.stringify(send));
+          conn(JSON.stringify(send));
         });
         
         return "!ignore";
@@ -69,22 +69,22 @@ module.exports = function ({obj,answer,conn,dbCache,print,errorlog}) {
           'options': [
             {
               'text': 'Drive',
-              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=drive',
+              'value': encodeURI('https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=drive'),
               'action': 'url'
             },
             {
               'text': 'Bus',
-              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=transit',
+              'value': encodeURI('https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=transit'),
               'action': 'url'
             },
             {
               'text': 'Walk',
-              'value': 'https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=walking',
+              'value': encodeURI('https://www.google.com/maps/dir/?api=1&destination='+location+'&travelmode=walking'),
               'action': 'url'
             }
           ]
         }
-        conn.sendText(JSON.stringify(urlsend));
+        conn(JSON.stringify(urlsend));
         return "!ignore";
         
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～

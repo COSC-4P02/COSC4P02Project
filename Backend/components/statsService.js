@@ -23,7 +23,7 @@ function stats_query(print, errorlog, dbMain, db_stats) {
       return 0;
     }
   }catch(e){
-    return 0;
+    return "None";
   }
 }
 

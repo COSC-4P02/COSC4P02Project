@@ -1,5 +1,5 @@
 var config = require('../config');
-var {stats_one, stats_array_append} = require('./statsService');
+var { stats_one, stats_array_append } = require('./statsService');
 
 // Hooks-Server
 /* eslint-disable */
@@ -22,7 +22,7 @@ var options = {
   cert: fs.readFileSync(config.wsCert)
 }
 
-module.exports = function (print, errorlog, chatlog, nlp_info, dbMain,dbCache) {
+module.exports = function (print, errorlog, chatlog, nlp_info, dbMain, dbCache) {
   var threshold = nlp_info[0];
   var nlpManagerBrock = nlp_info[1];
   var nlpManagerGame = nlp_info[2];
@@ -126,8 +126,11 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain,dbCache) {
 
       chatlog("Brock| User: " + obj.msg + " | Bot: " + answer);
 
-      // Process Answer if needed
-      answer = apply_filters("answer_process_brock", {obj,answer,conn,dbCache,print,errorlog});
+      function callback_conn(msg){
+        conn.sendText(msg);
+      }
+      var answerProcessBrock = require('../components/answerProcess/answerProcessBrock.js');
+      answer = answerProcessBrock(obj,answer,callback_conn,dbCache,print,errorlog);
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -156,12 +159,6 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain,dbCache) {
 
   // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
-  // Process answer if needs an action "!"
-  var answerProcessBrock = require('../components/answerProcess/answerProcessBrock.js');
-  add_filter('answer_process_brock',answerProcessBrock);
-
-  // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
-
   // Receive message
   // Canada Game
   var receivedTextGame = (conn,obj)=>{
@@ -183,7 +180,11 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain,dbCache) {
       chatlog("Game| User: " + obj.msg + " | Bot: " + answer);
 
       // Process Answer if needed
-      answer = apply_filters("answer_process_game", {obj,answer,conn,dbCache,print,errorlog});
+      function callback_conn(msg){
+        conn.sendText(msg);
+      }
+      var answerProcessGame = require('../components/answerProcess/answerProcessGame.js');
+      answer = answerProcessGame(obj,answer,callback_conn,dbCache,print,errorlog);
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -204,7 +205,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain,dbCache) {
   // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
   // Process answer if needs an action "!"
-  var answerProcessGame = require('../components/answerProcess/answerProcessGame.js');
-  add_filter('answer_process_game',answerProcessGame);
+  
+  //add_filter('answer_process_game',answerProcessGame);
 
 };

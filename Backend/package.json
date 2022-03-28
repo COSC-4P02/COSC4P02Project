@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "csvtojson": "^2.0.10",
+    "discord.js": "^13.6.0",
     "escodegen": "^2.0.0",
     "express": "^4.17.2",
     "fast-xml-parser": "^3.19.0",
