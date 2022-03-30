@@ -35,9 +35,9 @@
                 Font size
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                <li><a class="dropdown-item" @click="fontChange('0')">size 1</a></li>
-                <li><a class="dropdown-item" @click="fontChange('1')">size 2</a></li>
-                <li><a class="dropdown-item" @click="fontChange('2')">size 3</a></li>
+                <li><a class="dropdown-item" @click="fontChange('0')">Small</a></li>
+                <li><a class="dropdown-item" @click="fontChange('1')">Middle</a></li>
+                <li><a class="dropdown-item" @click="fontChange('2')">Large</a></li>
               </ul>
             </li>
           </ul>
@@ -87,10 +87,10 @@ export default {
       immediate: true,
       handler (newValue) {
         if (newValue === 'game') {
-          this.botInfo.botTitle = 'Niagara 2022 Canada Summer Games'
+          this.botInfo.botTitle = 'Canada Summer Games'
           this.botInfo.botIcon = 'https://niagara2022games.ca/assets/img/n22-logo.svg'
-          this.botInfo.IconAlt = 'Niagara 2022 Canada Gameslogo'
-          this.botInfo.navTitle = 'Niagara2022games Bot'
+          this.botInfo.IconAlt = 'Niagara 2022 Canada Games logo'
+          this.botInfo.navTitle = 'Niagara 2022 Games Bot'
           this.botInfo.OfficialWeb = 'https://niagara2022games.ca/'
         } else if (newValue === 'brock') {
           this.botInfo.botTitle = 'Brock University'

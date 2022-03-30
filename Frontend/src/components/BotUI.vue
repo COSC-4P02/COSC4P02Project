@@ -6,7 +6,7 @@
     .qkb-board(v-if="botActive")
       BoardHeader(
         :bot-title="optionsMain.botTitle",
-        @close-bot="botToggle"
+        @close-bot="botClose"
       )
       BoardContent(
         :bot-typing="botTyping",
@@ -46,7 +46,8 @@ import BoardAction from './Board/Action'
 import AppStyle from './AppStyle'
 import BubbleIcon from '../assets/icons/bubble.svg'
 import CloseIcon from '../assets/icons/close.svg'
-import BotIcon from '../assets/brock/Sir-Isaac-Brock.jpg'
+import BrockBot from '../assets/brock/Sir-Isaac-Brock.jpg'
+import GameBot from '../assets/canada_game/Canada_Game_icon.jpeg'
 
 export default {
   name: 'ChatbotUI',
@@ -101,7 +102,7 @@ export default {
         botTitle: 'Brock University Chatbot', // Bot Title Color
         colorScheme: '#cc0000', // Bot Color
         msgBubbleBgUser: '#cc0000', // User Bubble Color
-        botAvatarImg: BotIcon,
+        botAvatarImg: BrockBot,
         boardContentBg: '#f4f4f4',
         msgBubbleBgBot: '#fff',
         inputPlaceholder: 'Type here...',
@@ -112,7 +113,7 @@ export default {
         botTitle: 'Niagara 2022 Canada Summer Games Chatbot', // Bot Title Color
         colorScheme: '#004f71', // Bot Color
         msgBubbleBgUser: '#004f71', // User Bubble Color
-        botAvatarImg: BotIcon,
+        botAvatarImg: GameBot,
         boardContentBg: '#f4f4f4',
         msgBubbleBgBot: '#fff',
         inputPlaceholder: 'Type here...',
@@ -123,7 +124,7 @@ export default {
         botTitle: 'Chatbot', // Bot Title Color
         colorScheme: '#cc0000', // Bot Color
         textColor: '#fff',
-        bubbleBtnSize: 56,
+        bubbleBtnSize: 65,
         animation: true,
         boardContentBg: '#fff',
         botAvatarSize: 32,

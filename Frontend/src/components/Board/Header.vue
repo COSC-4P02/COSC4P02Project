@@ -1,39 +1,29 @@
 <template>
-  <div class="a">
-    <div class="qkb-board-header">
-      <div class="qkb-board-header__title">{{ botTitle }}</div>
-      <div>
-        <p @click.prevent="$refs.menu.open($event)" class="settings">
-          <SettingsIcon class="icon" />
-        </p>
-      </div>
-
+  <div class="qkb-board-header">
+    <div class="qkb-board-header__title">{{ botTitle }}</div>
+    <div class="btn-group" role="toolbar">
+      <a class="btn" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <SettingsIcon class="icon"/>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="#" @click.prevent="onClick(1)">Download Chat Log</a></li>
+        <li><a class="dropdown-item" href="#" @click.prevent="onClick(2)">Clear Chat</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#" @click.prevent="onClick(3)">Help</a></li>
+      </ul>
+      <a class="btn" role="button" @click="botClose()"><CloseIcon class="icon"/></a>
     </div>
-    <vue-context ref="menu" lazy>
-      <li>
-        <a href="#" @click.prevent="onClick(1)">Download Chat Log</a>
-      </li>
-      <li>
-        <a href="#" @click.prevent="onClick(2)">Clear Chat</a>
-      </li>
-      <li>
-        <a href="#" @click.prevent="onClick(3)">Help</a>
-      </li>
-      <!-- <li>
-        <a href="#" @click.prevent="onClick($event.target.innerText)">Button</a>
-      </li> -->
-    </vue-context>
   </div>
 </template>
 <script>
 import EventBus from '../../helpers/event-bus'
-import VueContext from '../../helpers/menu/index'
 import SettingsIcon from '../../assets/icons/settings.svg'
+import CloseIcon from '../../assets/icons/close.svg'
 
 export default {
   components: {
-    VueContext,
-    SettingsIcon
+    SettingsIcon,
+    CloseIcon
   },
   props: {
     botTitle: {
@@ -56,6 +46,9 @@ export default {
         default:
           alert(`Button Pressed: ${text}`)
       }
+    },
+    botClose () {
+      this.$emit('close-bot', '1')
     }
   }
 }

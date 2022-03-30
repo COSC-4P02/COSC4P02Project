@@ -51,7 +51,7 @@ export default {
       botTyping: false,
       inputDisable: false,
       version: 'brock', // Define Chatbot Version: brock / game
-      fSize: '18px',
+      fSize: '1rem',
       fontSize: '1',
       extra: ''
     }
@@ -138,13 +138,13 @@ export default {
     fontChange (event) {
       if (event === '0') {
         this.fontSize = '0'
-        this.fSize = '15px'
+        this.fSize = '0.95rem'
       } else if (event === '1') {
         this.fontSize = '1'
-        this.fSize = '18px'
+        this.fSize = '1rem'
       } else if (event === '2') {
         this.fontSize = '2'
-        this.fSize = '25px'
+        this.fSize = '1.2rem'
       }
     },
 
