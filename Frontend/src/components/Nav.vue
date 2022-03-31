@@ -88,7 +88,7 @@ export default {
       handler (newValue) {
         if (newValue === 'game') {
           this.botInfo.botTitle = 'Canada Summer Games'
-          this.botInfo.botIcon = 'https://niagara2022games.ca/assets/img/n22-logo.svg'
+          this.botInfo.botIcon = require('../assets/canada_game/n22-logo.webp')
           this.botInfo.IconAlt = 'Niagara 2022 Canada Games logo'
           this.botInfo.navTitle = 'Niagara 2022 Games Bot'
           this.botInfo.OfficialWeb = 'https://niagara2022games.ca/'

@@ -35,17 +35,6 @@ export default {
   fill: ${textColor};
   color: ${textColor};
 }
-.qkb-board {
-  bottom: ${bubbleBtnSize}px;
-}
-@media only screen and (max-width: 600px) {
-  .qkb-board {
-    bottom: 0;
-  }
-  .qkb-bubble-btn-icon--close {
-    display: none;
-  }
-}
 .qkb-board-header {
   background-color: ${colorScheme};
 }

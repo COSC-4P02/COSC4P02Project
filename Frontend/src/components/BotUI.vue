@@ -21,6 +21,7 @@
       )
   .qkb-bot-bubble
     button.qkb-bubble-btn(
+      v-if="!botActive",
       @click="botToggle"
     )
       slot(name="bubbleButton")
@@ -33,6 +34,9 @@
             v-else,
             key="2"
           )
+    button.qkb-bubble-btn.d-none(
+      v-if="botActive",
+    )
   AppStyle(:options="optionsMain")
   .qkb-preload-image
     .qkb-msg-avatar__img(v-if="optionsMain.botAvatarImg")

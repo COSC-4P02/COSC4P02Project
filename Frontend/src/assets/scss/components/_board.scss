@@ -6,6 +6,7 @@
   right: 0;
   width: $board-width;
   height: 77vh;
+  bottom: -0.5rem;
   margin-bottom: 10px;
   border-radius: $board-radius;
   background-color: $board-bg;
@@ -16,6 +17,7 @@
   .qkb-board {
     width: 100vw;
     position: fixed;
+    border-radius: 0;
     height: auto;
     bottom: 0;
     top: 62px;
