@@ -50,7 +50,7 @@ export default {
       messageData: [],
       botTyping: false,
       inputDisable: false,
-      version: 'brock', // Define Chatbot Version: brock / game
+      version: this.GLOBAL.version, // Define Chatbot Version: brock / game
       fSize: '1rem',
       fontSize: '1',
       extra: ''

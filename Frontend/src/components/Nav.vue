@@ -55,10 +55,6 @@
 export default {
   name: 'Nav',
   props: {
-    version: {
-      type: String,
-      default: 'brock'
-    },
     switchVersion: {
       type: Function,
       default: () => {}
@@ -71,6 +67,7 @@ export default {
   },
   data () {
     return {
+      version: this.GLOBAL.version,
       botInfo: {
         botTitle: '',
         botIcon: '../assets/icons/bubble.svg',
