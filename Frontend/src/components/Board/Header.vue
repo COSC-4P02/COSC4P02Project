@@ -6,12 +6,12 @@
         <SettingsIcon class="icon"/>
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="#" @click.prevent="onClick(1)">Download Chat Log</a></li>
+        <li v-if="!this.GLOBAL.ifAPP" ><a class="dropdown-item" href="#" @click.prevent="onClick(1)">Download Chat Log</a></li>
         <li><a class="dropdown-item" href="#" @click.prevent="onClick(2)">Clear Chat</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="#" @click.prevent="onClick(3)">Help</a></li>
       </ul>
-      <a class="btn" role="button" @click="botClose()"><CloseIcon class="icon"/></a>
+      <a v-if="!this.GLOBAL.ifAPP" class="btn" role="button" @click="botClose()"><CloseIcon class="icon"/></a>
     </div>
   </div>
 </template>

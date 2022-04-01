@@ -15,7 +15,7 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" :href="botInfo.OfficialWeb">Official Web</a>
+              <a v-if="!this.GLOBAL.ifAPP" class="nav-link active" aria-current="page" :href="botInfo.OfficialWeb">Official Web</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,7 +41,7 @@
               </ul>
             </li>
           </ul>
-          <form class="d-flex">
+          <form v-if="!this.GLOBAL.ifAPP" class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Type what you want" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>

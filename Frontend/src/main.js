@@ -7,6 +7,10 @@ import 'bootstrap/dist/js/bootstrap.min'
 Vue.config.productionTip = false
 Vue.prototype.GLOBAL = _global_
 
+if (navigator.userAgent.includes('Html5Plus')) {
+  Vue.prototype.GLOBAL.ifAPP = true
+}
+
 new Vue({
   render: (h) => h(App)
 }).$mount('#app')
