@@ -13,7 +13,7 @@ module.exports = function (print, errorlog, dbMain, dbCache) {
   var allowedOrigins = config.corsAllowedOrigins;
   app.use(cors({
     origin: function(origin, callback){
-      if(!origin) return callback(null, true);
+      if(!origin || origin=='null') return callback(null, true);
       if(allowedOrigins.indexOf(origin) === -1){
         var msg = 'The CORS policy for this site does not ' +
                   'allow access from the specified Origin.';
@@ -84,6 +84,14 @@ module.exports = function (print, errorlog, dbMain, dbCache) {
     });
   })
 
+  app.get('/data/game/news', (req, res) => {
+    const gameNews = require('./crawler/gameNews');
+    gameNews(0, dbMain, dbCache, print, errorlog, function (rss) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(rss));
+    });
+  })
+
   // app.get('/data/brock/news/all', (req, res) => {
   //   const brockNews = require('./crawler/brockNews');
   //   brockNews('all', '', 0, dbMain, dbCache, print, errorlog, function (rss) {
@@ -95,6 +103,14 @@ module.exports = function (print, errorlog, dbMain, dbCache) {
   app.get('/data/brock/news/cache', (req, res) => {
     const brockNews = require('./crawler/brockNews');
     brockNews('rss', '', 1, dbMain, dbCache, print, errorlog, function (rss) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(rss));
+    });
+  })
+
+  app.get('/data/game/news/cache', (req, res) => {
+    const gameNews = require('./crawler/gameNews');
+    gameNews(1, dbMain, dbCache, print, errorlog, function (rss) {
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(rss));
     });

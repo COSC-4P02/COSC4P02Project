@@ -33,6 +33,7 @@
     "express": "^4.17.2",
     "fast-xml-parser": "^3.19.0",
     "jsdom": "^19.0.0",
+    "jsdom-no-css": "^15.1.1",
     "kuromoji": "^0.1.2",
     "node-json-db": "^1.4.1",
     "node-nlp": "^4.23.2",

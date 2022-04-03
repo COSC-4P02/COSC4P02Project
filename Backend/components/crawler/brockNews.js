@@ -52,7 +52,7 @@ module.exports = function (type, parma, noFetch, dbMain, dbCache, print, errorlo
 
 	if(type === 'rss'){
 		stats_one(print, errorlog, dbMain, "api/crawler/brockNews/rss");
-		const db_news_loc = "/crawler/data/brock/news";
+		const db_news_loc = "/crawler/data/brock/news/recent";
 		const db_loc_date = "/crawler/data/brock/news/date";
 		const cache_max_time = 0.1; // Max cache time (Hour)
 		try{
