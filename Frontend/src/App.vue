@@ -40,13 +40,6 @@ export default {
 
   data () {
     return {
-      // Production Server
-      wsApi: 'wss://ws.chatbot-ai.ga:8001',
-      whApi: 'https://api.chatbot-ai.ga',
-
-      // Development Server
-      // wsApi: 'wss://localhost:8001',
-      // whApi: 'http://localhost:3000',
       messageData: [],
       botTyping: false,
       inputDisable: false,
@@ -59,6 +52,7 @@ export default {
 
   mounted () {
     this.getNetworkType()
+    this.getURLVersion()
     // SettingButtons
     EventBus.$on('SettingButtons', (msg) => {
       switch (msg) {
@@ -77,7 +71,7 @@ export default {
           break
         case 'ExportLog': // Export Chat Log
           const chatlog = { chatlog: JSON.stringify(this.messageData) }
-          axios.post(this.whApi + '/chat/pdf/', chatlog)
+          axios.post(this.GLOBAL.whApi + '/chat/pdf/', chatlog)
             .then(
               response => {
                 let filename = 'logs.txt'
@@ -121,7 +115,7 @@ export default {
 
     // Connect to websocket
     connectWS () {
-      ws = new WebSocket(this.wsApi)
+      ws = new WebSocket(this.GLOBAL.wsApi)
       ws.addEventListener('open', this.handleWsOpen.bind(this), false)
       ws.addEventListener('close', this.handleWsClose.bind(this), false)
       ws.addEventListener('error', this.handleWsError.bind(this), false)
@@ -238,7 +232,19 @@ export default {
     },
 
     getNetworkType () {
-      // alert('you are using ' + navigator.connection.effectiveType + ' network')
+      console.log(this.GLOBAL.isMobile())
+      if (this.GLOBAL.isMobile()) {
+        // alert('you are using ' + navigator.connection.effectiveType + ' network')
+      }
+    },
+
+    getURLVersion () {
+      console.log(window.location.search)
+      if (window.location.search === '?bot=game') {
+        this.version = 'game'
+      } else if (window.location.search === '?bot=brock') {
+        this.version = 'brock'
+      }
     },
 
     // Submit the message from user to bot API, then get the response from Bot

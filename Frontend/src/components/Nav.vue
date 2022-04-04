@@ -22,8 +22,8 @@
                 Switch Bot
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                <li><button class="dropdown-item" @click="switchVersion('brock')">Brock university</button></li>
-                <li><a class="dropdown-item"  @click="switchVersion('game')">Niagara 2020 Summer Game</a></li>
+                <li><button class="dropdown-item" @click="switchVersion('brock')" href="/?bot=brock">Brock university</button></li>
+                <li><a class="dropdown-item"  @click="switchVersion('game')" href="/?bot=game">Niagara 2020 Summer Game</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
@@ -55,6 +55,10 @@
 export default {
   name: 'Nav',
   props: {
+    version: {
+      type: String,
+      default: 'brock'
+    },
     switchVersion: {
       type: Function,
       default: () => {}
@@ -67,7 +71,6 @@ export default {
   },
   data () {
     return {
-      version: this.GLOBAL.version,
       botInfo: {
         botTitle: '',
         botIcon: '../assets/icons/bubble.svg',
