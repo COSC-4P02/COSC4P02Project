@@ -12,8 +12,9 @@
         <a :href="items.link"><img :src="items.image" class="d-block w-100" style="object-fit: cover" alt='...'></a>
         <div>
           <div class="carousel-caption d-block" style="left: 0;right: 0;bottom: 0;" :style="{'background': version == 'brock'? color.brock:color.game}">
+          <div class="carousel-caption d-block" style="height: 20vh; left: 0;right: 0;bottom: 0; background: linear-gradient(0deg, rgba(204,0,0,1) 40%, rgba(204,0,0,0.005) 100%)" >
             <h5>{{items.title}}</h5>
-            <p>{{items.description}}</p >
+            <p style="text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2">{{items.description}}</p >
           </div>
         </div>
       </div>
