@@ -1,0 +1,33 @@
+,parking-lot,type,closest_building
+0,['Lot B (Accessible)'],"['Permit, campus recreation']","['Kenmore Centre', 'Harrison Hall', 'Walker Complex', 'South Block', 'Rosalind Blauer Centre for Childcare', 'Arnie Lowenberger Residence', 'Robert S. K. Welch Hall']"
+1,['Flora Egerter Way Parking (Accessible)'],"[' Visitor, metered']","['Cairns Family Health and Bioscience Research Complex', 'Mackenzie Chown Complex', 'Student-Alumni Centre', 'Taro Hall', 'Plaza Building', 'Jack and Nora Canadian Centre for Lifespan Research', 'Brock Campus Store']"
+2,['Lot A (Accessible)'],"[' Permit, Zone 1']","['Cairns Family Health and Bioscience Research Complex', 'Mackenzie Chown Complex', 'Student-Alumni Centre', 'Goodman School of Business', 'Plaza Building', 'Jack and Nora Canadian Centre for Lifespan Research', 'Brock Campus Store', 'International Centre,', '573 Glenridge Ave.', 'East Academic']"
+3,['Lot E (Accessible)'],[' Visitor'],"['Cairns Family Health and Bioscience Research Complex', 'Mackenzie Chown Complex', 'Student-Alumni Centre', 'Plaza Building', 'Jack and Nora Canadian Centre for Lifespan Research', 'Brock Campus Store', 'International Centre,', '573 Glenridge Ave.', 'East Academic']"
+4,['Lot EB (Accessible)'],[' Visitor'],"['International Centre', 'East Academic', '573 Glenridge Ave.', 'Heritage Place Plaza', 'Quarryview Residence']"
+5,['Lot EA (Accessible)'],[' Permit'],"['International Centre', 'East Academic', '573 Glenridge Ave.', 'Heritage Place Plaza']"
+6,['Lot M (Accessible)'],"[' Permit, residence (general)']","['Alan Earp Residence', 'Gordon and Betty Vallee Residence', 'Concordia Lutheran Seminary', 'Central Utilities Building', 'Inniskillin Hall', 'Alumni Greenhouse', 'Mackenzie Chown Complex']"
+7,['Lot Q (Accessible)'],"[' Special reserved permit or visitor, metered']",['Walker Complex']
+8,['Lot P (Accessible)'],[' Visitor'],"['Walker Complex', 'Kenmore Centre', 'Harrison Hall', 'Village Residence', 'South Block', 'tennis courts', 'ropes course']"
+9,['Lot N'],"[' Special Reserved Permit', '\n']",['Concordia Lutheran Seminary']
+10,"['Flora Egerter Way Parking (Pay and Display, Honk)']","[' Visitor, metered']","['Cairns Family Health and Bioscience Research Complex', 'Mackenzie Chown Complex', 'Student-Alumni Centre', 'Taro Hall', 'Plaza Building', 'Jack and Nora Canadian Centre for Lifespan Research', 'Brock Campus Store']"
+11,['QV Lot (Accessible)'],"[': Permit, residence (general)']","['Quarryview Residence', 'International Centre', 'East Academic', '573 Glenridge Ave.', 'Heritage Place Plaza']"
+12,"['Lot Q (Metered Parking, Honk)']","[' Special reserved permit or visitor, metered']",['Walker Complex']
+13,"['Lot P (Pay and Display, Honk)']",[' Visitor'],"['Walker Complex', 'Kenmore Centre', 'Harrison Hall', 'Village Residence', 'South Block', 'tennis courts', 'ropes course']"
+14,['Reserved B'],"['Permit, campus recreation']","['Kenmore Centre', 'Harrison Hall', 'Walker Complex', 'South Block', 'Rosalind Blauer Centre for Childcare', 'Arnie Lowenberger Residence', 'Robert S. K. Welch Hall']"
+15,['Zone 1'],"[' Permit, Zone 1']","['Cairns Family Health and Bioscience Research Complex', 'Mackenzie Chown Complex', 'Student-Alumni Centre', 'Goodman School of Business', 'Plaza Building', 'Jack and Nora Canadian Centre for Lifespan Research', 'Brock Campus Store', 'International Centre,', '573 Glenridge Ave.', 'East Academic']"
+16,['Lot K (Accessible)'],"[' Special reserved permit or visitor, metered']","['Decew Residence', 'Gordon and Betty Vallee Residence', 'Alan Earp Residence', 'Central Utilities Building']"
+17,['Lot H (Accessible)'],[' Special reserved permit'],"['Decew Residence', 'Thistle Complex']"
+18,['Lot K'],"[' Special reserved permit or visitor, metered']","['Decew Residence', 'Gordon and Betty Vallee Residence', 'Alan Earp Residence', 'Central Utilities Building']"
+19,['Lot J'],"[' Special reserved permit or visitor, metered', '\n']","['Decew Residence', 'Gordon and Betty Vallee Residence', 'Alan Earp Residence', 'Central Utilities Building']"
+20,['Lot H'],"[' Special reserved permit', '\n']","['Decew Residence', 'Thistle Complex']"
+21,['Lot F'],"[' Special reserved permit', '\n']","['Alphie’s Trough', 'Thistle Complex']"
+22,['University Rd. West Parking (Pay and Display)'],"['Visitor, metered']","['Kenmore Centre', 'Harrison Hall', 'Walker Complex', 'South Block', 'Arnie Lowenberger Residence', 'Robert S. K. Welch Hall', 'David S. Howes Theatre']"
+23,['University Rd. West Parking – Side of Walker Complex (Accessible)'],[' Visitor'],"['Walker Complex', 'tennis courts', 'ropes course']"
+24,['Lot EB'],[' Visitor'],"['International Centre', 'East Academic', '573 Glenridge Ave.', 'Heritage Place Plaza', 'Quarryview Residence']"
+25,['Lot EA'],[' Permit'],"['International Centre', 'East Academic', '573 Glenridge Ave.', 'Heritage Place Plaza']"
+26,['Lot V (Zone 2)'],"['Permit, Zone 2 (general)']",['Theal House (Parking Services)']
+27,['Zone 3'],"['Permit, residence (general)']","['Rosalind Blauer Centre for Childcare', 'Arnie Lowenberger Residence', 'Village Residence', 'Theal House (Parking Services)']"
+28,['Lot M'],"[' Permit, residence (general)']","['Alan Earp Residence', 'Gordon and Betty Vallee Residence', 'Concordia Lutheran Seminary', 'Central Utilities Building', 'Inniskillin Hall', 'Alumni Greenhouse', 'Mackenzie Chown Complex']"
+29,['Lot L'],['Permit'],['Central Utilities Building']
+30,"['Lot E (Pay and Display, Honk)']",[' Visitor'],"['Cairns Family Health and Bioscience Research Complex', 'Mackenzie Chown Complex', 'Student-Alumni Centre', 'Plaza Building', 'Jack and Nora Canadian Centre for Lifespan Research', 'Brock Campus Store', 'International Centre,', '573 Glenridge Ave.', 'East Academic']"
+31,['Lot C (Honk)'],['Permit'],"['Robert S. K. Welch', 'Centre for the Arts Box Office', 'Sean O’Sullivan Theatre', 'David S. Howes Theatre', 'South Block', 'Walker Complex', 'Student-Alumni Centre', 'Taro Hall', 'Plaza Building', 'Jack and Nora Canadian Centre for Lifespan Research', 'Brock Campus Store']"
