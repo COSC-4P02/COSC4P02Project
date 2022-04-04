@@ -232,14 +232,12 @@ export default {
     },
 
     getNetworkType () {
-      console.log(this.GLOBAL.isMobile())
       if (this.GLOBAL.isMobile()) {
         // alert('you are using ' + navigator.connection.effectiveType + ' network')
       }
     },
 
     getURLVersion () {
-      console.log(window.location.search)
       if (window.location.search === '?bot=game') {
         this.version = 'game'
       } else if (window.location.search === '?bot=brock') {
