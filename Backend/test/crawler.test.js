@@ -71,3 +71,23 @@ describe('Brock News Test', () => {
     });
   });
 });
+
+const gameNews = require('../components/crawler/gameNews');
+
+describe('Game News Test', () => {
+  describe('Web Test', () => {
+    it('should return news list', function(done) {
+      if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
+        this.skip();
+      this.timeout(10000);
+      gameNews(0, dbTest, dbTest, print, print, function (rss) {
+        data = rss['items'];
+        if (data.length <= 0 || data == undefined){
+          done(new Error("Error"));
+          return;
+        }
+        done();
+      });
+    });
+  });
+});

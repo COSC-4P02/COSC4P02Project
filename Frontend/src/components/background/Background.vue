@@ -1,5 +1,5 @@
 <template>
-  <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div v-if="!this.GLOBAL.ifAPP" id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button v-for="(items, index) in msg.items" :key="items"
               type="button" data-bs-target="#carouselExampleIndicators"

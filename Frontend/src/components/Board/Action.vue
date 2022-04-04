@@ -70,7 +70,9 @@ export default {
   },
 
   mounted () {
-    this.$refs.qkbMessageInput.focus()
+    if (!this.GLOBAL.ifAPP) {
+      this.$refs.qkbMessageInput.focus()
+    }
   },
 
   methods: {
