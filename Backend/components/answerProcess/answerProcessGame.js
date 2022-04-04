@@ -3,7 +3,7 @@
 
 const covidNiagara = require('../crawler/covidNiagara');
 
-module.exports = function (obj,answer,conn,dbCache,print,errorlog) { 
+module.exports = function (obj,answer,conn,dbMain,dbCache,print,errorlog) { 
     if (answer.charAt(0)=='!'){
     var temp = (' ' + answer).slice(1);
     const control = temp.substr(0,temp.indexOf('-'));
@@ -85,6 +85,88 @@ module.exports = function (obj,answer,conn,dbCache,print,errorlog) {
           ]
         }
         conn(JSON.stringify(urlsend));
+        return "!ignore";
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!gameCountdown": // 
+
+        var second = 1000;
+        var minute = second * 60;
+        var hour = minute * 60;
+        var day = hour * 24;
+        var countDown = new Date('Aug 06, 2022 00:00:00').getTime();
+
+        var now = new Date().getTime(),
+        distance = countDown - now;
+
+        var c_day = Math.floor(distance / (day))
+        var c_hours = Math.floor((distance % (day)) / (hour))
+        var c_minutes = Math.floor((distance % (hour)) / (minute))
+        var c_seconds = Math.floor((distance % (minute)) / second)
+
+        var text = ""
+
+        if (c_day>=0){
+          text = ("The Niagara 2022 Games website says the event starts on Aug 06, 2022, which is " + c_day+" days "+c_hours+" hrs "+c_minutes+" min "+c_seconds+" sec left.");
+        }else{
+          c_day = 0 - c_day;
+          text = ("The Niagara 2022 Games website says the event starts on Aug 06, 2022, so the games is already start for " + c_day+" days.");
+        }
+
+        urlsend = {
+          'type': 'button',
+          'text': text,
+          'disableInput': false,
+          'options': [
+            {
+              'text': 'Learn more about Tickets',
+              'action': 'postback'
+            },
+            {
+              'text': 'Niagara Games Website',
+              'value': "https://niagara2022games.ca/",
+              'action': 'url'
+            }
+          ]
+        }
+        conn(JSON.stringify(urlsend));
+        return "!ignore";
+
+
+// ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!news": // 
+
+        var gameNews = require('../crawler/gameNews');
+        gameNews(0, dbMain, dbCache, print, errorlog, function (rss) {
+
+          for (var i = rss['items'].length - 1; i >= 0; i--) {
+            rss['items'][i]['href'] = rss['items'][i]['link']
+          }
+
+          urlsend = {
+            'type': 'news',
+            'text': "Here are the recent news about Canada Games",
+            'news': rss['items'],
+            'disableInput': false,
+            'options': [
+              {
+                'text': 'Canada Games News',
+                'value': "https://canadagames.ca/in-the-loop",
+                'action': 'url'
+              },
+              {
+                'text': 'Niagara Games Website',
+                'value': "https://niagara2022games.ca/",
+                'action': 'url'
+              }
+            ]
+          }
+          conn(JSON.stringify(urlsend));
+        });
+
+        
         return "!ignore";
         
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～

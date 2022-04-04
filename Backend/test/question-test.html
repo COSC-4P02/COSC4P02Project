@@ -69,6 +69,7 @@ conn.onopen = async function () {
 
 	send('brock','Hello');
 	send('brock','Get Started');
+	send('game','Get Started');
 
 	// Covid  Question
 	send('console','Covid Question')
@@ -89,6 +90,11 @@ conn.onmessage = async function (evt) {
 		|| msg.includes("won't")
 		|| msg.includes("Still under development...")
 		|| msg.includes("not sure")
+		|| msg.includes("don't know")
+		|| msg.includes("Feeling wonderful!")
+		|| msg.includes("I'm a conversational app")
+		|| msg.includes("I'm a virtual agent")
+		|| msg.includes("don't know")
 		){
 		console.log("%cNot Implemented: "+msg,'background: #c00; color: #fff')
 	}else{
@@ -131,27 +137,63 @@ async function send_full(version,msg,extra) {
 </head>
 
 <body>
-	<div class="container max-width-sm hide-nav padding-y-sm z-index-header pointer-events-none js-hide-nav js-hide-nav--main">
-	    <header class="float-nav-header pointer-events-auto">
-	      <div class="flex-basis-0 flex-grow flex items-center display@md">
-	        <ul class="flex items-center gap-sm padding-left-xs">
-	          <li class="flex items-center"><a class="float-nav-header__link" href="https://chatbot-ai.ga">Chatbot Web</a></li>
-	        </ul>
-	      </div>
-	    
-	      <div class="flex-basis-0 flex-grow flex items-center justify-start padding-left-xs justify-center@md padding-left-0@md">
-	        <a class="float-nav-header__logo" href="#" style="text-decoration: none;">
-	          <h4>Chatbot</h4>
-	        </a>
-	      </div>
-	    
-	      <div class="flex-basis-0 flex-grow flex items-center justify-end">
-	        <ul class="flex items-center gap-sm">
-	          <li class="flex items-center display@md"><a class="float-nav-header__link" href="https://uptime.krunk.cn">Uptime</a></li>
-	        </ul>
-	      </div>
-	    </header>
-	  </div>
+	<header class="f-header js-f-header position-relative">
+    <div class="f-header__mobile-content container max-width-lg">
+      <a href="/" class="f-header__logo">
+        <img src="https://app.chatbot-ai.ga/images/logo.webp" width="40px">
+      </a>
+
+      <button class="reset anim-menu-btn js-anim-menu-btn f-header__nav-control js-tab-focus" aria-label="Toggle menu">
+        <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="f-header__nav" role="navigation">
+      <div class="f-header__nav-grid justify-between@md container max-width-lg">
+        <div class="f-header__nav-logo-wrapper flex-grow flex-basis-0">
+          <a href="/" class="f-header__logo">
+            <img src="https://app.chatbot-ai.ga/images/logo.webp" width="50px">
+          </a>
+        </div>
+
+        <ul class="f-header__list flex-grow flex-basis-0 justify-center@md">
+          <li class="f-header__item"><a href="https://chatbot-ai.ga" class="f-header__link">Home</a></li>
+          <li class="f-header__item"><button class="reset f-header__dropdown-control js-f-header__dropdown-control">
+              <span>Chatbot</span>
+              <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
+                <path d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z" />
+              </svg>
+            </button>
+
+            <ul class="f-header__dropdown">
+              <li><a href="https://web.chatbot-ai.ga/?bot=brock" class="f-header__dropdown-link" target="_blank">Brock University</a></li>
+              <li><a href="https://web.chatbot-ai.ga/?bot=game" class="f-header__dropdown-link" target="_blank">Canada Games 2022</a></li>
+            </ul>
+          </li>
+          <li class="f-header__item"><a href="https://app.chatbot-ai.ga" class="f-header__link">App</a></li>
+          <li class="f-header__item"><a href="https://app.chatbot-ai.ga/privacy.html" class="f-header__link">TOS</a></li>
+          <li class="f-header__item"><a href="https://docs.chatbot-ai.ga" class="f-header__link" target="_blank">Docs</a></li>
+          <li class="f-header__item"><button class="reset f-header__dropdown-control js-f-header__dropdown-control">
+              <span>Social</span>
+              <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
+                <path d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z" />
+              </svg>
+            </button>
+
+            <ul class="f-header__dropdown">
+              <li><a href="https://discord.gg/kSDPxkVh5T" class="f-header__dropdown-link" target="_blank">Discord Channel</a></li>
+              <li><a href="https://discord.com/api/oauth2/authorize?client_id=957973848144375868&permissions=8&scope=bot" class="f-header__dropdown-link" target="_blank">Discord Bot</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
+          <li class="f-header__item"><a href="http://github.com/COSC-4P02/COSC4P02Project" class="f-header__link" target="_blank">Github</a></li>
+          <li class="f-header__item"><a href="https://app.chatbot-ai.ga" class="f-header__btn btn btn--primary">Download Now</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
 
 	  <div class="container max-width-sm padding-y-lg">
 	    <div class="article text-component">

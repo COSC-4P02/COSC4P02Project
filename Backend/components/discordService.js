@@ -71,7 +71,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain, dbCache) 
           }
           message.reply(msg.text);
           chatlog("Brock| User: " + message.content + " | Bot: " + msg.text);
-        },dbCache,print,errorlog);
+        }, dbMain, dbCache,print,errorlog);
         if (answer == "!ignore"){ // Ignore this send
             return;
         }else if (answer == "!json"){ // Send this json directly
@@ -109,7 +109,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain, dbCache) 
           }
           message.reply(msg.text);
           chatlog("Game| User: " + message.content + " | Bot: " + msg.text);
-        },dbCache,print,errorlog);
+        }, dbMain, dbCache,print,errorlog);
         if (answer == "!ignore"){ // Ignore this send
             return;
         }else if (answer == "!json"){ // Send this json directly

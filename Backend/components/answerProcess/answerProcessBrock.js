@@ -33,7 +33,7 @@ function sendCourseDetails(conn, result_array, number, ignoreifnone){
 }
 
 // Read courses from csv
-function readCourseFromBrockData(conn,param,number,dbCache,print,errorlog, callback){
+function readCourseFromBrockData(conn,param,number, dbCache,print,errorlog, callback){
   var result_array = null;
 
   if (param=="{{brockCourse}}"){
@@ -65,7 +65,7 @@ function readCourseFromBrockData(conn,param,number,dbCache,print,errorlog, callb
   });
 }
 
-module.exports = function (obj, answer, conn, dbCache, print, errorlog) {
+module.exports = function (obj, answer, conn, dbMain, dbCache, print, errorlog) {
     var urlsend = "";
 
     if (answer.charAt(0)=='!'){

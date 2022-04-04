@@ -130,7 +130,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain, dbCache) 
         conn.sendText(msg);
       }
       var answerProcessBrock = require('../components/answerProcess/answerProcessBrock.js');
-      answer = answerProcessBrock(obj,answer,callback_conn,dbCache,print,errorlog);
+      answer = answerProcessBrock(obj,answer,callback_conn, dbMain, dbCache,print,errorlog);
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }
@@ -184,7 +184,7 @@ module.exports = function (print, errorlog, chatlog, nlp_info, dbMain, dbCache) 
         conn.sendText(msg);
       }
       var answerProcessGame = require('../components/answerProcess/answerProcessGame.js');
-      answer = answerProcessGame(obj,answer,callback_conn,dbCache,print,errorlog);
+      answer = answerProcessGame(obj,answer,callback_conn, dbMain, dbCache,print,errorlog);
 
       // Reply to Client by text
       var send = { 'type': 'text', 'text': answer, 'disableInput': false }

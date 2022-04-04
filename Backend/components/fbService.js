@@ -30,13 +30,16 @@ async function nlp_msg(message,print, errorlog, chatlog, threshold, nlpManager, 
         }
         var obj={};
         obj.msg=message.content;
-        var answerProcessBrock = require('./answerProcess/answerProcessBrock.js');
+        var r = "./answerProcess/answerProcessBrock.js";
+        if (version === "game")
+          r = "./answerProcess/answerProcessGame.js";
+        var answerProcessBrock = require(r);
         answer = answerProcessBrock(obj,answer,function (msg){
           var response = {
               'text': sending(msg)
             };
           callSendAPI(senderPsid, response, version);
-        },dbCache,print,errorlog);
+        }, dbMain, dbCache,print,errorlog);
         if (answer == "!ignore"){ // Ignore this send
             return;
         }else if (answer == "!json"){ // Send this json directly
