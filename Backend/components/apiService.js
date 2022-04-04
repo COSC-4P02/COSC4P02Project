@@ -4,7 +4,7 @@ var cors = require('cors');
 var fs = require('fs');
 var {stats_one,stats_query,stats_array_query} = require('./statsService');
 
-module.exports = function (print, errorlog, dbMain, dbCache) { 
+module.exports = function (print, errorlog, dbMain, dbCache, chatlog, nlp_info) { 
   // Express
   const app = express()
   const webport = config.apiServicePort
@@ -131,6 +131,57 @@ module.exports = function (print, errorlog, dbMain, dbCache) {
       res.send(JSON.stringify(rss));
     });
   })
+
+  // FB Service
+  if (config.enableFB) {
+    app.get('/fbapibrock', (req, res) => {
+      print("Facebook: fbapibrock Check");
+      let VERIFY_TOKEN = "BROCK_CHAT_BOT"
+      let mode = req.query['hub.mode'];
+      let token = req.query['hub.verify_token'];
+      let challenge = req.query['hub.challenge'];
+      if (mode && token) {
+        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+          console.log('WEBHOOK_VERIFIED');
+          res.status(200).send(challenge);
+        } else {
+          res.sendStatus(403);      
+        }
+      }
+    });
+    
+    app.post('/fbapibrock', (req, res) => {
+      console.log("fbapibrock");
+        if (config.enableFB) {
+          const fbService = require('./fbService');
+          fbService("brock", print, errorlog, chatlog, nlp_info, dbMain, dbCache, req, res);
+        }
+    });
+    
+    app.get('/fbapigame', (req, res) => {
+      print("Facebook: fbapigame Check");
+      let VERIFY_TOKEN = "GAME_CHAT_BOT"
+      let mode = req.query['hub.mode'];
+      let token = req.query['hub.verify_token'];
+      let challenge = req.query['hub.challenge'];
+      if (mode && token) {
+        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+          console.log('WEBHOOK_VERIFIED');
+          res.status(200).send(challenge);
+        } else {
+          res.sendStatus(403);
+        }
+      }
+    });
+    
+    app.post('/fbapigame', (req, res) => {
+      console.log("fbapigame");
+        if (config.enableFB) {
+          const fbService = require('./fbService');
+          fbService("game", print, errorlog, chatlog, nlp_info, dbMain, dbCache, req, res);
+        }
+    });
+  }
 
   app.listen(webport, () => {
     stats_one(print, errorlog, dbMain, "api/service/start");

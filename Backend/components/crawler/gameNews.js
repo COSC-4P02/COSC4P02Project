@@ -52,15 +52,19 @@ module.exports = function (noFetch, dbMain, dbCache, print, errorlog, result) {
 			const dom = new JSDOM(res.data);
 			const total_array = dom.window.document.querySelectorAll('.articles-feed .w-dyn-item');
 			for (const item of total_array){
+				var image = item.querySelector('.article-wrap .basic-box .basic-wrap .basic-img img').src;
+				if (image === "" || image === "https://global-uploads.webflow.com/"){
+					image = "https://global-uploads.webflow.com/5d655866b2055c7cbb5d79a1/613a52ef7397e002b05fbdd9_37548692796_ec27fc520d_k.jpg";
+				}
 				const data = {
 					'title':item.querySelector('.article-wrap .basic-box .basic-wrap .basic-content .intro-card .title-limit').textContent,
 					'description':item.querySelector('.article-wrap .basic-box .basic-wrap .basic-content .intro-card .para-block .para-card').textContent,
 					'link':"https://www.canadagames.ca" + item.querySelector('.article-wrap .basic-box .basic-wrap .basic-content .mob-card-link').href,
-					'image':item.querySelector('.article-wrap .basic-box .basic-wrap .basic-img img').src
+					'image': image
 				}
 				all_news["items"].push(data);
 			}
-			result(all_news);
+			if(!sent) result(all_news);
 			dbCache.push(db_news_loc, all_news);
 			dbCache.push(db_loc_date, new Date());
 		})

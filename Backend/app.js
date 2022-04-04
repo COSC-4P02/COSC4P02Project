@@ -62,7 +62,7 @@ wsService(print, errorlog, chatlog, nlp_info, dbMain, dbCache);
 
 // Api Service
 const apiService = require('./components/apiService');
-apiService(print, errorlog, dbMain, dbCache);
+apiService(print, errorlog, dbMain, dbCache, chatlog, nlp_info);
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
