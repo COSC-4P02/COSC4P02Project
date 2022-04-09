@@ -78,13 +78,16 @@ conn.onopen = async function () {
 	send('game','What are the COVID-19 restrictions like in Niagara?')
 
 	// News
-	send('console','Covid Question')
+	send('console','News Question')
 	send_full('brock','Brock','news')
+	send('brock','Recent News')
+	send('game','Recent News')
 	
 }
 
 conn.onmessage = async function (evt) {
 	const msg = JSON.parse(evt.data).text;
+	const type = JSON.parse(evt.data).type;
 	if (msg.includes("Sorry")
 		|| msg.includes("sorry")
 		|| msg.includes("won't")
@@ -93,12 +96,18 @@ conn.onmessage = async function (evt) {
 		|| msg.includes("don't know")
 		|| msg.includes("Feeling wonderful!")
 		|| msg.includes("I'm a conversational app")
-		|| msg.includes("I'm a virtual agent")
+		|| msg.includes("virtual agent")
 		|| msg.includes("don't know")
+		|| msg.includes("virtual being")
 		){
 		console.log("%cNot Implemented: "+msg,'background: #c00; color: #fff')
 	}else{
-		console.info("A: "+msg)
+		if (type.includes("text")){
+			console.info("A: "+msg)
+		}else{
+			console.info("A ("+type+"): "+msg)
+		}
+		
 	}
 	lock = false
 }
@@ -183,6 +192,7 @@ async function send_full(version,msg,extra) {
             <ul class="f-header__dropdown">
               <li><a href="https://discord.gg/kSDPxkVh5T" class="f-header__dropdown-link" target="_blank">Discord Channel</a></li>
               <li><a href="https://discord.com/api/oauth2/authorize?client_id=957973848144375868&permissions=8&scope=bot" class="f-header__dropdown-link" target="_blank">Discord Bot</a></li>
+              <li><a href="https://www.facebook.com/Brock-Chat-bot-101894422491148/" class="f-header__dropdown-link" target="_blank">Facebook Messenger</a></li>
             </ul>
           </li>
         </ul>
@@ -197,7 +207,7 @@ async function send_full(version,msg,extra) {
 
 	  <div class="container max-width-sm padding-y-lg">
 	    <div class="article text-component">
-	      <h1>Chatbot-ai Question Test</h1>
+	      <h1>Chatbot-Ai Question Test</h1>
 	      <br>
 	      <h2>How to use:</h2>
 			<ol class="list list--ol">
