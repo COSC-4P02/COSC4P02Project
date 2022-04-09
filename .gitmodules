@@ -1,0 +1,18 @@
+[submodule "pages/Chatbot-Website"]
+	path = pages/Chatbot-Website
+	url = https://github.com/COSC-4P02/Chatbot-Website
+[submodule "App"]
+	path = App
+	url = https://github.com/COSC-4P02/Chatbot-App-Code
+[submodule "pages/Chatbot-App-Frontend-Pages"]
+	path = pages/Chatbot-App-Frontend-Pages
+	url = https://github.com/COSC-4P02/Chatbot-App-Frontend-Pages
+[submodule "pages/Chatbot-Frontend-Pages"]
+	path = pages/Chatbot-Frontend-Pages
+	url = https://github.com/COSC-4P02/Chatbot-Frontend-Pages
+[submodule "pages/Chatbot-Docs-Pages"]
+	path = pages/Chatbot-Docs-Pages
+	url = https://github.com/COSC-4P02/Chatbot-Docs-Pages
+[submodule "pages/Chatbot-Dashboard-Pages"]
+	path = pages/Chatbot-Dashboard-Pages
+	url = https://github.com/COSC-4P02/Chatbot-Dashboard-Pages
