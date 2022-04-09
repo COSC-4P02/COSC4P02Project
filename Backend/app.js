@@ -74,14 +74,14 @@ if (config.enableDiscord) {
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
-let {PythonShell} = require('python-shell')
-PythonShell.run('test/shell.py', null, function (err) {
-  if (err){
-    errorlog('Core: Python is not working correctly')
-    throw err;
-  } 
-  print('Core: PythonShell is working correctly')
-});
+// let {PythonShell} = require('python-shell')
+// PythonShell.run('test/shell.py', null, function (err) {
+//   if (err){
+//     errorlog('Core: Python is not working correctly')
+//     throw err;
+//   } 
+//   print('Core: PythonShell is working correctly')
+// });
 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
