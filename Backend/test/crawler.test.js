@@ -10,13 +10,12 @@ const brockData = require('../components/crawler/brockData');
 
 describe('Brock Data Read Test', () => {
   it('should return a list of courses data', function(done) {
-    brockData(dbTest, print,print,function (data) {
-      if (Object.keys(data).length <= 0 || data == undefined){
-        done(new Error("Error"));
-        return;
-      }
-      done();
-    });
+    var data = brockData();
+    if (Object.keys(data).length <= 0 || data == undefined){
+      done(new Error("Error"));
+      return;
+    }
+    done();
   });
 });
 

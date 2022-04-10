@@ -85,6 +85,7 @@ const brockNewsEngine = require('../components/newsEngine/brockNewsEngine');
 
 describe('Brock News Python Test', () => {
   it('should return notfound when msg is not relevant', function (done) {
+    this.skip();
     if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
       this.skip();
     this.timeout(100000);
@@ -98,6 +99,7 @@ describe('Brock News Python Test', () => {
     });
   });
   it('should return a text when brock is in the news', function(done) {
+    this.skip();
     if (process.env.CI === 'true' && process.env.CIRCLECI === 'true')
       this.skip();
     this.timeout(100000);

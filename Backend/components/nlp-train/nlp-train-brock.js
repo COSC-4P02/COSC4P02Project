@@ -1,7 +1,9 @@
 module.exports = function (manager, say, dbCache, save) { 
+  var json_a_temp;
 
   // Start
   manager.addDocument('en', 'Get Started', 'agent.start');
+  manager.addDocument('en', 'Is anyone available to chat?', 'agent.start');
   manager.addAnswer('en', 'agent.start', "!json-{\"type\":\"button\",\"text\":\"Welcome! Here are some questions you may ask!\",\"disableInput\":false,\"options\":[{\"text\":\"Tell me about Brock\",\"action\":\"postback\"},{\"text\":\"Where is Brock\",\"action\":\"postback\"},{\"text\":\"What is COSC 4P01\",\"action\":\"postback\"},{\"text\":\"COVID in Niagara\",\"action\":\"postback\"}]}");
 
   // Brock About
@@ -23,18 +25,6 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addAnswer('en', 'brock.about.website', '!json-{"type":"button","text":"The website is https://brocku.ca","disableInput":false,"options":[{"text":"Open brocku.ca","value":"https://brocku.ca","action":"url"}]}');
   manager.addAnswer('en', 'brock.about.news', '!json-{"type":"button","text":"Brock News is here, you can simply ask me recent activities","extra":"news","disableInput":false,"options":[{"text":"Visit","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Exit News Search","value":"Exit News Search","action":"postback"}]}');
   manager.addAnswer('en', 'brock.about.dates', '!json-{"type":"button","text":"Brock Important Dates is here","disableInput":false,"options":[{"text":"Visit","value":"https://brocku.ca/important-dates/","action":"url"}]}');
-  
-  // Brock Program
-  manager.addNamedEntityText('brockProgram', 'Computer Science', ['en'], ['CS','Computer Science','ComputerScience','cosc','COSC']);
-  manager.addNamedEntityText('brockProgram', 'Dance', ['en'], ['dance']);
-  manager.addNamedEntityText('brockProgram', 'Accounting', ['en'], ['accounting']);
-  manager.addNamedEntityText('brockProgram', 'Business Accounting', ['en'], ['business accounting']);
-  manager.addDocument('en', 'Tell me about the %brockProgram% Program', 'brock.program');
-  manager.addDocument('en', 'Tell me about the %brockProgram% Program requirements', 'brock.program.req');
-  manager.addDocument('en', 'What is %brockProgram% Program', 'brock.program');
-
-  manager.addAnswer('en', 'brock.program', '!programDes-{{brockProgram}}'); //Des
-  manager.addAnswer('en', 'brock.program.req', '!programReq-{{brockProgram}}');
 
   // Courses Details
   manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
@@ -85,21 +75,68 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addAnswer('en', 'brock.course.exam', '!courseExam-{{brockCourse}}');
   manager.addAnswer('en', 'brock.course.term', '!courseTerm-{{brockCourse}}');
 
+  // Brock Programs
+  const brockPrograms = require('../crawler/brockPrograms');
+  const programs_nlp = brockPrograms();
+  for (var i in programs_nlp){
+    if (programs_nlp[i]=="Krunk") continue;
+    var program = programs_nlp[i].title;
+    const case1 = program.toUpperCase();
+    const case2 = program.toLowerCase();
+    const case3 = program.replace(' ', '');
+    const case4 = program.toLowerCase().replace(' ', '');
+    manager.addDocument('en', case1, 'brock.program.general.'+case4);
+    manager.addDocument('en', case1 + ' program', 'brock.program.general.'+case4);
+    manager.addDocument('en', case2 + ' program', 'brock.program.general.'+case4);
+    manager.addDocument('en', case3 + ' program', 'brock.program.general.'+case4);
+    manager.addDocument('en', case4 + ' program', 'brock.program.general.'+case4);
+    manager.addAnswer('en', 'brock.program.general.'+case4, programs_nlp[i].nlp);
+  }
 
+  manager.addDocument('en', "Brock Program", 'brock.program.general');
+  manager.addDocument('en', "All Programs", 'brock.program.general');
+  manager.addDocument('en', "Programs", 'brock.program.general');
+  json_a_temp = {
+    "type":"button",
+    "text":"As a comprehensive university, Brock has an expansive selection of undergraduate programs as well as advanced research, post-graduate and doctoral options.",
+    "disableInput":false,
+    "options":[{"text":"Programs List","value":"https://brocku.ca/programs/","action":"url"}]
+  }
+  manager.addAnswer('en', 'brock.program.general', "!json-"+JSON.stringify(json_a_temp));
+
+  manager.addDocument('en', "How many Programs", 'brock.program.count');
+  json_a_temp = {
+    "type":"button",
+    "text":"There are total of "+programs_nlp.length+" Programs in Brock University",
+    "disableInput":false,
+    "options":[{"text":"Programs List","value":"https://brocku.ca/programs/","action":"url"}]
+  }
+  manager.addAnswer('en', 'brock.program.count', "!json-"+JSON.stringify(json_a_temp));
+
+  // Course Data
   const brockData = require('../crawler/brockData');
-  brockData(dbCache, say,say,function (data) {
-    for (var key in data) {
-      if (key=="Krunk") continue;
-      var course = key;
-      const courseName1 = course.toUpperCase();
-      const courseName2 = course.toLowerCase();
-      const courseName3 = course.replace('-', ' ');
-      const courseName4 = course.toUpperCase().replace('P', '').replace('F', '');
-      const courseName5 = course.toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
-      const courseName6 = course.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
-      manager.addNamedEntityText('brockCourse', course, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
-    }
-    save(); // Train and save
-  });
+  const brockData_data = brockData();
+  for (var key in brockData_data) {
+    if (key=="Krunk") continue;
+    var course = key;
+    const courseName1 = course.toUpperCase();
+    const courseName2 = course.toLowerCase();
+    const courseName3 = course.replace('-', ' ');
+    const courseName4 = course.toUpperCase().replace('P', '').replace('F', '');
+    const courseName5 = course.toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
+    const courseName6 = course.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+    manager.addNamedEntityText('brockCourse', course, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
+  }
+
+  manager.addDocument('en', "How many Courses", 'brock.course.count');
+  json_a_temp = {
+    "type":"button",
+    "text":"There are total of "+Object.keys(brockData_data).length+" Programs in Brock University",
+    "disableInput":false,
+    "options":[{"text":"Timetables List","value":"https://brocku.ca/guides-and-timetables/timetables/","action":"url"}]
+  }
+  manager.addAnswer('en', 'brock.course.count', "!json-"+JSON.stringify(json_a_temp));
+
+  save(); // Train and save
 
 };
