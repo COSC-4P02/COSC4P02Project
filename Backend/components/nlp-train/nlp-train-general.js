@@ -1,28 +1,33 @@
 module.exports = async function (manager) { 
+  var json_a_temp;
 
-  const csvFilePath='data/train-data/general/parking_info.csv'
-  const csv=require('csvtojson')
+  manager.addDocument('en', 'Where is %parkingLocation%', 'agent.parking');
+  manager.addAnswer('en', 'agent.parking', '');
 
-  var jsonArray=await csv().fromFile(csvFilePath);
-  jsonArray = (JSON.parse(JSON.stringify(jsonArray,1),1))
-
-  for (var i = 0; i < jsonArray.length; i++) {
-    var item = jsonArray[i];
-    //console.log('where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i)
-    manager.addDocument('en', 'where is '+item['parking-lot'].replace('[\'','').replace('\']',''), 'agent.parking.'+i);
-    var closest_building = item['closest_building'];
-    // for (const item in JSON.parse(item.closest_building)[0]){
-    //   closest_building=closest_building+item+', '
-    // }
-    //console.log('It is near '+closest_building+', Type:'+item.type, 'agent.parking.'+i)
-    manager.addAnswer('en', 'agent.parking.'+i, 'It is near '+closest_building+', Type:'+item.type);
-  
+  const fs = require('fs');
+  let all_loc = fs.readFileSync('data/train-data/general/all_loc.json');
+  let all_loc_data = JSON.parse(all_loc);
+  for (var i = 0; i < all_loc_data.length; i++) {
+    if (all_loc_data[i]['category'].includes("parking")){
+      manager.addDocument('en', 'Where is '+all_loc_data[i]['name'], 'agent.parking.'+all_loc_data[i]['name'].toLowerCase().replace(" ",""));
+      manager.addDocument('en', 'Where is '+all_loc_data[i]['name'].toLowerCase().replace(" ",""), 'agent.parking.'+all_loc_data[i]['name'].toLowerCase().replace(" ",""));
+      json_a_temp = {
+        "type":"button",
+        "text": all_loc_data[i]['name']+" is here, you can view it in google maps",
+        "disableInput":false,
+        "options":[{"text":"Google Maps","value":all_loc_data[i]['googlemaps'],"action":"url"}]
+      }
+      manager.addAnswer('en', 'agent.parking.'+all_loc_data[i]['name'].toLowerCase().replace(" ",""), "!json-"+JSON.stringify(json_a_temp));
+    }
   }
 
-  manager.addDocument('en', 'where can i park', 'agent.parking');
-  manager.addDocument('en', 'want to park', 'agent.parking');
+  manager.addDocument('en', 'where can i park', 'agent.park');
+  manager.addDocument('en', 'where can i park my car?', 'agent.park');
+  manager.addDocument('en', 'want to park', 'agent.park');
+  manager.addDocument('en', 'parking infomation', 'agent.park');
+  manager.addDocument('en', 'park my car', 'agent.park');
 
-  manager.addAnswer('en', 'agent.parking', '!json-{"type":"button","text":"You can find parking infomation here","disableInput":false,"options":[{"text":"Location","value":"https://brocku.ca/parking-services/wp-content/uploads/sites/16/Paid-Parking-2021.pdf","action":"url"}]}');
+  manager.addAnswer('en', 'agent.park', '!json-{"type":"button","text":"You can find parking infomation here","disableInput":false,"options":[{"text":"Location","value":"https://brocku.ca/parking-services/wp-content/uploads/sites/16/Paid-Parking-2021.pdf","action":"url"},{"text":"Interactive Campus Map","value":"https://brocku.ca/blogs/campus-map/","action":"url"}]}');
 
   // COVID
   manager.addDocument('en', 'covid-19', 'agent.covid');
@@ -32,18 +37,6 @@ module.exports = async function (manager) {
   manager.addDocument('en', 'What is the covid status', 'agent.covid');
 
   manager.addAnswer('en', 'agent.covid', "!covidNiagara-");
-
-  // Navigation
-  //manager.addNamedEntityText('navLocation', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
-  manager.addNamedEntityText('navLocation', 'Canada Games', ['en'], ['Canada Games','CanadaGames','CG','Canada Game','CanadaGame']);
-  // manager.addRegexEntity('navLocation', 'en', /go to ([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/i;
-  // manager.addRegexEntity('navLocation', 'en', /Where is [([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/i;
-
-  manager.addDocument('en', 'go to %navLocation%', 'agent.navigation');
-  manager.addDocument('en', 'bus take to %navLocation%', 'agent.navigation');
-  manager.addDocument('en', 'Where is %navLocation%', 'agent.navigation');
-
-  manager.addAnswer('en', 'agent.navigation', '!navgation-{{navLocation}}');
 
   // Transit
   manager.addDocument('en', 'What transportation options are available?', 'agent.transit.info');
