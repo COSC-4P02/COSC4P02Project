@@ -2,6 +2,7 @@
 // Return with answer or send by "conn"
 
 const covidNiagara = require('../crawler/covidNiagara');
+const csv=require('csvtojson');
 
 function sendCourseDetails(conn, result_array, number, ignoreifnone){
   var send = {}
@@ -32,6 +33,22 @@ function sendCourseDetails(conn, result_array, number, ignoreifnone){
   conn(JSON.stringify(send));
 }
 
+function checkCourseName(one,two){
+    var inputCourse = one.toLowerCase().replace(' ','').replace('-','').replace('_','').replace('/','');
+    var course1 = two.toLowerCase().replace(' ', '-');
+    const courseName1 = course1.toLowerCase();
+    const courseName3 = course1.toLowerCase().replace('-', '');
+    const courseName4 = course1.toLowerCase().replace('P', '').replace('F', '');
+    const courseName5 = course1.toLowerCase().replace('-', '').replace('P', '').replace('F', '');
+    if (inputCourse == courseName1||
+      inputCourse == courseName3||
+      inputCourse == courseName4||
+      inputCourse == courseName5){
+      return true;
+    }
+    return false;
+}
+
 // Read courses from csv
 function readCourseFromBrockData(conn,param,number, dbCache,print,errorlog, callback){
   var result_array = null;
@@ -41,28 +58,27 @@ function readCourseFromBrockData(conn,param,number, dbCache,print,errorlog, call
   }
 
   const brockData = require('../crawler/brockData');
-  brockData(dbCache, print,errorlog,function (data) {
-    var inputCourse = param.toUpperCase().replace(' ','').replace('-','').replace(' ','').replace('/','')
-    for (var key in data) {
-      var course1 = key.toUpperCase();
-      const courseName1 = course1.toUpperCase();
-      const courseName2 = course1.toLowerCase();
-      const courseName3 = course1.toUpperCase().replace('-', '');
-      const courseName4 = course1.toUpperCase().replace('P', '').replace('F', '');
-      const courseName5 = course1.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
-      const courseName6 = course1.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
-      if (inputCourse == courseName1||
-        inputCourse == courseName2||
-        inputCourse == courseName3||
-        inputCourse == courseName4||
-        inputCourse == courseName5||
-        inputCourse == courseName6){
-        result_array = data[key];
-        break;
-      }
+  const data = brockData();
+  var inputCourse = param.toUpperCase().replace(' ','').replace('-','').replace(' ','').replace('/','')
+  for (var key in data) {
+    var course1 = key.toUpperCase();
+    const courseName1 = course1.toUpperCase();
+    const courseName2 = course1.toLowerCase();
+    const courseName3 = course1.toUpperCase().replace('-', '');
+    const courseName4 = course1.toUpperCase().replace('P', '').replace('F', '');
+    const courseName5 = course1.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+    const courseName6 = course1.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+    if (inputCourse == courseName1||
+      inputCourse == courseName2||
+      inputCourse == courseName3||
+      inputCourse == courseName4||
+      inputCourse == courseName5||
+      inputCourse == courseName6){
+      result_array = data[key];
+      break;
     }
-    callback(result_array);
-  });
+  }
+  callback(result_array);
 }
 
 module.exports = function (obj, answer, conn, dbMain, dbCache, print, errorlog) {
@@ -258,19 +274,33 @@ module.exports = function (obj, answer, conn, dbMain, dbCache, print, errorlog) 
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!courseExam": // Course
-        readCourseFromBrockData(conn,param,2,dbCache,print,errorlog,function (result_array) {
-          if (result_array==null){
-            var send = {
-              'type': 'text',
-              'text': "Can not find info about it",
-              'disableInput': false
+        var csvFilePath='data/train-data/brock/brock-data-exam.csv'
+        var sent = false;
+        csv()
+        .fromFile(csvFilePath)
+        .then((jsonArray)=>{
+          jsonArray = (JSON.parse(JSON.stringify(jsonArray,1),1))
+          for (var i = 0; i < jsonArray.length; i++) {
+            if (checkCourseName(param,jsonArray[i]['Code'])){
+              urlsend = {
+                  'type': 'text',
+                  'text': "Duration "+jsonArray[i]['Duration']+" Section "+jsonArray[i]['Section']+" Exam is on "+jsonArray[i]['Date']+" "+jsonArray[i]['Starts']+"-"+jsonArray[i]['Ends']+" in "+jsonArray[i]['Location'],
+                  'disableInput': false
+              }
+              conn(JSON.stringify(urlsend));
+              sent = true;
             }
-            conn(JSON.stringify(send));
-            console.error("Can not find info - "+param);
-          }else{
-            sendCourseDetails(conn,result_array,"examinfo")
           }
-        });
+          if (!sent){
+            urlsend = {
+              'type': 'button',
+              'text': param + " does not appear to have an exam, you can access the exam timetable here",
+              'disableInput': false,
+              'options': [{"text":"Timetables List","value":"https://brocku.ca/guides-and-timetables/timetables/?session=fw&type=ex&level=all","action":"url"}]
+            }
+            conn(JSON.stringify(urlsend));
+          }
+        })
         return "!ignore";
         
 // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～

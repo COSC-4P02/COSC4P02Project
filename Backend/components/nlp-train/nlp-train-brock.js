@@ -1,4 +1,5 @@
 module.exports = function (manager, say, dbCache, save) { 
+  var json_a_temp;
 
   // Start
   manager.addDocument('en', 'Get Started', 'agent.start');
@@ -95,7 +96,7 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addDocument('en', "Brock Program", 'brock.program.general');
   manager.addDocument('en', "All Programs", 'brock.program.general');
   manager.addDocument('en', "Programs", 'brock.program.general');
-  var json_a_temp = {
+  json_a_temp = {
     "type":"button",
     "text":"As a comprehensive university, Brock has an expansive selection of undergraduate programs as well as advanced research, post-graduate and doctoral options.",
     "disableInput":false,
@@ -103,21 +104,39 @@ module.exports = function (manager, say, dbCache, save) {
   }
   manager.addAnswer('en', 'brock.program.general', "!json-"+JSON.stringify(json_a_temp));
 
+  manager.addDocument('en', "How many Programs", 'brock.program.count');
+  json_a_temp = {
+    "type":"button",
+    "text":"There are total of "+programs_nlp.length+" Programs in Brock University",
+    "disableInput":false,
+    "options":[{"text":"Programs List","value":"https://brocku.ca/programs/","action":"url"}]
+  }
+  manager.addAnswer('en', 'brock.program.count', "!json-"+JSON.stringify(json_a_temp));
 
+  // Course Data
   const brockData = require('../crawler/brockData');
-  brockData(dbCache, say,say,function (data) {
-    for (var key in data) {
-      if (key=="Krunk") continue;
-      var course = key;
-      const courseName1 = course.toUpperCase();
-      const courseName2 = course.toLowerCase();
-      const courseName3 = course.replace('-', ' ');
-      const courseName4 = course.toUpperCase().replace('P', '').replace('F', '');
-      const courseName5 = course.toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
-      const courseName6 = course.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
-      manager.addNamedEntityText('brockCourse', course, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
-    }
-    save(); // Train and save
-  });
+  const brockData_data = brockData();
+  for (var key in brockData_data) {
+    if (key=="Krunk") continue;
+    var course = key;
+    const courseName1 = course.toUpperCase();
+    const courseName2 = course.toLowerCase();
+    const courseName3 = course.replace('-', ' ');
+    const courseName4 = course.toUpperCase().replace('P', '').replace('F', '');
+    const courseName5 = course.toUpperCase().replace('-', ' ').replace('P', '').replace('F', '');
+    const courseName6 = course.toUpperCase().replace('-', '').replace('P', '').replace('F', '');
+    manager.addNamedEntityText('brockCourse', course, ['en'], [courseName1,courseName2,courseName3,courseName4,courseName5,courseName6]);
+  }
+
+  manager.addDocument('en', "How many Courses", 'brock.course.count');
+  json_a_temp = {
+    "type":"button",
+    "text":"There are total of "+Object.keys(brockData_data).length+" Programs in Brock University",
+    "disableInput":false,
+    "options":[{"text":"Timetables List","value":"https://brocku.ca/guides-and-timetables/timetables/","action":"url"}]
+  }
+  manager.addAnswer('en', 'brock.course.count', "!json-"+JSON.stringify(json_a_temp));
+
+  save(); // Train and save
 
 };

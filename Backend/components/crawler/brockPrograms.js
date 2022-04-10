@@ -6,6 +6,6 @@ module.exports = function () {
 
 	let rawdata = fs.readFileSync('data/train-data/brock/all_programs.json');
 	let brockPrograms = JSON.parse(rawdata);
-	return(brockPrograms);
+	return (brockPrograms);
 
 }
