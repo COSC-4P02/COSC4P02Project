@@ -174,7 +174,7 @@ driver.close()
 
 
 thread_pool = []
-num_threads = 20
+num_threads = 4
 for i in range(num_threads):
     p = Thread(target=thread_func, args=(person_url, i))
     p.start()
