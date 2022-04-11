@@ -149,6 +149,7 @@ def thread_func(urls, thread_id):
         #         line += game
         #         line += '"'
         #         line += ','
+        #         
 
         #  # get previous games
         # if 'txtPrevGames' in data_cell.get_attribute("innerHTML"): # check existance before find
@@ -218,7 +219,7 @@ driver.close()
 
 
 thread_pool = []
-num_threads = 4
+num_threads = 20
 for i in range(num_threads):
     p = Thread(target=thread_func, args=(person_url, i))
     p.start()
