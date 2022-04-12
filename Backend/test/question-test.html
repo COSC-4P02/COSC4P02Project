@@ -1,228 +1,348 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script>document.getElementsByTagName("html")[0].className += " js";</script>
-	<link rel="stylesheet" href="https://api-frame.krunk.cn/main/assets/css/style.min.css">
-	<title>Chatbot Question Test</title>
-<script>
-var conn = new WebSocket("wss://127.0.0.1:8001")
-var lock = false;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      document.getElementsByTagName("html")[0].className += " js";
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://api-frame.krunk.cn/main/assets/css/style.min.css"
+    />
+    <title>Chatbot Question Test</title>
+    <script>
+      var conn = new WebSocket("wss://127.0.0.1:8001");
+      var lock = false;
 
-//conn.send('{"type":"text","version":"brock","agent":"user","extra":"","msg":"hi"}');
+      //conn.send('{"type":"text","version":"brock","agent":"user","extra":"","msg":"hi"}');
 
-conn.onopen = async function () {
-	console.log("Connection Opened")
+      conn.onopen = async function () {
+        console.log("Connection Opened");
 
-	// Brock Question
-	send('console','Brock Question')
+        // Brock Question
+        send("console", "Brock Question");
 
-	send('brock','Tell me about the MATH 1P02 exam')
-	send('brock','What time is the MATH 1P06 exam')
-	send('brock','Where is the COSC 4P02 exam')
-	send('brock','Tell me about COSC 4P02')
-	send('brock','What term is COSC 4P02')
-	send('brock','Who teaches COSC 4P02')
-	send('brock','What are the lab options for COSC 4P02')
-	send('brock','What are the Prerequisites for COSC 1P02')
-	send('brock','What are the Prerequisites for COSC 1P03')
-	send('brock','Tell me about the Computer Science Program')
-	send('brock','Tell me about the Accounting Program')
-	send('brock','Tell me about the Accounting Program requirements')
-	send('brock','Tell me about the Business Accounting Program requirements')
-	send('brock','What is the Brock University Website')
-	send('brock','What’s new at Brock University')
-	send('brock','Tell me about Brock University')
-	send('brock','Tell me about Brock University Important Dates')
-	
-	send('brock','Where can I park my car?');
+        send("brock", "Tell me about the MATH 1P02 exam");
+        send("brock", "What time is the MATH 1P06 exam");
+        send("brock", "Where is the COSC 4P02 exam");
+        send("brock", "Tell me about COSC 4P02");
+        send("brock", "What term is COSC 4P02");
+        send("brock", "Who teaches COSC 4P02");
+        send("brock", "What are the lab options for COSC 4P02");
+        send("brock", "What are the Prerequisites for COSC 1P02");
+        send("brock", "What are the Prerequisites for COSC 1P03");
+        send("brock", "Tell me about the Computer Science Program");
+        send("brock", "Tell me about the Accounting Program");
+        send("brock", "Tell me about the Accounting Program requirements");
+        send(
+          "brock",
+          "Tell me about the Business Accounting Program requirements"
+        );
+        send("brock", "What is the Brock University Website");
+        send("brock", "What’s new at Brock University");
+        send("brock", "Tell me about Brock University");
+        send("brock", "Tell me about Brock University Important Dates");
 
-	// Canada Game Question
-	send('console','Canada Game Question')
+        send("brock", "Where can I park my car?");
 
-	send('game','What is the Canada Games Website')
-	send('game','How Long until the Canada Games Starts')
-	send('game','Whats new with the Canada Games')
-	send('game','Where is the Canada Games')
-	send('game','Tell me about Sidney Crosby')
-	send('game','Tell me about Sidney Corrigan')
-	send('game','What sport did Sidney Corrigan play')
-	send('game','How many medals does Ontario have?')
-	send('game','How many medals does Quebec have?')
-	send('game','How many silver medals does New Brunswick have?')
-	send('game','When is the next Badminton Game?')
-	send('game','When is the next Archery Game?')
-	send('game','When is the next Archery Game that Ontario plays in?')
-	send('game','Where can I buy tickets?')
-	
-	// Transportation  Question
-	send('console','Transportation Question')
+        // Canada Game Question
+        send("console", "Canada Game Question");
 
-	send('brock','What transportation options are available?')
-	send('brock','Is there an app for the buses?')
-	send('brock','What can you do in the Niagara region?')
-	send('brock','Where can you stay in the Niagara region?')
+        send("game", "What is the Canada Games Website");
+        send("game", "How Long until the Canada Games Starts");
+        send("game", "Whats new with the Canada Games");
+        send("game", "Where is the Canada Games");
+        send("game", "Tell me about Sidney Crosby");
+        send("game", "Tell me about Sidney Corrigan");
+        send("game", "What sport did Sidney Corrigan play");
+        send("game", "How many medals does Ontario have?");
+        send("game", "How many medals does Quebec have?");
+        send("game", "How many silver medals does New Brunswick have?");
+        send("game", "When is the next Badminton Game?");
+        send("game", "When is the next Archery Game?");
+        send("game", "When is the next Archery Game that Ontario plays in?");
+        send("game", "Where can I buy tickets?");
 
-	// Other Question
-	send('console','Other Question')
+        // Transportation  Question
+        send("console", "Transportation Question");
 
-	send('brock','Hello');
-	send('brock','Get Started');
-	send('game','Get Started');
+        send("brock", "What transportation options are available?");
+        send("brock", "Is there an app for the buses?");
+        send("brock", "What can you do in the Niagara region?");
+        send("brock", "Where can you stay in the Niagara region?");
 
-	// Covid  Question
-	send('console','Covid Question')
+        // Other Question
+        send("console", "Other Question");
 
-	send('brock','Covid news at Brock University')
-	send('game','What are the COVID-19 restrictions like in Niagara?')
+        send("brock", "Hello");
+        send("brock", "Get Started");
+        send("game", "Get Started");
 
-	// News
-	send('console','News Question')
-	send_full('brock','Brock','news')
-	send('brock','Recent News')
-	send('game','Recent News')
-	
-}
+        // Covid  Question
+        send("console", "Covid Question");
 
-conn.onmessage = async function (evt) {
-	const msg = JSON.parse(evt.data).text;
-	const type = JSON.parse(evt.data).type;
-	if (msg.includes("Sorry")
-		|| msg.includes("sorry")
-		|| msg.includes("won't")
-		|| msg.includes("Still under development...")
-		|| msg.includes("not sure")
-		|| msg.includes("don't know")
-		|| msg.includes("Feeling wonderful!")
-		|| msg.includes("I'm a conversational app")
-		|| msg.includes("virtual agent")
-		|| msg.includes("don't know")
-		|| msg.includes("virtual being")
-		){
-		console.log("%cNot Implemented: "+msg,'background: #c00; color: #fff')
-	}else{
-		if (type.includes("text")){
-			console.info("A: "+msg)
-		}else{
-			console.info("A ("+type+"): "+msg)
-		}
-		
-	}
-	lock = false
-}
+        send("brock", "Covid news at Brock University");
+        send("game", "What are the COVID-19 restrictions like in Niagara?");
 
-conn.onerror = function () {
-	console.error("Error")
-}
+        // News
+        send("console", "News Question");
+        send_full("brock", "Brock", "news");
+        send("brock", "Recent News");
+        send("game", "Recent News");
+      };
 
-conn.onclose = function () {
-	console.log("Connection Closed")
-}
+      conn.onmessage = async function (evt) {
+        const msg = JSON.parse(evt.data).text;
+        const type = JSON.parse(evt.data).type;
+        if (
+          msg.includes("Sorry") ||
+          msg.includes("sorry") ||
+          msg.includes("won't") ||
+          msg.includes("Still under development...") ||
+          msg.includes("not sure") ||
+          msg.includes("don't know") ||
+          msg.includes("Feeling wonderful!") ||
+          msg.includes("I'm a conversational app") ||
+          msg.includes("virtual agent") ||
+          msg.includes("don't know") ||
+          msg.includes("virtual being")
+        ) {
+          console.log(
+            "%cNot Implemented: " + msg,
+            "background: #c00; color: #fff"
+          );
+        } else {
+          if (type.includes("text")) {
+            console.info("A: " + msg);
+          } else {
+            console.info("A (" + type + "): " + msg);
+          }
+        }
+        lock = false;
+      };
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+      conn.onerror = function () {
+        console.error("Error");
+      };
 
-async function send(version,msg) {
-    send_full(version,msg,'');
-}
+      conn.onclose = function () {
+        console.log("Connection Closed");
+      };
 
-async function send_full(version,msg,extra) {
-    while(lock) {
-        await sleep(50);
-    }
-    if (version == "console"){
-    	console.log('%c\n'+msg,'background: #222; color: #bada55');
-    	return;
-    }
-    sent = ('{"type":"text","version":"'+version+'","agent":"user","extra":"'+extra+'","msg":"'+msg+'"}');
-    lock = true;
-    conn.send(sent);
-    console.log("%cQ: "+msg,'background: #222; color: #73deff');
-}
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
 
-</script>
-</head>
+      async function send(version, msg) {
+        send_full(version, msg, "");
+      }
 
-<body>
-	<header class="f-header js-f-header position-relative">
-    <div class="f-header__mobile-content container max-width-lg">
-      <a href="/" class="f-header__logo">
-        <img src="https://app.chatbot-ai.ga/images/logo.webp" width="40px">
-      </a>
+      async function send_full(version, msg, extra) {
+        while (lock) {
+          await sleep(50);
+        }
+        if (version == "console") {
+          console.log("%c\n" + msg, "background: #222; color: #bada55");
+          return;
+        }
+        sent =
+          '{"type":"text","version":"' +
+          version +
+          '","agent":"user","extra":"' +
+          extra +
+          '","msg":"' +
+          msg +
+          '"}';
+        lock = true;
+        conn.send(sent);
+        console.log("%cQ: " + msg, "background: #222; color: #73deff");
+      }
+    </script>
+  </head>
 
-      <button class="reset anim-menu-btn js-anim-menu-btn f-header__nav-control js-tab-focus" aria-label="Toggle menu">
-        <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
-      </button>
-    </div>
+  <body>
+    <header class="f-header js-f-header position-relative">
+      <div class="f-header__mobile-content container max-width-lg">
+        <a href="/" class="f-header__logo">
+          <img src="https://chatbot-ai.ga/images/logo.webp" width="40px" />
+        </a>
 
-    <div class="f-header__nav" role="navigation">
-      <div class="f-header__nav-grid justify-between@md container max-width-lg">
-        <div class="f-header__nav-logo-wrapper flex-grow flex-basis-0">
-          <a href="/" class="f-header__logo">
-            <img src="https://app.chatbot-ai.ga/images/logo.webp" width="50px">
-          </a>
+        <button
+          class="reset anim-menu-btn js-anim-menu-btn f-header__nav-control js-tab-focus"
+          aria-label="Toggle menu"
+        >
+          <i
+            class="anim-menu-btn__icon anim-menu-btn__icon--close"
+            aria-hidden="true"
+          ></i>
+        </button>
+      </div>
+
+      <div class="f-header__nav" role="navigation">
+        <div
+          class="f-header__nav-grid justify-between@md container max-width-lg"
+        >
+          <div class="f-header__nav-logo-wrapper flex-grow flex-basis-0">
+            <a href="/" class="f-header__logo">
+              <img src="https://chatbot-ai.ga/images/logo.webp" width="50px" />
+            </a>
+          </div>
+
+          <ul class="f-header__list flex-grow flex-basis-0 justify-center@md">
+            <li class="f-header__item">
+              <a href="https://chatbot-ai.ga" class="f-header__link">Home</a>
+            </li>
+            <li class="f-header__item">
+              <button
+                class="reset f-header__dropdown-control js-f-header__dropdown-control"
+              >
+                <span>Chatbot</span>
+                <svg
+                  class="f-header__dropdown-icon icon"
+                  aria-hidden="true"
+                  viewBox="0 0 12 12"
+                >
+                  <path
+                    d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z"
+                  />
+                </svg>
+              </button>
+
+              <ul class="f-header__dropdown">
+                <li>
+                  <a
+                    href="https://web.chatbot-ai.ga/?bot=brock"
+                    class="f-header__dropdown-link"
+                    target="_blank"
+                    >Brock University</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://web.chatbot-ai.ga/?bot=game"
+                    class="f-header__dropdown-link"
+                    target="_blank"
+                    >Canada Games 2022</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="f-header__item">
+              <a href="https://app.chatbot-ai.ga" class="f-header__link">App</a>
+            </li>
+            <li class="f-header__item">
+              <a
+                href="https://app.chatbot-ai.ga/privacy.html"
+                class="f-header__link"
+                >TOS</a
+              >
+            </li>
+            <li class="f-header__item">
+              <a
+                href="https://docs.chatbot-ai.ga"
+                class="f-header__link"
+                target="_blank"
+                >Docs</a
+              >
+            </li>
+            <li class="f-header__item">
+              <button
+                class="reset f-header__dropdown-control js-f-header__dropdown-control"
+              >
+                <span>Social</span>
+                <svg
+                  class="f-header__dropdown-icon icon"
+                  aria-hidden="true"
+                  viewBox="0 0 12 12"
+                >
+                  <path
+                    d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z"
+                  />
+                </svg>
+              </button>
+
+              <ul class="f-header__dropdown">
+                <li>
+                  <a
+                    href="https://discord.gg/kSDPxkVh5T"
+                    class="f-header__dropdown-link"
+                    target="_blank"
+                    >Discord Channel</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://discord.com/api/oauth2/authorize?client_id=957973848144375868&permissions=8&scope=bot"
+                    class="f-header__dropdown-link"
+                    target="_blank"
+                    >Discord Bot</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.facebook.com/Brock-Chat-bot-101894422491148/"
+                    class="f-header__dropdown-link"
+                    target="_blank"
+                    >Facebook Messenger</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
+            <li class="f-header__item">
+              <a
+                href="http://github.com/COSC-4P02/COSC4P02Project"
+                class="f-header__link"
+                target="_blank"
+                >Github</a
+              >
+            </li>
+            <li class="f-header__item">
+              <a
+                href="https://app.chatbot-ai.ga"
+                class="f-header__btn btn btn--primary"
+                >Download Now</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
+    </header>
 
-        <ul class="f-header__list flex-grow flex-basis-0 justify-center@md">
-          <li class="f-header__item"><a href="https://chatbot-ai.ga" class="f-header__link">Home</a></li>
-          <li class="f-header__item"><button class="reset f-header__dropdown-control js-f-header__dropdown-control">
-              <span>Chatbot</span>
-              <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
-                <path d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z" />
-              </svg>
-            </button>
-
-            <ul class="f-header__dropdown">
-              <li><a href="https://web.chatbot-ai.ga/?bot=brock" class="f-header__dropdown-link" target="_blank">Brock University</a></li>
-              <li><a href="https://web.chatbot-ai.ga/?bot=game" class="f-header__dropdown-link" target="_blank">Canada Games 2022</a></li>
-            </ul>
+    <div class="container max-width-sm padding-y-lg">
+      <div class="article text-component">
+        <h1>Chatbot-Ai Question Test</h1>
+        <br />
+        <h2>How to use:</h2>
+        <ol class="list list--ol">
+          <li>Open Web Console</li>
+          <li>npm run serve</li>
+          <li>
+            Access "<a href="https://127.0.0.1:8001" target="_blank"
+              >https://127.0.0.1:8001</a
+            >" in another tab. The browser should alert you about security,
+            since the certificate is self-signed
           </li>
-          <li class="f-header__item"><a href="https://app.chatbot-ai.ga" class="f-header__link">App</a></li>
-          <li class="f-header__item"><a href="https://app.chatbot-ai.ga/privacy.html" class="f-header__link">TOS</a></li>
-          <li class="f-header__item"><a href="https://docs.chatbot-ai.ga" class="f-header__link" target="_blank">Docs</a></li>
-          <li class="f-header__item"><button class="reset f-header__dropdown-control js-f-header__dropdown-control">
-              <span>Social</span>
-              <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
-                <path d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z" />
-              </svg>
-            </button>
+          <li>Accept security exception</li>
+          <li>Reload this page</li>
+        </ol>
 
-            <ul class="f-header__dropdown">
-              <li><a href="https://discord.gg/kSDPxkVh5T" class="f-header__dropdown-link" target="_blank">Discord Channel</a></li>
-              <li><a href="https://discord.com/api/oauth2/authorize?client_id=957973848144375868&permissions=8&scope=bot" class="f-header__dropdown-link" target="_blank">Discord Bot</a></li>
-              <li><a href="https://www.facebook.com/Brock-Chat-bot-101894422491148/" class="f-header__dropdown-link" target="_blank">Facebook Messenger</a></li>
-            </ul>
-          </li>
-        </ul>
-
-        <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
-          <li class="f-header__item"><a href="http://github.com/COSC-4P02/COSC4P02Project" class="f-header__link" target="_blank">Github</a></li>
-          <li class="f-header__item"><a href="https://app.chatbot-ai.ga" class="f-header__btn btn btn--primary">Download Now</a></li>
-        </ul>
+        <h2>Documentation</h2>
+        <p>
+          For further help,
+          <a
+            href="http://docs.chatbot-ai.ga"
+            target="_blank"
+            rel="noopener nofollow"
+            >check the documentation</a
+          >.
+        </p>
       </div>
     </div>
-  </header>
 
-	  <div class="container max-width-sm padding-y-lg">
-	    <div class="article text-component">
-	      <h1>Chatbot-Ai Question Test</h1>
-	      <br>
-	      <h2>How to use:</h2>
-			<ol class="list list--ol">
-				<li>Open Web Console</li>
-				<li>npm run serve</li>
-				<li>Access "<a href="https://127.0.0.1:8001" target="_blank">https://127.0.0.1:8001</a>" in another tab. The browser should alert you about security, since the certificate is self-signed</li>
-				<li>Accept security exception</li>
-				<li>Reload this page</li>
-			</ol>
-
-	      <h2>Documentation</h2>
-	      <p>For further help, <a href="http://docs.chatbot-ai.ga" target="_blank" rel="noopener nofollow">check the documentation</a>.</p>
-	    </div>
-	  </div>
-	
-	<script src="https://api-frame.krunk.cn/main/assets/js/scripts.min.js"></script>
-</body>
+    <script src="https://api-frame.krunk.cn/main/assets/js/scripts.min.js"></script>
+  </body>
 </html>

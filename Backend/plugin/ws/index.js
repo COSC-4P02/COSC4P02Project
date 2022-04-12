@@ -1,10 +1,10 @@
-'use strict'
+"use strict";
 
-var Server = require('./Server'),
-	Connection = require('./Connection'),
-	net = require('net'),
-	tls = require('tls'),
-	url = require('url')
+var Server = require("./Server"),
+  Connection = require("./Connection"),
+  net = require("net"),
+  tls = require("tls"),
+  url = require("url");
 
 /**
  * Create a WebSocket server
@@ -13,11 +13,11 @@ var Server = require('./Server'),
  * @returns {Server}
  */
 exports.createServer = function (options, callback) {
-	if (typeof options === 'function' || !arguments.length) {
-		return new Server(false, options)
-	}
-	return new Server(Boolean(options.secure), options, callback)
-}
+  if (typeof options === "function" || !arguments.length) {
+    return new Server(false, options);
+  }
+  return new Server(Boolean(options.secure), options, callback);
+};
 
 /**
  * Create a WebSocket client
@@ -27,45 +27,45 @@ exports.createServer = function (options, callback) {
  * @returns {Connection}
  */
 exports.connect = function (URL, options, callback) {
-	var socket
+  var socket;
 
-	if (typeof options === 'function') {
-		callback = options
-		options = undefined
-	}
-	options = options || {}
+  if (typeof options === "function") {
+    callback = options;
+    options = undefined;
+  }
+  options = options || {};
 
-	var connectionOptions = parseWSURL(URL)
-	options.port = connectionOptions.port
-	options.host = connectionOptions.host
+  var connectionOptions = parseWSURL(URL);
+  options.port = connectionOptions.port;
+  options.host = connectionOptions.host;
 
-	connectionOptions.extraHeaders = options.extraHeaders
-	connectionOptions.protocols = options.protocols
+  connectionOptions.extraHeaders = options.extraHeaders;
+  connectionOptions.protocols = options.protocols;
 
-	if (connectionOptions.secure) {
-		socket = tls.connect(options)
-	} else {
-		socket = net.connect(options)
-	}
+  if (connectionOptions.secure) {
+    socket = tls.connect(options);
+  } else {
+    socket = net.connect(options);
+  }
 
-	return new Connection(socket, connectionOptions, callback)
-}
+  return new Connection(socket, connectionOptions, callback);
+};
 
 /**
  * Set the minimum size of a pack of binary data to send in a single frame
  * @param {number} bytes
  */
 exports.setBinaryFragmentation = function (bytes) {
-	Connection.binaryFragmentation = bytes
-}
+  Connection.binaryFragmentation = bytes;
+};
 
 /**
  * Set the maximum size the internal Buffer can grow, to avoid memory attacks
  * @param {number} bytes
  */
 exports.setMaxBufferLength = function (bytes) {
-	Connection.maxBufferLength = bytes
-}
+  Connection.maxBufferLength = bytes;
+};
 
 /**
  * Parse the WebSocket URL
@@ -74,26 +74,28 @@ exports.setMaxBufferLength = function (bytes) {
  * @private
  */
 function parseWSURL(URL) {
-	var parts, secure
+  var parts, secure;
 
-	parts = url.parse(URL)
+  parts = url.parse(URL);
 
-	parts.protocol = parts.protocol || 'ws:'
-	if (parts.protocol === 'ws:') {
-		secure = false
-	} else if (parts.protocol === 'wss:') {
-		secure = true
-	} else {
-		throw new Error('Invalid protocol ' + parts.protocol + '. It must be ws or wss')
-	}
+  parts.protocol = parts.protocol || "ws:";
+  if (parts.protocol === "ws:") {
+    secure = false;
+  } else if (parts.protocol === "wss:") {
+    secure = true;
+  } else {
+    throw new Error(
+      "Invalid protocol " + parts.protocol + ". It must be ws or wss"
+    );
+  }
 
-	parts.port = parts.port || (secure ? 443 : 80)
-	parts.path = parts.path || '/'
+  parts.port = parts.port || (secure ? 443 : 80);
+  parts.path = parts.path || "/";
 
-	return {
-		path: parts.path,
-		port: parts.port,
-		secure: secure,
-		host: parts.hostname
-	}
+  return {
+    path: parts.path,
+    port: parts.port,
+    secure: secure,
+    host: parts.hostname,
+  };
 }

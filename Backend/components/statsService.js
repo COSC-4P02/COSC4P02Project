@@ -1,63 +1,63 @@
 // stats_one(print, errorlog, dbMain, "chat/pdf");
 function stats_one(print, errorlog, dbMain, db_stats) {
-  db_stats = "/stats/"+db_stats
-  try{
+  db_stats = "/stats/" + db_stats;
+  try {
     var db_stats_data = dbMain.getData(db_stats);
-    if (db_stats_data >= 0){
-      dbMain.push(db_stats, db_stats_data+1);
-    }else{
+    if (db_stats_data >= 0) {
+      dbMain.push(db_stats, db_stats_data + 1);
+    } else {
       dbMain.push(db_stats, 1);
     }
-  }catch(e){
+  } catch (e) {
     dbMain.push(db_stats, 1);
   }
 }
 
 function stats_query(print, errorlog, dbMain, db_stats) {
-  db_stats = "/stats/"+db_stats
-  try{
+  db_stats = "/stats/" + db_stats;
+  try {
     var db_stats_data = dbMain.getData(db_stats);
-    if (db_stats_data >= 0){
+    if (db_stats_data >= 0) {
       return db_stats_data;
-    }else{
+    } else {
       return 0;
     }
-  }catch(e){
+  } catch (e) {
     return "None";
   }
 }
 
 function stats_array_query(print, errorlog, dbMain, db_stats) {
-  db_stats = "/stats_array/"+db_stats
-  try{
+  db_stats = "/stats_array/" + db_stats;
+  try {
     var db_stats_data = dbMain.getData(db_stats);
     return JSON.stringify(db_stats_data);
-  }catch(e){
+  } catch (e) {
     return "{}";
   }
 }
 
 function stats_array_append(print, errorlog, dbMain, db_stats, data) {
-  db_stats = "/stats_array/"+db_stats
+  db_stats = "/stats_array/" + db_stats;
   var db_stats_data = {};
-  try{
+  try {
     db_stats_data = dbMain.getData(db_stats);
-    if (db_stats_data[data]>=0) {
-      db_stats_data[data] = db_stats_data[data] + 1
-    }else{
-      db_stats_data[data] = 1
+    if (db_stats_data[data] >= 0) {
+      db_stats_data[data] = db_stats_data[data] + 1;
+    } else {
+      db_stats_data[data] = 1;
     }
     dbMain.push(db_stats, db_stats_data);
-  }catch(e){
+  } catch (e) {
     db_stats_data = {};
-    db_stats_data[data] = 1
+    db_stats_data[data] = 1;
     dbMain.push(db_stats, db_stats_data);
   }
 }
 
 module.exports = {
-    stats_one,
-    stats_query,
-    stats_array_append,
-    stats_array_query
-}
+  stats_one,
+  stats_query,
+  stats_array_append,
+  stats_array_query,
+};

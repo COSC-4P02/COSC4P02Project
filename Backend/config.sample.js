@@ -7,8 +7,7 @@ config.WebSocketPort = 8001;
 config.apiServicePort = 3000;
 
 // Api Service CORS
-config.corsAllowedOrigins = ['http://localhost:1901',
-                        'http://localhost:3010'];
+config.corsAllowedOrigins = ["http://localhost:1901", "http://localhost:3010"];
 
 // SSL Cert
 config.wsKey = "cert/key.pem";
@@ -36,18 +35,18 @@ config.discordGame = "";
 // Faceebook Bot Config
 config.enableFB = 0;
 config.FB_brock = {
-    pageID:"",
-    appID:"",
-    appSecret:"",
-    validationToken:"",
-    pageToken:""
+  pageID: "",
+  appID: "",
+  appSecret: "",
+  validationToken: "",
+  pageToken: "",
 };
 config.FB_game = {
-    pageID:"",
-    appID:"",
-    appSecret:"",
-    validationToken:"",
-    pageToken:""
+  pageID: "",
+  appID: "",
+  appSecret: "",
+  validationToken: "",
+  pageToken: "",
 };
 
 module.exports = config;

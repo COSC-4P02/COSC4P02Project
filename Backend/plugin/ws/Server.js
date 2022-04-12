@@ -1,15 +1,15 @@
 /**
  * @file Represents a websocket server
  */
-'use strict'
+"use strict";
 
 function nop() {}
 
-var util = require('util'),
-	net = require('net'),
-	tls = require('tls'),
-	events = require('events'),
-	Connection
+var util = require("util"),
+  net = require("net"),
+  tls = require("tls"),
+  events = require("events"),
+  Connection;
 
 /**
  * @callback SelectProtocolCallback
@@ -33,70 +33,70 @@ var util = require('util'),
  * @event connection a Connection object is passed
  */
 function Server(secure, options, callback) {
-	var that = this
+  var that = this;
 
-	if (typeof options === 'function') {
-		callback = options
-		options = undefined
-	}
+  if (typeof options === "function") {
+    callback = options;
+    options = undefined;
+  }
 
-	var onConnection = function (socket) {
-		var conn = new Connection(socket, that, function () {
-			that.connections.push(conn)
-			conn.removeListener('error', nop)
-			that.emit('connection', conn)
-		})
-		conn.on('close', function () {
-			var pos = that.connections.indexOf(conn)
-			if (pos !== -1) {
-				that.connections.splice(pos, 1)
-			}
-		})
+  var onConnection = function (socket) {
+    var conn = new Connection(socket, that, function () {
+      that.connections.push(conn);
+      conn.removeListener("error", nop);
+      that.emit("connection", conn);
+    });
+    conn.on("close", function () {
+      var pos = that.connections.indexOf(conn);
+      if (pos !== -1) {
+        that.connections.splice(pos, 1);
+      }
+    });
 
-		// Ignore errors before the connection is established
-		conn.on('error', nop)
-	}
+    // Ignore errors before the connection is established
+    conn.on("error", nop);
+  };
 
-	if (secure) {
-		this.socket = tls.createServer(options, onConnection)
-	} else {
-		this.socket = net.createServer(options, onConnection)
-	}
+  if (secure) {
+    this.socket = tls.createServer(options, onConnection);
+  } else {
+    this.socket = net.createServer(options, onConnection);
+  }
 
-	this.socket.on('close', function () {
-		that.emit('close')
-	})
-	this.socket.on('error', function (err) {
-		that.emit('error', err)
-	})
-	this.connections = []
+  this.socket.on("close", function () {
+    that.emit("close");
+  });
+  this.socket.on("error", function (err) {
+    that.emit("error", err);
+  });
+  this.connections = [];
 
-	// super constructor
-	events.EventEmitter.call(this)
-	if (callback) {
-		this.on('connection', callback)
-	}
+  // super constructor
+  events.EventEmitter.call(this);
+  if (callback) {
+    this.on("connection", callback);
+  }
 
-	// Add protocol agreement handling
-	/**
-	 * @member {?SelectProtocolCallback}
-	 * @private
-	 */
-	this._selectProtocol = null
+  // Add protocol agreement handling
+  /**
+   * @member {?SelectProtocolCallback}
+   * @private
+   */
+  this._selectProtocol = null;
 
-	if (options && options.selectProtocol) {
-		// User-provided logic
-		this._selectProtocol = options.selectProtocol
-	} else if (options && options.validProtocols) {
-		// Default logic
-		this._selectProtocol = this._buildSelectProtocol(options.validProtocols)
-	}
+  if (options && options.selectProtocol) {
+    // User-provided logic
+    this._selectProtocol = options.selectProtocol;
+  } else if (options && options.validProtocols) {
+    // Default logic
+    this._selectProtocol = this._buildSelectProtocol(options.validProtocols);
+  }
 }
 
-util.inherits(Server, events.EventEmitter)
-module.exports = Server
+util.inherits(Server, events.EventEmitter);
+module.exports = Server;
 
-Connection = require('./Connection')
+Connection = require("./Connection");
 
 /**
  * Start listening for connections
@@ -105,23 +105,23 @@ Connection = require('./Connection')
  * @param {Function} [callback] will be added as "connection" listener
  */
 Server.prototype.listen = function (port, host, callback) {
-	var that = this
+  var that = this;
 
-	if (typeof host === 'function') {
-		callback = host
-		host = undefined
-	}
+  if (typeof host === "function") {
+    callback = host;
+    host = undefined;
+  }
 
-	if (callback) {
-		this.on('listening', callback)
-	}
+  if (callback) {
+    this.on("listening", callback);
+  }
 
-	this.socket.listen(port, host, function () {
-		that.emit('listening')
-	})
+  this.socket.listen(port, host, function () {
+    that.emit("listening");
+  });
 
-	return this
-}
+  return this;
+};
 
 /**
  * Stops the server from accepting new connections and keeps existing connections.
@@ -130,11 +130,11 @@ Server.prototype.listen = function (port, host, callback) {
  * @param {function()} [callback]
  */
 Server.prototype.close = function (callback) {
-	if (callback) {
-		this.once('close', callback)
-	}
-	this.socket.close()
-}
+  if (callback) {
+    this.once("close", callback);
+  }
+  this.socket.close();
+};
 
 /**
  * Create a resolver to pick the client's most preferred protocol the server recognises
@@ -143,16 +143,16 @@ Server.prototype.close = function (callback) {
  * @private
  */
 Server.prototype._buildSelectProtocol = function (validProtocols) {
-	return function (conn, protocols) {
-		var i
+  return function (conn, protocols) {
+    var i;
 
-		for (i = 0; i < protocols.length; i++) {
-			if (validProtocols.indexOf(protocols[i]) !== -1) {
-				// A valid protocol was found
-				return protocols[i]
-			}
-		}
+    for (i = 0; i < protocols.length; i++) {
+      if (validProtocols.indexOf(protocols[i]) !== -1) {
+        // A valid protocol was found
+        return protocols[i];
+      }
+    }
 
-		// No agreement
-	}
-}
+    // No agreement
+  };
+};

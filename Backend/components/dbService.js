@@ -1,9 +1,9 @@
-var config = require('../config');
+var config = require("../config");
 
-const { JsonDB } = require ('node-json-db');
-const { Config } = require ('node-json-db/dist/lib/JsonDBConfig.js');
-var dbMain = new JsonDB(new Config(config.databaseLocMain, true, false, '/'));
-var dbCache = new JsonDB(new Config(config.databaseLocCache, true, false, '/'));
+const { JsonDB } = require("node-json-db");
+const { Config } = require("node-json-db/dist/lib/JsonDBConfig.js");
+var dbMain = new JsonDB(new Config(config.databaseLocMain, true, false, "/"));
+var dbCache = new JsonDB(new Config(config.databaseLocCache, true, false, "/"));
 dbMain.push("/creator", "Krunk");
 dbCache.push("/creator", "Krunk");
 dbMain.push("/runtime", new Date());

@@ -68,7 +68,6 @@ module.exports = function (manager, say, dbCache, save) {
             "disableInput":false,
             "options":[{"text":"View Online","value":cg_result_data[i]['links'],"action":"url"}]
         }
-        console.log(cg_result_data[i]['name'])
         manager.addAnswer('en', 'game.medal.'+cg_result_data[i]['name'].toLowerCase().replace(" ",""), "!json-"+JSON.stringify(json_a_temp));
 
 
@@ -79,7 +78,6 @@ module.exports = function (manager, say, dbCache, save) {
             "disableInput":false,
             "options":[{"text":"View Online","value":cg_result_data[i]['links'],"action":"url"}]
         }
-        console.log(cg_result_data[i]['name'])
         manager.addAnswer('en', 'game.medal.gold.'+cg_result_data[i]['name'].toLowerCase().replace(" ",""), "!json-"+JSON.stringify(json_a_temp));
 
         manager.addDocument('en', 'silver medals '+cg_result_data[i]['name']+" have", 'game.medal.silver.'+cg_result_data[i]['name'].toLowerCase().replace(" ",""));
@@ -89,7 +87,6 @@ module.exports = function (manager, say, dbCache, save) {
             "disableInput":false,
             "options":[{"text":"View Online","value":cg_result_data[i]['links'],"action":"url"}]
         }
-        console.log(cg_result_data[i]['name'])
         manager.addAnswer('en', 'game.medal.silver.'+cg_result_data[i]['name'].toLowerCase().replace(" ",""), "!json-"+JSON.stringify(json_a_temp));
 
         manager.addDocument('en', 'bronze medals '+cg_result_data[i]['name']+" have", 'game.medal.bronze.'+cg_result_data[i]['name'].toLowerCase().replace(" ",""));
@@ -99,7 +96,6 @@ module.exports = function (manager, say, dbCache, save) {
             "disableInput":false,
             "options":[{"text":"View Online","value":cg_result_data[i]['links'],"action":"url"}]
         }
-        console.log(cg_result_data[i]['name'])
         manager.addAnswer('en', 'game.medal.bronze.'+cg_result_data[i]['name'].toLowerCase().replace(" ",""), "!json-"+JSON.stringify(json_a_temp));
     }
     
