@@ -31,6 +31,9 @@ def thread_func(urls, thread_id):
 
         line = ""
         data_cell = driver.find_element_by_id('ctl00_tdDataCell')
+        
+        #get links
+        line += '"' + url + '",'
 
         # get name
         line += '"'
@@ -73,7 +76,7 @@ def thread_func(urls, thread_id):
         line += ","
 
         #get the age
-        line += ""
+        line += '"'
         if 'txtAge' in data_cell.get_attribute("innerHTML"): # check existance before find
              agE_element = driver.find_element_by_id('txtAge')
              line += agE_element.text
@@ -81,7 +84,7 @@ def thread_func(urls, thread_id):
         line += ","
 
          #get the height
-        line += ""
+        line += '"'
         if 'txtHeight' in data_cell.get_attribute("innerHTML"): # check existance before find
              heighT_element = driver.find_element_by_id('txtHeight')
              line += heighT_element.text
@@ -89,14 +92,14 @@ def thread_func(urls, thread_id):
         line += ","
 
          #get the weight
-        line += ""
+        line += '"'
         if 'txtWeight' in data_cell.get_attribute("innerHTML"): # check existance before find
              weighT_element = driver.find_element_by_id('txtWeight')
              line += weighT_element.text
         line += '"'
         line += ","
 
-        line += ""
+        line += '"'
         if 'ctlRecent_ctlRecent1_Year' in data_cell.get_attribute("innerHTML"): # check existance before find
              recent1Y_element = driver.find_element_by_id('ctlRecent_ctlRecent1_Year')
              line += recent1Y_element.text
@@ -104,35 +107,35 @@ def thread_func(urls, thread_id):
         line += ","
 
 
-        line += ""
+        line += '"'
         if 'ctlRecent_ctlRecent1_Game' in data_cell.get_attribute("innerHTML"): # check existance before find
              recent1G_element = driver.find_element_by_id('ctlRecent_ctlRecent1_Game')
              line += recent1G_element.text
         line += '"'
         line += ","
 
-        line += ""
+        line += '"'
         if 'ctlRecent_ctlRecent2_Year' in data_cell.get_attribute("innerHTML"): # check existance before find
              recent2Y_element = driver.find_element_by_id('ctlRecent_ctlRecent2_Year')
              line += recent2Y_element.text
         line += '"'
         line += ","
 
-        line += ""
+        line += '"'
         if 'ctlRecent_ctlRecent2_Game' in data_cell.get_attribute("innerHTML"): # check existance before find
              recent2G_element = driver.find_element_by_id('ctlRecent_ctlRecent2_Game')
              line += recent2G_element.text
         line += '"'
         line += ","
 
-        line += ""
+        line += '"'
         if 'ctlRecent_ctlRecent3_Year' in data_cell.get_attribute("innerHTML"): # check existance before find
              recent3Y_element = driver.find_element_by_id('ctlRecent_ctlRecent3_Year')
              line += recent3Y_element.text
         line += '"'
         line += ","
 
-        line += ""
+        line += '"'
         if 'ctlRecent_ctlRecent3_Game' in data_cell.get_attribute("innerHTML"): # check existance before find
              recent3G_element = driver.find_element_by_id('ctlRecent_ctlRecent3_Game')
              line += recent3G_element.text
