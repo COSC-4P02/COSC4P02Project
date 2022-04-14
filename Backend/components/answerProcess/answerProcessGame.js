@@ -196,6 +196,149 @@ module.exports = function (
 
       // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
+      case "!athletesInfo": //
+        var query_name = param;
+        var i;
+        var database_url =
+          "https://cg2015.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA";
+
+        var csvFilePath = "data/train-data/game/2015version.csv";
+        var csv = require("csvtojson");
+        var Fuse = require("fuse.js");
+        csv()
+          .fromFile(csvFilePath)
+          .then((jsonArray) => {
+            const fuse = new Fuse(jsonArray, {
+              keys: ["name"],
+            });
+            var result = fuse.search(query_name)[0]["item"];
+
+            if (!result) {
+              urlsend = {
+                type: "button",
+                text: "This player does not exist in 2015 Canada Games Database, you may find him/her in the following links",
+                disableInput: false,
+                options: [
+                  {
+                    text: "2015 Canada Games Database",
+                    value: database_url,
+                    action: "url",
+                  },
+                  {
+                    text: "2019 Canada Games Database",
+                    value:
+                      "https://cgc.gems.pro/AlumCgc/Alumni/FindAlumni_List.aspx",
+                    action: "url",
+                  },
+                  {
+                    text: "2022 Canada Games Database",
+                    value: "https://cg2022.gems.pro/default.aspx",
+                    action: "url",
+                  },
+                ],
+              };
+              conn(JSON.stringify(urlsend));
+              return;
+            }
+
+            urlsend = {
+              type: "text",
+              text:
+                "Found: " +
+                result.name +
+                ", Data is based on 2015 Canada Games Database",
+              disableInput: false,
+            };
+            conn(JSON.stringify(urlsend));
+
+            var birthday = 2015 - parseInt(result["age"].replace('"', ""));
+            var hometown = result["hometown"];
+            var sport = result["sport"];
+            var all_game_played = [];
+
+            var url = result["url"];
+            if (url == "") {
+              url = database_url;
+            }
+
+            for (i = 4; i > 0; i--) {
+              var tag = "PrevousGame" + i;
+              if (
+                result[tag].toLowerCase() != "" &&
+                result[tag].toLowerCase() != "n/a" &&
+                result[tag].toLowerCase() != "none" &&
+                result[tag].toLowerCase() != "none." &&
+                result[tag].toLowerCase() != "/" &&
+                result[tag].toLowerCase() != "0"
+              ) {
+                all_game_played.push(result["PrevousGame" + i]);
+              }
+            }
+
+            if (all_game_played.length > 0) {
+              answer =
+                result.name +
+                " was born in " +
+                hometown +
+                " in " +
+                birthday +
+                " and play " +
+                sport +
+                " in ";
+              for (i = all_game_played.length - 1; i >= 0; i--) {
+                answer += all_game_played[i];
+                if (i > 0) {
+                  answer += ", ";
+                }
+              }
+              answer += ".";
+            } else {
+              answer =
+                result.name +
+                " was born in " +
+                hometown +
+                " in " +
+                birthday +
+                " and play " +
+                sport +
+                " in games.";
+            }
+
+            urlsend = {
+              type: "button",
+              text: answer,
+              disableInput: false,
+              options: [
+                {
+                  text: "More Athletes Info",
+                  value: url,
+                  action: "url",
+                },
+                {
+                  text: "2015 Canada Games Database",
+                  value: database_url,
+                  action: "url",
+                },
+                {
+                  text: "2019 Canada Games Database",
+                  value:
+                    "https://cgc.gems.pro/AlumCgc/Alumni/FindAlumni_List.aspx",
+                  action: "url",
+                },
+                {
+                  text: "2022 Canada Games Database",
+                  value: "https://cg2022.gems.pro/default.aspx",
+                  action: "url",
+                },
+              ],
+            };
+            conn(JSON.stringify(urlsend));
+          });
+
+        return "!ignore";
+
+      // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
       case "!json":
         return "!json";
 

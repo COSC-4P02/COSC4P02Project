@@ -1,5 +1,7 @@
-module.exports = function (manager, say, dbCache, save) { 
-    var json_a_temp;
+const csv = require("csvtojson");
+
+module.exports = async function (manager, say, dbCache, save) { 
+    var json_a_temp, i, jsonArray;
 
     // Start
     manager.addDocument('en', 'Get Started', 'agent.start');
@@ -55,7 +57,7 @@ module.exports = function (manager, say, dbCache, save) {
     const fs = require('fs');
     let cg_result = fs.readFileSync('data/train-data/game/cg_result.json');
     let cg_result_data = JSON.parse(cg_result);
-    for (var i = 0; i < cg_result_data.length; i++) {
+    for (i = 0; i < cg_result_data.length; i++) {
         var gold = parseInt(cg_result_data[i]['summergames']['gold'])+parseInt(cg_result_data[i]['wintergames']['gold'])
         var silver = parseInt(cg_result_data[i]['summergames']['silver'])+parseInt(cg_result_data[i]['wintergames']['silver'])
         var bronze = parseInt(cg_result_data[i]['summergames']['bronze'])+parseInt(cg_result_data[i]['wintergames']['bronze'])
@@ -98,6 +100,32 @@ module.exports = function (manager, say, dbCache, save) {
         }
         manager.addAnswer('en', 'game.medal.bronze.'+cg_result_data[i]['name'].toLowerCase().replace(" ",""), "!json-"+JSON.stringify(json_a_temp));
     }
+
+    // Athletes
+    manager.addDocument('en', 'Tell me about the %athletes%', 'game.athletes.info');
+    manager.addDocument('en', 'Who is %athletes%', 'game.athletes.info');
+    manager.addDocument('en', '%athletes%', 'game.athletes.info');
+    manager.addDocument('en', 'What sport did %athletes% play', 'game.athletes.info');
+    manager.addDocument('en', 'How many players', 'game.athletes.count');
+    manager.addDocument('en', 'How many athletes', 'game.athletes.count');
+
+    manager.addAnswer('en', 'game.athletes.info', '!athletesInfo-{{athletes}}');
+
+    var csvFilePath = "data/train-data/game/2015version.csv";
+    jsonArray=await csv().fromFile(csvFilePath);
+    jsonArray = JSON.parse(JSON.stringify(jsonArray, 1), 1);
     
+    for (i = 0; i < jsonArray.length; i++) {
+        var name = jsonArray[i]['name'];
+        const name1 = name.toUpperCase();
+        const name2 = name.toLowerCase();
+        const name3 = name.toLowerCase().replace(' ', '');
+        const name4 = name.toLowerCase().replace(',', '');
+
+        manager.addNamedEntityText('athletes', name, ['en'], [name1,name2,name3,name4]);
+    }
+    manager.addNamedEntityText('athletes', "Sidney Crosby", ['en'], ["Sidney Crosby"]);
+    manager.addAnswer('en', 'game.athletes.count', jsonArray.length+" Players in 2015 Canada Games Database.");
+
     save();
 };

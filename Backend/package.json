@@ -32,6 +32,7 @@
     "escodegen": "^2.0.0",
     "express": "^4.17.2",
     "fast-xml-parser": "^3.19.0",
+    "fuse.js": "^6.5.3",
     "jsdom": "^19.0.0",
     "jsdom-no-css": "^15.1.1",
     "kuromoji": "^0.1.2",

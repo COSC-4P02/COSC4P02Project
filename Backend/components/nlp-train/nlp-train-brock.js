@@ -93,7 +93,6 @@ module.exports = function (manager, say, dbCache, save) {
     manager.addAnswer('en', 'brock.program.general.'+case4, programs_nlp[i].nlp);
   }
 
-  manager.addDocument('en', "Brock Program", 'brock.program.general');
   manager.addDocument('en', "All Programs", 'brock.program.general');
   manager.addDocument('en', "Programs", 'brock.program.general');
   json_a_temp = {

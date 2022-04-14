@@ -372,7 +372,7 @@ module.exports = function (
 
       // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
-      case "!courseExam": // Course
+      case "!courseExam": // Course Exam
         var csvFilePath = "data/train-data/brock/brock-data-exam.csv";
         var sent = false;
         csv()
