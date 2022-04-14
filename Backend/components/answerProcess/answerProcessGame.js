@@ -2,6 +2,8 @@
 // Return with answer or send by "conn"
 
 const covidNiagara = require("../crawler/covidNiagara");
+const fs = require("fs");
+const Fuse = require("fuse.js");
 
 module.exports = function (
   obj,
@@ -18,6 +20,11 @@ module.exports = function (
 
     temp = (" " + answer).slice(1);
     const param = temp.substr(temp.indexOf("-") + 1, temp.length - 1); // eslint-disable-line
+
+    var second = 1000;
+    var minute = second * 60;
+    var hour = minute * 60;
+    var day = hour * 24;
 
     switch (control) {
       // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
@@ -108,10 +115,6 @@ module.exports = function (
       // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!gameCountdown": //
-        var second = 1000;
-        var minute = second * 60;
-        var hour = minute * 60;
-        var day = hour * 24;
         var countDown = new Date("Aug 06, 2022 00:00:00").getTime();
 
         var now = new Date().getTime(),
@@ -204,7 +207,6 @@ module.exports = function (
 
         var csvFilePath = "data/train-data/game/2015version.csv";
         var csv = require("csvtojson");
-        var Fuse = require("fuse.js");
         csv()
           .fromFile(csvFilePath)
           .then((jsonArray) => {
@@ -238,7 +240,7 @@ module.exports = function (
                 ],
               };
               conn(JSON.stringify(urlsend));
-              return;
+              return "!ignore";
             }
 
             urlsend = {
@@ -334,7 +336,67 @@ module.exports = function (
             };
             conn(JSON.stringify(urlsend));
           });
+        return "!ignore";
 
+      // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+      case "!sportsSchedule": //
+        var cg_schedule = fs.readFileSync(
+          "data/train-data/game/cg_schedule.json"
+        );
+        var cg_schedule_array = JSON.parse(cg_schedule);
+        var fuse = new Fuse(cg_schedule_array, {
+          keys: ["title"],
+        });
+        var search = fuse.search(param);
+        if (search.length <= 0) {
+          urlsend = {
+            type: "button",
+            text: "This sport does not exist in 2022 Canada Games, you may find all sports schedules in the following links",
+            disableInput: false,
+            options: [
+              {
+                text: "cg2022 Schedules",
+                value:
+                  "https://cg2022.gems.pro/Result/Sport_List.aspx?SetLanguage=en-CA",
+                action: "url",
+              },
+            ],
+          };
+          conn(JSON.stringify(urlsend));
+          return "!ignore";
+        }
+        var s = search[0]["item"];
+        var sport = s["time"];
+        var name = s["title"];
+        for (i = 0; i < sport.length; i++) {
+          var now1 = new Date().getTime();
+          var time = new Date(sport[i][0]).getTime();
+          var distance1 = time - now1;
+          var remain_days = Math.floor(distance1 / day);
+          if (remain_days >= 0) {
+            urlsend = {
+              type: "button",
+              text: "The next " + name + " game will be on " + sport[i][0],
+              disableInput: false,
+              options: [
+                {
+                  text: name + " Schedule",
+                  value: sport[i][1],
+                  action: "url",
+                },
+                {
+                  text: "All Schedules",
+                  value:
+                    "https://cg2022.gems.pro/Result/Sport_List.aspx?SetLanguage=en-CA",
+                  action: "url",
+                },
+              ],
+            };
+            conn(JSON.stringify(urlsend));
+            break;
+          }
+        }
         return "!ignore";
 
       // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～

@@ -1,10 +1,12 @@
 const csv = require("csvtojson");
+const fs = require('fs');
 
 module.exports = async function (manager, say, dbCache, save) { 
     var json_a_temp, i, jsonArray;
 
     // Start
     manager.addDocument('en', 'Get Started', 'agent.start');
+    manager.addDocument('en', 'Is anyone available to chat?', 'agent.start');
     json_a_temp = {
             "type":"button",
             "text": "Welcome! Here are some questions you may ask!",
@@ -54,7 +56,6 @@ module.exports = async function (manager, say, dbCache, save) {
     manager.addAnswer('en', 'game.about.location', '!json-{"type":"button","text":"The Niagara 2022 Canada Summer Games is taking place in Ontario\'s Niagara Region","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://www.google.com/maps/place/43°06\'57.3%22N+79°14\'40.7%22W/@43.115902,-79.246143,17z/data=!3m1!4b1!4m14!1m7!3m6!1s0x0:0xe37525e6516e34c9!2zNDPCsDA4JzIxLjAiTiA3OcKwMTQnMDEuOCJX!3b1!8m2!3d43.1391743!4d-79.2338363!3m5!1s0x0:0x2b8900f2cfaa8a23!7e2!8m2!3d43.115902!4d-79.2446335","action":"url"}]}');
 
     // Medals
-    const fs = require('fs');
     let cg_result = fs.readFileSync('data/train-data/game/cg_result.json');
     let cg_result_data = JSON.parse(cg_result);
     for (i = 0; i < cg_result_data.length; i++) {
@@ -107,7 +108,6 @@ module.exports = async function (manager, say, dbCache, save) {
     manager.addDocument('en', '%athletes%', 'game.athletes.info');
     manager.addDocument('en', 'What sport did %athletes% play', 'game.athletes.info');
     manager.addDocument('en', 'How many players', 'game.athletes.count');
-    manager.addDocument('en', 'How many athletes', 'game.athletes.count');
 
     manager.addAnswer('en', 'game.athletes.info', '!athletesInfo-{{athletes}}');
 
@@ -116,16 +116,35 @@ module.exports = async function (manager, say, dbCache, save) {
     jsonArray = JSON.parse(JSON.stringify(jsonArray, 1), 1);
     
     for (i = 0; i < jsonArray.length; i++) {
-        var name = jsonArray[i]['name'];
+        const name = jsonArray[i]['name'];
         const name1 = name.toUpperCase();
         const name2 = name.toLowerCase();
         const name3 = name.toLowerCase().replace(' ', '');
         const name4 = name.toLowerCase().replace(',', '');
-
         manager.addNamedEntityText('athletes', name, ['en'], [name1,name2,name3,name4]);
     }
     manager.addNamedEntityText('athletes', "Sidney Crosby", ['en'], ["Sidney Crosby"]);
     manager.addAnswer('en', 'game.athletes.count', jsonArray.length+" Players in 2015 Canada Games Database.");
+
+    // Schedule
+    manager.addDocument('en', 'Tell me about the %sports%', 'game.sports.next');
+    manager.addDocument('en', 'When is the next %sports% Game', 'game.sports.next');
+    manager.addDocument('en', 'When %sports%', 'game.sports.next');
+    manager.addDocument('en', 'When is the next %sports% Game that ontario plays in?', 'game.sports.next');
+
+    manager.addAnswer('en', 'game.sports.next', '!sportsSchedule-{{sports}}');
+
+    let cg_schedule = fs.readFileSync("data/train-data/game/cg_schedule.json");
+    let cg_schedule_array = JSON.parse(cg_schedule);
+    
+    for (i = 0; i < cg_schedule_array.length; i++) {
+        const name = cg_schedule_array[i]['title'];
+        const name1 = name.toUpperCase();
+        const name2 = name.toLowerCase();
+        const name3 = name.toLowerCase().replace(' ', '');
+        const name4 = name.toLowerCase().replace(',', '');
+        manager.addNamedEntityText('sports', name, ['en'], [name1,name2,name3,name4]);
+    }
 
     save();
 };

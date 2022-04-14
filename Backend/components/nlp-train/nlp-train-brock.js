@@ -4,7 +4,20 @@ module.exports = function (manager, say, dbCache, save) {
   // Start
   manager.addDocument('en', 'Get Started', 'agent.start');
   manager.addDocument('en', 'Is anyone available to chat?', 'agent.start');
-  manager.addAnswer('en', 'agent.start', "!json-{\"type\":\"button\",\"text\":\"Welcome! Here are some questions you may ask!\",\"disableInput\":false,\"options\":[{\"text\":\"Tell me about Brock\",\"action\":\"postback\"},{\"text\":\"Where is Brock\",\"action\":\"postback\"},{\"text\":\"What is COSC 4P01\",\"action\":\"postback\"},{\"text\":\"COVID in Niagara\",\"action\":\"postback\"}]}");
+  json_a_temp = {
+    "type":"button",
+    "text": "Welcome! Here are some questions you may ask!",
+    "disableInput":false,
+    "options":[
+      {"text":"Tell me about Brock","action":"postback"},
+      {"text":"Where is Brock","action":"postback"},
+      {"text":"What is COSC 4P01","action":"postback"},
+      {"text":"COVID in Niagara","action":"postback"},
+      {"text":"Tell me about the Accounting Program","action":"postback"},
+      {"text":"Where is Zone 1","action":"postback"}
+    ]
+  }
+  manager.addAnswer('en', 'agent.start', "!json-"+JSON.stringify(json_a_temp));
 
   // Brock About
   manager.addNamedEntityText('brocku', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
@@ -23,7 +36,7 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addAnswer('en', 'brock.about.des', '!json-{"type":"button","text":"Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.","disableInput":false,"options":[{"text":"About","value":"https://brocku.ca/about/","action":"url"},{"text":"Homepage","value":"https://brocku.ca/","action":"url"},{"text":"News","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}');
   manager.addAnswer('en', 'brock.about.location', '!json-{"type":"button","text":"You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}'); //Location
   manager.addAnswer('en', 'brock.about.website', '!json-{"type":"button","text":"The website is https://brocku.ca","disableInput":false,"options":[{"text":"Open brocku.ca","value":"https://brocku.ca","action":"url"}]}');
-  manager.addAnswer('en', 'brock.about.news', '!json-{"type":"button","text":"Brock News is here, you can simply ask me recent activities","extra":"news","disableInput":false,"options":[{"text":"Visit","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Exit News Search","value":"Exit News Search","action":"postback"}]}');
+  manager.addAnswer('en', 'brock.about.news', '!json-{"type":"button","text":"You can now simply ask me about Brock News","extra":"news","disableInput":false,"options":[{"text":"Visit","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Exit News Search","value":"Exit News Search","action":"postback"}]}');
   manager.addAnswer('en', 'brock.about.dates', '!json-{"type":"button","text":"Brock Important Dates is here","disableInput":false,"options":[{"text":"Visit","value":"https://brocku.ca/important-dates/","action":"url"}]}');
 
   // Courses Details
