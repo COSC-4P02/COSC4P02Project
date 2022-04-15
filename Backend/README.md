@@ -34,6 +34,15 @@ docker pull krunk/chatbot-ai-backend
 docker run -d --name chatbot-ai-backend -p 8001:8001 -p 3000:3000 -v $(pwd)/chatbot-ai-backend/data:/usr/src/app/data krunk/chatbot-ai-backend
 ```
 
+> Continuous Deployment: Watch for Docker Hub
+
+```bash
+docker run -d \
+--name watchtower \
+-v /var/run/docker.sock:/var/run/docker.sock \
+containrrr/watchtower -i 60
+```
+
 ### Run Tests
 
 ```bash
