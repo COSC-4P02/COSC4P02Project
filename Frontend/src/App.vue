@@ -85,7 +85,7 @@ export default {
                 this.messageData.push({
                   agent: 'bot',
                   type: 'text',
-                  text: 'Chat Log Generate complete'
+                  text: 'Chat Log Generate Complete'
                 })
               })
             .catch(error => {
@@ -101,9 +101,9 @@ export default {
           this.messageData.push({
             agent: 'bot',
             type: 'button',
-            text: 'Looks like you needs some help',
+            text: 'Looks like you need some helps',
             options: [ { text: 'Get Started', action: 'postback' },
-              { text: 'Read ChatBot Document', value: 'http://doc.krunk.cn/docs/post-2/page-9', action: 'url' },
+              { text: 'Read ChatBot Document', value: 'https://docs.chatbot-ai.ga/guide/getting-started.html', action: 'url' },
               { text: 'Open Source Code', value: 'https://github.com/COSC-4P02/COSC4P02Project', action: 'url' } ]
           })
           break
@@ -145,15 +145,21 @@ export default {
     // Connection open
     handleWsOpen (e) {
       // First message after socket open
+      var name
+      if (this.version === 'brock') {
+        name = 'Brock University'
+      } else if (this.version === 'game') {
+        name = 'Canada Games'
+      }
       this.botTyping = true
       setTimeout(() => {
         this.botTyping = false
         this.messageData.push({
           agent: 'bot',
           type: 'button',
-          text: 'Hello There, what can I do for you?',
+          text: 'Hi there! I hope you\'re having a great day! How could I assist you today?',
           options: [ { text: 'Get Started', action: 'postback' },
-            { text: 'About Brock University', action: 'postback' } ]
+            { text: 'About ' + name, action: 'postback' } ]
         })
       }, 200)
     },
