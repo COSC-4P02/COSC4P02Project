@@ -1,4 +1,4 @@
-var config = require("../config");
+var config = require("../data/config");
 var { stats_one, stats_array_append } = require("./statsService");
 var request = require("request");
 

@@ -205,7 +205,7 @@ module.exports = function (
         var database_url =
           "https://cg2015.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA";
 
-        var csvFilePath = "data/train-data/game/2015version.csv";
+        var csvFilePath = "train-data/game/2015version.csv";
         var csv = require("csvtojson");
         csv()
           .fromFile(csvFilePath)
@@ -341,9 +341,7 @@ module.exports = function (
       // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
       case "!sportsSchedule": //
-        var cg_schedule = fs.readFileSync(
-          "data/train-data/game/cg_schedule.json"
-        );
+        var cg_schedule = fs.readFileSync("train-data/game/cg_schedule.json");
         var cg_schedule_array = JSON.parse(cg_schedule);
         var fuse = new Fuse(cg_schedule_array, {
           keys: ["title"],

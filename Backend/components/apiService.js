@@ -1,4 +1,4 @@
-var config = require("../config");
+var config = require("../data/config");
 const express = require("express");
 var cors = require("cors");
 var fs = require("fs");

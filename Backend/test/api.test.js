@@ -1,6 +1,9 @@
 const assert = require("assert");
 var http = require("http");
 
+const init = require("../components/dataInit");
+init();
+
 // Test DB
 const { JsonDB } = require("node-json-db");
 const { Config } = require("node-json-db/dist/lib/JsonDBConfig.js");

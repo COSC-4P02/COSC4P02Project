@@ -5,7 +5,7 @@ module.exports = async function (manager) {
   manager.addAnswer('en', 'agent.parking', '');
 
   const fs = require('fs');
-  let all_loc = fs.readFileSync('data/train-data/general/all_loc.json');
+  let all_loc = fs.readFileSync('train-data/general/all_loc.json');
   let all_loc_data = JSON.parse(all_loc);
   for (var i = 0; i < all_loc_data.length; i++) {
     if (all_loc_data[i]['category'].includes("parking")){
@@ -61,6 +61,14 @@ module.exports = async function (manager) {
   manager.addAnswer('en', 'agent.localArea.do', '!json-{"type":"button","text":"The Niagara Falls Tourism website provided here has information about what you can see and do in the region.","disableInput":false,"options":[{"text":"Niagara Falls Tourism","value":"https://www.niagarafallstourism.com/niagara-region/","action":"url"}]}');
   manager.addAnswer('en', 'agent.localArea.stay', '!json-{"type":"button","text":"The Niagara Falls Tourism website provided here has information about accommodations in the Niagara Region.","disableInput":false,"options":[{"text":"Niagara Falls Tourism","value":"https://www.niagarafallstourism.com/niagara-region/","action":"url"},{"text":"Google Maps","value":"https://www.google.ca/maps/search/niagara+region+hotel/@43.1375653,-79.2561342,12.13z","action":"url"}]}');
 
+  // Strange Questions
+  manager.addDocument('en', 'easter egg', 'agent.strange.easteregg');
+  manager.addAnswer('en', 'agent.strange.easteregg', 'Sorry, we did not prepare easter egg for you');
+  manager.addDocument('en', 'exit', 'agent.strange.exit');
+  manager.addAnswer('en', 'agent.strange.exit', 'You can simply close this page, have a nice day!');
+  manager.addDocument('en', 'Feeling wonderful', 'user.excited');
+  manager.addDocument('en', 'I am your father', 'agent.strange.father');
+  manager.addAnswer('en', 'agent.strange.father', 'I am sure you are not!');
 
   // Gereral
   manager.addDocument('en', 'say about you', 'agent.acquaintance');
@@ -337,6 +345,8 @@ module.exports = async function (manager) {
   manager.addDocument('en', 'bye for now', 'greetings.bye');
   manager.addDocument('en', 'i must go', 'greetings.bye');
   manager.addDocument('en', 'hello', 'greetings.hello');
+  manager.addDocument('en', 'helo', 'greetings.hello');
+  manager.addDocument('en', 'hye', 'greetings.hello');
   manager.addDocument('en', 'nihao', 'greetings.hello');
   manager.addDocument('en', 'hi', 'greetings.hello');
   manager.addDocument('en', 'howdy', 'greetings.hello');

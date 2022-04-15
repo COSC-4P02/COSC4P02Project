@@ -57,6 +57,9 @@ module.exports = function (
   errorlog,
   result
 ) {
+  // Using reverse proxy to solve SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION
+  const kapi_news_url = "https://api2.krunk.cn/chatbotai-api/brock-news.php";
+
   var sent = false;
 
   if (type === "rss") {
@@ -92,11 +95,11 @@ module.exports = function (
       }
     }
 
-    parse("https://brocku.ca/brock-news/feed/").then((rss) => {
+    parse(kapi_news_url + "?type=rss").then((rss) => {
       if (rss.title != "failed") {
         var endpoints = [];
         for (const item of rss.items) {
-          const link = item.link;
+          const link = kapi_news_url + "?type=url&url=" + item.link;
           endpoints.push(link);
         }
 
@@ -124,122 +127,129 @@ module.exports = function (
           });
       } else {
         errorlog("Crawler: Brock News RSS Read Error");
+        console.log(rss);
         errorlog(JSON.stringify(rss, null, 3));
         rss = rss_cache;
         if (!sent) result(rss);
       }
     });
-  } else if (type === "all") {
-    stats_one(print, errorlog, dbMain, "api/crawler/brockNews");
+    // }
+    // else if (type === "all") {
+    //   stats_one(print, errorlog, dbMain, "api/crawler/brockNews");
 
-    const db_news_loc = "/crawler/data/brock/news_all";
+    //   const db_news_loc = "/crawler/data/brock/news_all";
 
-    try {
-      var all_news_cache = dbCache.getData(db_news_loc);
-      if (all_news_cache.length > 0 || all_news_cache.title != "failed") {
-        print("Crawler: Brock News All Read from database");
-        result(all_news_cache);
-        sent = true;
-      }
-    } catch (e) {
-      print("Crawler: No data from cache database - " + db_news_loc);
-    }
+    //   try {
+    //     var all_news_cache = dbCache.getData(db_news_loc);
+    //     if (all_news_cache.length > 0 || all_news_cache.title != "failed") {
+    //       print("Crawler: Brock News All Read from database");
+    //       result(all_news_cache);
+    //       sent = true;
+    //     }
+    //   } catch (e) {
+    //     print("Crawler: No data from cache database - " + db_news_loc);
+    //   }
 
-    if (sent && noFetch) return;
+    //   if (sent && noFetch) return;
 
-    axios
-      .get("https://brocku.ca/brock-news/category/news/")
-      .then(function (response) {
-        const dom = new JSDOM(response.data);
-        const total_array =
-          dom.window.document.querySelectorAll(".page-numbers");
-        var largest_page = 0;
-        for (const item of total_array) {
-          if (
-            !isNaN(parseInt(item.textContent, 10)) &&
-            parseInt(item.textContent, 10) > largest_page
-          ) {
-            largest_page = parseInt(item.textContent, 10);
-          }
-        }
-        //console.log(largest_page);
+    //   axios
+    //     .get("https://brocku.ca/brock-news/category/news/")
+    //     .then(function (response) {
+    //       const dom = new JSDOM(response.data);
+    //       const total_array =
+    //         dom.window.document.querySelectorAll(".page-numbers");
+    //       var largest_page = 0;
+    //       for (const item of total_array) {
+    //         if (
+    //           !isNaN(parseInt(item.textContent, 10)) &&
+    //           parseInt(item.textContent, 10) > largest_page
+    //         ) {
+    //           largest_page = parseInt(item.textContent, 10);
+    //         }
+    //       }
+    //       //console.log(largest_page);
 
-        //largest_page = 1
+    //       //largest_page = 1
 
-        let newPromise = axios({
-          method: "get",
-          url: "https://brocku.ca/brock-news/category/news/",
-        });
+    //       let newPromise = axios({
+    //         method: "get",
+    //         url: "https://brocku.ca/brock-news/category/news/",
+    //       });
 
-        let axiosArray = [newPromise];
-        for (var x = 2; x <= largest_page; x++) {
-          let newPromise = axios({
-            method: "get",
-            url: "https://brocku.ca/brock-news/category/news/page/" + x + "/",
-          });
-          axiosArray.push(newPromise);
-        }
+    //       let axiosArray = [newPromise];
+    //       for (var x = 2; x <= largest_page; x++) {
+    //         let newPromise = axios({
+    //           method: "get",
+    //           url: "https://brocku.ca/brock-news/category/news/page/" + x + "/",
+    //         });
+    //         axiosArray.push(newPromise);
+    //       }
 
-        print("Crawler: Fetching news - " + largest_page + " pages");
+    //       print("Crawler: Fetching news - " + largest_page + " pages");
 
-        var all_news = [];
+    //       var all_news = [];
 
-        axios
-          .all(axiosArray)
-          .then(
-            axios.spread((...responses) => {
-              responses.forEach((res) => {
-                const dom = new JSDOM(res.data);
-                const total_array = dom.window.document.querySelectorAll(
-                  "#loop-list li div h2 a"
-                );
-                for (const item of total_array) {
-                  const data = {
-                    title: item.textContent,
-                    href: item.href,
-                  };
-                  all_news.push(data);
-                }
-              });
-              print(
-                "Crawler: All News Fetching Complete - " +
-                  all_news.length +
-                  " Total news"
-              );
+    //       axios
+    //         .all(axiosArray)
+    //         .then(
+    //           axios.spread((...responses) => {
+    //             responses.forEach((res) => {
+    //               const dom = new JSDOM(res.data);
+    //               const total_array = dom.window.document.querySelectorAll(
+    //                 "#loop-list li div h2 a"
+    //               );
+    //               for (const item of total_array) {
+    //                 const data = {
+    //                   title: item.textContent,
+    //                   href: item.href,
+    //                 };
+    //                 all_news.push(data);
+    //               }
+    //             });
+    //             print(
+    //               "Crawler: All News Fetching Complete - " +
+    //                 all_news.length +
+    //                 " Total news"
+    //             );
 
-              //    let axiosArray2 = []
-              //    for (const item of all_news) {
-              //   let newPromise = axios({
-              //       method: 'get',
-              //       url: item.href
-              //     })
-              //   axiosArray2.push(newPromise)
-              //   //console.log(item.href)
-              // }
+    //             //    let axiosArray2 = []
+    //             //    for (const item of all_news) {
+    //             //   let newPromise = axios({
+    //             //       method: 'get',
+    //             //       url: item.href
+    //             //     })
+    //             //   axiosArray2.push(newPromise)
+    //             //   //console.log(item.href)
+    //             // }
 
-              // print('Crawler: Starting content fetch');
+    //             // print('Crawler: Starting content fetch');
 
-              // setTimeout(() => {
-              // 	get_news_content(axiosArray2, all_news, 0, function (all_news) {
-              //    				print('Crawler: All News Content Fetching Complete - ' + all_news.length + " Total news");
-              // 		dbCache.push(db_news_loc, all_news);
-              //  			});
-              // }, 15000);
-              //print('Crawler: All News Content Fetching Complete - ' + all_news.length + " Total news");
+    //             // setTimeout(() => {
+    //             // 	get_news_content(axiosArray2, all_news, 0, function (all_news) {
+    //             //    				print('Crawler: All News Content Fetching Complete - ' + all_news.length + " Total news");
+    //             // 		dbCache.push(db_news_loc, all_news);
+    //             //  			});
+    //             // }, 15000);
+    //             //print('Crawler: All News Content Fetching Complete - ' + all_news.length + " Total news");
 
-              dbCache.push(db_news_loc, all_news);
-              if (!sent) result(all_news);
-            })
-          )
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+    //             dbCache.push(db_news_loc, all_news);
+    //             if (!sent) result(all_news);
+    //           })
+    //         )
+    //         .catch((error) => {
+    //           console.log(error);
+    //         });
+    //     });
   } else if (type === "search") {
     stats_one(print, errorlog, dbMain, "api/crawler/brockNews/search");
     var all_news = [];
     axios
-      .get("https://brocku.ca/brock-news/?s=" + parma.replace(" ", "+"))
+      .get(
+        kapi_news_url +
+          "?type=url&url=" +
+          "https://brocku.ca/brock-news/?s=" +
+          parma.replace(" ", "+")
+      )
       .then(function (res) {
         // console.log(res);
         const dom = new JSDOM(res.data);

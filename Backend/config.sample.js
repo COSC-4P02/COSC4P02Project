@@ -10,8 +10,8 @@ config.apiServicePort = 3000;
 config.corsAllowedOrigins = ["http://localhost:1901", "http://localhost:3010"];
 
 // SSL Cert
-config.wsKey = "cert/key.pem";
-config.wsCert = "cert/cert.pem";
+config.wsKey = "data/cert/key.pem";
+config.wsCert = "data/cert/cert.pem";
 
 // Error Log Location
 config.loggerInfo = "data/logs/chatbot-info.log";

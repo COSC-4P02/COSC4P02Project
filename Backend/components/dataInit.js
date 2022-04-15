@@ -1,4 +1,37 @@
------BEGIN CERTIFICATE-----
+var fs = require("fs");
+
+function createFile(path, content) {
+  if (!fs.existsSync(path)) {
+    try {
+      fs.writeFileSync(path, content, { flag: "w" });
+      console.log("FILE CREATED: ", path);
+    } catch (err) {
+      console.error("FILE CREATION ERROR: ", path);
+      console.error(err);
+    }
+  }
+}
+
+function createDir(dir) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+    console.log("DIR CREATED: ", dir);
+  }
+}
+
+module.exports = function () {
+  createDir("data/");
+  createDir("data/database");
+  createDir("data/cert");
+  createDir("data/logs");
+  createDir("data/nlp-model");
+  createDir("data/nltk");
+
+  createFile("data/config.js", fs.readFileSync("config.sample.js"));
+
+  createFile(
+    "data/cert/cert.pem",
+    `-----BEGIN CERTIFICATE-----
 MIIFJjCCBA6gAwIBAgISAx6ZiqI8ErSHX8axNSl7g+X5MA0GCSqGSIb3DQEBCwUA
 MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
 EwJSMzAeFw0yMjAxMjUwMjQ5MTNaFw0yMjA0MjUwMjQ5MTJaMBsxGTAXBgNVBAMT
@@ -90,4 +123,38 @@ MA0GCSqGSIb3DQEBCwUAA4IBAQAKcwBslm7/DlLQrt2M51oGrS+o44+/yQoDFVDC
 WCLKTVXkcGdtwlfFRjlBz4pYg1htmf5X6DYO8A4jqv2Il9DjXA6USbW1FzXSLr9O
 he8Y4IWS6wY7bCkjCWDcRQJMEhg76fsO3txE+FiYruq9RUWhiF1myv4Q6W+CyBFC
 Dfvp7OOGAN6dEOM4+qR9sdjoSYKEBpsr6GtPAQw4dy753ec5
------END CERTIFICATE-----
+-----END CERTIFICATE-----`
+  );
+
+  createFile(
+    "data/cert/key.pem",
+    `-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDWb9BYuJ1TGlTY
+oPtPwyN3G63PpALyxfNGANwSlSTMVIk61QMDBfX+JHsstBe80SYFZYzt/5UMtd8d
+aeoqKx6Avk9AjhIIa5WLWrr0kTxNmvvEqNpYAO4qCOrB5c8pnC7OSBeT7U9sfzdJ
+TpLAMPQN5IlJUrZCAXkkEdR6w+KGHSG7Zsb6CqbgtlM1zKc6Nyv1r1MaIRHy8KaK
+pJe8bbfSgPsvfVrinJ9Glh63zqsM+/wB69yiYFY4a3TcWcVbisrnqBr+Hj8EFZkG
+1ZJprhDOFamqGrCeMPKxr+tzAcV2VvdeYlqGPG6pKDYtCRAhpAH1kx9d1p+ImmEA
+fIY5FRBrAgMBAAECggEAY+GFDC5BqXm0V4r0Q/zCwjH0Tak5bldhrxOrbkRl9X7S
+xMJ/OqNGJ3Bap0HjZKGOsijQ8fKAPIFiQVMaLTYUaSc7xvfl0mI6L8S9HDmh+wvb
+hYiY2zDjvlSU9GfUjK8g5hiSUubQfdrrp4ufs0GaC/aNM8gA+NGy2WgsrlobYxfI
+WVT8RWGWcbknmzwjQhRXg3GR8S3Jkq6cTqqze29SoA1WMj4Q8Zy6ltgn/+2Cd5Pr
+d151boGX1zEIOvBDI2E3ZaZ0j6CT+LuCEQ+Eln9fK5qK0JfC5vCKpOgH6+uy1gFP
+sU9mT+90YKg+Ewe1+qtqqZqSK0ynXJLNz1lj7DLtQQKBgQDt7wWCZRcVSROLcAFV
+U5K4fjnoPLWp1lfouB7eof429Xfu0HFxSLA330yQNsAfJvXBiyViEORGNPj5T4af
+yv+valeQPm+WfWd1TgVduvYE24nN0lD6wX/mJr/j/Mv9lVr0zrZHkvMnl1XGnrZm
+bLHsZrWD/CWzN0dRjfdqbentcQKBgQDmuA6h9/HGiErUnf65SQzuT5TFQ0xr4bCV
+dPCL4htBENRUeuudhgRjFGhgqfgijryN7inIVa6HQo4cpqrO2nULf3rBvtE632ld
+f6wuZIRwsTPmWY13riK0GwIrjoiUqGjEGErhStMHO3JFuzD96zXEZ1sZ8tnXujgF
+DAvQuRSdmwKBgQDbaSZod3ZQ36GRXQktuTK8xVH7Ejjn1Ewew+NbpIC8B6LAbCGg
+uMofy+BbwNFsKM5J21nu0+rdvy21IhvgMR+VkHgNATZ/zUbhisAyDh2enyC113Nr
+uZKLF0KvKEiooNlOlWzMFfv6j3i+/07upt9wQ8qxWo0ddiVjVIpK7+7fUQKBgQC1
+5qtyu59dXZtR4ncv8g5F3Wx30kVwUPH+A8KbJttCA1jEel1FRqIy06YvgBJofIzg
+gcNjdVoyviB5KlZE3Cunsww/sIgZmIbj9oLz2MAqcStwE27byukFgr3FRY0dV2Gy
+KUzwLyQN8ap4m8tWhplPjgVfgf6KfQEpyYOPPjyovQKBgCjdXSO4gz198QdM+a8G
+qbA/+Q24avVmPxDMzNxCuocXl7lNGDkSS6e0IkcNVv6ysBkkwmighb/6kkz3jwnn
+Rc107h2sv0gPk3Hb/pTIF+zQAm/0EOnzxfZCyjI2EzPuPbniSG9K+3KaEKHUee4I
+NKFtiFcWJANQ/BsHDE5VaqZh
+-----END PRIVATE KEY-----`
+  );
+};

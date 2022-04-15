@@ -8,26 +8,38 @@ module.exports = async function (manager, say, dbCache, save) {
     manager.addDocument('en', 'Get Started', 'agent.start');
     manager.addDocument('en', 'Is anyone available to chat?', 'agent.start');
     json_a_temp = {
-            "type":"button",
-            "text": "Welcome! Here are some questions you may ask!",
-            "disableInput":false,
-            "options":[
-                {"text":"Tell me about Canada Games","action":"postback"},
-                {"text":"Where can I buy tickets?","action":"postback"},
-                {"text":"How Long until the Canada Games Start","action":"postback"},
-                {"text":"How many medals does Ontario have?","action":"postback"},
-                {"text":"COVID in Niagara","action":"postback"},
-                {"text":"Whats new with the Canada Games","action":"postback"}
-            ]
-        }
+        "type":"button",
+        "text": "Welcome! Here are some questions you may ask!",
+        "disableInput":false,
+        "options":[
+            {"text":"Tell me about Canada Games","action":"postback"},
+            {"text":"Where can I buy tickets?","action":"postback"},
+            {"text":"How Long until the Canada Games Start","action":"postback"},
+            {"text":"How many medals does Ontario have?","action":"postback"},
+            {"text":"COVID in Niagara","action":"postback"},
+            {"text":"Whats new with the Canada Games","action":"postback"}
+        ]
+    }
     manager.addAnswer('en', 'agent.start', "!json-"+JSON.stringify(json_a_temp));
 
 	// Canada Game
-	manager.addDocument('en', 'canada game', 'agent.cginfo');
-	manager.addDocument('en', 'i want to know about canada game', 'agent.cginfo');
-    manager.addDocument('en', 'what is canada game', 'agent.cginfo');
-    manager.addDocument('en', 'when is canada game', 'agent.cginfo');
-    manager.addAnswer('en', 'agent.cginfo', "The Canada Summer Games are coming to the Niagara Region August 6-21, 2022! These Games will feature approximately 5,000 athletes and coaches in 18 sports from all 13 Provinces and Territories. 4,000 volunteers will be needed to deliver these Games and the expected economic impact will exceed $450 million.");
+	manager.addDocument('en', '%cgames%', 'agent.cginfo');
+	manager.addDocument('en', 'i want to know about %cgames%', 'agent.cginfo');
+    manager.addDocument('en', 'what is %cgames%', 'agent.cginfo');
+    manager.addDocument('en', 'when is %cgames%', 'agent.cginfo');
+    json_a_temp = {
+        "type":"button",
+        "text": "The Canada Summer Games are coming to the Niagara Region August 6-21, 2022! These Games will feature approximately 5,000 athletes and coaches in 18 sports from all 13 Provinces and Territories. 4,000 volunteers will be needed to deliver these Games and the expected economic impact will exceed $450 million.",
+        "disableInput":false,
+        "options":[
+            {"text":"Website","value":"https://www.canadagames.ca","action":"url"},
+            {"text":"News","value":"https://www.canadagames.ca/in-the-loop","action":"url"},
+            {"text":"Niagara Games","value":"https://niagara2022games.ca","action":"url"},
+            {"text":"Gems.pro","value":"https://cg2022.gems.pro","action":"url"},
+            {"text":"Results","value":"https://www.canadagames.ca/results","action":"url"}
+        ]
+    }
+    manager.addAnswer('en', 'agent.cginfo', "!json-"+JSON.stringify(json_a_temp));
 
     // Ticket
     manager.addDocument('en', 'Where can I buy tickets?', 'game.ticket');
@@ -56,7 +68,7 @@ module.exports = async function (manager, say, dbCache, save) {
     manager.addAnswer('en', 'game.about.location', '!json-{"type":"button","text":"The Niagara 2022 Canada Summer Games is taking place in Ontario\'s Niagara Region","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://www.google.com/maps/place/43°06\'57.3%22N+79°14\'40.7%22W/@43.115902,-79.246143,17z/data=!3m1!4b1!4m14!1m7!3m6!1s0x0:0xe37525e6516e34c9!2zNDPCsDA4JzIxLjAiTiA3OcKwMTQnMDEuOCJX!3b1!8m2!3d43.1391743!4d-79.2338363!3m5!1s0x0:0x2b8900f2cfaa8a23!7e2!8m2!3d43.115902!4d-79.2446335","action":"url"}]}');
 
     // Medals
-    let cg_result = fs.readFileSync('data/train-data/game/cg_result.json');
+    let cg_result = fs.readFileSync('train-data/game/cg_result.json');
     let cg_result_data = JSON.parse(cg_result);
     for (i = 0; i < cg_result_data.length; i++) {
         var gold = parseInt(cg_result_data[i]['summergames']['gold'])+parseInt(cg_result_data[i]['wintergames']['gold'])
@@ -111,7 +123,7 @@ module.exports = async function (manager, say, dbCache, save) {
 
     manager.addAnswer('en', 'game.athletes.info', '!athletesInfo-{{athletes}}');
 
-    var csvFilePath = "data/train-data/game/2015version.csv";
+    var csvFilePath = "train-data/game/2015version.csv";
     jsonArray=await csv().fromFile(csvFilePath);
     jsonArray = JSON.parse(JSON.stringify(jsonArray, 1), 1);
     
@@ -134,7 +146,7 @@ module.exports = async function (manager, say, dbCache, save) {
 
     manager.addAnswer('en', 'game.sports.next', '!sportsSchedule-{{sports}}');
 
-    let cg_schedule = fs.readFileSync("data/train-data/game/cg_schedule.json");
+    let cg_schedule = fs.readFileSync("train-data/game/cg_schedule.json");
     let cg_schedule_array = JSON.parse(cg_schedule);
     
     for (i = 0; i < cg_schedule_array.length; i++) {

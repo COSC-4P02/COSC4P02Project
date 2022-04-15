@@ -3,6 +3,8 @@ node_modules
 
 # cert/*.pem
 
+data
+
 # logs
 chatbot-info.log
 chatbot-error.log

@@ -1,4 +1,4 @@
-var config = require("../config");
+var config = require("../data/config");
 
 // Logger
 const winston = require("winston");

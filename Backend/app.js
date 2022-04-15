@@ -1,12 +1,20 @@
-/*!
- * Chatbot-ai Backend
- * Copyright 2021 chatbot-ai.ga
- *
- * Available under the terms of the MIT
- * See LICENSE file for more informations.
+/*
+ * +----------------------------------------+
+ * |                                        |
+ * |           Chatbot-Ai Backend           |
+ * |                                        |
+ * |      Copyright 2022 chatbot-ai.ga      |
+ * |                                        |
+ * |  Available under the terms of the MIT  |
+ * | See LICENSE file for more informations |
+ * |                                        |
+ * +----------------------------------------+
  */
 
-var config = require("./config");
+const init = require("./components/dataInit");
+init();
+
+var config = require("./data/config");
 
 // Logger
 const { print, errorlog, chatlog } = require("./components/logService");

@@ -46,8 +46,8 @@
 
         send("brock", "Where can I park my car?");
 
-        // Canada Game Question
-        send("console", "Canada Game Question");
+        // Canada Games Question
+        send("console", "Canada Games Question");
 
         send("game", "What is the Canada Games Website");
         send("game", "How Long until the Canada Games Starts");
@@ -63,6 +63,7 @@
         send("game", "When is the next Baseball Game?");
         send("game", "When is the next Swimming Game that Ontario plays in?");
         send("game", "Where can I buy tickets?");
+        send("game", "How many players");
 
         // Transportation  Question
         send("console", "Transportation Question");
@@ -191,51 +192,11 @@
 
           <ul class="f-header__list flex-grow flex-basis-0 justify-center@md">
             <li class="f-header__item">
-              <a href="https://chatbot-ai.ga" class="f-header__link">Home</a>
-            </li>
-            <li class="f-header__item">
-              <button
-                class="reset f-header__dropdown-control js-f-header__dropdown-control"
-              >
-                <span>Chatbot</span>
-                <svg
-                  class="f-header__dropdown-icon icon"
-                  aria-hidden="true"
-                  viewBox="0 0 12 12"
-                >
-                  <path
-                    d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z"
-                  />
-                </svg>
-              </button>
-
-              <ul class="f-header__dropdown">
-                <li>
-                  <a
-                    href="https://web.chatbot-ai.ga/?bot=brock"
-                    class="f-header__dropdown-link"
-                    target="_blank"
-                    >Brock University</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://web.chatbot-ai.ga/?bot=game"
-                    class="f-header__dropdown-link"
-                    target="_blank"
-                    >Canada Games 2022</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="f-header__item">
-              <a href="https://app.chatbot-ai.ga" class="f-header__link">App</a>
-            </li>
-            <li class="f-header__item">
               <a
-                href="https://app.chatbot-ai.ga/privacy.html"
+                href="https://chatbot-ai.ga"
                 class="f-header__link"
-                >TOS</a
+                target="_blank"
+                >Home</a
               >
             </li>
             <li class="f-header__item">
@@ -247,47 +208,7 @@
               >
             </li>
             <li class="f-header__item">
-              <button
-                class="reset f-header__dropdown-control js-f-header__dropdown-control"
-              >
-                <span>Social</span>
-                <svg
-                  class="f-header__dropdown-icon icon"
-                  aria-hidden="true"
-                  viewBox="0 0 12 12"
-                >
-                  <path
-                    d="M9.943,4.269A.5.5,0,0,0,9.5,4h-7a.5.5,0,0,0-.41.787l3.5,5a.5.5,0,0,0,.82,0l3.5-5A.5.5,0,0,0,9.943,4.269Z"
-                  />
-                </svg>
-              </button>
-
-              <ul class="f-header__dropdown">
-                <li>
-                  <a
-                    href="https://discord.gg/kSDPxkVh5T"
-                    class="f-header__dropdown-link"
-                    target="_blank"
-                    >Discord Channel</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://discord.com/api/oauth2/authorize?client_id=957973848144375868&permissions=8&scope=bot"
-                    class="f-header__dropdown-link"
-                    target="_blank"
-                    >Discord Bot</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://www.facebook.com/Brock-Chat-bot-101894422491148/"
-                    class="f-header__dropdown-link"
-                    target="_blank"
-                    >Facebook Messenger</a
-                  >
-                </li>
-              </ul>
+              <a href="" class="f-header__link" aria-current="page">Test</a>
             </li>
           </ul>
 
@@ -304,7 +225,8 @@
               <a
                 href="https://app.chatbot-ai.ga"
                 class="f-header__btn btn btn--primary"
-                >Download Now</a
+                target="_blank"
+                >Download App</a
               >
             </li>
           </ul>
@@ -318,7 +240,6 @@
         <br />
         <h2>How to use:</h2>
         <ol class="list list--ol">
-          <li>Open Web Console</li>
           <li>npm run serve</li>
           <li>
             Access "<a href="https://127.0.0.1:8001" target="_blank"
@@ -326,8 +247,9 @@
             >" in another tab. The browser should alert you about security,
             since the certificate is self-signed
           </li>
-          <li>Accept security exception</li>
+          <li>Accept Security Exception</li>
           <li>Reload this page</li>
+          <li>Open Web Console</li>
         </ol>
 
         <h2>Documentation</h2>

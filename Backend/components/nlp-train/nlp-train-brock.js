@@ -4,6 +4,7 @@ module.exports = function (manager, say, dbCache, save) {
   // Start
   manager.addDocument('en', 'Get Started', 'agent.start');
   manager.addDocument('en', 'Is anyone available to chat?', 'agent.start');
+  manager.addDocument('en', 'What can you do', 'agent.start');
   json_a_temp = {
     "type":"button",
     "text": "Welcome! Here are some questions you may ask!",
@@ -18,6 +19,10 @@ module.exports = function (manager, say, dbCache, save) {
     ]
   }
   manager.addAnswer('en', 'agent.start', "!json-"+JSON.stringify(json_a_temp));
+
+  // Strange Questions
+  manager.addDocument('en', 'what is the school\'s name', 'brock.strange.schoolname');
+  manager.addAnswer('en', 'brock.strange.schoolname', 'Brock University');
 
   // Brock About
   manager.addNamedEntityText('brocku', 'Brock University', ['en'], ['Brock University','Brock','Brocku','brockuniversity','BU']);
