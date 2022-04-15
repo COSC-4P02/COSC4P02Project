@@ -1,0 +1,32 @@
+name: Docker Continuous Deployment
+
+on:
+  push:
+    paths:
+      - 'Backend/**'
+      - 'Backend/**/**'
+      - 'Backend/**/**/**'
+      - 'Backend/**/**/**/**'
+  pull_request:
+    paths:
+      - Backend
+
+defaults:
+  run:
+    working-directory: ./Backend
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: |
+        docker run --privileged --rm tonistiigi/binfmt --install all
+        docker login -u="${{ secrets.DOCKER_UN }}" -p="${{ secrets.DOCKER_PW }}"
+        docker buildx create --name krunkbuilder
+        docker buildx ls
+        docker buildx use krunkbuilder
+    - name: Build the Docker image date
+      run: docker buildx build . -t krunk/chatbot-ai-backend:$(date +%s) --platform=linux/arm64,linux/amd64 --push
+    - name: Build the Docker image latest
+      run: docker buildx build . -t krunk/chatbot-ai-backend:latest --platform=linux/arm64,linux/amd64 --push
