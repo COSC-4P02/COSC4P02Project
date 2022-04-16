@@ -203,9 +203,10 @@ module.exports = function (
         var query_name = param;
         var i;
         var database_url =
-          "https://cg2015.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA";
+          "https://cg2019.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA";
+        var database_year = 2019;
 
-        var csvFilePath = "train-data/game/2015version.csv";
+        var csvFilePath = "train-data/game/" + database_year + "version.csv";
         var csv = require("csvtojson");
         csv()
           .fromFile(csvFilePath)
@@ -218,18 +219,22 @@ module.exports = function (
             if (!result) {
               urlsend = {
                 type: "button",
-                text: "This player does not exist in 2015 Canada Games Database, you may find him/her in the following links",
+                text:
+                  "This player does not exist in " +
+                  database_year +
+                  " Canada Games Database, you may find him/her in the following links",
                 disableInput: false,
                 options: [
                   {
                     text: "2015 Canada Games Database",
-                    value: database_url,
+                    value:
+                      "https://cg2015.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA",
                     action: "url",
                   },
                   {
                     text: "2019 Canada Games Database",
                     value:
-                      "https://cgc.gems.pro/AlumCgc/Alumni/FindAlumni_List.aspx",
+                      "https://cg2019.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA",
                     action: "url",
                   },
                   {
@@ -248,13 +253,19 @@ module.exports = function (
               text:
                 "Found: " +
                 result.name +
-                ", Data is based on 2015 Canada Games Database",
+                ", Data is based on " +
+                database_year +
+                " Canada Games Database",
               disableInput: false,
             };
             conn(JSON.stringify(urlsend));
 
-            var birthday = 2015 - parseInt(result["age"].replace('"', ""));
+            var birthday =
+              database_year - parseInt(result["age"].replace('"', ""));
             var hometown = result["hometown"];
+            if (hometown === "") {
+              hometown = "Unknown";
+            }
             var sport = result["sport"];
             var all_game_played = [];
 
@@ -263,17 +274,22 @@ module.exports = function (
               url = database_url;
             }
 
-            for (i = 4; i > 0; i--) {
-              var tag = "PrevousGame" + i;
+            for (i = 3; i > 0; i--) {
+              var tag = "PreviousGame" + i;
               if (
                 result[tag].toLowerCase() != "" &&
                 result[tag].toLowerCase() != "n/a" &&
                 result[tag].toLowerCase() != "none" &&
                 result[tag].toLowerCase() != "none." &&
                 result[tag].toLowerCase() != "/" &&
-                result[tag].toLowerCase() != "0"
+                result[tag].toLowerCase() != "0" &&
+                result[tag].toLowerCase() != "undefined"
               ) {
-                all_game_played.push(result["PrevousGame" + i]);
+                all_game_played.push(
+                  result["PreviousGameYear" + i] +
+                    " " +
+                    result["PreviousGame" + i]
+                );
               }
             }
 
@@ -318,13 +334,14 @@ module.exports = function (
                 },
                 {
                   text: "2015 Canada Games Database",
-                  value: database_url,
+                  value:
+                    "https://cg2015.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA",
                   action: "url",
                 },
                 {
                   text: "2019 Canada Games Database",
                   value:
-                    "https://cgc.gems.pro/AlumCgc/Alumni/FindAlumni_List.aspx",
+                    "https://cg2019.gems.pro/Result/ShowPerson_List.aspx?SetLanguage=en-CA",
                   action: "url",
                 },
                 {

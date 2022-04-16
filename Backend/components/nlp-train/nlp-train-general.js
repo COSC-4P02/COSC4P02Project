@@ -345,6 +345,7 @@ module.exports = async function (manager) {
   manager.addDocument('en', 'bye for now', 'greetings.bye');
   manager.addDocument('en', 'i must go', 'greetings.bye');
   manager.addDocument('en', 'hello', 'greetings.hello');
+  manager.addDocument('en', 'Greetings', 'greetings.hello');
   manager.addDocument('en', 'helo', 'greetings.hello');
   manager.addDocument('en', 'hye', 'greetings.hello');
   manager.addDocument('en', 'nihao', 'greetings.hello');
