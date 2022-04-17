@@ -17,7 +17,6 @@
             <li class="nav-item">
               <div v-if="!this.GLOBAL.ifAPP" class="nav-link active" aria-current="page" >Web Setting</div>
             </li>
-            <li><hr class="dropdown-divider"></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Switch Bot
@@ -25,10 +24,6 @@
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
                 <li><button class="dropdown-item" @click="switchVersion('brock')" >Brock university</button></li>
                 <li><a class="dropdown-item"  @click="switchVersion('game')" >Niagara 2020 Summer Game</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -41,10 +36,10 @@
                 <li><a class="dropdown-item" @click="fontChange('2')">Large</a></li>
               </ul>
             </li>
+            <li><hr class="dropdown-divider"></li>
             <li class="nav-item">
               <div v-if="!this.GLOBAL.ifAPP" class="nav-link active" aria-current="page" >Useful Links</div>
             </li>
-            <li><hr class="dropdown-divider"></li>
             <li class="nav-item dropdown" v-for="(items) in links.list" :key="items" >
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{items.type}}
@@ -106,14 +101,14 @@ export default {
           this.botInfo.IconAlt = 'Niagara 2022 Canada Games logo'
           this.botInfo.navTitle = 'Niagara 2022 Games Bot'
           this.botInfo.OfficialWeb = 'https://niagara2022games.ca/'
-          this.links = require('./BrockuLink.json')
+          this.links = require('./CgamesLink.json')
         } else if (newValue === 'brock') {
           this.botInfo.botTitle = 'Brock University'
           this.botInfo.botIcon = require('../assets/brock/brocku-logo-rgb.png')
           this.botInfo.IconAlt = 'Brock University logo'
           this.botInfo.navTitle = 'Brock Bot'
           this.botInfo.OfficialWeb = 'https://brocku.ca/'
-          this.links = require('./CgamesLink.json')
+          this.links = require('./BrockuLink.json')
         }
       }
     }
