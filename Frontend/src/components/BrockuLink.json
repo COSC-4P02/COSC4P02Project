@@ -1,0 +1,135 @@
+{
+  "list": [
+    {
+      "type": "Study",
+      "links": [
+        { "label": "Sakai LMS", "link": "https://lms.brocku.ca" },
+        { "label": "My brocku", "link": "https://my.brocku.ca" },
+        { "label": "Outlook Mail", "link": "https://outlook.office.com/mail/" },
+        { "label": "Office 365", "link": "https://adfs.brocku.ca/adfs/ls/?wa=wsignin1.0&wtrealm=urn:federation:MicrosoftOnline&wctx=bk%3D1406747354%26LoginOptions%3D3" },
+        { "label": "Important Dates", "link": "https://brocku.ca/important-dates" },
+        { "label": "Brock Study Central Toolkit", "link": "https://brocku.ca/registrar/toolkit/" }
+      ]
+    },
+    {
+      "type": "Library",
+      "links": [
+        { "label": "Brock University Library omni", "link": "https://brocku.ca/library/" },
+        { "label": "Group Study Room Booking", "link": "https://calendar.library.brocku.ca/reserve/groupstudy" },
+        { "label": "Printing", "link": "https://printing.brocku.ca/user" },
+        { "label": "Markerspace", "link": "https://brocku.ca/library/makerspace/" }
+      ]
+    },
+    {
+      "type": "Life",
+      "links": [
+        { "label": "ExperienceBU", "link": "https://experiencebu.brocku.ca" },
+        { "label": "Brock Card", "link": "https://card.brocku.ca/" },
+        { "label": "CareerZone", "link": "https://careerzone.brocku.ca/" },
+        { "label": "Current Student", "link": "https://brocku.ca/current-students" },
+        { "label": "Student Life @ Brock", "link": "https://brocku.ca/student-life-success/student-life" },
+        { "label": "Off Campus Living", "link": "https://brocku.ca/student-life-success/student-life" },
+        { "label": "Residence", "link": "https://brocku.ca/residence/?utm_source=brockapp" },
+        { "label": "Brock 4U", "link": "https://brocku.ca/bu4u/" }
+      ]
+    },
+    {
+      "type": "Health",
+      "links": [
+        { "label": "Local Walk-in Clinics", "link": "http://www.hnhbhealthline.ca/listServicesDetailed.aspx?id=10072&region=Niagara" },
+        { "label": "Free Personal Counselling", "link": "https://brocku.ca/health-wellness-accessibility/personal-counselling-services" },
+        { "label": "Good2Talk 24-Hour Hotline", "link": "(866)925-5454" },
+        { "label": "Mental Health & Wellness", "link": "https://brocku.ca/and/mental-health/" },
+        { "label": "Book A Medical Appointment", "link": "(905)688-5550,3243" },
+        { "label": "On Campus Clinic", "link": "https://brocku.ca/health-wellness-accessibility/student-health-services" }
+      ]
+    },
+    {
+      "type": "Health",
+      "links": [
+        { "label": "Local Walk-in Clinics", "link": "http://www.hnhbhealthline.ca/listServicesDetailed.aspx?id=10072&region=Niagara" },
+        { "label": "Free Personal Counselling", "link": "https://brocku.ca/health-wellness-accessibility/personal-counselling-services" },
+        { "label": "Good2Talk 24-Hour Hotline", "link": "(866)925-5454" },
+        { "label": "Mental Health & Wellness", "link": "https://brocku.ca/and/mental-health/" },
+        { "label": "Book A Medical Appointment", "link": "(905)688-5550,3243" },
+        { "label": "On Campus Clinic", "link": "https://brocku.ca/health-wellness-accessibility/student-health-services" }
+      ]
+    },
+
+    {"type":"Building Location",
+      "links": [
+      {"label":"Arthur Schmon Twoer","link": "https://www.google.com/maps/place/Schmon+Tower,+St.+Catharines,+ON+L2S+3A1/@43.119826,-79.2511707,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e32466994df:0xee9ea745eff657cd!8m2!3d43.119826!4d-79.248982"},
+      {"label":"Brock University International Centre","link": "https://www.google.com/maps/place/Brock+University+International+Centre/@43.1198092,-79.2422309,18.82z/data=!4m13!1m7!3m6!1s0x89d34fcd9fc261b7:0x214baf1fd1202661!2s573+Glenridge+Ave,+St.+Catharines,+ON+L2T+4C2!3b1!8m2!3d43.119678!4d-79.2422401!3m4!1s0x89d34fcd976c26e1:0x8954f2007f99869b!8m2!3d43.1197308!4d-79.2413608"},
+      {"label":"Brock Plaza","link": "https://www.google.com/maps/place/Plaza+Building+Brock+University/@43.1184213,-79.2479415,19.05z/data=!4m9!1m2!2m1!1sbrock+plaza!3m5!1s0x89d34e3304175c7f:0xb14ea7f8703295a8!8m2!3d43.1185737!4d-79.2476449!15sCgticm9jayBwbGF6YZIBFXVuaXZlcnNpdHlfZGVwYXJ0bWVudA"},
+      {"label":"Campus Maps (PDF)","link": "https://brocku.ca/facilities-management/wp-content/uploads/sites/84/2-BROCK-UNIVERSITY-CAMPUS-MAPS.pdf"},
+      {"label":"Cairns Complex","link": "https://www.google.com/maps/place/Cairns+Complex/@43.1186065,-79.2483629,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e32dc1de547:0x94565c0c964ada3a!8m2!3d43.1186065!4d-79.2461742"},
+      {"label":"Concordia Lutheran Theological Seminary","link": "https://www.google.com/maps/place/Concordia+Lutheran+Theological+Seminary/@43.1215398,-79.2465874,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34fd39aab8731:0xa12f4e5c784dbe22!8m2!3d43.1215404!4d-79.2444276"},
+      {"label":"David S. Howes Theatre","link": "https://www.google.com/maps/place/David+S.+Howes+Theatre/@43.1187485,-79.252231,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e33ce36a8a5:0xcc27e0ef1a80e000!8m2!3d43.1185335!4d-79.2505143"},
+      {"label":"Dr. Charles A. Sankey Chamber","link": "https://www.google.com/maps/place/43%C2%B007'10.2%22N+79%C2%B014'53.2%22W/@43.1193788,-79.2485133,19.82z/data=!4m6!3m5!1s0x89d34e325a63e223:0xda3ead2c382e53c5!7e2!8m2!3d43.1194989!4d-79.248105"},
+      {"label":"East Academic","link": "https://www.google.com/maps/place/East+Academic/@43.1190904,-79.2444712,17z/data=!4m8!1m2!2m1!1seast+academic+1+accessible+washroom!3m4!1s0x89d34fcda78bb1d5:0x7d33dbe9726b03ea!8m2!3d43.1190904!4d-79.2422825/"},
+      {"label":"Interactive Campus Map","link": "https://brocku.ca/blogs/campus-map/"},
+      {"label":"Kenmore Centre","link": "https://www.google.com/maps/place/Kenmore+Centre,+St.+Catharines,+ON+L2T+4C6/@43.1180002,-79.2536266,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e3141ae0e6f:0x6cd065512251c0e9!8m2!3d43.1180002!4d-79.2518546"},
+      {"label":"Mackenzie Chown (A-J)-Block","link": "https://www.google.com/maps/place/43%C2%B007'11.2%22N+79%C2%B014'47.1%22W/@43.1193854,-79.247354,18.56z/data=!4m8!1m2!2m1!1sMackenzie+Chown+C-Block!3m4!1s0x0:0x6a8980cd9afee5ea!8m2!3d43.1194721!4d-79.2456436"},
+      {"label":"Marilyn I. Walker School of Fine and Performing Arts","link": "https://www.google.com/maps/place/Marilyn+I.+Walker+School+of+Fine+and+Performing+Arts/@43.15703,-79.2453806,16.23z/data=!4m5!3m4!1s0x89d3504d0dda0165:0x9eaf77bbd741fdf9!8m2!3d43.1577335!4d-79.2425234"},
+      {"label":"Rodman hall art centre","link": "https://www.google.com/maps/place/Rodman+Hall+Art+Centre/@43.1499489,-79.2480836,17z/data=!3m1!4b1!4m5!3m4!1s0x89d351ca830f02bf:0xdf827fc7972d289e!8m2!3d43.1500221!4d-79.245972"},
+      {"label":"Sean O'Sullivan Theatre","link": "https://www.google.com/maps/place/Sean+O'Sullivan+Theatre/@43.1196174,-79.2522336,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34fd375b072ef:0x3ee6db88411e8d78!8m2!3d43.1196174!4d-79.2500449"},
+      {"label":"South Block","link": "https://www.google.com/maps/place/South+Block,+St.+Catharines,+ON+L2T+4C6/@43.1187742,-79.2531183,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e317bd5eca1:0x51b4ebc8ebcccbcd!8m2!3d43.1187742!4d-79.2509296"},
+      {"label":"Goodman School of Business(Taro hall)","link": "https://www.google.com/maps/place/Goodman+School+of+Business/@43.1190604,-79.2487125,18.79z/data=!4m9!1m2!2m1!1sTaro+hall!3m5!1s0x89d34e325490dcc3:0xba5df1d150b9fa5a!8m2!3d43.119066!4d-79.248234!15sCglUYXJvIGhhbGxaCyIJdGFybyBoYWxskgEPYnVzaW5lc3Nfc2Nob29s"},
+      {"label":"Interactive Campus Map","link": "https://brocku.ca/blogs/campus-map/"}
+      ]
+    },
+    {
+    "type":"General Location",
+    "links": [
+      {"label":"Lowenberger Residence Dining Hall","link": "https://www.google.com/maps/place/Lowenberger+Residence+Dining+Hall/@43.1167706,-79.2523977,19.05z/data=!4m5!3m4!1s0x89d34e36b3b885c1:0xceff27d14d68308a!8m2!3d43.1166773!4d-79.2518237"},
+      {"label":"Eleanor Misener Aquatic Centre","link": "https://www.google.com/maps/place/Eleanor+Misener+Aquatic+Centre/@43.1196942,-79.2533145,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e31864ad03f:0x93271cf4beb4b794!8m2!3d43.1196942!4d-79.2511258"},
+      {"label":"Guernsey Market","link": "https://www.google.com/maps/place/Guernsey+Market/@43.1198636,-79.2516544,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e3238442b33:0xb79700f7e7ec37c!8m2!3d43.1198636!4d-79.2494657"},
+      {"label":"Quarryview Residence","link": "https://www.google.com/maps/place/Quarryview+Residence,+51+John+Macdonell+St,+St.+Catharines,+ON+L2T+4E4/@43.1196128,-79.2428534,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34fcd935a5811:0x8485339b689c01c0!8m2!3d43.1196128!4d-79.2406647"},
+      {"label":"Student-Alumni Centre","link": "https://www.google.com/maps/place/Student-Alumni+Centre/@43.1184473,-79.2501608,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34f69836974f5:0x80413528ee38be44!8m2!3d43.1184468!4d-79.2478765"},
+      {"label":"Union Station","link": "https://www.google.com/maps/place/Union+Station/@43.1187105,-79.250259,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e33a941e621:0xbc56a9df9d8019eb!8m2!3d43.11871!4d-79.2478259"}
+    ]
+    },
+    {
+      "type":"Service Location",
+      "links": [
+      {"label":"Brock Campus Store","link": " https://www.google.com/maps/place/Brock+University+Campus+Store/@43.1179719,-79.2485747,17.77z/data=!4m9!1m2!2m1!1sBrock+Campus+Store!3m5!1s0x89d34e3304c1c755:0xf4ccdad6a01be620!8m2!3d43.1184873!4d-79.247312!15sChJCcm9jayBDYW1wdXMgU3RvcmUiA4gBAVoUIhJicm9jayBjYW1wdXMgc3RvcmWSAQpib29rX3N0b3Jl"},
+      {"label":"Brock Card Office","link": "https://www.google.com/maps/place/Brock+Card+Office/@43.119414,-79.2518982,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34f351f9d83db:0x8ef64207d048a9d5!8m2!3d43.119414!4d-79.2497095"},
+      {"label":"Brock University Students' Union","link": "https://www.google.com/maps/place/Brock+University+Students'+Union/@43.1187105,-79.250259,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e33a8c30dc9:0x6f43e3549a9f988d!8m2!3d43.11871!4d-79.2478259"},
+      {"label":"James A. Gibson Library","link": "https://www.google.com/maps/place/Brock+University+Library/@43.1184923,-79.2499929,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34fe1379f5267:0x845a968da0d5cfa9!8m2!3d43.1184924!4d-79.2478281"},
+      {"label":"Student Health Services","link": "https://www.google.com/maps/place/Student+Health+Services/@43.1180864,-79.2536363,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e3167f1b635:0x7841bc0c9710521e!8m2!3d43.1180864!4d-79.2514476"}
+    ]
+    },
+    {
+      "type":"Parking Location",
+      "links": [
+      {"label":"A Lot (Zone 1,Accessible)","link": "https://www.google.com/maps/place/Zone+1/@43.1171641,-79.2480459,17.35z/data=!4m9!1m2!2m1!1sA+Lot+(Zone+1,Accessible)!3m5!1s0x89d34e3336bd766b:0x4988a1dcd10c6423!8m2!3d43.1178072!4d-79.2454673!15sChlBIExvdCAoWm9uZSAxLEFjY2Vzc2libGUpkgELcGFya2luZ19sb3Q"},
+      {"label":"B Lot","link": "https://www.google.com/maps/place/Lot+B,+St.+Catharines,+ON+L2T+4C6/@43.1165639,-79.2507174,17.94z/data=!4m8!1m2!2m1!1s(Zone+2)!3m4!1s0x89d34e3158de9b6d:0xc1cce244f351b7ce!8m2!3d43.1175753!4d-79.2509294"},
+      {"label":"D Lot","link": "https://www.google.com/maps/place/Lot+D,+St.+Catharines,+ON+L2T+4C6/@43.1165639,-79.2507174,17.94z/data=!4m8!1m2!2m1!1s(Zone+2)!3m4!1s0x89d34e33ef50858f:0x99e19390dd4d5a95!8m2!3d43.117775!4d-79.2498726"},
+      {"label":"K Lot","link": "https://www.google.com/maps/place/Lot+K,+St.+Catharines,+ON/@43.1202358,-79.2465302,17.94z/data=!4m8!1m2!2m1!1s(Zone+2)!3m4!1s0x89d34e32a0bd704d:0x6234eb1517416b4a!8m2!3d43.121137!4d-79.246216"},
+      {"label":"M Lot","link": "https://www.google.com/maps/place/Lot+M,+St.+Catharines,+ON+L2S+3A1/@43.1202358,-79.2465302,17.94z/data=!4m8!1m2!2m1!1s(Zone+2)!3m4!1s0x89d34fcd56815915:0x141172f1ee9857a8!8m2!3d43.1208703!4d-79.2445866"},
+      {"label":"P Lot","link": "https://www.google.com/maps/place/Lot+P,+St.+Catharines,+ON+L2T+4C6/@43.1182402,-79.2528895,19.56z/data=!4m13!1m7!3m6!1s0x89d34e3176344a41:0x786c3023f8339a8b!2sWalker+Complex,+St.+Catharines,+ON+L2T+4C6!3b1!8m2!3d43.1193509!4d-79.2517885!3m4!1s0x89d34e313cd4ceef:0x4bcd213659740c78!8m2!3d43.118042!4d-79.2526916"},
+      {"label":"Q Lot","link": "https://www.google.com/maps/place/Lot+Q,+University+Rd+W,+St.+Catharines,+ON+L2T+4C6/@43.1188139,-79.2527107,17.94z/data=!4m8!1m2!2m1!1s(Zone+2)!3m4!1s0x89d34e319742e6f3:0xd67c967e96073d53!8m2!3d43.1199898!4d-79.251899"},
+      {"label":"S Lot(Zone 3)","link": "https://www.google.com/maps/place/Parking+Lot+S,+St.+Catharines,+ON+L2T+4C6/@43.1152626,-79.2504314,18.45z/data=!4m8!1m2!2m1!1s(Zone+2)!3m4!1s0x89d34e343fd738a3:0xe72f690da6dfa71e!8m2!3d43.1156438!4d-79.2495199"},
+      {"label":"T Lot (Zone 2)","link": "https://www.google.com/maps/place/Zone+2/@43.1151874,-79.2493558,17z/data=!4m8!1m2!2m1!1sT+Lot+(Zone+2)!3m4!1s0x89d34e34b40a4811:0x450b933f6905a915!8m2!3d43.1151874!4d-79.2471671"},
+      {"label":"U Lot (Zone 2)","link": "https://www.google.com/maps/place/Lot+U/@43.115315,-79.2479634,17.77z/data=!4m9!1m2!2m1!1sU+Lot!3m5!1s0x89d34e34ba7d7b95:0xa250d9731493ff44!8m2!3d43.1155948!4d-79.2458546!15sCgVVIExvdJIBC3BhcmtpbmdfbG90"}]
+    },
+    {
+      "type":"Residences Location",
+      "links": [
+      {"label":"Alan Earp Residence","link": "https://www.google.com/maps/place/Alan+Earp+Residence,+St.+Catharines,+ON+L2S+3A1/@43.1207623,-79.2470521,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e32aeb79de3:0xccec2069c0036e57!8m2!3d43.1207623!4d-79.2454233"},
+      {"label":"DeCew Residence","link": "https://www.google.com/maps/place/Decew+Residence,+18+Residence+Rd,+St.+Catharines,+ON+L2S+3A1/@43.1206715,-79.250211,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e3289a4c7d7:0x4171526032806a41!8m2!3d43.1206715!4d-79.2480223"},
+      {"label":"Gateway Suites","link": "https://www.google.com/maps/place/Gateway+Suites/@43.1184398,-79.2426452,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34fcdcb81f4f9:0xbd7770ef89de88f5!8m2!3d43.1183864!4d-79.2406132"},
+      {"label":"Gordon and Betty Vallee Residence","link": "https://www.google.com/maps/place/Gordon+and+Betty+Vallee+Residence,+1812+Sir+Isaac+Brock+Way,+St.+Catharines,+ON+L2S+3A1/@43.1207043,-79.2485811,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e32989e6b2b:0xac80fa78fd2b1020!8m2!3d43.1207043!4d-79.2463924"},
+      {"label":"Village Residence","link": "https://www.google.com/maps/place/Earp+Residence/@43.1192152,-79.2475332,18z/data=!4m9!1m2!2m1!1sVillage+Residence+brock!3m5!1s0x89d34fea478f3c8d:0xc965b35b49a1afa9!8m2!3d43.1207949!4d-79.2454707!15sChdWaWxsYWdlIFJlc2lkZW5jZSBicm9ja1oZIhd2aWxsYWdlIHJlc2lkZW5jZSBicm9ja5IBFXVuaXZlcnNpdHlfZGVwYXJ0bWVudA"}
+      ]
+    },
+    {
+      "type":"Tools",
+      "links": [
+      {"label":"BrockU Chatbot","link": "https://web.chatbot-ai.ga/?bot=brock"},
+      {"label":"Canada Games 2022 Chatbot","link": "https://web.chatbot-ai.ga/?bot=game"}
+      ]
+    }
+  ]
+}
+
