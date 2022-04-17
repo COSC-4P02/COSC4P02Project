@@ -17,6 +17,7 @@
             <li class="nav-item">
               <a v-if="!this.GLOBAL.ifAPP" class="nav-link active" aria-current="page" :href="botInfo.OfficialWeb">Official Web</a>
             </li>
+            <li><hr class="dropdown-divider"></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Switch Bot
@@ -45,6 +46,15 @@
             <input class="form-control me-2" type="search" placeholder="Type what you want" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
+          <li><hr class="dropdown-divider"></li>
+          <li class="nav-item dropdown" v-for="(items,index) in links" :key="items" >
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{items}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li v-for="(items) in links[index]" :key="items"><a class="dropdown-item" :href="items.link"></a></li>
+            </ul>
+          </li>
         </div>
       </div>
     </div>
@@ -77,6 +87,8 @@ export default {
         IconAlt: '',
         navTitle: '',
         OfficialWeb: ''
+      },
+      links: {
       }
     }
   },

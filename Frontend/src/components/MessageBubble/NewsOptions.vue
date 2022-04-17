@@ -3,7 +3,7 @@
   .qkb-msg-bubble-component__text {{ mainData.text }}
     .qkb-msg-bubble-component__text(
       v-for="(item, index) in mainData.news",
-      :class="{ active: selectedItem === item.title }",
+      :class="{ active: selectedtem === item.title }",
       :key="index"
     )
       a(
@@ -22,7 +22,7 @@
         @click="selectOption(item)"
       )
         span {{ item.text }}
-      a.qkb-mb-button-options__btn.qkb-mb-button-options__url(
+      a(
         target="_blank",
         v-else,
         :href="item.value"
