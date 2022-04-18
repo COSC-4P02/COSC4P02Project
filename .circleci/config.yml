@@ -12,7 +12,8 @@ jobs:
           path: ~/circleci/
       - run:
           command: ls
-      - node/install-npm
+      - node/install:
+          node-version: '16.13'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - node/install-packages:
@@ -35,7 +36,9 @@ jobs:
           path: ~/circleci/
       - run:
           command: ls
-      - node/install-yarn
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - node/install-packages:
