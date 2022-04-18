@@ -3,7 +3,7 @@
   display: flex;
   flex: none;
   height: $action-height;
-  padding: 0.45rem 1.25rem 0.5rem;
+  padding: 0.25rem 1.25rem 0.5rem;
   border-top: 1px solid $action-line;
 }
 
@@ -31,7 +31,7 @@
 .qkb-board-action__msg-box {
   position: relative;
   flex-grow: 1;
-  padding: 0 1rem 0 0;
+  padding: 0 1rem 0 0.5rem;
 }
 
 .qkb-board-action__input {
