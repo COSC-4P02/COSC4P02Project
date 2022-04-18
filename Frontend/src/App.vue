@@ -40,6 +40,21 @@ export default {
     Nav,
     Footer
   },
+  metaInfo () {
+    return {
+      title: 'Chatbot-ai',
+      link: [
+        { rel: 'icon', href: '<https://malikgabroun.com/>' }
+      ],
+      meta: [
+        { name: 'viewport', content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' }
+      ],
+      script: [
+        { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-620XBF3V1E' },
+        { innerHTML: 'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(\'js\', new Date());gtag(\'config\', \'G-620XBF3V1E\');' }
+      ]
+    }
+  },
 
   data () {
     return {

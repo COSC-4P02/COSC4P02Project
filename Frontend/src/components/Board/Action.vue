@@ -11,6 +11,7 @@
         :disabled="inputDisable",
         :placeholder="inputPlaceholder",
         @keydown.enter="sendMessage",
+        @blur="onBlurInput ()"
       )
       .qkb-board-action__disable-text(
         v-if="inputDisablePlaceholder && inputDisable"
@@ -81,6 +82,9 @@ export default {
         this.$emit('msg-send', { text: this.messageText })
         this.messageText = null
       }
+    },
+    onBlurInput () {
+      window.scroll(0, 0)
     }
   }
 }
