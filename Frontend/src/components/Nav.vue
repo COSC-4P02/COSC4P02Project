@@ -45,13 +45,14 @@
                 {{items.type}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                <li v-for="(item) in items.links" :key="item"><a class="dropdown-item" :href="item.link">{{item.label}}</a></li>
+                <li v-for="(item) in items.links" :key="item"><a class="dropdown-item" :href="item.link" target="_blank">{{item.label}}</a></li>
               </ul>
             </li>
+            <li><hr class="dropdown-divider"></li>
           </ul>
           <form v-if="!this.GLOBAL.ifAPP" class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Type what you want" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit" target="_blank">Search</button>
           </form>
         </div>
       </div>
@@ -101,14 +102,14 @@ export default {
           this.botInfo.IconAlt = 'Niagara 2022 Canada Games logo'
           this.botInfo.navTitle = 'Niagara 2022 Games Bot'
           this.botInfo.OfficialWeb = 'https://niagara2022games.ca/'
-          this.links = require('./CgamesLink.json')
+          this.links = require('../assets/UsefulLinks/CgamesLink.json')
         } else if (newValue === 'brock') {
           this.botInfo.botTitle = 'Brock University'
           this.botInfo.botIcon = require('../assets/brock/brocku-logo-rgb.png')
           this.botInfo.IconAlt = 'Brock University logo'
           this.botInfo.navTitle = 'Brock Bot'
           this.botInfo.OfficialWeb = 'https://brocku.ca/'
-          this.links = require('./BrockuLink.json')
+          this.links = require('../assets/UsefulLinks/BrockuLink.json')
         }
       }
     }

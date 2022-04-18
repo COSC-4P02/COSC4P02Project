@@ -1,5 +1,5 @@
 <template>
-  <div class="qkb-msg-bubble-component qkb-msg-bubble-component--button-options">
+  <div class="qkb-msg-bubble-component qkb-msg-bubble-component--button-options" :class="sizeClass">
     <div class="card" style="width: 18rem;">
       <img src="" class="card-img-top">
       <div class="card-body">
@@ -9,7 +9,9 @@
         <a class="list-group-item" v-for="(item, index) in mainData.news"
            :class="{ active: selectedItem === item.title }"
            :key="index"
-           :href="item.href">
+           :href="item.href"
+           target="_blank"
+           >
           <div>{{item.title}}</div></a>
       </ul>
     </div>

@@ -44,18 +44,6 @@
         { "label": "On Campus Clinic", "link": "https://brocku.ca/health-wellness-accessibility/student-health-services" }
       ]
     },
-    {
-      "type": "Health",
-      "links": [
-        { "label": "Local Walk-in Clinics", "link": "http://www.hnhbhealthline.ca/listServicesDetailed.aspx?id=10072&region=Niagara" },
-        { "label": "Free Personal Counselling", "link": "https://brocku.ca/health-wellness-accessibility/personal-counselling-services" },
-        { "label": "Good2Talk 24-Hour Hotline", "link": "(866)925-5454" },
-        { "label": "Mental Health & Wellness", "link": "https://brocku.ca/and/mental-health/" },
-        { "label": "Book A Medical Appointment", "link": "(905)688-5550,3243" },
-        { "label": "On Campus Clinic", "link": "https://brocku.ca/health-wellness-accessibility/student-health-services" }
-      ]
-    },
-
     {"type":"Building Location",
       "links": [
       {"label":"Arthur Schmon Twoer","link": "https://www.google.com/maps/place/Schmon+Tower,+St.+Catharines,+ON+L2S+3A1/@43.119826,-79.2511707,17z/data=!3m1!4b1!4m5!3m4!1s0x89d34e32466994df:0xee9ea745eff657cd!8m2!3d43.119826!4d-79.248982"},

@@ -48,6 +48,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.2",
     "axios": "^0.25.0",
+    "bootstrap-icons": "^1.8.1",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "vue-clickaway": "^2.2.2",

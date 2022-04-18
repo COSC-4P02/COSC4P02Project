@@ -1,0 +1,134 @@
+{
+  "list": [
+    {
+      "type": "Canada Games",
+      "links": [
+        {"label":"Canada Games Website", "link": "https://canadagames.ca"},
+        {"label":"Brand", "link": "https://www.canadagames.ca/brand"},
+        {"label":"Partners", "link": "https://www.canadagames.ca/about/partners"},
+        {"label":"Hall of Honour", "link": "https://www.canadagames.ca/about/hall-of-honour"},
+        {"label":"FAQs", "link": "https://www.canadagames.ca/about/faq"},
+        {"label":"Safe Sport", "link": "https://www.canadagames.ca/about/safe-sport"},
+        {"label":"Stategic Plan", "link": "https://drive.google.com/file/d/1ovamhiTFajs-WXfy_Is-Vi9yPABcnZ_N/view"},
+        {"label":"Corporate Resources", "link": "https://www.canadagames.ca/about/corporate-resources"},
+        {"label":"Our People", "link": "https://www.canadagames.ca/about/our-people"},
+        {"label":"Careers", "link": "https://www.canadagames.ca/about/contact#careers"},
+        {"label":"Contant", "link": "https://www.canadagames.ca/about/contact"},
+        {"label":"Athletes", "link": "https://www.canadagames.ca/athletes"},
+        {"label":"Result", "link": "https://www.canadagames.ca/results"},
+        {"label":"News", "link": "https://www.canadagames.ca/in-the-loop"},
+        {"label":"Multimedia", "link": "https://www.canadagames.ca/multimedia"}
+      ]
+    },
+    {
+      "type": "The Games",
+      "links": [
+        {"label":"Niagara 2022","link": "https://www.canadagames.ca/future-games/niagara-2022"},
+        {"label":"PEI 2023","link": "https://www.canadagames.ca/future-games/prince-edward-island"},
+        {"label":"St.John's 2025","link": "https://www.canadagames.ca/future-games/st-johns-2025"},
+        {"label":"Red Deer 2019","link": "https://www.canadagames.ca/previous-games/red-deer-2019"},
+        {"label":"winnipeg 2017","link": "https://www.canadagames.ca/previous-games/winnipeg-2017"},
+        {"label":"Prince George 2015","link": "https://www.canadagames.ca/previous-games/prince-george-2015"},
+        {"label":"Sherbrooke 2013","link": "https://www.canadagames.ca/previous-games/sherbrooke-2013"},
+        {"label":"Halifax 2011","link": "https://www.canadagames.ca/previous-games/halifax-2011"},
+        {"label":"Prince Edward lsland 2009","link": "https://www.canadagames.ca/previous-games/prince-edward-island-2009"},
+        {"label":"Whitehorse 2007","link": "https://www.canadagames.ca/previous-games/whitehorse-2007"},
+        {"label":"Regina 2005","link": "https://www.canadagames.ca/previous-games/regina-2005"},
+        {"label":"Bathurst - Campbellton 2003","link": "https://www.canadagames.ca/previous-games/bathurst-campbellton-2003"},
+        {"label":"London 2001","link": "https://www.canadagames.ca/previous-games/london-2001"},
+        {"label":"Corner Brook 1999","link": "https://www.canadagames.ca/previous-games/corner-brook-1999"},
+        {"label":"Brandon 1997","link": "https://www.canadagames.ca/previous-games/brandon-1997"},
+        {"label":"Grande Prairie 1995","link": "https://www.canadagames.ca/previous-games/grande-prairie-1995"},
+        {"label":"Kamloops 1993","link": "https://www.canadagames.ca/previous-games/kamloops-1993"},
+        {"label":"Prince Edward lsland 1991","link": "https://www.canadagames.ca/previous-games/prince-edward-island-1991"},
+        {"label":"Saskatoon 1989","link": "https://www.canadagames.ca/previous-games/saskatoon-1989"},
+        {"label":"Cape Breton 1987","link": "https://www.canadagames.ca/previous-games/cape-breton-1987"},
+        {"label":"Saint John 1985","link": "https://www.canadagames.ca/previous-games/saint-john-1985"},
+        {"label":"Saguenay-Lac-St-Jean 1983","link": "https://www.canadagames.ca/previous-games/saguenay-lac-st-jean-1983"},
+        {"label":"Thunder Bay 1981","link": "https://www.canadagames.ca/previous-games/thunder-bay-1981"},
+        {"label":"Brandon 1979","link": "https://www.canadagames.ca/previous-games/brandon-1979"},
+        {"label":"St.John's 1977","link": "https://www.canadagames.ca/previous-games/st-johns-1977"},
+        {"label":"Lethbridge 1975","link": "https://www.canadagames.ca/previous-games/lethbridge-1975"},
+        {"label":"New Westminster - Burnaby 1973","link": "https://www.canadagames.ca/previous-games/new-westminister-burnaby-1973"},
+        {"label":"Saskatoon 1971","link": "https://www.canadagames.ca/previous-games/saskatoon-1971"},
+        {"label":"Halifax 1969","link": "https://www.canadagames.ca/previous-games/halifax-1969"},
+        {"label":"Quebec 1967","link": "https://www.canadagames.ca/previous-games/quebec-1967"}
+      ]
+    },
+    {
+      "type": "Sports",
+      "links": [
+        {"label":"ALPINE SKI","link": "https://www.canadagames.ca/all-sports/alpine-ski"},
+        {"label":"ARCHERY","link": "https://www.canadagames.ca/all-sports/archery"},
+        {"label":"ARTISTIC SWIMMING","link": "https://www.canadagames.ca/all-sports/artistic-swimming"},
+        {"label":"ATHLETICS","link": "https://www.canadagames.ca/all-sports/athletics"},
+        {"label":"BADMINTON","link": "https://www.canadagames.ca/all-sports/badminton"},
+        {"label":"BASEBALL","link": "https://www.canadagames.ca/all-sports/baseball"},
+        {"label":"BASKETBALL","link": "https://www.canadagames.ca/all-sports/basketball"},
+        {"label":"BIATHLON","link": "https://www.canadagames.ca/all-sports/biathlon"},
+        {"label":"BOXING","link": "https://www.canadagames.ca/all-sports/boxing"},
+        {"label":"CANOE KAYAK","link": "https://www.canadagames.ca/all-sports/canoe-kayak"},
+        {"label":"CROSS COUNTRY SKIING","link": "https://www.canadagames.ca/all-sports/cross-country-skiing"},
+        {"label":"CURLING","link": "https://www.canadagames.ca/all-sports/curling"},
+        {"label":"CYCLING","link": "https://www.canadagames.ca/all-sports/cycling"},
+        {"label":"DIVING","link": "https://www.canadagames.ca/all-sports/diving"},
+        {"label":"FENCING","link": "https://www.canadagames.ca/all-sports/fencing"},
+        {"label":"FIGURE SKATING","link": "https://www.canadagames.ca/all-sports/figure-skating"},
+        {"label":"FREESTYLE SKI","link": "https://www.canadagames.ca/all-sports/freestyle-ski"},
+        {"label":"GOLF","link": "https://www.canadagames.ca/all-sports/golf"},
+        {"label":"GYMNASTICS","link": "https://www.canadagames.ca/all-sports/gymnastics"},
+        {"label":"HOCKEY","link": "https://www.canadagames.ca/all-sports/hockey"},
+        {"label":"JUDO","link": "https://www.canadagames.ca/all-sports/judo"},
+        {"label":"KARATE","link": "https://www.canadagames.ca/all-sports/karate"},
+        {"label":"LACROSSE","link": "https://www.canadagames.ca/all-sports/lacrosse"},
+        {"label":"RINGETTE","link": "https://www.canadagames.ca/all-sports/ringette"},
+        {"label":"ROWING","link": "https://www.canadagames.ca/all-sports/rowing"},
+        {"label":"RUGBY SEVENS","link": "https://www.canadagames.ca/all-sports/rugby-sevens"},
+        {"label":"SAILING","link": "https://www.canadagames.ca/all-sports/sailing"},
+        {"label":"SNOWBOARD","link": "https://www.canadagames.ca/all-sports/snowboard"},
+        {"label":"SOCCER","link": "https://www.canadagames.ca/all-sports/soccer"},
+        {"label":"SOFTBALL","link": "https://www.canadagames.ca/all-sports/softball"},
+        {"label":"SPEED SKATING","link": "https://www.canadagames.ca/all-sports/speed-skating"},
+        {"label":"SQUASH","link": "https://www.canadagames.ca/all-sports/squash"},
+        {"label":"SWIMMING","link": "https://www.canadagames.ca/all-sports/swimming"},
+        {"label":"TABLE TENNIS","link": "https://www.canadagames.ca/all-sports/table-tennis"},
+        {"label":"TENNIS","link": "https://www.canadagames.ca/all-sports/tennis"},
+        {"label":"TRIATHLON","link": "https://www.canadagames.ca/all-sports/triathlon"},
+        {"label":"VOLLEYBALL","link": "https://www.canadagames.ca/all-sports/volleyball"},
+        {"label":"WHEELCHAIR BASKETBALL","link": "https://www.canadagames.ca/all-sports/wheelchair-basketball"},
+        {"label":"WRESTLING","link": "https://www.canadagames.ca/all-sports/wrestling"}
+      ]
+    },
+    {
+      "type": "Teams",
+      "links": [
+        {"label":"Team Alberta","link": "https://www.canadagames.ca/teams/alberta"},
+        {"label":"Team British Columbia","link": "https://www.canadagames.ca/teams/british-columbia"},
+        {"label":"Team Manitoba","link": "https://www.canadagames.ca/teams/manitoba"},
+        {"label":"Team New Brunswick","link": "https://www.canadagames.ca/teams/new-brunswick"},
+        {"label":"Team Newfoundland & Labrador","link": "https://www.canadagames.ca/teams/newfoundland-labrador"},
+        {"label":"Team Nova Scotia","link": "https://www.canadagames.ca/teams/nova-scotia"},
+        {"label":"Team Nunavut","link": "https://www.canadagames.ca/teams/nunavut"},
+        {"label":"Team Northwest Territories","link": "https://www.canadagames.ca/teams/northwest-territories"},
+        {"label":"Team Ontario","link": "https://www.canadagames.ca/teams/ontario"},
+        {"label":"Team Prince Edward lsland","link": "https://www.canadagames.ca/teams/prince-edward-island"},
+        {"label":"Team Quebec","link": "https://www.canadagames.ca/teams/quebec"},
+        {"label":"Team Saskatchewan","link": "https://www.canadagames.ca/teams/saskatchewan"},
+        {"label":"Team Yukon","link": "https://www.canadagames.ca/teams/yukon"}
+      ]
+    },
+    {
+      "type":"Niagara Region",
+      "links": [
+        {"label":"Niagara Region","link": "https://www.niagararegion.ca"}
+      ]},
+    {
+      "type":"Tools",
+      "links": [
+        {"label":"Canada Games 2022 Chatbot","link": "https://web.chatbot-ai.ga/?bot=game"},
+        {"label":"BrockU Chatbot","link": "https://web.chatbot-ai.ga/?bot=brock"}
+      ]
+    }
+  ]
+}
+

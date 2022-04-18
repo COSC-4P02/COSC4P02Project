@@ -2,6 +2,7 @@ module.exports = {
   devServer: {
     port: 1901
   },
+  indexPath: 'index.html',
 
   css: {
     extract: false

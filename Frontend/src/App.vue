@@ -1,6 +1,6 @@
 <template lang="pug">
   #app(
-    v-bind:style="{fontSize: fSize}"
+    v-bind:style="{fontSize: fSize, height:this.GLOBAL.height}"
     )
     Nav(
       :version="version"
@@ -20,12 +20,14 @@
       @init="botStart",
       @msg-send="msgSend",
     )
+    Footer
 </template>
 <script>
 import EventBus from './helpers/event-bus'
 import { ChatbotUI } from './chatbot'
 import Background from './components/background/Background'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 import axios from 'axios'
 // import { messageService } from './helpers/message'
 
@@ -35,7 +37,8 @@ export default {
   components: {
     ChatbotUI,
     Background,
-    Nav
+    Nav,
+    Footer
   },
 
   data () {
@@ -53,6 +56,7 @@ export default {
   mounted () {
     this.getNetworkType()
     this.getURLVersion()
+    window.visualViewport.addEventListener('resize', this.resize)
     // SettingButtons
     EventBus.$on('SettingButtons', (msg) => {
       switch (msg) {
@@ -109,6 +113,10 @@ export default {
           break
       }
     })
+  },
+
+  beforeDestroy () {
+    window.visualViewport.removeEventListener('resize', this.resize)
   },
 
   methods: {
@@ -251,6 +259,9 @@ export default {
       }
     },
 
+    resize () {
+      this.GLOBAL.height = window.visualViewport.height
+    },
     // Submit the message from user to bot API, then get the response from Bot
     getResponse () {
       // Loading

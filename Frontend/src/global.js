@@ -2,6 +2,7 @@ const ifApp = false
 const version = 'brock'
 const wsApi = 'wss://ws.chatbot-ai.ga:8001'
 const whApi = 'https://api.chatbot-ai.ga'
+const height = '100%'
 // Production Server
 // wsApi: 'wss://ws.chatbot-ai.ga:8001',
 // whApi: 'https://api.chatbot-ai.ga',
@@ -20,5 +21,6 @@ export default
   version,
   whApi,
   wsApi,
+  height,
   isMobile
 }
