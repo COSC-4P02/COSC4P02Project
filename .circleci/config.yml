@@ -35,13 +35,9 @@ jobs:
           path: ~/circleci/
       - run:
           command: ls
-      - node/install:
-          install-yarn: true
-          node-version: '16.13'
+      - node/install-yarn
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run:
-          command: yarn config set ignore-engines true
       - node/install-packages:
           app-dir: ~/circleci/Frontend/
           cache-path: node_modules
