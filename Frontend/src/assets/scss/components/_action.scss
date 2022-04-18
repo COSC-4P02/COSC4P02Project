@@ -2,9 +2,10 @@
   position: relative;
   display: flex;
   flex: none;
-  height: $action-height;
+  height: $action-height+10px;
   padding: 0.25rem 1.25rem 0.5rem;
   border-top: 1px solid $action-line;
+  border-bottom: 10px solid $action-line;
 }
 
 .qkb-board-action--disabled {

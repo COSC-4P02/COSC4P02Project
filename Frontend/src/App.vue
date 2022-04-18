@@ -285,7 +285,7 @@ export default {
     },
 
     resize () {
-      this.GLOBAL.height = window.visualViewport.height
+      document.body.offsetHeight = window.visualViewport.height
     },
     // Submit the message from user to bot API, then get the response from Bot
     getResponse () {
