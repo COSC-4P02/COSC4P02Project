@@ -35,16 +35,10 @@ config.discordGame = "";
 // Faceebook Bot Config
 config.enableFB = 0;
 config.FB_brock = {
-  pageID: "",
-  appID: "",
-  appSecret: "",
   validationToken: "",
   pageToken: "",
 };
 config.FB_game = {
-  pageID: "",
-  appID: "",
-  appSecret: "",
   validationToken: "",
   pageToken: "",
 };

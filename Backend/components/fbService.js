@@ -13,6 +13,11 @@ function sending(msg) {
         msg.text = msg.text + "\nAsk Me: " + msg.options[e].text;
     }
   }
+  if (msg.type === "news") {
+    for (const e in msg.news) {
+      msg.text = msg.text + "\n" + msg.news[e].title + ": " + msg.news[e].href;
+    }
+  }
   return msg.text;
 }
 
@@ -39,7 +44,7 @@ async function nlp_msg(
     stats_array_append(print, errorlog, dbMain, "nlp/brock/noanswer", message);
   }
   var obj = {};
-  obj.msg = message.content;
+  obj.msg = message;
   var r = "./answerProcess/answerProcessBrock.js";
   if (version === "game") r = "./answerProcess/answerProcessGame.js";
   var answerProcessBrock = require(r);

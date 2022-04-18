@@ -13,6 +13,11 @@ function sending(msg, message, chatlog) {
         msg.text = msg.text + "\nAsk Me: " + msg.options[e].text;
     }
   }
+  if (msg.type === "news") {
+    for (const e in msg.news) {
+      msg.text = msg.text + "\n" + msg.news[e].title + ": " + msg.news[e].href;
+    }
+  }
   message.reply(msg.text);
   chatlog("Brock| User: " + message.content + " | Bot: " + msg.text);
 }
@@ -70,7 +75,7 @@ module.exports = function (
             errorlog,
             dbMain,
             "nlp/brock/noanswer",
-            obj.msg
+            message.content
           );
         }
         var obj = {};
@@ -92,6 +97,12 @@ module.exports = function (
                     msg.options[e].value;
                 if (msg.options[e].action === "postback")
                   msg.text = msg.text + "\nAsk Me: " + msg.options[e].text;
+              }
+            }
+            if (msg.type === "news") {
+              for (const e in msg.news) {
+                msg.text =
+                  msg.text + "\n" + msg.news[e].title + ": " + msg.news[e].href;
               }
             }
             message.reply(msg.text);
@@ -134,7 +145,7 @@ module.exports = function (
             errorlog,
             dbMain,
             "nlp/brock/noanswer",
-            obj.msg
+            message.content
           );
         }
         obj = {};
