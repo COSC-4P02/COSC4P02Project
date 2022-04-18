@@ -17,6 +17,9 @@ COPY . .
 # Save data folder
 VOLUME ["data"]
 
+# Set Production
+ENV NODE_ENV production
+
 # Server Ports
 EXPOSE 8001 3000
 

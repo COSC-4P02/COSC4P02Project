@@ -66,7 +66,7 @@ module.exports = function (
 
     conn.on("error", function (err) {
       stats_one(print, errorlog, dbMain, "ws/error");
-      errorlog("WebSocket Error Occour - " + err);
+      print("WebSocket Error Occour - " + err);
     });
   }).listen(wsport);
   print("Core: WebSocket Server Listening on Port " + wsport);
@@ -76,6 +76,7 @@ module.exports = function (
   // Receive message
   // Brock
   var receivedTextBrock = (conn, obj) => {
+    var send;
     stats_one(print, errorlog, dbMain, "msg/receive/brock");
     (async () => {
       if (obj.extra == "news" && obj.msg != "Exit News Search") {
@@ -135,9 +136,8 @@ module.exports = function (
       var answer =
         result.score > threshold && result.answer
           ? result.answer
-          : '!json-{"type":"button","text":"Sorry, I don\'t understand, but maybe you can find answer here.","disableInput":false,"options":[{"text":"Find it out","value":"http://www.google.com/search?q=' +
-            encodeURIComponent(obj.msg) +
-            '","action":"url"}]}';
+          : "!notFound-";
+
       var answer2 = (" " + answer).slice(1);
 
       if (!(result.score > threshold && result.answer)) {
@@ -168,7 +168,7 @@ module.exports = function (
       );
 
       // Reply to Client by text
-      var send = { type: "text", text: answer, disableInput: false };
+      send = { type: "text", text: answer, disableInput: false };
 
       if (answer == "!ignore") {
         // Ignore this send

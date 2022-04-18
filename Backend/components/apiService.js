@@ -158,6 +158,14 @@ module.exports = function (
     );
   });
 
+  app.get("/data/brock/web/search", (req, res) => {
+    const brockSearch = require("./crawler/brockSearch");
+    brockSearch(req.query.s, dbMain, print, errorlog, dbCache, function (rss) {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(rss));
+    });
+  });
+
   // FB Service
   if (config.enableFB) {
     app.get("/fbapibrock", (req, res) => {

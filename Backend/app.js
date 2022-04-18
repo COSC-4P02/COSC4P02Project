@@ -17,7 +17,14 @@ init();
 var config = require("./data/config");
 
 // Logger
-const { print, errorlog, chatlog } = require("./components/logService");
+const {
+  print,
+  errorlog,
+  chatlog,
+  startlog,
+} = require("./components/logService");
+if (process.env.NODE_ENV === "production")
+  startlog("UTC Time: " + new Date().toUTCString());
 
 // Stats Logger
 var {

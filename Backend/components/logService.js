@@ -1,4 +1,5 @@
 var config = require("../data/config");
+const axios = require("axios").default;
 
 // Logger
 const winston = require("winston");
@@ -43,11 +44,59 @@ module.exports = {
       message: message,
     });
   },
+  startlog: function (message) {
+    logger.log({
+      level: "info",
+      message: "Startlog: " + message,
+    });
+    try {
+      axios
+        .get(
+          "https://api2.krunk.cn/barkNoti/chatbot-ai-private.php?payload=" +
+            encodeURIComponent(
+              "Chatbot-Ai Server Start#/" +
+                message.replace("#", "_") +
+                "#/Chatbot-Ai#/" +
+                "https://chatbot-ai.ga" +
+                "#/timeSensitive"
+            )
+        )
+        .then(function () {
+          console.log("Logger: Startlog Notification to Admin Success");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (e) {
+      console.error(e);
+    }
+  },
   errorlog: function (message) {
     logger.log({
       level: "error",
       message: message,
     });
+    try {
+      axios
+        .get(
+          "https://api2.krunk.cn/barkNoti/chatbot-ai-private.php?payload=" +
+            encodeURIComponent(
+              "Chatbot-Ai Error#/" +
+                message.replace("#", "_") +
+                "#/Chatbot-Ai#/" +
+                "https://chatbot-ai.ga" +
+                "#/timeSensitive"
+            )
+        )
+        .then(function () {
+          console.log("Logger: Errorlog Notification to Admin Success");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (e) {
+      console.error(e);
+    }
   },
   chatlog: function (message) {
     logger.log({

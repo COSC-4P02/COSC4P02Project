@@ -7,6 +7,8 @@
     "test": "mocha --exit",
     "testn": "mocha --exit --reporter nyan",
     "lint": "./node_modules/.bin/eslint ./components",
+    "pcheck": "npx prettier --check .",
+    "pwrite": "npx prettier --write .",
     "clean": "node clean.js"
   },
   "repository": {
