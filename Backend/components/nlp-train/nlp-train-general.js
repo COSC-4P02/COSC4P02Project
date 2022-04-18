@@ -56,6 +56,7 @@ module.exports = async function (manager) {
   manager.addDocument('en', 'What to play around', 'agent.localArea.do');
   manager.addDocument('en', 'Where can you stay in the Niagara region?', 'agent.localArea.stay');
   manager.addDocument('en', 'Where can I stay in the Niagara region?', 'agent.localArea.stay');
+  manager.addDocument('en', 'Where is the hotel', 'agent.localArea.stay');
   manager.addDocument('en', 'where to stay', 'agent.localArea.stay');
 
   manager.addAnswer('en', 'agent.localArea.do', '!json-{"type":"button","text":"The Niagara Falls Tourism website provided here has information about what you can see and do in the region.","disableInput":false,"options":[{"text":"Niagara Falls Tourism","value":"https://www.niagarafallstourism.com/niagara-region/","action":"url"}]}');
@@ -63,7 +64,8 @@ module.exports = async function (manager) {
 
   // Strange Questions
   manager.addDocument('en', 'easter egg', 'agent.strange.easteregg');
-  manager.addAnswer('en', 'agent.strange.easteregg', 'Sorry, we did not prepare easter egg for you');
+  manager.addDocument('en', 'easteregg', 'agent.strange.easteregg');
+  manager.addAnswer('en', 'agent.strange.easteregg', '!json-{"type":"button","text":"I heard someone want an Easter Egg","disableInput":false,"options":[{"text":"Easter Egg","value":"https://www.youtube.com/watch?v=dQw4w9WgXcQ","action":"url"}]}');
   manager.addDocument('en', 'exit', 'agent.strange.exit');
   manager.addAnswer('en', 'agent.strange.exit', 'You can simply close this page, have a nice day!');
   manager.addDocument('en', 'Feeling wonderful', 'user.excited');
@@ -71,14 +73,8 @@ module.exports = async function (manager) {
   manager.addAnswer('en', 'agent.strange.father', 'I am sure you are not!');
 
   // Gereral
-  manager.addDocument('en', 'say about you', 'agent.acquaintance');
   manager.addDocument('en', 'why are you here', 'agent.acquaintance');
-  manager.addDocument('en', 'what is your personality', 'agent.acquaintance');
-  manager.addDocument('en', 'describe yourself', 'agent.acquaintance');
-  manager.addDocument('en', 'tell me about yourself', 'agent.acquaintance');
-  manager.addDocument('en', 'tell me about you', 'agent.acquaintance');
   manager.addDocument('en', 'what are you', 'agent.acquaintance');
-  manager.addDocument('en', 'who are you', 'agent.acquaintance');
   manager.addDocument(
     'en',
     'I want to know more about you',

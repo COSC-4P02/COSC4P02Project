@@ -45,6 +45,9 @@ module.exports = {
     });
   },
   startlog: function (message) {
+    if (process.env.NODE_ENV === "production") {
+      console.log(message);
+    }
     logger.log({
       level: "info",
       message: "Startlog: " + message,
@@ -52,7 +55,7 @@ module.exports = {
     try {
       axios
         .get(
-          "https://api2.krunk.cn/barkNoti/chatbot-ai-private.php?payload=" +
+          "https://api2.krunk.cn/chatbotai-api/chatbotNoti/chatbot-ai-private.php?payload=" +
             encodeURIComponent(
               "Chatbot-Ai Server Start#/" +
                 message.replace("#", "_") +
@@ -72,6 +75,9 @@ module.exports = {
     }
   },
   errorlog: function (message) {
+    if (process.env.NODE_ENV === "production") {
+      console.error(message);
+    }
     logger.log({
       level: "error",
       message: message,
@@ -79,7 +85,7 @@ module.exports = {
     try {
       axios
         .get(
-          "https://api2.krunk.cn/barkNoti/chatbot-ai-private.php?payload=" +
+          "https://api2.krunk.cn/chatbotai-api/chatbotNoti/chatbot-ai-private.php?payload=" +
             encodeURIComponent(
               "Chatbot-Ai Error#/" +
                 message.replace("#", "_") +

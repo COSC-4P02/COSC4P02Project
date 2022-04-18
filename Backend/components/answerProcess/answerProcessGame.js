@@ -416,6 +416,45 @@ module.exports = function (
 
       // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
 
+      case "!notFound": //
+        var gameSearch = require("../crawler/gameSearch");
+        gameSearch(obj.msg, dbMain, print, errorlog, dbCache, function (data) {
+          if (data.length <= 0) {
+            var answer2 =
+              '!json-{"type":"button","text":"Sorry, I don\'t understand, but maybe you can find answer here.","disableInput":false,"options":[{"text":"Find it out","value":"http://www.google.com/search?q=' +
+              encodeURIComponent(obj.msg) +
+              '","action":"url"}]}';
+            urlsend = answer2.substr(
+              answer2.indexOf("-") + 1,
+              answer2.length - 1
+            );
+            urlsend = JSON.parse(urlsend);
+          } else {
+            urlsend = {
+              type: "news",
+              text: "Here are some links you may want to take a look",
+              disableInput: false,
+              news: [
+                { title: data[0]["titleNoFormatting"], href: data[0]["url"] },
+                { title: data[1]["titleNoFormatting"], href: data[1]["url"] },
+              ],
+              options: [
+                {
+                  text: "Search on Google",
+                  value:
+                    "https://www.google.com/search?q=" +
+                    encodeURIComponent(obj.msg),
+                  action: "url",
+                },
+              ],
+            };
+          }
+          conn(JSON.stringify(urlsend));
+        });
+        return "!ignore";
+
+      // ～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
       case "!json":
         return "!json";
 

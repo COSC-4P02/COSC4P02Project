@@ -60,7 +60,7 @@ module.exports = function (
         var answer =
           result.score > threshold && result.answer
             ? result.answer
-            : "Sorry, I don't understand.";
+            : "!notFound-";
         var answer2 = (" " + answer).slice(1);
 
         if (!(result.score > threshold && result.answer)) {
@@ -124,7 +124,7 @@ module.exports = function (
         answer =
           result.score > threshold && result.answer
             ? result.answer
-            : "Sorry, I don't understand.";
+            : "!notFound-";
         answer2 = (" " + answer).slice(1);
 
         if (!(result.score > threshold && result.answer)) {

@@ -209,9 +209,7 @@ module.exports = function (
       var answer =
         result.score > threshold && result.answer
           ? result.answer
-          : '!json-{"type":"button","text":"Sorry, I don\'t understand, but maybe you can find answer here.","disableInput":false,"options":[{"text":"Find it out","value":"http://www.google.com/search?q=' +
-            encodeURIComponent(obj.msg) +
-            '","action":"url"}]}';
+          : "!notFound-";
       var answer2 = (" " + answer).slice(1);
 
       if (!(result.score > threshold && result.answer)) {

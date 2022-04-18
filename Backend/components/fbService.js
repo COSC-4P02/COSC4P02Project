@@ -31,9 +31,7 @@ async function nlp_msg(
   stats_one(print, errorlog, dbMain, "msg/receive/brock");
   const result = await nlpManager.process(message);
   var answer =
-    result.score > threshold && result.answer
-      ? result.answer
-      : "Sorry, I don't understand.";
+    result.score > threshold && result.answer ? result.answer : "!notFound-";
   var answer2 = (" " + answer).slice(1);
 
   if (!(result.score > threshold && result.answer)) {

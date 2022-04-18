@@ -123,20 +123,7 @@ module.exports = async function (manager, say, dbCache, save) {
 
     manager.addAnswer('en', 'game.athletes.info', '!athletesInfo-{{athletes}}');
 
-    var csvFilePath = "train-data/game/2015version.csv";
-    jsonArray=await csv().fromFile(csvFilePath);
-    jsonArray = JSON.parse(JSON.stringify(jsonArray, 1), 1);
-    
-    for (i = 0; i < jsonArray.length; i++) {
-        const name = jsonArray[i]['name'];
-        const name1 = name.toUpperCase();
-        const name2 = name.toLowerCase();
-        const name3 = name.toLowerCase().replace(' ', '');
-        const name4 = name.toLowerCase().replace(',', '');
-        manager.addNamedEntityText('athletes', name, ['en'], [name1,name2,name3,name4]);
-    }
-
-    csvFilePath = "train-data/game/2019version.csv";
+    var csvFilePath = "train-data/game/2019version.csv";
     jsonArray=await csv().fromFile(csvFilePath);
     jsonArray = JSON.parse(JSON.stringify(jsonArray, 1), 1);
     
@@ -149,12 +136,13 @@ module.exports = async function (manager, say, dbCache, save) {
         manager.addNamedEntityText('athletes', name, ['en'], [name1,name2,name3,name4]);
     }
     manager.addNamedEntityText('athletes', "Sidney Crosby", ['en'], ["Sidney Crosby"]);
-    manager.addAnswer('en', 'game.athletes.count', jsonArray.length+" Players in 2015 Canada Games Database.");
+    manager.addAnswer('en', 'game.athletes.count', jsonArray.length+" Players in 2019 Canada Games Database.");
 
     // Schedule
     manager.addDocument('en', 'Tell me about the %sports%', 'game.sports.next');
     manager.addDocument('en', 'When is the next %sports% Game', 'game.sports.next');
     manager.addDocument('en', 'When %sports%', 'game.sports.next');
+    manager.addDocument('en', '%sports% schedule', 'game.sports.next');
     manager.addDocument('en', 'When is the next %sports% Game that ontario plays in?', 'game.sports.next');
 
     manager.addAnswer('en', 'game.sports.next', '!sportsSchedule-{{sports}}');
