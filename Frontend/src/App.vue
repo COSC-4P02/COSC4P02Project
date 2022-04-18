@@ -1,7 +1,7 @@
 <template lang="pug">
   #app(
     v-bind:style="{fontSize: fSize, height:this.GLOBAL.height}"
-    )
+  )
     Nav(
       :version="version"
       :switchVersion="versionSwitch"
@@ -140,8 +140,8 @@ export default {
     connectWS () {
       ws = new WebSocket(this.GLOBAL.wsApi)
       ws.addEventListener('open', this.handleWsOpen.bind(this), false)
-      ws.addEventListener('close', this.handleWsClose.bind(this), false)
-      ws.addEventListener('error', this.handleWsError.bind(this), false)
+      ws.addEventListener('close', this.handleReconnectPrompt.bind(this), false)
+      ws.addEventListener('error', this.handleReconnectPrompt.bind(this), false)
       ws.addEventListener('message', this.handleWsMessage.bind(this), false)
     },
 
@@ -187,21 +187,26 @@ export default {
       }, 200)
     },
 
-    // Connection closed
-    handleWsClose (e) {
+    handleReconnectPrompt (e) {
       this.botTyping = true
+      this.inputDisable = true
       setTimeout(() => {
         this.botTyping = false
         this.messageData.push({
           agent: 'bot',
-          type: 'text',
-          text: 'Something went wrong, close the pop-up and open it again'
+          type: 'button',
+          text: 'You are offline, click the button below to reconnect',
+          disableInput: true,
+          options: [ { text: 'Reconnect', action: 'postback' } ]
         })
-      }, 1000)
+      }, 200)
     },
-    handleWsError (e) {
 
-    },
+    // Connection closed
+    // handleWsClose (e) {
+    // },
+    // handleWsError (e) {
+    // },
 
     // Receive message from ws server
     handleWsMessage (e) {
@@ -229,6 +234,11 @@ export default {
     },
     // Get user input and send to server
     msgSend (value) {
+      this.inputDisable = false
+      // Connect WebSocket
+      if (ws === null || ws.readyState === WebSocket.CLOSED) {
+        this.connectWS()
+      }
       if (this.extra === 'news' && value.text.toLowerCase() === 'exit news search'.toLowerCase()) {
         this.extra = ''
         this.messageData.push({ agent: 'user', type: 'text', extra: this.extra, text: value.text })

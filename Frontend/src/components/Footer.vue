@@ -1,5 +1,5 @@
 <template>
-  <footer class="text-center text-lg-start bg-light text-muted">
+  <footer v-if="!this.GLOBAL.ifAPP" class="text-center text-lg-start bg-light text-muted">
     <section
       class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
     >
