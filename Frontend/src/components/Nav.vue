@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-light bg-light fixed-top" v-if="!this.GLOBAL.ifAPP">
+  <nav class="navbar navbar-light bg-light fixed-top">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>

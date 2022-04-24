@@ -6,53 +6,80 @@ import Vue from 'vue'
 import _global_ from '@/global'
 Vue.prototype.GLOBAL = _global_
 
-const bk = (values = {}) => {
-  return shallowMount(Background, {
+describe('Background.vue', () => {
+  const wrapper = shallowMount(Background, {
     data () {
       return {
         msg: {
           items: [{
-            title: 'brock',
-            description: '',
+            title: 'title',
+            description: 'd',
             image: '../assets/brock/Brock.jpg',
             link: ''
           }]
         }
       }
     },
-    propsData: { version: 'brock' }
+    propsData: { version: '1' }
   })
-}
 
-describe('Background.vue', () => {
-  it('renders props .version when passed', () => {
-    const wrapper = bk
-    expect(wrapper.find('.items.title').text()).toEqual('brock')
+  it('Background be exists', () => {
+    const wrapper = shallowMount(Nav)
+    expect(wrapper.exists()).toBe(true)
+  })
+
+  it('find data/props in Background is create', () => {
+    expect(wrapper.find('h5').text()).toEqual('title')
+    expect(wrapper.find('p').text()).toEqual('d')
+    expect(wrapper.props().version).toContain('1')
+  })
+
+  it('find methods in Background is done', () => {
+    const mockFn = jest.fn()
+    wrapper.setMethods({
+      switchVersion: mockFn
+    })
+    wrapper.find('.carousel-control-prev').trigger('click')
+    expect(mockFn).toBeCalled()
+    expect(mockFn).toHaveBeenCalledTimes(1)
   })
 })
 
-const nav = (values = {}) => {
-  return shallowMount(Nav, {
+describe('Nav.vue', () => {
+  const wrapper = shallowMount(Nav, {
     data () {
       return {
-        msg: {
-          items: [{
-            title: 'brock',
-            description: '',
-            image: '../assets/brock/Brock.jpg',
-            link: ''
-          }]
+        botInfo: {
+          botTitle: 'bot title',
+          botIcon: '../assets/icons/bubble.svg',
+          IconAlt: '',
+          navTitle: 'nav title',
+          OfficialWeb: ''
         }
       }
     },
-    propsData: { version: 'brock' }
+    propsData: { version: '1' }
   })
-}
 
-describe('Nav.vue', () => {
-  it('renders props .version when passed', () => {
-    const wrapper = nav
-    expect(wrapper.find('.items.title').text()).toEqual('brock')
+  it('Nav be exists', () => {
+    const wrapper = shallowMount(Nav)
+    expect(wrapper.exists()).toBe(true)
+  })
+
+  it('find data/props in Nav is create', () => {
+    expect(wrapper.find('h5').text()).toEqual('nav title')
+    expect(wrapper.find('a').text()).toEqual('bot title')
+    expect(wrapper.props().version).toContain('1')
+  })
+
+  it('find methods in Nav is done', () => {
+    const mockFn = jest.fn()
+    wrapper.setMethods({
+      switchVersion: mockFn
+    })
+    wrapper.find('.dropdown-item').trigger('click')
+    expect(mockFn).toBeCalled()
+    expect(mockFn).toHaveBeenCalledTimes(1)
   })
 })
 
