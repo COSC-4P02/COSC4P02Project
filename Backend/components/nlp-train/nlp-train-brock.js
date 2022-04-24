@@ -60,7 +60,7 @@ module.exports = function (manager, say, dbCache, save) {
   }
   manager.addAnswer('en', 'brock.about.faculty', "!json-"+JSON.stringify(json_a_temp));
 
-  manager.addDocument('en', 'How many employment in brock', 'brock.about.employment');
+  manager.addDocument('en', 'How many employee', 'brock.about.employment');
   json_a_temp = {
     "type":"button",
     "text": "Employment: 6,000",
