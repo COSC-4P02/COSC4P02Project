@@ -79,16 +79,16 @@
               Products
             </h6>
             <p>
-              <a href="#!" class="text-reset" target="_blank">Teams</a>
+              <a href="https://teams.chatbot-ai.ga/" class="text-reset" target="_blank">Teams</a>
             </p>
             <p>
-              <a href="#!" class="text-reset" target="_blank">Tutorials</a>
+              <a href="https://docs.chatbot-ai.ga/guide/getting-started.html" class="text-reset" target="_blank">Tutorials</a>
             </p>
             <p>
-              <a href="#!" class="text-reset" target="_blank">Contact</a>
+              <a href="mailto:info@chatbot-ai.ga" class="text-reset" target="_blank">Contact</a>
             </p>
             <p>
-              <a href="#!" class="text-reset" target="_blank">License</a>
+              <a href="https://docs.chatbot-ai.ga/code/open-source.html" class="text-reset" target="_blank">License</a>
             </p>
           </div>
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -96,16 +96,16 @@
               Developers
             </h6>
             <p>
-              <a href="#!" class="text-reset" target="_blank">Documentation</a>
+              <a href="https://docs.chatbot-ai.ga" class="text-reset" target="_blank">Documentation</a>
             </p>
             <p>
-              <a href="#!" class="text-reset" target="_blank">API Reference</a>
+              <a href="https://docs.chatbot-ai.ga/api/chat.html" class="text-reset" target="_blank">API Reference</a>
             </p>
             <p>
-              <a href="#!" class="text-reset" target="_blank">API Status</a>
+              <a href="http://uptime.krunk.cn" class="text-reset" target="_blank">API Status</a>
             </p>
             <p>
-              <a href="#!" class="text-reset" target="_blank">Open Source</a>
+              <a href="https://github.com/COSC-4P02/" class="text-reset" target="_blank">Open Source</a>
             </p>
           </div>
         </div>
