@@ -65,6 +65,7 @@ module.exports = async function (manager, say, dbCache, save) {
     // Location
     manager.addNamedEntityText('cgames', 'Canada Games', ['en'], ['Canada Games','CanadaGames','CG','Canada Game','CanadaGame']);
     manager.addDocument('en', 'Where is %cgames%', 'game.about.location');
+    manager.addDocument('en', 'where the canada games will be hold', 'game.about.location');
     manager.addAnswer('en', 'game.about.location', '!json-{"type":"button","text":"The Niagara 2022 Canada Summer Games is taking place in Ontario\'s Niagara Region","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://www.google.com/maps/place/43°06\'57.3%22N+79°14\'40.7%22W/@43.115902,-79.246143,17z/data=!3m1!4b1!4m14!1m7!3m6!1s0x0:0xe37525e6516e34c9!2zNDPCsDA4JzIxLjAiTiA3OcKwMTQnMDEuOCJX!3b1!8m2!3d43.1391743!4d-79.2338363!3m5!1s0x0:0x2b8900f2cfaa8a23!7e2!8m2!3d43.115902!4d-79.2446335","action":"url"}]}');
 
     // Medals

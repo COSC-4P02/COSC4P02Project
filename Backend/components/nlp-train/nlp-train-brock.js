@@ -38,6 +38,39 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addDocument('en', 'Covid news at %brocku%', 'agent.covid');
   manager.addDocument('en', 'Tell me about %brocku% Important Dates', 'brock.about.dates');
 
+  manager.addDocument('en', 'How many students', 'brock.about.numofstu');
+  json_a_temp = {
+    "type":"button",
+    "text": "Student population: 19,000+",
+    "disableInput":false,
+    "options":[
+      {"text":"Brock facts","value":"https://brocku.ca/about/brock-facts/","action":"url"}
+    ]
+  }
+  manager.addAnswer('en', 'brock.about.numofstu', "!json-"+JSON.stringify(json_a_temp));
+
+  manager.addDocument('en', 'How many professors', 'brock.about.faculty');
+  json_a_temp = {
+    "type":"button",
+    "text": "Faculty members: 600",
+    "disableInput":false,
+    "options":[
+      {"text":"Brock facts","value":"https://brocku.ca/about/brock-facts/","action":"url"}
+    ]
+  }
+  manager.addAnswer('en', 'brock.about.faculty', "!json-"+JSON.stringify(json_a_temp));
+
+  manager.addDocument('en', 'How many employment in brock', 'brock.about.employment');
+  json_a_temp = {
+    "type":"button",
+    "text": "Employment: 6,000",
+    "disableInput":false,
+    "options":[
+      {"text":"Brock facts","value":"https://brocku.ca/about/brock-facts/","action":"url"}
+    ]
+  }
+  manager.addAnswer('en', 'brock.about.employment', "!json-"+JSON.stringify(json_a_temp));
+
   manager.addAnswer('en', 'brock.about.des', '!json-{"type":"button","text":"Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.","disableInput":false,"options":[{"text":"About","value":"https://brocku.ca/about/","action":"url"},{"text":"Homepage","value":"https://brocku.ca/","action":"url"},{"text":"News","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}');
   manager.addAnswer('en', 'brock.about.location', '!json-{"type":"button","text":"You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}'); //Location
   manager.addAnswer('en', 'brock.about.website', '!json-{"type":"button","text":"The website is https://brocku.ca","disableInput":false,"options":[{"text":"Open brocku.ca","value":"https://brocku.ca","action":"url"}]}');

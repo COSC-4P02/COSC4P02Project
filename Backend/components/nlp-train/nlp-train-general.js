@@ -71,6 +71,44 @@ module.exports = async function (manager) {
   manager.addDocument('en', 'Feeling wonderful', 'user.excited');
   manager.addDocument('en', 'I am your father', 'agent.strange.father');
   manager.addAnswer('en', 'agent.strange.father', 'I am sure you are not!');
+  manager.addDocument('en', 'Who is the most handsome boy', 'agent.strange.handsome');
+  manager.addAnswer('en', 'agent.strange.handsome', 'You are!');
+  manager.addDocument('en', 'whats your name', 'agent.strange.name');
+  json_a_temp = {
+    "type":"button",
+    "text": 'I don\'t have a name, but you can help me add one',
+    "disableInput":false,
+    "options":[
+      {"text":"Create an Issue","value":"https://github.com/COSC-4P02/COSC4P02Project","action":"url"}
+    ]
+  }
+  manager.addAnswer('en', 'agent.strange.name', "!json-"+JSON.stringify(json_a_temp));
+  manager.addDocument('en', '你好', 'agent.strange.nihao');
+  manager.addAnswer('en', 'agent.strange.nihao', '对不起，我暂时只支持英文');
+
+  manager.addDocument('en', 'Tianyu Zhou', 'agent.strange.developer');
+  manager.addDocument('en', 'Dazhi Gao', 'agent.strange.developer');
+  manager.addDocument('en', 'Wenjie Li', 'agent.strange.developer');
+  manager.addDocument('en', 'Zijian Feng', 'agent.strange.developer');
+  manager.addDocument('en', 'Jiayang Lai', 'agent.strange.developer');
+  manager.addDocument('en', 'Icarus Zhu', 'agent.strange.developer');
+  manager.addDocument('en', 'Junhui Chen', 'agent.strange.developer');
+  manager.addDocument('en', 'Siyuan Zhao', 'agent.strange.developer');
+  manager.addDocument('en', 'Krunk Zhou', 'agent.strange.developer');
+  json_a_temp = {
+    "type":"button",
+    "text": 'They are my creaters, learn more about them here',
+    "disableInput":false,
+    "options":[
+      {"text":"About Teams","value":"https://teams.chatbot-ai.ga","action":"url"},
+      {"text":"Github","value":"http://github.com/COSC-4P02/COSC4P02Project","action":"url"}
+    ]
+  }
+  manager.addAnswer('en', 'agent.strange.developer', "!json-"+JSON.stringify(json_a_temp));
+
+  manager.addDocument('en', 'Do you need a boyfriend', 'agent.strange.boyfriend');
+  manager.addDocument('en', 'Do you need a girlfriend', 'agent.strange.boyfriend');
+  manager.addAnswer('en', 'agent.strange.boyfriend', 'Well, I\'m not a person, so I can\'t get a BF/GF...');
 
   // Gereral
   manager.addDocument('en', 'why are you here', 'agent.acquaintance');
