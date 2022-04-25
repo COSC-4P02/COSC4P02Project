@@ -143,28 +143,6 @@ def thread_func(urls, thread_id):
         line += ","
 
 
-        # # get previous games
-        # if 'txtPrevSameGames' in data_cell.get_attribute("innerHTML"): # check existance before find
-        #     preS_element = driver.find_element_by_id('txtPrevSameGames')
-        #     games = preS_element.text.split('\n')
-        #     for game in games:
-        #         line += '"'
-        #         line += game
-        #         line += '"'
-        #         line += ','
-        #         
-
-        #  # get previous games
-        # if 'txtPrevGames' in data_cell.get_attribute("innerHTML"): # check existance before find
-        #     preV_element = driver.find_element_by_id('txtPrevGames')
-        #     games1 = preV_element.text.split('\n')
-        #     for game2 in games1:
-        #         line += '"'
-        #         line += game2
-        #         line += '"'
-        #         line += ','
-        
-
 
 
         line += '\n'
