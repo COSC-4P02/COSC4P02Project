@@ -21,3 +21,5 @@ Group project for Professor Naser Ezzati-Jivan's COSC 4P02 class at Brock Univer
 | [Junhui Chen](https://github.com/charles11223344) | 6828214 |
 | [Siyuan Zhao](https://github.com/Barry1208) | 6365431 |
 
+Everyone is welcomed to ask any questions about Brock University and the Canada Games on our Chatbot website through the direct link below. The Chatbot is also available on Facebook messenger and Discord or you could take one more step to download our App from the website. The answer you want is all in here : )
+http://chatbot-ai.ga
