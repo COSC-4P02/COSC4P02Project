@@ -10,7 +10,7 @@ Group project for Professor Naser Ezzati-Jivan's COSC 4P02 class at Brock Univer
 
 ## Team Members:  
 
-|Name|ID|
+|Name|Brock ID|
 |--|--|
 | [Dazhi Gao](https://github.com/AlbatrossBill) [Leader] | 5914320 |
 | [Wenjie Li](https://github.com/lwj-super7) | 5748389 |
