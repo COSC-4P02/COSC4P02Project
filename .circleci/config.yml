@@ -99,6 +99,3 @@ workflows:
           requires:
             - build_backend
       - build_frontend
-      - lint_frontend:
-          requires:
-            - build_frontend
