@@ -17,7 +17,8 @@ module.exports = async function (manager, say, dbCache, save) {
             {"text":"How Long until the Canada Games Start","action":"postback"},
             {"text":"How many medals does Ontario have?","action":"postback"},
             {"text":"COVID in Niagara","action":"postback"},
-            {"text":"Whats new with the Canada Games","action":"postback"}
+            {"text":"Whats new with the Canada Games","action":"postback"},
+            {"text":"Tell me about Daley Merrigan","action":"postback"}
         ]
     }
     manager.addAnswer('en', 'agent.start', "!json-"+JSON.stringify(json_a_temp));

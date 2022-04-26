@@ -30,6 +30,8 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addDocument('en', 'Tell me about %brocku%', 'brock.about.des');
   manager.addDocument('en', '%brocku%', 'brock.about.des');
   manager.addDocument('en', 'Where is %brocku%', 'brock.about.location');
+  manager.addDocument('en', 'How to get to %brocku%', 'brock.about.location');
+  manager.addDocument('en', 'The transit to %brocku%', 'brock.about.location');
   manager.addDocument('en', 'Go to %brocku%', 'brock.about.location');
   manager.addDocument('en', 'How is %brocku%', 'brock.about.des');
   manager.addDocument('en', 'What is the %brocku% Website', 'brock.about.website');
@@ -72,10 +74,35 @@ module.exports = function (manager, say, dbCache, save) {
   manager.addAnswer('en', 'brock.about.employment', "!json-"+JSON.stringify(json_a_temp));
 
   manager.addAnswer('en', 'brock.about.des', '!json-{"type":"button","text":"Brock University is one of Canada’s top post-secondary institutions. Located in historic Niagara region, Brock offers all the benefits of a young and modern university in a safe, community-minded city with beautiful natural surroundings.","disableInput":false,"options":[{"text":"About","value":"https://brocku.ca/about/","action":"url"},{"text":"Homepage","value":"https://brocku.ca/","action":"url"},{"text":"News","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}');
-  manager.addAnswer('en', 'brock.about.location', '!json-{"type":"button","text":"You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada","disableInput":false,"options":[{"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"}]}'); //Location
+  json_a_temp = {
+    "type":"button",
+    "text": "You can reach us at 1812 Sir Isaac Brock Way St. Catharines, ON L2S 3A1 Canada",
+    "disableInput":false,
+    "options":[
+      {"text":"Open in Google Maps","value":"https://goo.gl/maps/LhZQxd2xQ86LZUAP7","action":"url"},
+      {text: "Drive",value: encodeURI("https://www.google.com/maps/dir/?api=1&destination=Brock+University&travelmode=drive"),action: "url"},
+      {text: "Bus",value: encodeURI("https://www.google.com/maps/dir/?api=1&destination=Brock+University&travelmode=transit"),action: "url"},
+      {text: "Walk",value: encodeURI("https://www.google.com/maps/dir/?api=1&destination=Brock+University&travelmode=walking"),action: "url"}
+    ]
+  }
+  manager.addAnswer('en', 'brock.about.location', "!json-"+JSON.stringify(json_a_temp));
   manager.addAnswer('en', 'brock.about.website', '!json-{"type":"button","text":"The website is https://brocku.ca","disableInput":false,"options":[{"text":"Open brocku.ca","value":"https://brocku.ca","action":"url"}]}');
   manager.addAnswer('en', 'brock.about.news', '!json-{"type":"button","text":"You can now simply ask me about Brock News","extra":"news","disableInput":false,"options":[{"text":"Visit","value":"https://brocku.ca/brock-news/","action":"url"},{"text":"Exit News Search","value":"Exit News Search","action":"postback"}]}');
   manager.addAnswer('en', 'brock.about.dates', '!json-{"type":"button","text":"Brock Important Dates is here","disableInput":false,"options":[{"text":"Visit","value":"https://brocku.ca/important-dates/","action":"url"}]}');
+
+  manager.addDocument('en', '%brocku% phone number', 'brock.about.contact');
+  manager.addDocument('en', 'how to contact %brocku%', 'brock.about.contact');
+  json_a_temp = {
+    "type":"button",
+    "text": "You can contact Brock by using the following buttons",
+    "disableInput":false,
+    "options":[
+      {"text":"Brock Contact","value":"https://brocku.ca/contact/","action":"url"},
+      {text: "Call St. Catharines Campus 9056885550 x4636",value: "tel:9056885550",action: "url"},
+      {text: "Call Hamilton Campus 9055473555",value: "tel:9055473555",action: "url"}
+    ]
+  }
+  manager.addAnswer('en', 'brock.about.contact', "!json-"+JSON.stringify(json_a_temp));
 
   // Courses Details
   manager.addDocument('en', 'What is %brockCourse%', 'brock.course.des');
