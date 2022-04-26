@@ -1,8 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import Background from '@/components/background/Background'
 import Nav from '@/components/Nav'
-import BotUI from '@/components/BotUI';
-import App from '@/App.vue'
+import BotUI from '@/components/BotUI'
 import Vue from 'vue'
 import _global_ from '@/global'
 Vue.prototype.GLOBAL = _global_
@@ -302,5 +301,4 @@ describe('BotUI.vue', () => {
     const wrapper = shallowMount(Nav)
     expect(wrapper.exists()).toBe(true)
   })
-  
 })
