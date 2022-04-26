@@ -40,8 +40,8 @@
             <li class="nav-item">
               <div v-if="!this.GLOBAL.ifAPP" class="nav-link active" aria-current="page" >Useful Links</div>
             </li>
-            <li v-if="!this.GLOBAL.ifAPP" class="nav-item dropdown" v-for="(items) in links.list" :key="items" >
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li  class="nav-item dropdown" v-for="(items) in links.list" :key="items" >
+              <a v-if="!this.GLOBAL.ifAPP" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{items.type}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
