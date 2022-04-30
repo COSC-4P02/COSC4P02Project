@@ -8,6 +8,45 @@
 
 Group project for Professor Naser Ezzati-Jivan's COSC 4P02 class at Brock Universtiy. Winter 2022 term.
 
+---
+
+Everyone is welcomed to ask any questions about Brock University and the Canada Games on our Chatbot website through the direct link below. The Chatbot is also available on Facebook messenger and Discord or you could take one more step to download our App from the website. The answer you want is all in here : )
+
+[Homepage](https://chatbot-ai.ga)
+
+[Brock University Chatbot](https://web.chatbot-ai.ga/?bot=brock)
+
+[Canada Games 2022 Chatbot](https://web.chatbot-ai.ga/?bot=game)
+
+[Mobile App Download](https://app.chatbot-ai.ga)
+
+[Documentation](https://docs.chatbot-ai.ga)
+
+[Discord Channel](https://discord.gg/kSDPxkVh5T)
+
+---
+
+## Directory Tree
+
+```
+└── COSC4P02Project/
+    ├── .circleci/          # CircleCi Config
+    ├── .github/workflows/  # Docker Auto Deploy
+    ├── App/                # Mobile App
+    ├── Backend/            # Backend Code
+    ├── Crawler/            # Crawler Code
+    ├── Documents/          # Docs for dev process
+    ├── Frontend/           # Frontend Code
+    └── pages/              # Hosted on Github Pages
+```
+
+[Backend Readme](https://github.com/COSC-4P02/COSC4P02Project/blob/main/Backend/README.md)
+
+[Frontend Readme](https://github.com/COSC-4P02/COSC4P02Project/blob/main/Frontend/README.md)
+
+---
+
+
 ## Team Members:  
 
 |Name|Brock ID|
@@ -20,6 +59,3 @@ Group project for Professor Naser Ezzati-Jivan's COSC 4P02 class at Brock Univer
 | [Icarus Zhu](https://github.com/ICARUSCLOVER) | 5925045 |
 | [Junhui Chen](https://github.com/charles11223344) | 6828214 |
 | [Siyuan Zhao](https://github.com/Barry1208) | 6365431 |
-
-Everyone is welcomed to ask any questions about Brock University and the Canada Games on our Chatbot website through the direct link below. The Chatbot is also available on Facebook messenger and Discord or you could take one more step to download our App from the website. The answer you want is all in here : )
-http://chatbot-ai.ga
