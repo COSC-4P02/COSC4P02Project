@@ -17,7 +17,7 @@
             <li class="nav-item">
               <div v-if="!this.GLOBAL.ifAPP" class="nav-link active" aria-current="page" >Web Setting</div>
             </li>
-            <li v-if="!this.GLOBAL.ifAPP" class="nav-item dropdown">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Switch Bot
               </a>
@@ -36,19 +36,19 @@
                 <li><a class="dropdown-item" @click="fontChange('2')">Large</a></li>
               </ul>
             </li>
-            <li v-if="!this.GLOBAL.ifAPP"><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider"></li>
             <li class="nav-item">
               <div v-if="!this.GLOBAL.ifAPP" class="nav-link active" aria-current="page" >Useful Links</div>
             </li>
-            <li  class="nav-item dropdown" v-for="(items) in links.list" :key="items" >
-              <a v-if="!this.GLOBAL.ifAPP" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li class="nav-item dropdown" v-for="(items) in links.list" :key="items" >
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{items.type}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
                 <li v-for="(item) in items.links" :key="item"><a class="dropdown-item" :href="item.link" target="_blank">{{item.label}}</a></li>
               </ul>
             </li>
-            <li><hr v-if="!this.GLOBAL.ifAPP" class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider"></li>
           </ul>
           <form v-if="!this.GLOBAL.ifAPP" class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Type what you want" aria-label="Search">

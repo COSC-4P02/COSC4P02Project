@@ -13,9 +13,9 @@ describe('Background.vue', () => {
         msg: {
           items: [{
             title: 'title',
-            description: 'd',
+            description: 'description',
             image: '../assets/brock/Brock.jpg',
-            link: ''
+            link: 'https://google.com'
           }]
         }
       }
@@ -28,10 +28,20 @@ describe('Background.vue', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('find data/props in Background is create', () => {
+  it('find data "title" in Background is create', () => {
     expect(wrapper.find('h5').text()).toEqual('title')
-    expect(wrapper.find('p').text()).toEqual('d')
+  })
+  it('find data "description" in Background is create', () => {
+    expect(wrapper.find('p').text()).toEqual('description')
+  })
+  it('find props "version" in Background is create', () => {
     expect(wrapper.props().version).toContain('1')
+  })
+  it('find data in Background that checks href to "link"', () => {
+    expect(wrapper.find('a').attributes().href).toBe('https://google.com')
+  })
+  it('find data in Background that checks src in img to be "image"', () => {
+    expect(wrapper.find('img').attributes().src).toBe('../assets/brock/Brock.jpg')
   })
 })
 
@@ -44,7 +54,7 @@ describe('Nav.vue', () => {
           botIcon: '../assets/icons/bubble.svg',
           IconAlt: '',
           navTitle: 'nav title',
-          OfficialWeb: ''
+          OfficialWeb: 'https://google.com'
         }
       }
     },
@@ -56,200 +66,17 @@ describe('Nav.vue', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('find data/props in Nav is create', () => {
+  it('find data "navTitle" in Nav is create', () => {
     expect(wrapper.find('h5').text()).toEqual('nav title')
+  })
+  it('find data "botTitle" in Nav is create', () => {
     expect(wrapper.find('a').text()).toEqual('bot title')
+  })
+  it('find props "version" in Nav is create', () => {
     expect(wrapper.props().version).toContain('1')
   })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
-  })
-  it('find data/props in Nav is create', () => {
-    expect(wrapper.find('h5').text()).toEqual('nav title')
-    expect(wrapper.find('a').text()).toEqual('bot title')
-    expect(wrapper.props().version).toContain('1')
+  it('find data in Nav that checks src in img to be "botIcon"', () => {
+    expect(wrapper.find('img').attributes().src).toBe('../assets/icons/bubble.svg')
   })
   it('find methods in Nav is done', () => {
     const mockFn = jest.fn()
@@ -290,7 +117,7 @@ describe('BotUI.vue', () => {
       version: '1',
       messages: 'Hello bot',
       botTyping: false,
-      inputDisable: false,
+      inputDisable: true,
       isOpen: true,
       openDelay: '1',
       fontSize: '0'
@@ -300,5 +127,23 @@ describe('BotUI.vue', () => {
   it('BotUI be exists', () => {
     const wrapper = shallowMount(Nav)
     expect(wrapper.exists()).toBe(true)
+  })
+  it('find props "version" in BotUI is create', () => {
+    expect(wrapper.props().version).toContain('1')
+  })
+  it('find props "fontSize" in BotUI is create', () => {
+    expect(wrapper.props().fontSize).toContain('0')
+  })
+  it('find props "isOpen" in BotUI is create', () => {
+    expect(wrapper.props().isOpen).toBe(true)
+  })
+  it('find props "inputDisable" in BotUI is create', () => {
+    expect(wrapper.props().inputDisable).toBe(true)
+  })
+  it('find props "botTyping" in BotUI is create', () => {
+    expect(wrapper.props().botTyping).toBe(false)
+  })
+  it('find props "messages" in BotUI is create', () => {
+    expect(wrapper.props().messages).toContain('Hello bot')
   })
 })
