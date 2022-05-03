@@ -3,13 +3,21 @@
 ## Run by YARN
 
 ```bash
-cd Frontend
 yarn
 yarn serve
 ```
+
+## Run Tests
+
+```bash
+yarn lint
+yarn jest
+```
+
+For development information, check out our documentation - [Development](https://docs.chatbot-ai.ga/use/dev.html)
 
 ---
 
 ## Deploy to Server
 
-For deployment infomation, check out our Documentation - [Deploy](https://docs.chatbot-ai.ga/use/deploy.html)
+For deployment information, check out our documentation - [Deploy](https://docs.chatbot-ai.ga/use/deploy.html)
