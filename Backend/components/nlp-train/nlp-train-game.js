@@ -141,12 +141,26 @@ module.exports = async function (manager, say, dbCache, save) {
     manager.addAnswer('en', 'game.athletes.count', jsonArray.length+" Players in 2019 Canada Games Database.");
 
     // Schedule
+    manager.addDocument('en', 'what is the schedule', 'game.sports.schedule');
     manager.addDocument('en', 'Tell me about the %sports%', 'game.sports.next');
     manager.addDocument('en', 'When is the next %sports% Game', 'game.sports.next');
     manager.addDocument('en', 'When %sports%', 'game.sports.next');
     manager.addDocument('en', '%sports% schedule', 'game.sports.next');
     manager.addDocument('en', 'When is the next %sports% Game that ontario plays in?', 'game.sports.next');
 
+    json_a_temp = {
+        type: "button",
+        text: "You can find all sports schedules in the following links",
+        disableInput: false,
+        options: [
+            {
+                text: "cg2022 Schedules",
+                value:"https://cg2022.gems.pro/Result/Sport_List.aspx?SetLanguage=en-CA",
+                action: "url",
+            },
+        ],
+    };
+    manager.addAnswer('en', 'game.sports.schedule', "!json-"+JSON.stringify(json_a_temp));
     manager.addAnswer('en', 'game.sports.next', '!sportsSchedule-{{sports}}');
 
     let cg_schedule = fs.readFileSync("train-data/game/cg_schedule.json");

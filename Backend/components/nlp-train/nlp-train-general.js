@@ -111,6 +111,7 @@ module.exports = async function (manager) {
   manager.addAnswer('en', 'agent.strange.boyfriend', 'Well, I\'m not a person, so I can\'t get a BF/GF...');
 
   // Gereral
+  // https://github.com/axa-group/nlp.js/blob/5a0dfc580410c15d355851a8f852e81a70cff1f4/examples/02-qna-classic/train-nlp.js
   manager.addDocument('en', 'why are you here', 'agent.acquaintance');
   manager.addDocument('en', 'what are you', 'agent.acquaintance');
   manager.addDocument(
