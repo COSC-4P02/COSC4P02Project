@@ -161,6 +161,7 @@ module.exports = function (
                 "https://health-infobase.canada.ca/covid-19/epidemiological-summary-covid-19-cases.html#newCases",
               action: "url",
             },
+            
             {
               text: "Ontario COVID",
               value: "https://covid-19.ontario.ca/data/case-numbers-and-spread",
