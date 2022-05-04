@@ -2,6 +2,8 @@ import { shallowMount } from '@vue/test-utils'
 import Background from '@/components/background/Background'
 import Nav from '@/components/Nav'
 import BotUI from '@/components/BotUI'
+import Header from '@/components/Board/Header'
+import Content from '@/components/Board/Content'
 import Vue from 'vue'
 import _global_ from '@/global'
 Vue.prototype.GLOBAL = _global_
@@ -145,5 +147,53 @@ describe('BotUI.vue', () => {
   })
   it('find props "messages" in BotUI is create', () => {
     expect(wrapper.props().messages).toContain('Hello bot')
+  })
+})
+
+describe('Header.vue', () => {
+  const wrapper = shallowMount(Header, {
+    propsData: { botTitle: '1' }
+  })
+  it('Header be exists', () => {
+    const wrapper = shallowMount(Nav)
+    expect(wrapper.exists()).toBe(true)
+  })
+  it('find props "botTitle" in Header is create', () => {
+    expect(wrapper.props().botTitle).toContain('1')
+  })
+  it('find methods in Header is done', () => {
+    const mockFn = jest.fn()
+    wrapper.setMethods({
+      onClick: mockFn,
+      botClose: mockFn
+    })
+    wrapper.find('.dropdown-item').trigger('click')
+    wrapper.find('a').trigger('click')
+    expect(mockFn).toBeCalled()
+    expect(mockFn).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('Content.vue', () => {
+  const wrapper = shallowMount(Content, {
+    propsData: {
+      mainData: ['first', 'second'],
+      botTyping: false,
+      fontSize: 'fontSize'
+    }
+  })
+  it('Content be exists', () => {
+    const wrapper = shallowMount(Nav)
+    expect(wrapper.exists()).toBe(true)
+  })
+  it('find props "mainData" in Content is create', () => {
+    expect(wrapper.props().mainData).toContain('first')
+    expect(wrapper.props().mainData).toContain('second')
+  })
+  it('find props "botTyping" in Content is create', () => {
+    expect(wrapper.props().botTyping).toBe(false)
+  })
+  it('find props "fontSize" in Content is create', () => {
+    expect(wrapper.props().fontSize).toContain('fontSize')
   })
 })
