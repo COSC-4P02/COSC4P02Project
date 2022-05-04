@@ -4,6 +4,7 @@ import Nav from '@/components/Nav'
 import BotUI from '@/components/BotUI'
 import Header from '@/components/Board/Header'
 import Content from '@/components/Board/Content'
+import Action from '@/components/Board/Action'
 import Vue from 'vue'
 import _global_ from '@/global'
 Vue.prototype.GLOBAL = _global_
@@ -26,7 +27,6 @@ describe('Background.vue', () => {
   })
 
   it('Background be exists', () => {
-    const wrapper = shallowMount(Nav)
     expect(wrapper.exists()).toBe(true)
   })
 
@@ -64,7 +64,6 @@ describe('Nav.vue', () => {
   })
 
   it('Nav be exists', () => {
-    const wrapper = shallowMount(Nav)
     expect(wrapper.exists()).toBe(true)
   })
 
@@ -127,7 +126,6 @@ describe('BotUI.vue', () => {
   })
 
   it('BotUI be exists', () => {
-    const wrapper = shallowMount(Nav)
     expect(wrapper.exists()).toBe(true)
   })
   it('find props "version" in BotUI is create', () => {
@@ -155,7 +153,6 @@ describe('Header.vue', () => {
     propsData: { botTitle: '1' }
   })
   it('Header be exists', () => {
-    const wrapper = shallowMount(Nav)
     expect(wrapper.exists()).toBe(true)
   })
   it('find props "botTitle" in Header is create', () => {
@@ -183,7 +180,6 @@ describe('Content.vue', () => {
     }
   })
   it('Content be exists', () => {
-    const wrapper = shallowMount(Nav)
     expect(wrapper.exists()).toBe(true)
   })
   it('find props "mainData" in Content is create', () => {
@@ -195,5 +191,57 @@ describe('Content.vue', () => {
   })
   it('find props "fontSize" in Content is create', () => {
     expect(wrapper.props().fontSize).toContain('fontSize')
+  })
+
+  describe('Action.vue', () => {
+    const wrapper = shallowMount(Action, {
+      propsData: {
+        inputPlaceholder: 'inputPlaceholder',
+        inputDisablePlaceholder: 'inputDisablePlaceholder',
+        inputDisable: false
+      }
+    })
+    it('Action be exists', () => {
+      const wrapper = shallowMount(Action)
+      expect(wrapper.exists()).toBe(true)
+    })
+    it('find props "inputPlaceholder" in Action is create', () => {
+      expect(wrapper.props().inputPlaceholder).toContain('inputPlaceholder')
+    })
+    it('find props "inputDisablePlaceholder" in Action is create', () => {
+      expect(wrapper.props().inputDisablePlaceholder).toContain('inputDisablePlaceholder')
+    })
+    it('find props "inputDisable" in Action is create', () => {
+      expect(wrapper.props().inputDisable).toBe(false)
+    })
+    it('find methods "click" in Action is done', () => {
+      const mockFn = jest.fn()
+      wrapper.setMethods({
+        empty: mockFn,
+        sendMessage: mockFn,
+      })
+      wrapper.find('.qkb-action-item').trigger('click')
+      wrapper.find('.qkb-action-item.qkb-action-item--send').trigger('click')
+      expect(mockFn).toBeCalled()
+      expect(mockFn).toHaveBeenCalledTimes(2)
+    })
+    it('find methods "keydown.enter" in Action is done', () => {
+      const mockFn = jest.fn()
+      wrapper.setMethods({
+        sendMessage: mockFn
+      })
+      wrapper.find('.qkb-board-action__input').trigger('keydown.enter')
+      expect(mockFn).toBeCalled()
+      expect(mockFn).toHaveBeenCalledTimes(1)
+    })
+    it('find methods "blur" in Action is done', () => {
+      const mockFn = jest.fn()
+      wrapper.setMethods({
+        onBlurInput: mockFn
+      })
+      wrapper.find('.qkb-board-action__input').trigger('blur')
+      expect(mockFn).toBeCalled()
+      expect(mockFn).toHaveBeenCalledTimes(1)
+    })
   })
 })
