@@ -166,11 +166,6 @@ module.exports = function (
               value: "https://covid-19.ontario.ca/data/case-numbers-and-spread",
               action: "url",
             },
-            {
-              text: "Ontario COVID",
-              value: "https://covid-19.ontario.ca/data/case-numbers-and-spread",
-              action: "url",
-            }
           ],
         };
         conn(JSON.stringify(urlsend));
