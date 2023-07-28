@@ -79,16 +79,16 @@
               Products
             </h6>
             <p>
-              <a href="https://teams.chatbot-ai.ga/" class="text-reset" target="_blank">Teams</a>
+              <a href="https://teams.chatbot-ai.gq/" class="text-reset" target="_blank">Teams</a>
             </p>
             <p>
-              <a href="https://docs.chatbot-ai.ga/guide/getting-started.html" class="text-reset" target="_blank">Tutorials</a>
+              <a href="https://docs.chatbot-ai.gq/guide/getting-started.html" class="text-reset" target="_blank">Tutorials</a>
             </p>
             <p>
-              <a href="mailto:info@chatbot-ai.ga" class="text-reset" target="_blank">Contact</a>
+              <a href="mailto:info@chatbot-ai.gq" class="text-reset" target="_blank">Contact</a>
             </p>
             <p>
-              <a href="https://docs.chatbot-ai.ga/code/open-source.html" class="text-reset" target="_blank">License</a>
+              <a href="https://docs.chatbot-ai.gq/code/open-source.html" class="text-reset" target="_blank">License</a>
             </p>
           </div>
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -96,10 +96,10 @@
               Developers
             </h6>
             <p>
-              <a href="https://docs.chatbot-ai.ga" class="text-reset" target="_blank">Documentation</a>
+              <a href="https://docs.chatbot-ai.gq" class="text-reset" target="_blank">Documentation</a>
             </p>
             <p>
-              <a href="https://docs.chatbot-ai.ga/api/chat.html" class="text-reset" target="_blank">API Reference</a>
+              <a href="https://docs.chatbot-ai.gq/api/chat.html" class="text-reset" target="_blank">API Reference</a>
             </p>
             <p>
               <a href="http://uptime.krunk.cn" class="text-reset" target="_blank">API Status</a>
@@ -114,8 +114,8 @@
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
       <p>© Copyright Chatbot-Ai 2022</p>
       <p>Images and contents may come from brocku.ca and canadagames.ca</p>
-      <a class="text-reset fw-bold" href="https://app.chatbot-ai.ga/privacy.html#tos">Terms</a>
-      <a class="text-reset fw-bold" href="https://app.chatbot-ai.ga/privacy.html#privacy">Privacy</a>
+      <a class="text-reset fw-bold" href="https://app.chatbot-ai.gq/privacy.html#tos">Terms</a>
+      <a class="text-reset fw-bold" href="https://app.chatbot-ai.gq/privacy.html#privacy">Privacy</a>
     </div>
   </footer>
 </template>

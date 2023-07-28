@@ -100,7 +100,7 @@ module.exports = async function (manager) {
     "text": 'They are my creaters, learn more about them here',
     "disableInput":false,
     "options":[
-      {"text":"About Teams","value":"https://teams.chatbot-ai.ga","action":"url"},
+      {"text":"About Teams","value":"https://teams.chatbot-ai.gq","action":"url"},
       {"text":"Github","value":"http://github.com/COSC-4P02/COSC4P02Project","action":"url"}
     ]
   }

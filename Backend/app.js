@@ -3,7 +3,7 @@
  * |                                        |
  * |           Chatbot-Ai Backend           |
  * |                                        |
- * |      Copyright 2022 chatbot-ai.ga      |
+ * |      Copyright 2022 chatbot-ai.gq      |
  * |                                        |
  * |  Available under the terms of the MIT  |
  * | See LICENSE file for more informations |

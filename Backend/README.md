@@ -15,7 +15,7 @@ npm run test
 open http://localhost:3000/test
 ```
 
-For development information, check out our documentation - [Development](https://docs.chatbot-ai.ga/use/dev.html)
+For development information, check out our documentation - [Development](https://docs.chatbot-ai.gq/use/dev.html)
 
 ---
 
@@ -25,25 +25,25 @@ For development information, check out our documentation - [Development](https:/
 └── Backend/
     ├── components/ # Server Components
     ├── data/       # Configs and Databases
-    │               #  - https://docs.chatbot-ai.ga/dev/config.html
+    │               #  - https://docs.chatbot-ai.gq/dev/config.html
     ├── plugin/     # Plugins used by the Server
-    │               #  - https://docs.chatbot-ai.ga/code/open-source.html
+    │               #  - https://docs.chatbot-ai.gq/code/open-source.html
     ├── test/       # Unit Testing
     └── train-data/ # Training Data from Crawler
-                    #  - https://docs.chatbot-ai.ga/dev/train-data.html
+                    #  - https://docs.chatbot-ai.gq/dev/train-data.html
 ```
 
 ---
 
 ## Chatbot Api
 
-For api information, check out our documentation - [Chatbot Api](https://docs.chatbot-ai.ga/api/chat.html)
+For api information, check out our documentation - [Chatbot Api](https://docs.chatbot-ai.gq/api/chat.html)
 
 ---
 
 ## Deploy to Server
 
-For deployment information, check out our documentation - [Deploy](https://docs.chatbot-ai.ga/use/deploy.html)
+For deployment information, check out our documentation - [Deploy](https://docs.chatbot-ai.gq/use/deploy.html)
 
 ---
 
@@ -51,4 +51,4 @@ For deployment information, check out our documentation - [Deploy](https://docs.
 
 After commit into this repo, CircleCi will run unit testing automatically, and Github Workflow will build and push the Docker Image to Docker Hub, our server is always listening the update for the docker image, if the digest is changed for the latest version, server will automatically pull the image and rebuilt the container.
 
-For CI/CD information, check out our documentation - [CI/CD](https://docs.chatbot-ai.ga/dev/CI-CD.html)
+For CI/CD information, check out our documentation - [CI/CD](https://docs.chatbot-ai.gq/dev/CI-CD.html)

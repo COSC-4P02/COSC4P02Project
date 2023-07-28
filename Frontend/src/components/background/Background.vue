@@ -73,10 +73,10 @@ export default {
       immediate: true,
       handler (newValue) {
         if (newValue === 'game') {
-          const path = 'https://api.chatbot-ai.ga/data/game/news'
+          const path = 'https://api.chatbot-ai.gq/data/game/news'
           axios(path).then((res) => { this.msg = res.data })
         } else if (newValue === 'brock') {
-          const path = 'https://api.chatbot-ai.ga/data/brock/news'
+          const path = 'https://api.chatbot-ai.gq/data/brock/news'
           axios(path).then((res) => { this.msg = res.data })
         }
       }

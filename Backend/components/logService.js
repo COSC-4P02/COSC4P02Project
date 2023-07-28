@@ -60,7 +60,7 @@ module.exports = {
               "Chatbot-Ai Server Start#/" +
                 message.replace("#", "_") +
                 "#/Chatbot-Ai#/" +
-                "https://chatbot-ai.ga" +
+                "https://chatbot-ai.gq" +
                 "#/timeSensitive"
             )
         )
@@ -90,7 +90,7 @@ module.exports = {
               "Chatbot-Ai Error#/" +
                 message.replace("#", "_") +
                 "#/Chatbot-Ai#/" +
-                "https://chatbot-ai.ga" +
+                "https://chatbot-ai.gq" +
                 "#/timeSensitive"
             )
         )

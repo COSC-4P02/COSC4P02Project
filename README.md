@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Chatbot-Ai Logo" src="https://chatbot-ai.ga/images/logo.webp" width="100px" />
+  <img alt="Chatbot-Ai Logo" src="https://chatbot-ai.gq/images/logo.webp" width="100px" />
   <h1 align="center">Chatbot-Ai</h1>
 </p>
 
@@ -13,15 +13,23 @@
   <img alt="CircleCI" src="https://circleci.com/gh/COSC-4P02/COSC4P02Project/tree/main.svg?style=svg">
 </p>
 
+---
+
+### Update 2023/07/27
+
+Domain changed to chatbot-ai.gq due to Freenom lost its deal with the government of Gabon (.ga) [Read More](https://domainincite.com/28814-millions-of-domains-to-be-deleted-as-freenom-loses-its-first-tld)
+
+---
+
 Everyone is welcome to ask any questions about Brock University and the Canada Games on our Chatbot website through the direct link below. The Chatbot is also available on Facebook messenger and Discord or you could take one more step to download our App from the website. The answer you want is all in here : )
 
-[Homepage](https://chatbot-ai.ga)
+[Homepage](https://chatbot-ai.gq)
 
-[Brock University Chatbot](https://web.chatbot-ai.ga/?bot=brock)
+[Brock University Chatbot](https://web.chatbot-ai.gq/?bot=brock)
 
-[Canada Games 2022 Chatbot](https://web.chatbot-ai.ga/?bot=game)
+[Canada Games 2022 Chatbot](https://web.chatbot-ai.gq/?bot=game)
 
-[Mobile App Download](https://app.chatbot-ai.ga)
+[Mobile App Download](https://app.chatbot-ai.gq)
 
 ---
 
@@ -43,9 +51,9 @@ Everyone is welcome to ask any questions about Brock University and the Canada G
 
 [Frontend Readme](https://github.com/COSC-4P02/COSC4P02Project/blob/main/Frontend/README.md)
 
-[Documentation](https://docs.chatbot-ai.ga)
+[Documentation](https://docs.chatbot-ai.gq)
 
-[Open Source License](https://docs.chatbot-ai.ga/code/open-source.html)
+[Open Source License](https://docs.chatbot-ai.gq/code/open-source.html)
 
 ---
 

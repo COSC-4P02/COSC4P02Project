@@ -122,7 +122,7 @@ export default {
             type: 'button',
             text: 'Looks like you need some helps',
             options: [ { text: 'Get Started', action: 'postback' },
-              { text: 'Read ChatBot Document', value: 'https://docs.chatbot-ai.ga/guide/getting-started.html', action: 'url' },
+              { text: 'Read ChatBot Document', value: 'https://docs.chatbot-ai.gq/guide/getting-started.html', action: 'url' },
               { text: 'Open Source Code', value: 'https://github.com/COSC-4P02/COSC4P02Project', action: 'url' } ]
           })
           break

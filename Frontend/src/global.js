@@ -1,11 +1,11 @@
 const ifApp = false
 const version = 'brock'
-const wsApi = 'wss://ws.chatbot-ai.ga:8001'
-const whApi = 'https://api.chatbot-ai.ga'
+const wsApi = 'wss://ws.chatbot-ai.gq:8001'
+const whApi = 'https://api.chatbot-ai.gq'
 const height = '100%'
 // Production Server
-// wsApi: 'wss://ws.chatbot-ai.ga:8001',
-// whApi: 'https://api.chatbot-ai.ga',
+// wsApi: 'wss://ws.chatbot-ai.gq:8001',
+// whApi: 'https://api.chatbot-ai.gq',
 
 // Development Server
 // wsApi: 'wss://localhost:8001',
