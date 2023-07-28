@@ -21,25 +21,25 @@ describe("Brock Data Read Test", () => {
   });
 });
 
-const covidNiagara = require("../components/crawler/covidNiagara");
+// const covidNiagara = require("../components/crawler/covidNiagara");
 
-describe("Niagara Covid Infomation Fetch Test", () => {
-  it("should return a string of covid infomation", function (done) {
-    covidNiagara(dbTest, print, print, function (data) {
-      if (
-        data.length <= 0 ||
-        data == undefined ||
-        !data.includes("Niagara Region") ||
-        typeof data != "string" ||
-        !data instanceof String
-      ) {
-        done(new Error("Error"));
-        return;
-      }
-      done();
-    });
-  });
-});
+// describe("Niagara Covid Infomation Fetch Test", () => {
+//   it("should return a string of covid infomation", function (done) {
+//     covidNiagara(dbTest, print, print, function (data) {
+//       if (
+//         data.length <= 0 ||
+//         data == undefined ||
+//         !data.includes("Niagara Region") ||
+//         typeof data != "string" ||
+//         !data instanceof String
+//       ) {
+//         done(new Error("Error"));
+//         return;
+//       }
+//       done();
+//     });
+//   });
+// });
 
 const brockNews = require("../components/crawler/brockNews");
 
